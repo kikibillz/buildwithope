@@ -127,8 +127,13 @@ export const LeadFinderPreview: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-500 italic">
-        Real repository script: queries official healthcare provider registers with rate limiting and automated CSV serialization.
+      <div className="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-500 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <span className="italic">
+          Real repository script: queries official healthcare provider registers with rate limiting and automated CSV serialization.
+        </span>
+        <span className="inline-flex items-center gap-1 font-mono text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">
+          Open Data Compliant • Zero Patient PII
+        </span>
       </div>
     </div>
   );

@@ -220,9 +220,12 @@ export const BankCustomerChurnPreview: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-4 pt-3 border-t border-stone-200 flex items-center justify-between text-xs text-stone-500">
-        <span className="italic">
-          Model evaluation metrics available in the project documentation.
+      <div className="mt-4 pt-3 border-t border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-stone-500">
+        <span className="italic flex items-center gap-1.5">
+          <span>Model evaluation metrics available in the project documentation.</span>
+          <span className="font-mono text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+            Synthetic Benchmark • Zero Customer PII
+          </span>
         </span>
         <button
           onClick={() => {

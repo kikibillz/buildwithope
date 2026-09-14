@@ -12,12 +12,14 @@ import {
   AlertCircle,
   Radio,
   Edit2,
-  Check
+  Check,
+  Sparkles,
 } from 'lucide-react';
 import { Project } from '../types';
 import { BankCustomerChurnPreview } from './BankCustomerChurnPreview';
 import { HrAnalyticsPreview } from './HrAnalyticsPreview';
 import { HrAttritionPredictorPreview } from './HrAttritionPredictorPreview';
+import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
 
 interface LiveStreamlitModalProps {
   project: Project | null;
@@ -32,11 +34,34 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
   onClose,
   onUpdateStreamlitUrl,
 }) => {
-  const [viewMode, setViewMode] = useState<'simulator' | 'embed'>('simulator');
+  const isVercelApp = Boolean(
+    project &&
+      (project.id === 'begi-begi' ||
+        project.id === 'career-boost' ||
+        project.id === 'nigerian-career-boost-hub' ||
+        project.streamlitDeployment?.includes('vercel.app'))
+  );
+
+  const [viewMode, setViewMode] = useState<'screenshot' | 'simulator' | 'embed'>(
+    isVercelApp ? 'embed' : 'screenshot'
+  );
   const [deviceView, setDeviceView] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [iframeKey, setIframeKey] = useState<number>(0);
   const [isEditingUrl, setIsEditingUrl] = useState(false);
   const [customUrl, setCustomUrl] = useState(project?.streamlitUrl || '');
+
+  // Reset view mode when project changes
+  React.useEffect(() => {
+    if (project) {
+      const isVercel =
+        project.id === 'begi-begi' ||
+        project.id === 'career-boost' ||
+        project.id === 'nigerian-career-boost-hub' ||
+        project.streamlitDeployment?.includes('vercel.app');
+      setViewMode(isVercel ? 'embed' : 'screenshot');
+      setCustomUrl(project.streamlitUrl || '');
+    }
+  }, [project]);
 
   if (!isOpen || !project) return null;
 
@@ -96,17 +121,29 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
           {/* Header */}
           <div className="bg-stone-950 text-stone-100 p-4 sm:p-5 border-b border-stone-800 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded bg-red-600/90 text-white flex items-center justify-center font-bold font-mono text-sm shadow-sm flex-shrink-0">
-                <span className="animate-pulse">▲</span>
+              <div
+                className={`w-8 h-8 rounded flex items-center justify-center font-bold font-mono text-sm shadow-sm flex-shrink-0 text-white ${
+                  isVercelApp ? 'bg-emerald-600' : 'bg-red-600/90'
+                }`}
+              >
+                <span>▲</span>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-red-400 font-semibold tracking-wider uppercase flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-red-500 inline-block animate-ping" />
-                    Streamlit Community Cloud
+                  <span
+                    className={`text-xs font-mono font-semibold tracking-wider uppercase flex items-center gap-1.5 ${
+                      isVercelApp ? 'text-emerald-400' : 'text-red-400'
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full inline-block animate-ping ${
+                        isVercelApp ? 'bg-emerald-500' : 'bg-red-500'
+                      }`}
+                    />
+                    {isVercelApp ? 'Vercel Production Deployment' : 'Streamlit Community Cloud'}
                   </span>
                   <span className="text-[11px] font-mono bg-stone-800 text-stone-300 px-2 py-0.5 rounded border border-stone-700">
-                    Live Model
+                    {isVercelApp ? 'Live Web App' : 'Live Model'}
                   </span>
                 </div>
                 <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
@@ -121,7 +158,9 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 id="btn-open-streamlit-tab"
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-white bg-red-600 hover:bg-red-500 px-3 py-1.5 rounded transition-colors shadow-sm"
+                className={`inline-flex items-center gap-1.5 text-xs font-mono font-medium text-white px-3 py-1.5 rounded transition-colors shadow-sm ${
+                  isVercelApp ? 'bg-emerald-600 hover:bg-emerald-500' : 'bg-red-600 hover:bg-red-500'
+                }`}
               >
                 <span>Launch in New Tab</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -143,7 +182,7 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
             <div className="flex items-center gap-2 flex-wrap text-stone-400">
               <span className="text-stone-500">Target:</span>
               <span className="text-stone-200 bg-stone-800 px-2 py-0.5 rounded border border-stone-700">
-                {project.streamlitDeployment || 'Streamlit Deployment'}
+                {project.streamlitDeployment || 'Production Deployment'}
               </span>
               {!isEditingUrl ? (
                 <button
@@ -151,7 +190,7 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                     setCustomUrl(currentUrl);
                     setIsEditingUrl(true);
                   }}
-                  title="Configure custom Streamlit Cloud URL"
+                  title="Configure custom URL"
                   className="text-stone-400 hover:text-stone-200 inline-flex items-center gap-1 underline text-[11px] ml-1"
                 >
                   <Edit2 className="w-3 h-3" />
@@ -163,12 +202,12 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                     type="url"
                     value={customUrl}
                     onChange={(e) => setCustomUrl(e.target.value)}
-                    placeholder="https://your-app.streamlit.app"
+                    placeholder="https://your-app.vercel.app"
                     className="bg-stone-800 text-white border border-stone-600 rounded px-2 py-0.5 text-xs w-60"
                   />
                   <button
                     onClick={handleSaveUrl}
-                    className="p-1 bg-red-600 hover:bg-red-500 text-white rounded"
+                    className="p-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded"
                     title="Apply URL"
                   >
                     <Check className="w-3 h-3" />
@@ -186,35 +225,85 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
 
             {/* Mode Switcher */}
             <div className="flex items-center gap-1.5 bg-stone-950 p-1 rounded-md border border-stone-800">
-              <button
-                onClick={() => setViewMode('simulator')}
-                className={`px-3 py-1 rounded text-xs transition-all flex items-center gap-1.5 ${
-                  viewMode === 'simulator'
-                    ? 'bg-stone-800 text-white font-semibold shadow-sm'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-              >
-                <Sliders className="w-3.5 h-3.5 text-red-400" />
-                <span>Zero-Latency Simulator</span>
-              </button>
+              {isVercelApp ? (
+                <button
+                  onClick={() => setViewMode('embed')}
+                  className="px-3 py-1 rounded text-xs transition-all flex items-center gap-1.5 bg-stone-800 text-white font-semibold shadow-sm"
+                >
+                  <Radio className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Actual Live Web App</span>
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setViewMode('screenshot')}
+                    className={`px-3 py-1 rounded text-xs transition-all flex items-center gap-1.5 ${
+                      viewMode === 'screenshot'
+                        ? 'bg-stone-800 text-white font-semibold shadow-sm'
+                        : 'text-stone-400 hover:text-stone-200'
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-red-400" />
+                    <span>Demo Screenshot</span>
+                  </button>
 
-              <button
-                onClick={() => setViewMode('embed')}
-                className={`px-3 py-1 rounded text-xs transition-all flex items-center gap-1.5 ${
-                  viewMode === 'embed'
-                    ? 'bg-stone-800 text-white font-semibold shadow-sm'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-              >
-                <Radio className="w-3.5 h-3.5 text-red-400" />
-                <span>Live Streamlit Cloud Iframe</span>
-              </button>
+                  <button
+                    onClick={() => setViewMode('simulator')}
+                    className={`px-3 py-1 rounded text-xs transition-all flex items-center gap-1.5 ${
+                      viewMode === 'simulator'
+                        ? 'bg-stone-800 text-white font-semibold shadow-sm'
+                        : 'text-stone-400 hover:text-stone-200'
+                    }`}
+                  >
+                    <Sliders className="w-3.5 h-3.5 text-red-400" />
+                    <span>Zero-Latency Simulator</span>
+                  </button>
+
+                  <button
+                    onClick={() => setViewMode('embed')}
+                    className={`px-3 py-1 rounded text-xs transition-all flex items-center gap-1.5 ${
+                      viewMode === 'embed'
+                        ? 'bg-stone-800 text-white font-semibold shadow-sm'
+                        : 'text-stone-400 hover:text-stone-200'
+                    }`}
+                  >
+                    <Radio className="w-3.5 h-3.5 text-red-400" />
+                    <span>Live Streamlit Cloud Iframe</span>
+                  </button>
+                </>
+              )}
             </div>
           </div>
 
           {/* Modal Body */}
           <div className="p-4 sm:p-6 overflow-y-auto flex-1 bg-stone-100">
-            {viewMode === 'simulator' ? (
+            {viewMode === 'screenshot' ? (
+              <motion.div
+                key="screenshot"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 6 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-4"
+              >
+                <div className="bg-stone-900 border border-stone-800 rounded-lg p-3 text-xs text-stone-300 flex items-start gap-2.5">
+                  <Sparkles className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-white block mb-0.5">
+                      Streamlit Application Live Demo Snapshot
+                    </span>
+                    <p className="text-stone-400 leading-relaxed font-sans">
+                      Interactive demo interface screenshot rendered with animated hover dynamics. Hover over the interface below to trigger interactive simulation states and access launch shortcuts.
+                    </p>
+                  </div>
+                </div>
+
+                <ProjectDemoScreenshotPreview
+                  project={project}
+                  onOpenLiveDemo={() => setViewMode('embed')}
+                />
+              </motion.div>
+            ) : viewMode === 'simulator' ? (
               <motion.div
                 key="simulator"
                 initial={{ opacity: 0, y: 6 }}
@@ -314,13 +403,22 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                   </div>
                 </div>
 
-                {/* Cloud Wake Note */}
-                <div className="bg-sky-50 border border-sky-200/80 rounded-lg p-2.5 text-xs text-sky-900 flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-sky-700 flex-shrink-0" />
-                  <span>
-                    <strong>Note:</strong> Streamlit Community Cloud apps go to sleep after period of inactivity. If the frame displays &ldquo;App is sleeping&rdquo;, click the blue &ldquo;Wake app up&rdquo; button directly inside the frame.
-                  </span>
-                </div>
+                {/* Deployment Notice */}
+                {isVercelApp ? (
+                  <div className="bg-emerald-50 border border-emerald-200/80 rounded-lg p-2.5 text-xs text-emerald-900 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>
+                      <strong>Actual Live App:</strong> Running live on Vercel. You can interact directly with the application, navigate views, or test responsiveness using the device viewport controls.
+                    </span>
+                  </div>
+                ) : (
+                  <div className="bg-sky-50 border border-sky-200/80 rounded-lg p-2.5 text-xs text-sky-900 flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-sky-700 flex-shrink-0" />
+                    <span>
+                      <strong>Note:</strong> Streamlit Community Cloud apps go to sleep after period of inactivity. If the frame displays &ldquo;App is sleeping&rdquo;, click the blue &ldquo;Wake app up&rdquo; button directly inside the frame.
+                    </span>
+                  </div>
+                )}
 
                 {/* Iframe Window */}
                 <div className={`${getContainerWidth()} transition-all duration-300 w-full`}>
@@ -328,10 +426,10 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                     <iframe
                       key={iframeKey}
                       src={currentUrl}
-                      title={`Streamlit Cloud - ${project.title}`}
+                      title={isVercelApp ? project.title : `Streamlit Cloud - ${project.title}`}
                       className="w-full h-full border-0"
-                      allow="clipboard-write; camera; microphone"
-                      sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
                     />
                   </div>
                 </div>

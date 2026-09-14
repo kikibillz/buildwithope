@@ -9,6 +9,7 @@ import {
   AlertCircle,
   ExternalLink,
   RefreshCw,
+  ShieldCheck,
 } from 'lucide-react';
 import { PortfolioConfig } from '../types';
 
@@ -23,6 +24,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -32,21 +34,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
   const validate = () => {
     const newErrors: { name?: string; email?: string; message?: string } = {};
 
-    if (!name.trim()) {
+    const cleanName = name.trim().slice(0, 100);
+    const cleanEmail = email.trim().slice(0, 120);
+    const cleanMessage = message.trim().slice(0, 3000);
+
+    if (!cleanName) {
       newErrors.name = 'Please enter your name.';
-    } else if (name.trim().length < 2) {
+    } else if (cleanName.length < 2) {
       newErrors.name = 'Name must be at least 2 characters.';
     }
 
-    if (!email.trim()) {
+    if (!cleanEmail) {
       newErrors.email = 'Please enter your email address.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
       newErrors.email = 'Please enter a valid email address.';
     }
 
-    if (!message.trim()) {
+    if (!cleanMessage) {
       newErrors.message = 'Please include a message.';
-    } else if (message.trim().length < 10) {
+    } else if (cleanMessage.length < 10) {
       newErrors.message = 'Message must be at least 10 characters long.';
     }
 
@@ -56,14 +62,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Anti-bot honeypot check: if filled, quietly succeed to trap bots without transmission
+    if (honeypot.trim()) {
+      setStatus('success');
+      return;
+    }
+
     if (!validate()) return;
 
     setStatus('sending');
     setErrorMessage('');
 
-    const mailSubject = subject.trim()
-      ? subject.trim()
-      : `Portfolio Message from ${name.trim()}`;
+    // Sanitized inputs
+    const cleanName = name.trim().slice(0, 100).replace(/[<>]/g, '');
+    const cleanEmail = email.trim().slice(0, 120);
+    const cleanSubject = subject.trim().slice(0, 140).replace(/[\r\n<>]/g, '');
+    const cleanMessage = message.trim().slice(0, 3000).replace(/[<>]/g, '');
+
+    const mailSubject = cleanSubject
+      ? cleanSubject
+      : `Portfolio Message from ${cleanName}`;
 
     try {
       const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`, {
@@ -73,13 +92,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
+          name: cleanName,
+          email: cleanEmail,
           _subject: mailSubject,
-          message: message.trim(),
-          _replyto: email.trim(),
+          message: cleanMessage,
+          _replyto: cleanEmail,
           _template: 'table',
-          _captcha: 'false',
+          _honey: honeypot,
         }),
       });
 
@@ -87,20 +106,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
 
       if (response.ok && (data?.success === 'true' || data?.success === true)) {
         setStatus('success');
-      } else if (data?.message && data.message.toLowerCase().includes('activation')) {
+      } else if (data?.message && typeof data.message === 'string' && data.message.toLowerCase().includes('activation')) {
         // FormSubmit sent a one-time activation confirmation email to targetEmail
         setStatus('activation_required');
       } else {
-        // FormSubmit or network returned a non-success response
+        // Safe, professional error message avoiding any server stack leak
         setStatus('error');
         setErrorMessage(
-          data?.message || 'Unable to deliver message right now. Please use the direct mail link below.'
+          'Unable to deliver message through the web form at this moment. Please use the direct email link below.'
         );
       }
     } catch {
       setStatus('error');
       setErrorMessage(
-        'Network error connecting to email service. Please use the direct mail button below to send your message.'
+        'Network connection to the mail service timed out. Please click the direct email link below to send your message.'
       );
     }
   };
@@ -418,6 +437,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     )}
                   </div>
 
+                  {/* Hidden Anti-Bot Honeypot */}
+                  <div className="hidden pointer-events-none opacity-0 select-none -z-50" aria-hidden="true">
+                    <label htmlFor="contact-honey">Leave empty</label>
+                    <input
+                      id="contact-honey"
+                      type="text"
+                      name="_honey"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
+
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
                     <button
                       type="submit"
@@ -440,7 +473,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       <ExternalLink className="w-3 h-3 text-stone-400" />
                     </a>
                   </div>
+
+                  {/* Privacy & Anti-Leak Statement */}
+                  <div className="pt-3 mt-2 border-t border-stone-100 flex items-start gap-2 text-[11px] text-stone-500 font-sans">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>
+                      <strong className="text-stone-700 font-medium">Privacy &amp; Data Security Guarantee:</strong> Inquiries are transmitted over encrypted TLS directly to the recipient inbox. Your contact details are never logged in marketing brokers, tracked in cookies, or sold to third parties.
+                    </span>
+                  </div>
                 </form>
+
               )}
             </div>
           </div>

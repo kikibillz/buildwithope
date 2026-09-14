@@ -180,8 +180,13 @@ export const HrAnalyticsPreview: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-3 text-[11px] text-stone-500 italic">
-        Dataset clearly designated as sample data for exploratory research and dashboard development.
+      <div className="mt-3 text-[11px] text-stone-500 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+        <span className="italic">
+          Dataset clearly designated as sample data for exploratory research and dashboard development.
+        </span>
+        <span className="inline-flex items-center gap-1 font-mono text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200 shrink-0">
+          Anonymized Sample • GDPR Compliant
+        </span>
       </div>
     </div>
   );

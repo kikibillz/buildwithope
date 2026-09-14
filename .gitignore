@@ -6,3 +6,12 @@ coverage/
 *.log
 .env*
 !.env.example
+*.pem
+*.key
+*.cert
+*.id_rsa
+*.sqlite
+*.db
+credentials.json
+token.json
+secrets.json

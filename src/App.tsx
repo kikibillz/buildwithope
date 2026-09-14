@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   Play,
   Film,
+  MapPin,
 } from 'lucide-react';
 import { initialConfig, projects, skillCategories, experienceItems } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
@@ -39,10 +40,50 @@ export default function App() {
   const [streamlitProject, setStreamlitProject] = useState<Project | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
 
+  // Auto-detect and display the natural photograph (from local storage or candidate static paths)
+  const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('portfolio_natural_photo') || null;
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    if (!naturalPhoto && typeof window !== 'undefined') {
+      const candidatePaths = [
+        '/1736458983342.jpg',
+        '/images/odunayo.jpg',
+        '/images/profile.jpg',
+        '/profile.jpg',
+        '/odunayo.jpg',
+        '/picture.jpg',
+        '/photo.jpg',
+      ];
+      let isMounted = true;
+      for (const path of candidatePaths) {
+        const testImg = new window.Image();
+        testImg.src = path;
+        testImg.onload = () => {
+          if (isMounted && testImg.naturalWidth > 0) {
+            setNaturalPhoto(path);
+          }
+        };
+      }
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [naturalPhoto]);
+
+  const activeConfig = {
+    ...config,
+    avatarUrl: naturalPhoto || config.avatarUrl,
+  };
+
   return (
     <div className="min-h-screen bg-[#fafaf9] text-[#1c1917] flex flex-col font-sans selection:bg-stone-800 selection:text-white">
       {/* Navigation */}
-      <Navbar config={config} />
+      <Navbar config={activeConfig} />
 
       <main className="flex-grow pt-20">
         {/* =========================================================================
@@ -53,9 +94,31 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left Column: Natural, Credible Editorial Intro */}
               <div className="lg:col-span-6 space-y-6">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-stone-100 border border-stone-200 text-stone-700 text-xs font-mono">
-                  <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block" />
-                  <span>Available for Roles &amp; AI Media Projects</span>
+                <div className="flex items-center gap-3.5">
+                  {activeConfig.avatarUrl ? (
+                    <img
+                      src={activeConfig.avatarUrl}
+                      alt={config.name}
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        (e.target as HTMLElement).style.display = 'none';
+                      }}
+                      className="w-13 h-13 sm:w-15 sm:h-15 rounded-full object-cover border-2 border-white shadow-sm ring-1 ring-stone-300 shrink-0"
+                    />
+                  ) : (
+                    <div className="w-12 h-12 rounded-full bg-stone-900 text-white font-mono font-bold text-base flex items-center justify-center shrink-0 shadow-xs ring-1 ring-stone-300">
+                      BO
+                    </div>
+                  )}
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-stone-100 border border-stone-200 text-stone-700 text-xs font-mono">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block animate-pulse" />
+                      <span>Available for Roles &amp; AI Media Projects</span>
+                    </div>
+                    <div className="text-xs text-stone-500 font-mono mt-1">
+                      {config.location} • Nigeria
+                    </div>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -129,56 +192,97 @@ export default function App() {
            ========================================================================= */}
         <section id="about" className="py-16 sm:py-24 border-b border-stone-200/80 bg-[#f7f7f5]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-3xl">
-              <span className="text-xs font-mono font-medium text-stone-600 uppercase tracking-wider block mb-2">
-                Background &amp; Approach
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 mb-6">
-                About Me
-              </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              {/* Left Column: Background, Education & Principles */}
+              <div className="lg:col-span-7 space-y-6">
+                <div>
+                  <span className="text-xs font-mono font-medium text-stone-600 uppercase tracking-wider block mb-2">
+                    Background &amp; Approach
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 mb-6">
+                    About Me
+                  </h2>
+                </div>
 
-              <div className="space-y-4 text-base sm:text-lg text-stone-700 leading-relaxed font-normal">
-                <p>
-                  I earned my Bachelor of Science (BSc) in Computer Science from Olabisi Onabanjo University (O.O.U), building a rigorous foundation in algorithms, relational databases, Python scripting, and statistics.
-                </p>
-                <p>
-                  My work combines machine learning, statistical modeling, exploratory data analysis, and interactive dashboard development. Alongside applied data science projects in predictive churn and attrition modeling, I have practical experience as an Agile People Operations Specialist and People Leader at Culturelligence and in virtual operational data management.
-                </p>
-                <p>
-                  My goal is to continue deploying practical, value-driving machine learning models while contributing to forward-thinking engineering and analytics teams.
-                </p>
+                <div className="space-y-4 text-base sm:text-lg text-stone-700 leading-relaxed font-normal">
+                  <p>
+                    I earned my Bachelor of Science (BSc) in Computer Science from Olabisi Onabanjo University (O.O.U), building a rigorous foundation in algorithms, relational databases, Python scripting, and statistics.
+                  </p>
+                  <p>
+                    My work combines machine learning, statistical modeling, exploratory data analysis, and interactive dashboard development. Alongside applied data science projects in predictive churn and attrition modeling, I have practical experience as an Agile People Operations Specialist and People Leader at Culturelligence and in virtual operational data management.
+                  </p>
+                  <p>
+                    My goal is to continue deploying practical, value-driving machine learning models while contributing to forward-thinking engineering and analytics teams.
+                  </p>
+                </div>
+
+                {/* Pragmatic Working Principles */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 mt-6 border-t border-stone-300/80">
+                  <div className="bg-white/90 border border-stone-200 rounded-lg p-4 shadow-2xs">
+                    <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1.5 font-mono">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                      <span>Clean Data First</span>
+                    </div>
+                    <p className="text-xs text-stone-600 leading-relaxed">
+                      Handling missing values, outliers, and schema validation before any modeling.
+                    </p>
+                  </div>
+
+                  <div className="bg-white/90 border border-stone-200 rounded-lg p-4 shadow-2xs">
+                    <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1.5 font-mono">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                      <span>Explainable Insights</span>
+                    </div>
+                    <p className="text-xs text-stone-600 leading-relaxed">
+                      Prioritizing interpretable metrics and charts operational teams can trust.
+                    </p>
+                  </div>
+
+                  <div className="bg-white/90 border border-stone-200 rounded-lg p-4 shadow-2xs">
+                    <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1.5 font-mono">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                      <span>Code Hygiene</span>
+                    </div>
+                    <p className="text-xs text-stone-600 leading-relaxed">
+                      Writing structured Python pipelines and lightweight Streamlit apps for testing.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              {/* Pragmatic Working Principles */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-10 mt-8 border-t border-stone-300/80">
-                <div className="bg-white/80 border border-stone-200 rounded-lg p-4">
-                  <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1.5 font-mono">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                    <span>Clean Data First</span>
+              {/* Right Column: Visual Portrait Card */}
+              <div className="lg:col-span-5 pt-2">
+                <div className="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+                  <div className="relative aspect-[4/4.8] sm:aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 border border-stone-200/80">
+                    <img
+                      src={activeConfig.avatarUrl || '/images/odunayo.jpg'}
+                      alt={config.name}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center"
+                      onError={(e) => {
+                        // If image cannot be loaded, show elegant fallback initials
+                        (e.target as HTMLElement).style.display = 'none';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent pointer-events-none" />
+                    
+                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                      <div className="text-lg font-bold tracking-tight">{config.name}</div>
+                      <div className="text-xs font-mono text-stone-200 mt-0.5">B.Sc. Computer Science • O.O.U</div>
+                      <div className="text-[11px] text-emerald-300 font-mono mt-1.5 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
+                        <span>Data Scientist &amp; AI Video Creator</span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-stone-600 leading-relaxed">
-                    Spending careful effort handling missing values, anomalies, and schema validation before touching any modeling algorithm.
-                  </p>
-                </div>
 
-                <div className="bg-white/80 border border-stone-200 rounded-lg p-4">
-                  <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1.5 font-mono">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                    <span>Explainable Insights</span>
+                  <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs font-mono text-stone-600 px-1">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-stone-400" />
+                      <span>{config.location}</span>
+                    </div>
+                    <span className="text-emerald-700 font-medium">Remote &amp; Relocation Ready</span>
                   </div>
-                  <p className="text-xs text-stone-600 leading-relaxed">
-                    Prioritizing interpretable metrics and diagnostic charts that operational teams can understand and act upon.
-                  </p>
-                </div>
-
-                <div className="bg-white/80 border border-stone-200 rounded-lg p-4">
-                  <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1.5 font-mono">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                    <span>Code Hygiene</span>
-                  </div>
-                  <p className="text-xs text-stone-600 leading-relaxed">
-                    Writing structured Python scripts, reproducible pipelines, and lightweight Streamlit interfaces for hands-on evaluation.
-                  </p>
                 </div>
               </div>
             </div>

@@ -1,37 +1,63 @@
 import React, { useState } from 'react';
-import { Github, ExternalLink, Code2, Database, Terminal, ArrowUpRight, FolderGit2 } from 'lucide-react';
+import {
+  Github,
+  ExternalLink,
+  Code2,
+  Database,
+  Terminal,
+  ArrowUpRight,
+  FolderGit2,
+  ShieldCheck,
+  LayoutGrid,
+  ListFilter,
+  CheckCircle2,
+  Sparkles,
+} from 'lucide-react';
 import { GitHubRepo } from '../types';
+import { RepoDemoScreenshotPreview } from './RepoDemoScreenshotPreview';
 
 export const allGithubRepos: GitHubRepo[] = [
+  {
+    name: 'fastapi-ml-service',
+    displayName: 'fastapi-ml-service',
+    description:
+      'Production-grade asynchronous FastAPI backend serving machine learning inference pipelines with Pydantic v2 schemas, automated Swagger UI, and Docker.',
+    language: 'Python',
+    html_url: 'https://github.com/kikibillz/fastapi-ml-service',
+    homepage: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+    category: 'Machine Learning',
+    tags: ['Python', 'FastAPI', 'Pydantic v2', 'REST APIs', 'Docker', 'Uvicorn'],
+    isFeatured: true,
+  },
   {
     name: 'HR-Analytics-2026',
     displayName: 'HR-Analytics-2026',
     description:
-      'End-to-end workforce analytics pipeline with data cleaning (HR_cleaned.csv), MongoDB integration, exploratory analysis, and Streamlit visualization.',
+      'End-to-end workforce analytics pipeline with data cleaning, MongoDB integration, exploratory analysis, and Streamlit visualization.',
     language: 'Python',
     html_url: 'https://github.com/kikibillz/HR-Analytics-2026',
-    homepage: null,
+    homepage: 'https://hr-analytics-2026-msc.streamlit.app',
     category: 'Data Analysis',
-    tags: ['Python', 'Pandas', 'Plotly', 'Streamlit', 'MongoDB', 'Joblib'],
+    tags: ['Python', 'Pandas', 'Plotly', 'Streamlit', 'MongoDB'],
     isFeatured: true,
   },
   {
     name: 'Bank-Customer-Churn-Project',
     displayName: 'Bank-Customer-Churn-Project',
     description:
-      'Customer retention & churn prediction engine using XGBoost, SMOTE class imbalance handling, feature engineering, and an interactive Streamlit app.',
+      'Customer retention & churn prediction engine using XGBoost, SMOTE class balancing, feature engineering, and an interactive Streamlit app.',
     language: 'Python',
     html_url: 'https://github.com/kikibillz/Bank-Customer-Churn-Project',
-    homepage: null,
+    homepage: 'https://bank-customer-churn-project-mcrbap8m8yqf7y3yghq87c.streamlit.app/',
     category: 'Machine Learning',
-    tags: ['Python', 'XGBoost', 'Scikit-learn', 'SMOTE', 'Streamlit', 'Joblib'],
+    tags: ['Python', 'XGBoost', 'Scikit-learn', 'SMOTE', 'Streamlit'],
     isFeatured: true,
   },
   {
     name: 'lead-finder',
     displayName: 'lead-finder',
     description:
-      'Automated Python ETL script querying the UK Care Quality Commission (CQC) REST API to extract, parse, and export regulated care provider records to CSV.',
+      'Automated Python ETL script querying the UK Care Quality Commission (CQC) REST API to extract, parse, and export care provider records to CSV.',
     language: 'Python',
     html_url: 'https://github.com/kikibillz/lead-finder',
     homepage: null,
@@ -63,10 +89,22 @@ export const allGithubRepos: GitHubRepo[] = [
     tags: ['TypeScript', 'Web App', 'Vercel'],
   },
   {
+    name: 'Begi-Begi',
+    displayName: 'Begi-Begi',
+    description:
+      'Full-stack social funding and micro-request web application with responsive layout and live deployment.',
+    language: 'TypeScript',
+    html_url: 'https://github.com/kikibillz/Begi-Begi',
+    homepage: 'https://begi-begi.vercel.app',
+    category: 'Web & Tools',
+    tags: ['TypeScript', 'React', 'Vercel'],
+    isFeatured: true,
+  },
+  {
     name: 'filr',
     displayName: 'filr',
     description:
-      'Python utility for automated file management, directory indexing, and structured data handling.',
+      'Python utility for automated file management, directory indexing, and structured file sorting.',
     language: 'Python',
     html_url: 'https://github.com/kikibillz/filr',
     homepage: null,
@@ -85,21 +123,10 @@ export const allGithubRepos: GitHubRepo[] = [
     tags: ['Python', 'Tkinter', 'Desktop GUI'],
   },
   {
-    name: 'Begi-Begi',
-    displayName: 'Begi-Begi',
-    description:
-      'Full-stack social funding and micro-request web application with responsive layout and live deployment.',
-    language: 'TypeScript',
-    html_url: 'https://github.com/kikibillz/Begi-Begi',
-    homepage: 'https://begi-begi.vercel.app',
-    category: 'Web & Tools',
-    tags: ['TypeScript', 'React', 'Vercel'],
-  },
-  {
     name: 'gads-2020-pratice-project',
     displayName: 'gads-2020-practice-project',
     description:
-      'Google Africa Developer Scholarship (GADS) practice project setting up Google Cloud Platform (GCP) Compute Engine and Cloud Datalab notebook environments.',
+      'Google Africa Developer Scholarship practice project configuring GCP Compute Engine and Cloud Datalab notebook environments.',
     language: 'Cloud / Shell',
     html_url: 'https://github.com/kikibillz/gads-2020-pratice-project',
     homepage: null,
@@ -121,7 +148,7 @@ export const allGithubRepos: GitHubRepo[] = [
     name: 'Cloud-challenge',
     displayName: 'Cloud-challenge',
     description:
-      'Hands-on cloud architecture and deployment labs covering compute instances, API configurations, and cloud services.',
+      'Hands-on cloud architecture labs covering compute instances, API configurations, and Linux cloud services.',
     language: 'Cloud Infrastructure',
     html_url: 'https://github.com/kikibillz/Cloud-challenge',
     homepage: null,
@@ -132,12 +159,16 @@ export const allGithubRepos: GitHubRepo[] = [
 
 export const GitHubReposSection: React.FC = () => {
   const [filter, setFilter] = useState<string>('All');
+  const [viewMode, setViewMode] = useState<'visual' | 'compact'>('visual');
 
-  const categories = ['All', 'Python & Data Science', 'Web & TypeScript', 'Cloud & Systems'];
+  const categories = ['All', 'Live Demos', 'Python & Data', 'Web & TypeScript'];
 
   const filteredRepos = allGithubRepos.filter((repo) => {
     if (filter === 'All') return true;
-    if (filter === 'Python & Data Science') {
+    if (filter === 'Live Demos') {
+      return Boolean(repo.homepage);
+    }
+    if (filter === 'Python & Data') {
       return (
         repo.category === 'Machine Learning' ||
         repo.category === 'Data Analysis' ||
@@ -147,128 +178,220 @@ export const GitHubReposSection: React.FC = () => {
     if (filter === 'Web & TypeScript') {
       return repo.language === 'TypeScript' || repo.category === 'Web & Tools';
     }
-    if (filter === 'Cloud & Systems') {
-      return repo.tags.some((t) => t.includes('Cloud') || t.includes('GCP') || t.includes('Infrastructure'));
-    }
     return true;
   });
 
   return (
-    <div id="all-github-repositories" className="mt-16 pt-12 border-t border-stone-300/80">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+    <div id="repositories" className="mt-14 pt-10 border-t border-stone-200 dark:border-stone-800">
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block" />
-            <span className="text-xs font-mono uppercase tracking-wider text-stone-600 font-medium">
-              Verified Public Repositories
-            </span>
-          </div>
-          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-stone-900">
-            All Repositories on github.com/kikibillz
+          <span className="text-xs font-mono font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-1">
+            Open Source Codebases
+          </span>
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
+            Repositories &amp; Code
           </h3>
-          <p className="text-sm text-stone-600 mt-1">
-            Real repositories covering machine learning pipelines, HR analytics, automated scraping, and full-stack web tools.
+          <p className="text-sm text-stone-600 dark:text-stone-300 mt-1 max-w-xl">
+            Machine learning models, exploratory data pipelines, web platforms, and developer utilities on GitHub.
           </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap gap-1 bg-stone-200/70 p-1 rounded-lg">
-          {categories.map((cat) => (
+        {/* View Mode & Filter Controls */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Visual / Compact Switcher */}
+          <div className="inline-flex items-center bg-stone-100 dark:bg-stone-900 p-0.5 rounded-lg border border-stone-200 dark:border-stone-800 text-xs">
             <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`text-xs px-2.5 py-1 rounded-md transition-colors font-medium ${
-                filter === cat
-                  ? 'bg-white text-stone-900 shadow-xs'
-                  : 'text-stone-600 hover:text-stone-900'
+              onClick={() => setViewMode('visual')}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all font-medium ${
+                viewMode === 'visual'
+                  ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
+                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
               }`}
             >
-              {cat}
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span>Screenshots &amp; Demos</span>
             </button>
-          ))}
+            <button
+              onClick={() => setViewMode('compact')}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all font-medium ${
+                viewMode === 'compact'
+                  ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
+                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+              }`}
+            >
+              <ListFilter className="w-3.5 h-3.5" />
+              <span>List View</span>
+            </button>
+          </div>
+
+          {/* Filter Pills */}
+          <div className="flex flex-wrap gap-1 bg-stone-100 dark:bg-stone-900 p-0.5 rounded-lg border border-stone-200 dark:border-stone-800">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`text-xs px-2.5 py-1 rounded-md transition-colors font-medium ${
+                  filter === cat
+                    ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
+                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Grid of Repositories */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredRepos.map((repo) => (
-          <div
-            key={repo.name}
-            className="bg-white border border-stone-200 rounded-lg p-4 flex flex-col justify-between hover:border-stone-400 hover:shadow-xs transition-all"
-          >
-            <div>
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="inline-flex items-center gap-1 text-[11px] font-mono text-stone-500">
-                  <FolderGit2 className="w-3.5 h-3.5 text-stone-500" />
-                  <span>{repo.language || 'Code'}</span>
-                </span>
-                {repo.isFeatured && (
-                  <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded font-medium">
-                    Featured
-                  </span>
-                )}
+      {/* Repositories Display */}
+      {viewMode === 'visual' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredRepos.map((repo) => (
+            <div
+              key={repo.name}
+              className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden flex flex-col justify-between hover:border-stone-400 dark:hover:border-stone-700 hover:shadow-md transition-all group"
+            >
+              <div>
+                {/* Visual Screenshot with Hover Animation */}
+                <div className="p-2 pb-0">
+                  <RepoDemoScreenshotPreview repo={repo} />
+                </div>
+
+                {/* Card Content */}
+                <div className="p-4 pt-3">
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-mono text-stone-500 dark:text-stone-400">
+                      <FolderGit2 className="w-3.5 h-3.5 text-stone-500" />
+                      <span>{repo.language || 'Code'}</span>
+                    </span>
+                    {repo.isFeatured && (
+                      <span className="text-[10px] font-mono text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 px-1.5 py-0.2 rounded font-medium flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5 text-emerald-600 dark:text-emerald-400" />
+                        <span>Featured</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100 font-mono tracking-tight mb-1">
+                    {repo.displayName}
+                  </h4>
+                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed font-sans mb-3 line-clamp-2">
+                    {repo.description}
+                  </p>
+                </div>
               </div>
 
-              <h4 className="text-sm font-bold text-stone-900 font-mono tracking-tight mb-1">
-                {repo.displayName}
-              </h4>
-              <p className="text-xs text-stone-600 leading-relaxed font-sans mb-3 line-clamp-3">
-                {repo.description}
-              </p>
-            </div>
+              <div className="p-4 pt-0">
+                <div className="flex flex-wrap gap-1 mb-3 pt-2.5 border-t border-stone-100 dark:border-stone-800">
+                  {repo.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-mono bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 px-1.5 py-0.5 rounded border border-stone-200/60 dark:border-stone-700"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-            <div>
-              <div className="flex flex-wrap gap-1 mb-3 pt-2 border-t border-stone-100">
-                {repo.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] font-mono bg-stone-100 text-stone-700 px-1.5 py-0.5 rounded border border-stone-200/60"
+                <div className="flex items-center justify-between pt-2 border-t border-stone-100 dark:border-stone-800 text-xs">
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 font-mono text-stone-800 dark:text-stone-200 hover:text-stone-950 dark:hover:text-white font-medium hover:underline"
                   >
-                    {tag}
+                    <Github className="w-3.5 h-3.5" />
+                    <span>View Code</span>
+                  </a>
+
+                  {repo.homepage && (
+                    <a
+                      href={repo.homepage}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 font-medium hover:underline"
+                    >
+                      <span>Live Site</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        /* Compact Matrix Table View */
+        <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden divide-y divide-stone-200 dark:divide-stone-800 shadow-2xs">
+          {filteredRepos.map((repo) => (
+            <div
+              key={repo.name}
+              className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-stone-50/70 dark:hover:bg-stone-800/50 transition-colors"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100 font-mono">{repo.displayName}</h4>
+                  <span className="text-[10px] font-mono bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 px-1.5 py-0.2 rounded border border-stone-200 dark:border-stone-700">
+                    {repo.language}
                   </span>
-                ))}
+                  {repo.isFeatured && (
+                    <span className="text-[10px] font-mono text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 px-1.5 py-0.2 rounded">
+                      Featured
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-stone-600 dark:text-stone-400 line-clamp-1">{repo.description}</p>
+                <div className="flex flex-wrap gap-1 mt-1.5">
+                  {repo.tags.slice(0, 4).map((tag) => (
+                    <span key={tag} className="text-[9px] font-mono text-stone-500 dark:text-stone-400 bg-stone-50 dark:bg-stone-800/80 px-1.5 py-0.2 rounded border border-stone-200 dark:border-stone-700">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-stone-100 text-xs">
+              <div className="flex items-center gap-3 shrink-0 text-xs font-mono">
                 <a
                   href={repo.html_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-stone-800 hover:text-stone-950 font-medium hover:underline"
+                  className="inline-flex items-center gap-1 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white px-2.5 py-1 rounded bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors"
                 >
-                  <Github className="w-3.5 h-3.5" />
-                  <span>View Code</span>
+                  <Github className="w-3 h-3" />
+                  <span>GitHub</span>
                 </a>
-
                 {repo.homepage && (
                   <a
                     href={repo.homepage}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-emerald-700 hover:text-emerald-800 font-medium"
+                    className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 px-2.5 py-1 rounded bg-emerald-50 dark:bg-emerald-950/70 hover:bg-emerald-100 dark:hover:bg-emerald-900 transition-colors border border-emerald-200/60 dark:border-emerald-800"
                   >
-                    <span>Live Demo</span>
+                    <span>Demo</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 )}
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      <div className="mt-6 text-center">
+      {/* Footer link to all GitHub Repos */}
+      <div className="mt-8 text-center flex flex-col sm:flex-row items-center justify-center gap-3">
         <a
           href="https://github.com/kikibillz"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 text-xs font-mono text-stone-700 hover:text-stone-950 bg-white border border-stone-300 hover:border-stone-400 px-4 py-2 rounded-md transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-mono text-stone-800 dark:text-stone-200 hover:text-stone-950 dark:hover:text-white bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-600 px-4 py-2 rounded-md transition-colors shadow-2xs"
         >
           <Github className="w-4 h-4" />
-          <span>Explore all 11 repositories on GitHub (@kikibillz)</span>
+          <span>Explore all 12 repositories on GitHub (@kikibillz)</span>
           <ArrowUpRight className="w-3.5 h-3.5 text-stone-400" />
         </a>
       </div>
     </div>
   );
 };
+

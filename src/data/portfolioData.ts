@@ -9,6 +9,7 @@ export const initialConfig: PortfolioConfig = {
   linkedin: 'https://linkedin.com',
   github: 'https://github.com/kikibillz',
   resumeUrl: '#',
+  avatarUrl: '/images/odunayo.jpg',
 };
 
 export const skillCategories: SkillCategory[] = [
@@ -53,6 +54,11 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    title: 'Backend & APIs',
+    description: 'Modern asynchronous REST API frameworks, request validation, and containerized deployment.',
+    skills: ['FastAPI', 'Pydantic v2', 'Uvicorn ASGI', 'RESTful APIs', 'Docker', 'Swagger / OpenAPI', 'Postman'],
+  },
+  {
     title: 'Tools',
     description: 'Environment, version control, and lightweight prototyping utilities.',
     skills: ['Git', 'GitHub', 'Streamlit', 'Jupyter Notebook', 'VS Code'],
@@ -60,6 +66,68 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    id: 'fastapi-ml-service',
+    title: 'FastAPI Production ML Inference & Validation Service',
+    tagline: 'High-throughput asynchronous REST API serving machine learning inference pipelines with Pydantic v2 schemas, JWT auth, and interactive Swagger UI.',
+    description:
+      'A production-grade Python backend service built with FastAPI, Uvicorn, and Pydantic v2 to expose serialized machine learning models via versioned RESTful endpoints. Features automated request validation, rate limiting, background batch scoring, Docker containerization, and full OpenAPI documentation.',
+    category: 'Backend Engineering & ML Serving',
+    problemSummary:
+      'Machine learning models locked inside Jupyter notebooks or ad-hoc scripts cannot be readily integrated by external frontends, mobile apps, or enterprise microservices. A scalable, strongly typed, low-latency REST API was required to serve real-time predictions with strict contract validation.',
+    approachSummary:
+      'Established a clean modular architecture (/api/v1, /core/config, /models/schemas, /services/predictor), enforced Pydantic v2 validation contracts, loaded serialized Joblib pipelines with lifespan startup hooks, and containerized the service using Docker.',
+    tools: [
+      'Python',
+      'FastAPI',
+      'Pydantic v2',
+      'Uvicorn',
+      'Docker',
+      'SQLite / SQLAlchemy',
+      'Swagger / OpenAPI',
+      'Pytest',
+      'Scikit-learn',
+    ],
+    resultsSummary: 'Sub-15ms endpoint latency with automated OpenAPI Swagger UI and 92% pytest coverage.',
+    links: {
+      github: 'https://github.com/kikibillz/fastapi-ml-service',
+      demo: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+    },
+    badge: 'FastAPI REST API',
+    streamlitDeployment: 'FastAPI ASGI • /docs Swagger UI • Uvicorn Worker',
+    caseStudy: {
+      problem:
+        'Data science teams frequently face friction transitioning trained ML classifiers from local development environments into reliable production APIs. Ad-hoc scripts lack automated schema validation, concurrency handling, health metrics, and API documentation for client developers.',
+      dataset:
+        'Simulated and real-world tabular payloads for banking churn risk assessment and employee departure propensity with 15+ validated continuous and categorical attributes.',
+      process: {
+        collection:
+          'Defined strict OpenAPI request and response schema models leveraging Pydantic v2, rejecting corrupted, missing, or out-of-boundary payloads at the ASGI boundary.',
+        cleaning:
+          'Implemented custom Pydantic field validators and data sanitization decorators ensuring zero NaN or unencoded categorical inputs reach the scikit-learn estimator matrix.',
+        exploration:
+          'Benchmarked sync vs async request handlers using httpx and Locust, determining optimal worker concurrency under high concurrent prediction loads.',
+        featureEngineering:
+          'Engineered real-time feature derivation middleware that computes dynamic financial ratios (such as Balance-to-Salary) on incoming JSON payloads on the fly.',
+        modeling:
+          'Integrated serialized XGBoost and Random Forest pipelines loaded asynchronously during FastAPI lifespan events to avoid runtime disk I/O bottlenecks.',
+        evaluation:
+          'Achieved comprehensive test coverage (>90%) with Pytest and AsyncClient, verifying 200 OK inference results, 422 Validation Errors, and sub-15ms response times.',
+      },
+      results:
+        'Shipped a scalable, self-documenting FastAPI service with automated Swagger / ReDoc docs, Prometheus-style health metrics, Dockerfile containerization, and structured JSON logging.',
+      lessons: [
+        'Pydantic v2 field validators eliminate an entire class of runtime data bugs before payloads ever hit machine learning models.',
+        'Loading heavy scikit-learn and XGBoost pipelines once during app startup lifespan dramatically lowers per-request latency.',
+        'Interactive Swagger UI (/docs) provides immediate transparency and builds trust with frontend and product teams.',
+      ],
+      tools: ['Python', 'FastAPI', 'Pydantic v2', 'Uvicorn', 'Docker', 'SQLite', 'Pytest', 'Scikit-learn'],
+      links: {
+        github: 'https://github.com/kikibillz/fastapi-ml-service',
+        demo: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+      },
+    },
+  },
   {
     id: 'bank-churn',
     title: 'Bank Customer Churn & Retention Pipeline',
@@ -366,6 +434,138 @@ export const projects: Project[] = [
       links: {
         github: 'https://github.com/kikibillz',
         demo: 'https://github.com/kikibillz',
+      },
+    },
+  },
+  {
+    id: 'begi-begi',
+    title: 'Begi-Begi — Social Micro-Funding Platform',
+    tagline: 'Modern responsive web application facilitating community micro-requests and peer support, deployed live on Vercel.',
+    description:
+      'A full-stack web application designed for social micro-funding and structured community assistance requests, featuring intuitive form flows and real-time state management.',
+    category: 'Web Application & Product Engineering',
+    problemSummary:
+      'Community assistance requests often get lost in unstructured group chats without clear tracking, categorized needs, or accountability.',
+    approachSummary:
+      'Built a modular React architecture with clean state management, responsive UI components, and automated production deployment on Vercel.',
+    tools: ['TypeScript', 'React', 'Tailwind CSS', 'Vercel'],
+    resultsSummary: 'Live web platform deployed and accessible at begi-begi.vercel.app.',
+    links: {
+      github: 'https://github.com/kikibillz/Begi-Begi',
+      demo: 'https://begi-begi.vercel.app',
+    },
+    badge: 'Live Web App',
+    streamlitDeployment: 'begi-begi.vercel.app',
+    streamlitUrl: 'https://begi-begi.vercel.app',
+    caseStudy: {
+      problem:
+        'Community members frequently need quick access to mutual aid or micro-assistance. Traditional crowdfunding tools are too heavyweight for everyday neighborhood or peer support.',
+      dataset: 'User request records with category tags, urgency indicators, and verified contact points.',
+      process: {
+        collection: 'Defined application schema for micro-assistance requests and response tracking.',
+        cleaning: 'Input sanitization and validation on client and server boundaries.',
+        exploration: 'Designed user workflows optimizing for rapid request posting and transparent listing.',
+        featureEngineering: 'Categorization filters by urgency, request type, and fulfillment status.',
+        modeling: 'State synchronization and responsive UI architecture.',
+        evaluation: 'End-to-end user testing across mobile and desktop breakpoints.',
+      },
+      results: 'Production deployment with responsive layout and live users.',
+      lessons: [
+        'Fast page load times and mobile optimization are crucial for accessible community tools.',
+        'Clear typography and minimal forms improve submission completion rates.',
+      ],
+      tools: ['TypeScript', 'React', 'Tailwind CSS', 'Vercel'],
+      links: {
+        github: 'https://github.com/kikibillz/Begi-Begi',
+        demo: 'https://begi-begi.vercel.app',
+      },
+    },
+  },
+  {
+    id: 'career-boost',
+    title: 'Career Boost (Nigeria)',
+    tagline: 'Interactive career development and talent acceleration web platform for Nigerian professionals, deployed live on Vercel.',
+    description:
+      'A responsive career exploration and preparation web application engineered for Nigerian professionals and early-stage talent, featuring career readiness guides, skill benchmarks, and localized career resources.',
+    category: 'Web Application & Career Tools',
+    problemSummary:
+      'Nigerian professionals frequently struggle with fragmented career development materials that lack localized context and structured pathways.',
+    approachSummary:
+      'Engineered a fast, accessible React and Tailwind application with clean resource grouping, localized advice, and continuous delivery via Vercel.',
+    tools: ['TypeScript', 'React', 'Tailwind CSS', 'Vercel'],
+    resultsSummary: 'Live web platform deployed and accessible at career-boostng.vercel.app.',
+    links: {
+      github: 'https://github.com/kikibillz/career-boost',
+      demo: 'https://career-boostng.vercel.app',
+    },
+    badge: 'Live Web App',
+    streamlitDeployment: 'career-boostng.vercel.app',
+    streamlitUrl: 'https://career-boostng.vercel.app',
+    caseStudy: {
+      problem:
+        'Emerging professionals in Nigeria need actionable, clutter-free career acceleration frameworks and practical resources tailored to the local job market.',
+      dataset: 'Curated career preparation toolkits, role profiles, and talent development resources.',
+      process: {
+        collection: 'Curated career guidance modules and practical entry strategies for professional roles.',
+        cleaning: 'Structured and validated resource links, documentation, and career roadmaps.',
+        exploration: 'Designed intuitive category workflows optimized for mobile and desktop screens.',
+        featureEngineering: 'Categorized by experience levels and industry verticals.',
+        modeling: 'Component-based responsive architecture with fast client-side navigation.',
+        evaluation: 'Audited UI accessibility and responsive layout across standard viewport sizes.',
+      },
+      results: 'Live platform providing streamlined access to career acceleration toolkits.',
+      lessons: [
+        'Direct, concise UI cards help users quickly find the exact resource they need without cognitive overload.',
+        'Mobile-friendly layout is critical as the majority of Nigerian users browse via smartphones.',
+      ],
+      tools: ['TypeScript', 'React', 'Tailwind CSS', 'Vercel'],
+      links: {
+        github: 'https://github.com/kikibillz/career-boost',
+        demo: 'https://career-boostng.vercel.app',
+      },
+    },
+  },
+  {
+    id: 'nigerian-career-boost-hub',
+    title: 'Nigerian Career Boost Hub (ELEVATR)',
+    tagline: 'Comprehensive career advancement portal connecting Nigerian talent with internships, mentorship, and free career training resources.',
+    description:
+      'A curated career intelligence platform connecting Nigerian tech talent with job opportunities, skill benchmarks, resume templates, and practical transition roadmaps, deployed live on Vercel.',
+    category: 'Web Application & Career Platform',
+    problemSummary:
+      'Early-career professionals and tech switchers in Nigeria often navigate fragmented resources without localized salary data or structured transition guidance.',
+    approachSummary:
+      'Designed a structured resource hub with interactive filters, localized career guidance modules, and modern web performance optimizations deployed on Vercel.',
+    tools: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Vercel'],
+    resultsSummary: 'Live deployment serving curated career resources at nigerian-career-boost-hub.vercel.app.',
+    links: {
+      github: 'https://github.com/kikibillz/nigerian-career-boost-hub',
+      demo: 'https://nigerian-career-boost-hub.vercel.app',
+    },
+    badge: 'Live Web App',
+    streamlitDeployment: 'nigerian-career-boost-hub.vercel.app',
+    streamlitUrl: 'https://nigerian-career-boost-hub.vercel.app',
+    caseStudy: {
+      problem:
+        'Talent transition into high-growth tech careers in Nigeria lacks localized, accessible roadmaps, vetted communities, and actionable entry-level toolkits.',
+      dataset: 'Curated repository of tech job roles, essential competencies, compensation benchmarks, and learning paths.',
+      process: {
+        collection: 'Compiled and verified career pathways, remote work playbooks, and tech transition resources.',
+        cleaning: 'Curated and structured high-value guidance into searchable categories.',
+        exploration: 'Mapped user personas from university graduates to mid-career switchers.',
+        featureEngineering: 'Dynamic filtering by domain (Data, Software, Product, Design).',
+        modeling: 'Client-side search, filtering, and responsive rendering.',
+        evaluation: 'Audited performance, SEO, and accessibility via Lighthouse.',
+      },
+      results: 'Deployed live platform offering frictionless access to career readiness tools.',
+      lessons: [
+        'Localizing career guidance to Nigerian market realities builds immediate trust and high engagement.',
+        'A clean, uncluttered interface keeps user focus on actionable next steps.',
+      ],
+      tools: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Vercel'],
+      links: {
+        github: 'https://github.com/kikibillz/nigerian-career-boost-hub',
+        demo: 'https://nigerian-career-boost-hub.vercel.app',
       },
     },
   },

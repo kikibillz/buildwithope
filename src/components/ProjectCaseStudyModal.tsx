@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal } from 'lucide-react';
+import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal, Sparkles } from 'lucide-react';
 import { Project } from '../types';
+import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
 
 interface ProjectCaseStudyModalProps {
   project: Project | null;
@@ -170,16 +171,28 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
             </div>
           </section>
 
-          {/* 04 — Results */}
+          {/* 04 — Results & Live Demo Screenshot */}
           <section id="case-study-results" className="border-b border-stone-200 pb-5">
             <div className="flex items-center gap-2 text-xs font-mono font-semibold text-stone-500 uppercase tracking-wider mb-2">
               <span className="text-stone-900 font-bold">04</span>
               <span>—</span>
-              <span>Results & Delivery</span>
+              <span>Results, Delivery &amp; Live Demo Interface</span>
             </div>
-            <p className="text-sm leading-relaxed text-stone-700 bg-stone-100 border border-stone-200 rounded-md p-3.5">
+            <p className="text-sm leading-relaxed text-stone-700 bg-stone-100 border border-stone-200 rounded-md p-3.5 mb-3.5">
               {caseStudy.results}
             </p>
+
+            {/* Visual Screenshot of Live Demo */}
+            <div>
+              <div className="text-xs font-mono text-stone-600 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span className="flex items-center gap-1.5 font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-red-500" />
+                  <span>Interactive Application Interface (Demo Screenshot)</span>
+                </span>
+                <span className="text-stone-400 text-[11px]">Hover for interactive states</span>
+              </div>
+              <ProjectDemoScreenshotPreview project={project} />
+            </div>
           </section>
 
           {/* 05 — Lessons */}

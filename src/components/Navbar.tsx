@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { PortfolioConfig } from '../types';
 import { AnimatedName } from './AnimatedName';
+import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
   config: PortfolioConfig;
@@ -50,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
       id="site-header"
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
         isScrolled
-          ? 'bg-[#fafaf9]/90 backdrop-blur-md border-b border-stone-200/80 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.02)]'
+          ? 'bg-[#fafaf9]/90 dark:bg-[#121214]/90 backdrop-blur-md border-b border-stone-200/80 dark:border-stone-800 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.02)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.3)]'
           : 'bg-transparent py-5'
       }`}
     >
@@ -59,11 +60,23 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
         <a
           href="#"
           id="nav-brand"
-          className="group flex items-center gap-2 text-stone-900 font-semibold tracking-tight text-base"
+          className="group flex items-center gap-2.5 text-stone-900 dark:text-stone-100 font-semibold tracking-tight text-base"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-700 inline-block transition-transform group-hover:scale-125" />
+          {config.avatarUrl ? (
+            <img
+              src={config.avatarUrl}
+              alt={config.name}
+              referrerPolicy="no-referrer"
+              onError={(e) => {
+                (e.target as HTMLElement).style.display = 'none';
+              }}
+              className="w-7 h-7 rounded-full object-cover border border-stone-300 dark:border-stone-700 group-hover:ring-2 group-hover:ring-stone-400 dark:group-hover:ring-stone-600 transition-all"
+            />
+          ) : (
+            <span className="w-2 h-2 rounded-full bg-emerald-700 dark:bg-emerald-400 inline-block transition-transform group-hover:scale-125" />
+          )}
           <AnimatedName name={config.name} variant="nav" />
-          <span className="text-stone-400 text-xs hidden sm:inline-block font-mono border-l border-stone-300 pl-2">
+          <span className="text-stone-400 dark:text-stone-500 text-xs hidden sm:inline-block font-mono border-l border-stone-300 dark:border-stone-700 pl-2">
             portfolio
           </span>
         </a>
@@ -79,8 +92,8 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
                 id={`nav-link-${link.href.substring(1)}`}
                 className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                   isActive
-                    ? 'text-stone-950 font-medium bg-stone-200/60'
-                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+                    ? 'text-stone-950 dark:text-stone-100 font-medium bg-stone-200/60 dark:bg-stone-800'
+                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/60'
                 }`}
               >
                 {link.label}
@@ -89,26 +102,28 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
           })}
         </nav>
 
-        {/* Action Button */}
-        <div className="hidden md:flex items-center gap-2">
+        {/* Desktop Action & Theme Toggle */}
+        <div className="hidden md:flex items-center gap-2.5">
+          <ThemeToggle />
           <a
             href="#contact"
             id="nav-cta-talk"
-            className="inline-flex items-center gap-1 text-sm font-medium text-stone-900 bg-stone-900 text-white hover:bg-stone-800 px-4 py-1.5 rounded-md transition-colors"
+            className="inline-flex items-center gap-1 text-sm font-medium text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white px-4 py-1.5 rounded-md transition-colors shadow-2xs"
           >
             <span>Let&apos;s Talk</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Actions: Theme Toggle + Hamburger */}
         <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
-            className="p-2 text-stone-700 hover:text-stone-950 rounded-md hover:bg-stone-100"
+            className="p-2 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -119,23 +134,24 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
       {mobileMenuOpen && (
         <div
           id="mobile-nav-menu"
-          className="md:hidden bg-[#fafaf9] border-b border-stone-200 px-4 pt-2 pb-6 space-y-2 shadow-lg"
+          className="md:hidden bg-[#fafaf9] dark:bg-[#121214] border-b border-stone-200 dark:border-stone-800 px-4 pt-2 pb-6 space-y-2 shadow-lg"
         >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-base font-medium text-stone-800 hover:bg-stone-100 rounded-md"
+              className="block px-3 py-2 text-base font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-md transition-colors"
             >
               {link.label}
             </a>
           ))}
-          <div className="pt-2 border-t border-stone-200 flex flex-col gap-2">
+          <div className="pt-3 border-t border-stone-200 dark:border-stone-800 flex flex-col gap-2.5">
+            <ThemeToggle variant="expanded" />
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 text-center text-sm font-medium text-white bg-stone-900 px-4 py-2.5 rounded-md"
+              className="flex items-center justify-center gap-2 text-center text-sm font-medium text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 px-4 py-2.5 rounded-md transition-colors shadow-sm"
             >
               <span>Let&apos;s Talk</span>
               <ArrowUpRight className="w-4 h-4" />

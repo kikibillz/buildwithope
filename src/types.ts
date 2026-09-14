@@ -18,6 +18,14 @@ export interface ProjectCaseStudy {
   };
 }
 
+export interface ProjectDemoScreenshot {
+  title: string;
+  caption: string;
+  url?: string;
+  type?: 'streamlit' | 'analytics' | 'pipeline' | 'classification';
+  accentColor?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -35,6 +43,8 @@ export interface Project {
   badge?: string;
   streamlitDeployment?: string;
   streamlitUrl?: string;
+  screenshot?: ProjectDemoScreenshot;
+  screenshots?: ProjectDemoScreenshot[];
   caseStudy: ProjectCaseStudy;
 }
 
@@ -101,4 +111,5 @@ export interface PortfolioConfig {
   linkedin: string;
   github: string;
   resumeUrl: string;
+  avatarUrl?: string;
 }
