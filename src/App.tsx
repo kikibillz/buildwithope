@@ -33,6 +33,7 @@ import { AnimatedName } from './components/AnimatedName';
 import { AIVideoSection } from './components/AIVideoSection';
 import { AIVideoModal } from './components/AIVideoModal';
 import { FastApiBackendSection } from './components/FastApiBackendSection';
+import { ResumeSection } from './components/ResumeSection';
 
 export default function App() {
   const [config, setConfig] = useState<PortfolioConfig>(initialConfig);
@@ -545,34 +546,7 @@ export default function App() {
         {/* =========================================================================
             6. RESUME SECTION
            ========================================================================= */}
-        <section id="resume" className="py-14 sm:py-20 border-b border-stone-200/80 dark:border-stone-800 bg-stone-100/70 dark:bg-stone-900/60 transition-colors">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
-              Full Credentials
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
-              Want the full picture?
-            </h2>
-            <p className="text-base text-stone-600 dark:text-stone-400 max-w-xl mx-auto mb-6 leading-relaxed">
-              Download my résumé to see my background, skills, education, and experience.
-            </p>
-
-            <a
-              href={config.resumeUrl}
-              target="_blank"
-              rel="noreferrer"
-              id="btn-download-resume"
-              className="inline-flex items-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 font-medium text-sm px-6 py-3 rounded-md transition-colors shadow-sm cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download Résumé</span>
-            </a>
-
-            <div className="mt-3 text-xs font-mono text-stone-500 dark:text-stone-400">
-              Target destination: {config.resumeUrl}
-            </div>
-          </div>
-        </section>
+        <ResumeSection config={config} />
 
         {/* =========================================================================
             7. CONTACT SECTION
