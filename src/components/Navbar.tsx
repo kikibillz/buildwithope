@@ -78,7 +78,13 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
               alt={config.name}
               referrerPolicy="no-referrer"
               onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
+                const target = e.currentTarget;
+                if (!target.dataset.triedFallback) {
+                  target.dataset.triedFallback = 'true';
+                  target.src = '/images/opeyemi.png';
+                } else {
+                  target.style.display = 'none';
+                }
               }}
               className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-stone-300 dark:border-stone-700 group-hover:ring-2 group-hover:ring-stone-400 dark:group-hover:ring-stone-600 transition-all shrink-0"
             />

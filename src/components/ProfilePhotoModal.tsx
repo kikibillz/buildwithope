@@ -70,18 +70,18 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
 
   const handleResetToDefault = () => {
     localStorage.removeItem('portfolio_natural_photo');
-    onPhotoUpdated('/images/odunayo.jpg');
+    onPhotoUpdated('/images/opeyemi picture.png');
     setUploadSuccess(true);
     setTimeout(() => setUploadSuccess(false), 3000);
   };
 
   const handleCopyPath = () => {
-    navigator.clipboard.writeText('public/images/odunayo.jpg');
+    navigator.clipboard.writeText('public/images/opeyemi picture.png');
     setCopiedPath(true);
     setTimeout(() => setCopiedPath(false), 2000);
   };
 
-  const activeDisplaySrc = currentPhoto || '/images/odunayo.jpg';
+  const activeDisplaySrc = currentPhoto || '/images/opeyemi picture.png';
 
   return (
     <div
@@ -235,9 +235,9 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
 
             {/* Code Block Showing Folder Tree */}
             <div className="relative rounded-lg bg-stone-950 text-stone-200 p-3.5 font-mono text-xs overflow-x-auto border border-stone-800">
-              <div className="text-stone-500 mb-1">// Supported filenames in public/images/:</div>
+              <div className="text-stone-500 mb-1">// Active image asset in public/images/:</div>
               <div className="text-emerald-400 font-semibold flex items-center justify-between">
-                <span>public/images/odunayo.jpg  (or opeyemi picture.png)</span>
+                <span>public/images/opeyemi picture.png</span>
                 <button
                   onClick={handleCopyPath}
                   className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-stone-800 hover:bg-stone-700 text-[11px] text-stone-300 transition-colors cursor-pointer"
@@ -258,8 +258,8 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
               <div className="text-stone-400 mt-2 text-[11px] leading-relaxed">
                 ├── public/<br />
                 │&nbsp;&nbsp; ├── <span className="text-amber-300 font-bold">images/</span><br />
-                │&nbsp;&nbsp; │&nbsp;&nbsp; ├── <span className="text-emerald-400 font-bold">odunayo.jpg</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-stone-500">&lt;-- Primary headshot</span><br />
-                │&nbsp;&nbsp; │&nbsp;&nbsp; └── <span className="text-emerald-400 font-bold">opeyemi picture.png</span>&nbsp;<span className="text-stone-500">&lt;-- Auto-detected if uploaded</span><br />
+                │&nbsp;&nbsp; │&nbsp;&nbsp; ├── <span className="text-emerald-400 font-bold">opeyemi picture.png</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-stone-500">&lt;-- Primary headshot</span><br />
+                │&nbsp;&nbsp; │&nbsp;&nbsp; └── <span className="text-emerald-400 font-bold">opeyemi.png</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-stone-500">&lt;-- Fail-safe asset</span><br />
                 │&nbsp;&nbsp; └── videos/
               </div>
             </div>
@@ -267,16 +267,14 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
             <div className="p-3 rounded-lg bg-stone-50 dark:bg-stone-950/60 border border-stone-200 dark:border-stone-800 text-xs text-stone-600 dark:text-stone-400 space-y-1">
               <div className="font-semibold text-stone-800 dark:text-stone-200 flex items-center gap-1.5">
                 <Info className="w-3.5 h-3.5 text-blue-500" />
-                <span>Automatic Detection Hierarchy</span>
+                <span>Default &amp; Fail-Safe Priority</span>
               </div>
               <p>
-                The portfolio checks for your authentic image in this exact order:
+                The portfolio exclusively displays your authentic photograph:
               </p>
               <ol className="list-decimal list-inside font-mono text-[11px] text-stone-700 dark:text-stone-300 space-y-0.5 mt-1">
-                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/opeyemi picture.png</code> (Top priority)</li>
-                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/opeyemi.png</code></li>
-                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/odunayo.png</code> / <code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/odunayo.jpg</code></li>
-                <li><code className="text-stone-600 dark:text-stone-400">/odunayo.jpg</code> (Root fallback)</li>
+                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/opeyemi picture.png</code> (Default)</li>
+                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/opeyemi.png</code> (Fail-safe)</li>
               </ol>
             </div>
           </div>

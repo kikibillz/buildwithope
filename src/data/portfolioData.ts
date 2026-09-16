@@ -9,7 +9,7 @@ export const initialConfig: PortfolioConfig = {
   linkedin: 'https://linkedin.com',
   github: 'https://github.com/kikibillz',
   resumeUrl: '#',
-  avatarUrl: '/images/odunayo.jpg',
+  avatarUrl: '/images/opeyemi picture.png',
 };
 
 export const skillCategories: SkillCategory[] = [

@@ -47,7 +47,11 @@ export default function App() {
   // Auto-detect and display the natural photograph (from local storage or candidate static paths)
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('portfolio_natural_photo') || null;
+      const stored = localStorage.getItem('portfolio_natural_photo');
+      if (stored && (stored.includes('opeyemi') || stored.startsWith('data:image'))) {
+        return stored;
+      }
+      localStorage.removeItem('portfolio_natural_photo');
     }
     return null;
   });
@@ -55,28 +59,19 @@ export default function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Sequential prioritization: if a user photo like opeyemi picture.png or custom odunayo.png exists, use it first
+    // Strict priority: ONLY Opeyemi picture paths
     const candidatePaths = [
       '/images/opeyemi picture.png',
-      '/opeyemi picture.png',
+      '/images/opeyemi%20picture.png',
       '/images/opeyemi.png',
+      '/opeyemi picture.png',
+      '/opeyemi%20picture.png',
       '/opeyemi.png',
-      '/images/opeyemi.jpg',
-      '/opeyemi.jpg',
-      '/images/odunayo.png',
-      '/odunayo.png',
-      '/images/odunayo.jpg',
-      '/odunayo.jpg',
-      '/profile.png',
-      '/profile.jpg',
-      '/1736458983342.jpg',
-      '/images/profile.jpg',
     ];
 
     let isMounted = true;
 
     const testCandidates = async () => {
-      // If user already has a custom localStorage photo, keep it unless we discover a dedicated repository asset
       for (const path of candidatePaths) {
         try {
           const isValid = await new Promise<boolean>((resolve) => {
@@ -105,7 +100,7 @@ export default function App() {
 
   const activeConfig = {
     ...config,
-    avatarUrl: naturalPhoto || config.avatarUrl,
+    avatarUrl: naturalPhoto || '/images/opeyemi picture.png',
   };
 
   return (
@@ -130,7 +125,13 @@ export default function App() {
                         alt={config.name}
                         referrerPolicy="no-referrer"
                         onError={(e) => {
-                          (e.target as HTMLElement).style.display = 'none';
+                          const target = e.currentTarget;
+                          if (!target.dataset.triedFallback) {
+                            target.dataset.triedFallback = 'true';
+                            target.src = '/images/opeyemi.png';
+                          } else {
+                            target.style.display = 'none';
+                          }
                         }}
                         className="w-13 h-13 sm:w-15 sm:h-15 rounded-full object-cover border-2 border-white dark:border-stone-800 shadow-sm ring-1 ring-stone-300 dark:ring-stone-700 shrink-0 group-hover/avatar:ring-emerald-500 transition-all"
                       />
@@ -288,13 +289,19 @@ export default function App() {
                 <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl p-4 sm:p-5 shadow-sm">
                   <div className="relative aspect-[4/4.8] sm:aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-950 border border-stone-200/80 dark:border-stone-800">
                     <img
-                      src={activeConfig.avatarUrl || '/images/odunayo.jpg'}
+                      src={activeConfig.avatarUrl || '/images/opeyemi picture.png'}
                       alt={config.name}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover object-center"
                       onError={(e) => {
-                        // If image cannot be loaded, show elegant fallback initials
-                        (e.target as HTMLElement).style.display = 'none';
+                        // Fallback strictly to /images/opeyemi.png
+                        const target = e.currentTarget;
+                        if (!target.dataset.triedFallback) {
+                          target.dataset.triedFallback = 'true';
+                          target.src = '/images/opeyemi.png';
+                        } else {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent pointer-events-none" />
@@ -677,7 +684,7 @@ export default function App() {
       <ProfilePhotoModal
         isOpen={isPhotoModalOpen}
         onClose={() => setIsPhotoModalOpen(false)}
-        currentPhoto={activeConfig.avatarUrl || '/images/odunayo.jpg'}
+        currentPhoto={activeConfig.avatarUrl || '/images/opeyemi picture.png'}
         onUpdatePhoto={(newUrl) => {
           setNaturalPhoto(newUrl);
           if (typeof window !== 'undefined') {
