@@ -19,7 +19,6 @@ import {
   Play,
   Film,
   MapPin,
-  Camera,
 } from 'lucide-react';
 import { initialConfig, projects, skillCategories, experienceItems } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
@@ -34,7 +33,6 @@ import { AnimatedName } from './components/AnimatedName';
 import { AIVideoSection } from './components/AIVideoSection';
 import { AIVideoModal } from './components/AIVideoModal';
 import { FastApiBackendSection } from './components/FastApiBackendSection';
-import { ProfilePhotoModal } from './components/ProfilePhotoModal';
 
 export default function App() {
   const [config, setConfig] = useState<PortfolioConfig>(initialConfig);
@@ -42,7 +40,6 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [streamlitProject, setStreamlitProject] = useState<Project | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
-  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
 
   // Auto-detect and display the natural photograph (from local storage or candidate static paths)
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
@@ -118,7 +115,7 @@ export default function App() {
               {/* Left Column: Natural, Credible Editorial Intro */}
               <div className="lg:col-span-6 space-y-6">
                 <div className="flex items-center gap-3.5">
-                  <div className="relative group/avatar cursor-pointer" onClick={() => setIsPhotoModalOpen(true)} title="Click to view photo documentation or manage portrait">
+                  <div className="relative shrink-0">
                     {activeConfig.avatarUrl ? (
                       <img
                         src={activeConfig.avatarUrl}
@@ -133,16 +130,13 @@ export default function App() {
                             target.style.display = 'none';
                           }
                         }}
-                        className="w-13 h-13 sm:w-15 sm:h-15 rounded-full object-cover border-2 border-white dark:border-stone-800 shadow-sm ring-1 ring-stone-300 dark:ring-stone-700 shrink-0 group-hover/avatar:ring-emerald-500 transition-all"
+                        className="w-13 h-13 sm:w-15 sm:h-15 rounded-full object-cover border-2 border-white dark:border-stone-800 shadow-sm ring-1 ring-stone-300 dark:ring-stone-700 shrink-0"
                       />
                     ) : (
                       <div className="w-12 h-12 rounded-full bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-950 font-mono font-bold text-base flex items-center justify-center shrink-0 shadow-xs ring-1 ring-stone-300 dark:ring-stone-700">
                         BO
                       </div>
                     )}
-                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-stone-900/90 dark:bg-stone-800 text-white flex items-center justify-center text-[9px] shadow-sm border border-white dark:border-stone-700 group-hover/avatar:scale-110 transition-transform">
-                      <Camera className="w-2.5 h-2.5 text-emerald-400" />
-                    </div>
                   </div>
                   <div>
                     <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 text-xs font-mono">
@@ -305,17 +299,6 @@ export default function App() {
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent pointer-events-none" />
-                    
-                    {/* Photo Settings button */}
-                    <button
-                      type="button"
-                      onClick={() => setIsPhotoModalOpen(true)}
-                      className="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-stone-950/80 hover:bg-stone-900 text-stone-200 hover:text-white text-xs font-mono backdrop-blur-md border border-white/10 shadow-sm transition-all cursor-pointer"
-                      title="Manage profile photo"
-                    >
-                      <Camera className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Photo Settings</span>
-                    </button>
 
                     <div className="absolute bottom-4 left-4 right-4 text-white">
                       <div className="text-lg font-bold tracking-tight">{config.name}</div>
@@ -678,19 +661,6 @@ export default function App() {
       <AIVideoModal
         video={selectedVideo}
         onClose={() => setSelectedVideo(null)}
-      />
-
-      {/* Profile Photo Documentation & Management Modal */}
-      <ProfilePhotoModal
-        isOpen={isPhotoModalOpen}
-        onClose={() => setIsPhotoModalOpen(false)}
-        currentPhoto={activeConfig.avatarUrl || '/images/opeyemi picture.png'}
-        onUpdatePhoto={(newUrl) => {
-          setNaturalPhoto(newUrl);
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('portfolio_natural_photo', newUrl);
-          }
-        }}
       />
     </div>
   );

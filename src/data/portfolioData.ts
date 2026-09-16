@@ -28,8 +28,8 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: 'Programming',
-    description: 'Core programming language used for scripting, analysis, and data pipelines.',
-    skills: ['Python'],
+    description: 'Core languages used for full-stack logic, web interfaces, scripting, and data pipelines.',
+    skills: ['Python', 'TypeScript', 'JavaScript', 'HTML'],
   },
   {
     title: 'Data',
