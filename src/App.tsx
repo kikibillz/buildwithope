@@ -53,31 +53,55 @@ export default function App() {
   });
 
   useEffect(() => {
-    if (!naturalPhoto && typeof window !== 'undefined') {
-      const candidatePaths = [
-        '/images/odunayo.jpg',
-        '/odunayo.jpg',
-        '/profile.jpg',
-        '/1736458983342.jpg',
-        '/images/profile.jpg',
-        '/picture.jpg',
-        '/photo.jpg',
-      ];
-      let isMounted = true;
+    if (typeof window === 'undefined') return;
+
+    // Sequential prioritization: if a user photo like opeyemi picture.png or custom odunayo.png exists, use it first
+    const candidatePaths = [
+      '/images/opeyemi picture.png',
+      '/opeyemi picture.png',
+      '/images/opeyemi.png',
+      '/opeyemi.png',
+      '/images/opeyemi.jpg',
+      '/opeyemi.jpg',
+      '/images/odunayo.png',
+      '/odunayo.png',
+      '/images/odunayo.jpg',
+      '/odunayo.jpg',
+      '/profile.png',
+      '/profile.jpg',
+      '/1736458983342.jpg',
+      '/images/profile.jpg',
+    ];
+
+    let isMounted = true;
+
+    const testCandidates = async () => {
+      // If user already has a custom localStorage photo, keep it unless we discover a dedicated repository asset
       for (const path of candidatePaths) {
-        const testImg = new window.Image();
-        testImg.src = path;
-        testImg.onload = () => {
-          if (isMounted && testImg.naturalWidth > 0) {
+        try {
+          const isValid = await new Promise<boolean>((resolve) => {
+            const testImg = new window.Image();
+            testImg.onload = () => resolve(testImg.naturalWidth > 0);
+            testImg.onerror = () => resolve(false);
+            testImg.src = path;
+          });
+
+          if (isValid && isMounted) {
             setNaturalPhoto(path);
+            break;
           }
-        };
+        } catch {
+          // continue checking next path
+        }
       }
-      return () => {
-        isMounted = false;
-      };
-    }
-  }, [naturalPhoto]);
+    };
+
+    testCandidates();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const activeConfig = {
     ...config,

@@ -149,11 +149,26 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
             </div>
           </div>
 
+          {/* Vercel & GitHub Deployment Explanation Callout */}
+          <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 space-y-2">
+            <div className="flex items-center gap-2 text-amber-900 dark:text-amber-200 font-semibold text-xs sm:text-sm">
+              <Info className="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" />
+              <span>Why an AI image showed on Vercel &amp; GitHub</span>
+            </div>
+            <p className="text-xs text-amber-800 dark:text-amber-300/90 leading-relaxed">
+              When using in-browser &quot;Choose Photo&quot;, the image is stored only in your local browser storage (LocalStorage). 
+              Because LocalStorage is <strong>never</strong> committed to Git, your Vercel deployment could not see it and fell back to the placeholder image in the repository.
+            </p>
+            <p className="text-xs text-amber-900 dark:text-amber-200 font-medium">
+              👉 To make your real photo show on Vercel for all visitors, place your image directly in the <code className="bg-amber-200/60 dark:bg-amber-900/60 px-1 py-0.5 rounded font-mono">public/images/</code> folder in the project file explorer.
+            </p>
+          </div>
+
           {/* Alert feedback */}
           {uploadSuccess && (
             <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
-              <span>Profile photo successfully updated and synced across the whole portfolio!</span>
+              <span>Profile photo successfully updated in preview! (Remember to save to public/images/ for Vercel)</span>
             </div>
           )}
 
@@ -165,13 +180,13 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
                   1
                 </span>
                 <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                  Instant Browser Upload (No code required)
+                  Preview Your Photo (Instant Browser Preview)
                 </h4>
               </div>
-              <span className="text-[11px] font-mono text-emerald-700 dark:text-emerald-400 font-medium">Recommended</span>
+              <span className="text-[11px] font-mono text-stone-500 font-medium">Local Preview</span>
             </div>
             <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-              Select any personal photograph from your device. It will be loaded immediately and persisted in your browser&apos;s storage.
+              Select your photo from your device to immediately preview how it looks across your entire portfolio layout.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -195,10 +210,10 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
               <button
                 type="button"
                 onClick={handleResetToDefault}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition-colors cursor-pointer"
               >
                 <RefreshCw className="w-3.5 h-3.5 text-stone-500" />
-                <span>Reset to Default Asset</span>
+                <span>Reset to Static Repo Image</span>
               </button>
             </div>
           </div>
@@ -206,26 +221,26 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
           {/* Option 2: Folder Documentation for Developer / Git Workflow */}
           <div className="p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 space-y-3">
             <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-mono text-xs flex items-center justify-center font-bold">
+              <span className="w-5 h-5 rounded-full bg-emerald-600 text-white font-mono text-xs flex items-center justify-center font-bold">
                 2
               </span>
               <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                Project Folder Structure &amp; Git Asset Placement
+                Permanent Vercel &amp; GitHub Deployment (Static File)
               </h4>
             </div>
 
             <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-              If you prefer to commit your photo directly to your GitHub repository or project directory, place your image in the static <code className="font-mono text-stone-800 dark:text-stone-200 bg-stone-100 dark:bg-stone-800 px-1 py-0.5 rounded">public/images/</code> folder:
+              To guarantee that Vercel serves your genuine headshot to every visitor, upload or drop your photo file into the project&apos;s static <code className="font-mono text-stone-800 dark:text-stone-200 bg-stone-100 dark:bg-stone-800 px-1 py-0.5 rounded">public/images/</code> folder using the AI Studio File Explorer:
             </p>
 
             {/* Code Block Showing Folder Tree */}
             <div className="relative rounded-lg bg-stone-950 text-stone-200 p-3.5 font-mono text-xs overflow-x-auto border border-stone-800">
-              <div className="text-stone-500 mb-1">// Target directory &amp; file name:</div>
+              <div className="text-stone-500 mb-1">// Supported filenames in public/images/:</div>
               <div className="text-emerald-400 font-semibold flex items-center justify-between">
-                <span>public/images/odunayo.jpg</span>
+                <span>public/images/odunayo.jpg  (or opeyemi picture.png)</span>
                 <button
                   onClick={handleCopyPath}
-                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-stone-800 hover:bg-stone-700 text-[11px] text-stone-300 transition-colors"
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-stone-800 hover:bg-stone-700 text-[11px] text-stone-300 transition-colors cursor-pointer"
                 >
                   {copiedPath ? (
                     <>
@@ -242,8 +257,9 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
               </div>
               <div className="text-stone-400 mt-2 text-[11px] leading-relaxed">
                 ├── public/<br />
-                │&nbsp;&nbsp; ├── <span className="text-amber-300 font-bold">images/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-stone-500">&lt;-- Folder created</span><br />
-                │&nbsp;&nbsp; │&nbsp;&nbsp; └── <span className="text-emerald-400 font-bold">odunayo.jpg</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-stone-500">&lt;-- Your headshot photo</span><br />
+                │&nbsp;&nbsp; ├── <span className="text-amber-300 font-bold">images/</span><br />
+                │&nbsp;&nbsp; │&nbsp;&nbsp; ├── <span className="text-emerald-400 font-bold">odunayo.jpg</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-stone-500">&lt;-- Primary headshot</span><br />
+                │&nbsp;&nbsp; │&nbsp;&nbsp; └── <span className="text-emerald-400 font-bold">opeyemi picture.png</span>&nbsp;<span className="text-stone-500">&lt;-- Auto-detected if uploaded</span><br />
                 │&nbsp;&nbsp; └── videos/
               </div>
             </div>
@@ -251,15 +267,16 @@ export const ProfilePhotoModal: React.FC<ProfilePhotoModalProps> = ({
             <div className="p-3 rounded-lg bg-stone-50 dark:bg-stone-950/60 border border-stone-200 dark:border-stone-800 text-xs text-stone-600 dark:text-stone-400 space-y-1">
               <div className="font-semibold text-stone-800 dark:text-stone-200 flex items-center gap-1.5">
                 <Info className="w-3.5 h-3.5 text-blue-500" />
-                <span>Automatic Fallback Hierarchy</span>
+                <span>Automatic Detection Hierarchy</span>
               </div>
               <p>
-                The portfolio checks the following locations automatically:
+                The portfolio checks for your authentic image in this exact order:
               </p>
               <ol className="list-decimal list-inside font-mono text-[11px] text-stone-700 dark:text-stone-300 space-y-0.5 mt-1">
-                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/odunayo.jpg</code> (Primary standard)</li>
-                <li><code className="text-stone-600 dark:text-stone-400">/odunayo.jpg</code> (Root public fallback)</li>
-                <li><code className="text-stone-600 dark:text-stone-400">/profile.jpg</code> (Alternative fallback)</li>
+                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/opeyemi picture.png</code> (Top priority)</li>
+                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/opeyemi.png</code></li>
+                <li><code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/odunayo.png</code> / <code className="text-emerald-700 dark:text-emerald-400 font-semibold">/images/odunayo.jpg</code></li>
+                <li><code className="text-stone-600 dark:text-stone-400">/odunayo.jpg</code> (Root fallback)</li>
               </ol>
             </div>
           </div>
