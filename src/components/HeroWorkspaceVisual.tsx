@@ -24,20 +24,20 @@ export const HeroWorkspaceVisual: React.FC = () => {
       className="w-full bg-[#18181b] text-stone-300 rounded-xl border border-stone-800 shadow-xl overflow-hidden font-mono text-xs"
     >
       {/* Window Header */}
-      <div className="bg-[#121214] px-4 py-2.5 border-b border-stone-800 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex gap-1.5">
+      <div className="bg-[#121214] px-3 sm:px-4 py-2 sm:py-2.5 border-b border-stone-800 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="flex gap-1.5 shrink-0">
             <span className="w-2.5 h-2.5 rounded-full bg-stone-700 inline-block" />
             <span className="w-2.5 h-2.5 rounded-full bg-stone-700 inline-block" />
             <span className="w-2.5 h-2.5 rounded-full bg-stone-700 inline-block" />
           </div>
-          <span className="text-[11px] text-stone-400 pl-2 tracking-wide font-sans">
+          <span className="text-[11px] text-stone-400 pl-1 sm:pl-2 tracking-wide font-sans truncate">
             workspace / pipeline_inspection.py
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] text-emerald-400 flex items-center gap-1 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <span className="text-[10px] text-emerald-400 hidden xs:flex sm:flex items-center gap-1 bg-emerald-950/60 px-1.5 sm:px-2 py-0.5 rounded border border-emerald-800/40">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" />
             <span>Python 3.11</span>
           </span>
@@ -46,14 +46,14 @@ export const HeroWorkspaceVisual: React.FC = () => {
             id="workspace-run-btn"
             disabled={isExecuting}
             title="Execute pipeline cell"
-            className="flex items-center gap-1 bg-stone-800 hover:bg-stone-700 active:bg-stone-600 text-stone-200 px-2.5 py-1 rounded transition-all text-[11px] hover:scale-105 active:scale-95"
+            className="flex items-center gap-1 bg-stone-800 hover:bg-stone-700 active:bg-stone-600 text-stone-200 px-2 sm:px-2.5 py-1 rounded transition-all text-[11px] hover:scale-105 active:scale-95 cursor-pointer"
           >
             {isExecuting ? (
               <RefreshCw className="w-3 h-3 animate-spin text-amber-400" />
             ) : (
               <Play className="w-3 h-3 fill-current text-emerald-400" />
             )}
-            <span>{isExecuting ? 'Executing...' : `Run (${execCount})`}</span>
+            <span>{isExecuting ? 'Running...' : `Run (${execCount})`}</span>
           </button>
         </div>
       </div>
@@ -69,11 +69,11 @@ export const HeroWorkspaceVisual: React.FC = () => {
       )}
 
       {/* Tabs */}
-      <div className="bg-[#161619] px-3 pt-2 border-b border-stone-800/80 flex gap-1">
+      <div className="bg-[#161619] px-3 pt-2 border-b border-stone-800/80 flex gap-1 overflow-x-auto whitespace-nowrap scrollbar-none">
         <button
           onClick={() => setActiveTab('code')}
           id="hero-tab-code"
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-t text-xs transition-colors border-t border-x ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-t text-xs transition-colors border-t border-x shrink-0 ${
             activeTab === 'code'
               ? 'bg-[#18181b] text-stone-100 border-stone-700 font-medium'
               : 'text-stone-400 border-transparent hover:text-stone-200 hover:bg-stone-800/40'
@@ -86,7 +86,7 @@ export const HeroWorkspaceVisual: React.FC = () => {
         <button
           onClick={() => setActiveTab('table')}
           id="hero-tab-table"
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-t text-xs transition-colors border-t border-x ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-t text-xs transition-colors border-t border-x shrink-0 ${
             activeTab === 'table'
               ? 'bg-[#18181b] text-stone-100 border-stone-700 font-medium'
               : 'text-stone-400 border-transparent hover:text-stone-200 hover:bg-stone-800/40'
@@ -99,7 +99,7 @@ export const HeroWorkspaceVisual: React.FC = () => {
         <button
           onClick={() => setActiveTab('chart')}
           id="hero-tab-chart"
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-t text-xs transition-colors border-t border-x ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-t text-xs transition-colors border-t border-x shrink-0 ${
             activeTab === 'chart'
               ? 'bg-[#18181b] text-stone-100 border-stone-700 font-medium'
               : 'text-stone-400 border-transparent hover:text-stone-200 hover:bg-stone-800/40'

@@ -46,7 +46,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = 'icon', clas
       id="theme-toggle-btn"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className={`relative p-2 rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-center border ${
+      className={`relative min-w-[40px] min-h-[40px] sm:min-w-[36px] sm:min-h-[36px] p-2 rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-center border ${
         isDark
           ? 'bg-stone-800/90 text-amber-300 border-stone-700 hover:bg-stone-700 hover:text-amber-200 shadow-inner'
           : 'bg-stone-100 text-stone-700 border-stone-200/90 hover:bg-stone-200 hover:text-stone-950 shadow-2xs'

@@ -142,21 +142,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 border-t border-stone-200 bg-white">
+    <section id="contact" className="py-16 sm:py-24 border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="max-w-2xl mb-12">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 mb-3">
-            <Mail className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 mb-3">
+            <Mail className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>Direct Inbox Connection</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-2">
             Let&apos;s work together.
           </h2>
-          <p className="text-base text-stone-600 leading-relaxed">
+          <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
             Have a project, job opportunity, or question? Send a message directly to my inbox at{' '}
             <a
               href={`mailto:${targetEmail}`}
-              className="text-stone-950 font-medium underline underline-offset-4 decoration-stone-400 hover:decoration-stone-900"
+              className="text-stone-950 dark:text-stone-100 font-medium underline underline-offset-4 decoration-stone-400 dark:decoration-stone-600 hover:decoration-stone-900 dark:hover:decoration-stone-200"
             >
               {targetEmail}
             </a>
@@ -167,8 +167,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Direct channels & context */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-[#fafaf9] border border-stone-200 rounded-xl p-6 space-y-4 shadow-2xs">
-              <h3 className="text-xs font-semibold text-stone-900 uppercase tracking-wider font-mono">
+            <div className="bg-[#fafaf9] dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-6 space-y-4 shadow-2xs">
+              <h3 className="text-xs font-semibold text-stone-900 dark:text-stone-100 uppercase tracking-wider font-mono">
                 Direct Channels
               </h3>
 
@@ -176,18 +176,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                 <a
                   href={`mailto:${targetEmail}`}
                   id="contact-channel-email"
-                  className="flex items-center gap-3 text-stone-700 hover:text-stone-950 group p-2 rounded-lg hover:bg-white transition-colors"
+                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-white dark:hover:bg-stone-800 transition-colors"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-emerald-800 group-hover:bg-emerald-100 transition-colors shrink-0">
+                  <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200/80 dark:border-emerald-800 flex items-center justify-center text-emerald-800 dark:text-emerald-300 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900 transition-colors shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div className="overflow-hidden">
-                    <div className="text-[10px] font-mono text-stone-500 uppercase">Primary Email</div>
-                    <div className="text-xs sm:text-sm font-medium text-stone-900 truncate">
+                    <div className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase">Primary Email</div>
+                    <div className="text-xs sm:text-sm font-medium text-stone-900 dark:text-stone-100 truncate">
                       {targetEmail}
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-700 ml-auto shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-stone-700 dark:group-hover:text-stone-300 ml-auto shrink-0" />
                 </a>
 
                 <a
@@ -195,18 +195,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                   target="_blank"
                   rel="noreferrer"
                   id="contact-channel-linkedin"
-                  className="flex items-center gap-3 text-stone-700 hover:text-stone-950 group p-2 rounded-lg hover:bg-white transition-colors"
+                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-white dark:hover:bg-stone-800 transition-colors"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-stone-200 transition-colors shrink-0">
+                  <div className="w-9 h-9 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-600 dark:text-stone-300 group-hover:bg-stone-200 dark:group-hover:bg-stone-700 transition-colors shrink-0">
                     <Linkedin className="w-4 h-4" />
                   </div>
                   <div className="overflow-hidden">
-                    <div className="text-[10px] font-mono text-stone-500 uppercase">LinkedIn Profile</div>
-                    <div className="text-xs sm:text-sm font-medium text-stone-900 truncate">
+                    <div className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase">LinkedIn Profile</div>
+                    <div className="text-xs sm:text-sm font-medium text-stone-900 dark:text-stone-100 truncate">
                       {config.linkedin.replace(/^https?:\/\/(www\.)?/, '')}
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-700 ml-auto shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-stone-700 dark:group-hover:text-stone-300 ml-auto shrink-0" />
                 </a>
 
                 <a
@@ -214,61 +214,61 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                   target="_blank"
                   rel="noreferrer"
                   id="contact-channel-github"
-                  className="flex items-center gap-3 text-stone-700 hover:text-stone-950 group p-2 rounded-lg hover:bg-white transition-colors"
+                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-white dark:hover:bg-stone-800 transition-colors"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-stone-200 transition-colors shrink-0">
+                  <div className="w-9 h-9 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-600 dark:text-stone-300 group-hover:bg-stone-200 dark:group-hover:bg-stone-700 transition-colors shrink-0">
                     <Github className="w-4 h-4" />
                   </div>
                   <div className="overflow-hidden">
-                    <div className="text-[10px] font-mono text-stone-500 uppercase">GitHub Repositories</div>
-                    <div className="text-xs sm:text-sm font-medium text-stone-900 truncate">
+                    <div className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase">GitHub Repositories</div>
+                    <div className="text-xs sm:text-sm font-medium text-stone-900 dark:text-stone-100 truncate">
                       {config.github.replace(/^https?:\/\/(www\.)?/, '')}
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-700 ml-auto shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-stone-700 dark:group-hover:text-stone-300 ml-auto shrink-0" />
                 </a>
 
-                <div className="flex items-center gap-3 text-stone-700 p-2">
-                  <div className="w-9 h-9 rounded-lg bg-stone-100 flex items-center justify-center text-stone-600 shrink-0">
+                <div className="flex items-center gap-3 text-stone-700 dark:text-stone-300 p-2">
+                  <div className="w-9 h-9 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-600 dark:text-stone-300 shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-mono text-stone-500 uppercase">Location</div>
-                    <div className="text-xs sm:text-sm font-medium text-stone-900">{config.location}</div>
+                    <div className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase">Location</div>
+                    <div className="text-xs sm:text-sm font-medium text-stone-900 dark:text-stone-100">{config.location}</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Note on availability */}
-            <div className="bg-stone-50 border border-stone-200 rounded-xl p-5 text-xs text-stone-600 leading-relaxed font-sans">
-              <span className="font-semibold text-stone-900 block mb-1">Response Window</span>
+            <div className="bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-5 text-xs text-stone-600 dark:text-stone-400 leading-relaxed font-sans">
+              <span className="font-semibold text-stone-900 dark:text-stone-100 block mb-1">Response Window</span>
               Open to Data Science, Python Developer, and Data/Business Analyst roles, as well as AI video &amp; ML collaborations. Emails are delivered directly to {targetEmail} and answered within 24–48 hours.
             </div>
           </div>
 
           {/* Form / Delivery Status */}
           <div className="lg:col-span-7">
-            <div className="bg-[#fafaf9] border border-stone-200 rounded-xl p-6 sm:p-8 shadow-2xs">
+            <div className="bg-[#fafaf9] dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-6 sm:p-8 shadow-2xs">
               {/* SUCCESS STATE */}
               {status === 'success' && (
                 <div className="text-center py-8 space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto border border-emerald-300">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 flex items-center justify-center mx-auto border border-emerald-300 dark:border-emerald-800">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-stone-900">
+                  <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100">
                     Message Delivered to My Inbox
                   </h3>
-                  <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-stone-900">{name}</strong>. Your message has been transmitted directly to{' '}
-                    <strong className="text-stone-900">{targetEmail}</strong>. I will reply to your email address (
-                    <span className="font-mono text-xs text-stone-800">{email}</span>) as soon as possible.
+                  <p className="text-sm text-stone-600 dark:text-stone-300 max-w-md mx-auto leading-relaxed">
+                    Thank you, <strong className="text-stone-900 dark:text-stone-100">{name}</strong>. Your message has been transmitted directly to{' '}
+                    <strong className="text-stone-900 dark:text-stone-100">{targetEmail}</strong>. I will reply to your email address (
+                    <span className="font-mono text-xs text-stone-800 dark:text-stone-200">{email}</span>) as soon as possible.
                   </p>
                   <div className="pt-2">
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-stone-700 hover:text-stone-950 underline underline-offset-4"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 underline underline-offset-4 cursor-pointer min-h-[44px] px-2"
                     >
                       <RefreshCw className="w-3 h-3" />
                       <span>Send another message</span>
@@ -280,21 +280,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
               {/* ONE-TIME ACTIVATION NOTICE */}
               {status === 'activation_required' && (
                 <div className="text-center py-6 space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto border border-amber-300">
+                  <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300 flex items-center justify-center mx-auto border border-amber-300 dark:border-amber-800">
                     <AlertCircle className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-stone-900">
+                  <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100">
                     Delivery Initiated — Activation Step
                   </h3>
-                  <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
+                  <p className="text-sm text-stone-600 dark:text-stone-300 max-w-md mx-auto leading-relaxed">
                     FormSubmit has sent a 1-click activation email to{' '}
-                    <strong className="text-stone-900">{targetEmail}</strong>. Please check your inbox (or spam) and click{' '}
+                    <strong className="text-stone-900 dark:text-stone-100">{targetEmail}</strong>. Please check your inbox (or spam) and click{' '}
                     <em>&quot;Activate Form&quot;</em> once to enable instant email forwarding.
                   </p>
                   <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a
                       href={mailtoUrl}
-                      className="inline-flex items-center gap-2 bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium px-4 py-2 rounded-md transition-colors shadow-xs"
+                      className="inline-flex items-center justify-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white text-white dark:text-stone-950 text-xs font-medium px-4 py-2.5 rounded-md transition-colors shadow-xs min-h-[44px]"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       <span>Send Directly via Email App</span>
@@ -302,7 +302,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="text-xs font-mono text-stone-600 hover:text-stone-900 underline"
+                      className="text-xs font-mono text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 underline min-h-[44px] px-3 cursor-pointer"
                     >
                       Back to form
                     </button>
@@ -312,18 +312,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
 
               {/* ERROR STATE */}
               {status === 'error' && (
-                <div className="mb-6 p-4 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 space-y-3">
+                <div className="mb-6 p-4 rounded-lg bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900/60 text-rose-800 dark:text-rose-200 space-y-3">
                   <div className="flex items-start gap-2 text-xs">
-                    <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold">Unable to complete automated delivery</p>
-                      <p className="text-rose-700 mt-0.5">{errorMessage}</p>
+                      <p className="font-semibold text-rose-900 dark:text-rose-100">Unable to complete automated delivery</p>
+                      <p className="text-rose-700 dark:text-rose-300 mt-0.5">{errorMessage}</p>
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center gap-3 pt-1">
                     <a
                       href={mailtoUrl}
-                      className="inline-flex items-center gap-1.5 bg-rose-700 hover:bg-rose-800 text-white text-xs font-medium px-3.5 py-1.5 rounded-md transition-colors"
+                      className="inline-flex items-center gap-1.5 bg-rose-700 hover:bg-rose-800 text-white text-xs font-medium px-3.5 py-2 rounded-md transition-colors min-h-[44px]"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       <span>Send with Your Email App</span>
@@ -331,7 +331,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     <button
                       type="button"
                       onClick={() => setStatus('idle')}
-                      className="text-xs font-mono text-rose-800 hover:underline"
+                      className="text-xs font-mono text-rose-800 dark:text-rose-300 hover:underline min-h-[44px] px-2 cursor-pointer"
                     >
                       Try submitting again
                     </button>
@@ -344,7 +344,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                 <form onSubmit={handleSubmit} noValidate className="space-y-4 font-sans">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-name" className="block text-xs font-medium text-stone-700 mb-1">
+                      <label htmlFor="contact-name" className="block text-xs font-medium text-stone-700 dark:text-stone-300 mb-1">
                         Your Name <span className="text-rose-500">*</span>
                       </label>
                       <input
@@ -357,12 +357,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                           if (errors.name) setErrors({ ...errors, name: undefined });
                         }}
                         placeholder="e.g. Sarah Jenkins"
-                        className={`w-full text-sm bg-white border ${
-                          errors.name ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300'
-                        } rounded-md px-3 py-2 text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-600 transition-colors`}
+                        className={`w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-stone-800 border ${
+                          errors.name ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300 dark:border-stone-700'
+                        } rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors`}
                       />
                       {errors.name && (
-                        <p className="mt-1 text-xs text-rose-600 flex items-center gap-1">
+                        <p className="mt-1 text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1">
                           <AlertCircle className="w-3 h-3" />
                           <span>{errors.name}</span>
                         </p>
@@ -370,7 +370,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     </div>
 
                     <div>
-                      <label htmlFor="contact-email" className="block text-xs font-medium text-stone-700 mb-1">
+                      <label htmlFor="contact-email" className="block text-xs font-medium text-stone-700 dark:text-stone-300 mb-1">
                         Your Email Address <span className="text-rose-500">*</span>
                       </label>
                       <input
@@ -383,12 +383,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                           if (errors.email) setErrors({ ...errors, email: undefined });
                         }}
                         placeholder="sarah@company.com"
-                        className={`w-full text-sm bg-white border ${
-                          errors.email ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300'
-                        } rounded-md px-3 py-2 text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-600 transition-colors`}
+                        className={`w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-stone-800 border ${
+                          errors.email ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300 dark:border-stone-700'
+                        } rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors`}
                       />
                       {errors.email && (
-                        <p className="mt-1 text-xs text-rose-600 flex items-center gap-1">
+                        <p className="mt-1 text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1">
                           <AlertCircle className="w-3 h-3" />
                           <span>{errors.email}</span>
                         </p>
@@ -397,8 +397,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-subject" className="block text-xs font-medium text-stone-700 mb-1">
-                      Subject <span className="text-stone-400 text-[11px] font-normal">(Optional)</span>
+                    <label htmlFor="contact-subject" className="block text-xs font-medium text-stone-700 dark:text-stone-300 mb-1">
+                      Subject <span className="text-stone-400 dark:text-stone-500 text-[11px] font-normal">(Optional)</span>
                     </label>
                     <input
                       id="contact-subject"
@@ -407,12 +407,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       disabled={status === 'sending'}
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="e.g. Data Science Opportunity / AI Video Project"
-                      className="w-full text-sm bg-white border border-stone-300 rounded-md px-3 py-2 text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-600 transition-colors"
+                      className="w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="contact-message" className="block text-xs font-medium text-stone-700 mb-1">
+                    <label htmlFor="contact-message" className="block text-xs font-medium text-stone-700 dark:text-stone-300 mb-1">
                       Your Message <span className="text-rose-500">*</span>
                     </label>
                     <textarea
@@ -425,12 +425,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                         if (errors.message) setErrors({ ...errors, message: undefined });
                       }}
                       placeholder="Hi Odunayo, I came across your portfolio and would like to connect regarding..."
-                      className={`w-full text-sm bg-white border ${
-                        errors.message ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300'
-                      } rounded-md px-3 py-2 text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-600 transition-colors`}
+                      className={`w-full text-base sm:text-sm bg-white dark:bg-stone-800 border ${
+                        errors.message ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300 dark:border-stone-700'
+                      } rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors`}
                     />
                     {errors.message && (
-                      <p className="mt-1 text-xs text-rose-600 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1">
                         <AlertCircle className="w-3 h-3" />
                         <span>{errors.message}</span>
                       </p>
@@ -456,7 +456,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       type="submit"
                       id="contact-submit-btn"
                       disabled={status === 'sending'}
-                      className="inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-stone-800 active:bg-stone-950 text-white text-sm font-medium px-6 py-2.5 rounded-md transition-colors disabled:opacity-50 shadow-xs"
+                      className="inline-flex items-center justify-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 text-sm font-medium px-6 py-3 sm:py-2.5 min-h-[44px] rounded-md transition-colors disabled:opacity-50 shadow-xs cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>{status === 'sending' ? 'Transmitting to Mailbox...' : 'Send Message'}</span>
@@ -465,7 +465,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     <a
                       href={mailtoUrl}
                       id="contact-mailto-fallback"
-                      className="inline-flex items-center justify-center gap-1.5 text-xs text-stone-600 hover:text-stone-950 font-mono py-2 px-3 rounded hover:bg-stone-100 transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 text-xs text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-200 font-mono py-2.5 px-3 min-h-[44px] rounded hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
                       title="Open directly in your default email client"
                     >
                       <Mail className="w-3 h-3" />
@@ -475,10 +475,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                   </div>
 
                   {/* Privacy & Anti-Leak Statement */}
-                  <div className="pt-3 mt-2 border-t border-stone-100 flex items-start gap-2 text-[11px] text-stone-500 font-sans">
+                  <div className="pt-3 mt-2 border-t border-stone-100 dark:border-stone-800 flex items-start gap-2 text-[11px] text-stone-500 dark:text-stone-400 font-sans">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-stone-700 font-medium">Privacy &amp; Data Security Guarantee:</strong> Inquiries are transmitted over encrypted TLS directly to the recipient inbox. Your contact details are never logged in marketing brokers, tracked in cookies, or sold to third parties.
+                      <strong className="text-stone-700 dark:text-stone-300 font-medium">Privacy &amp; Data Security Guarantee:</strong> Inquiries are transmitted over encrypted TLS directly to the recipient inbox. Your contact details are never logged in marketing brokers, tracked in cookies, or sold to third parties.
                     </span>
                   </div>
                 </form>
