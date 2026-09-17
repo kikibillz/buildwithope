@@ -424,7 +424,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                         setMessage(e.target.value);
                         if (errors.message) setErrors({ ...errors, message: undefined });
                       }}
-                      placeholder="Hi Odunayo, I came across your portfolio and would like to connect regarding..."
+                      placeholder="Hi Opeyemi, I came across your portfolio and would like to connect regarding..."
                       className={`w-full text-base sm:text-sm bg-white dark:bg-stone-800 border ${
                         errors.message ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300 dark:border-stone-700'
                       } rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors`}

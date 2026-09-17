@@ -116,7 +116,7 @@ const endpoints: EndpointConfig[] = [
       null,
       2
     ),
-    curlSnippet: `curl -X POST "https://api.odunayo-ml.internal/api/v1/predict/churn" \\
+    curlSnippet: `curl -X POST "https://api.opeyemi-ml.internal/api/v1/predict/churn" \\
   -H "Authorization: Bearer <YOUR_JWT_TOKEN>" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -137,7 +137,7 @@ const endpoints: EndpointConfig[] = [
 async def predict_churn(payload: dict, token: str):
     async with httpx.AsyncClient(timeout=3.0) as client:
         response = await client.post(
-            "https://api.odunayo-ml.internal/api/v1/predict/churn",
+            "https://api.opeyemi-ml.internal/api/v1/predict/churn",
             headers={"Authorization": f"Bearer {token}"},
             json=payload,
         )
@@ -199,7 +199,7 @@ async def predict_churn(payload: dict, token: str):
       null,
       2
     ),
-    curlSnippet: `curl -X POST "https://api.odunayo-ml.internal/api/v1/predict/attrition" \\
+    curlSnippet: `curl -X POST "https://api.opeyemi-ml.internal/api/v1/predict/attrition" \\
   -H "Authorization: Bearer <YOUR_JWT_TOKEN>" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -219,7 +219,7 @@ async def predict_churn(payload: dict, token: str):
 async def predict_attrition(payload: dict, token: str):
     async with httpx.AsyncClient() as client:
         res = await client.post(
-            "https://api.odunayo-ml.internal/api/v1/predict/attrition",
+            "https://api.opeyemi-ml.internal/api/v1/predict/attrition",
             headers={"Authorization": f"Bearer {token}"},
             json=payload,
         )
@@ -251,12 +251,12 @@ async def predict_attrition(payload: dict, token: str):
       null,
       2
     ),
-    curlSnippet: `curl -X GET "https://api.odunayo-ml.internal/api/v1/health"`,
+    curlSnippet: `curl -X GET "https://api.opeyemi-ml.internal/api/v1/health"`,
     pythonSnippet: `import httpx
 
 async def check_health():
     async with httpx.AsyncClient() as client:
-        res = await client.get("https://api.odunayo-ml.internal/api/v1/health")
+        res = await client.get("https://api.opeyemi-ml.internal/api/v1/health")
         return res.json()`,
     averageLatencyMs: 2.1,
   },
@@ -296,12 +296,12 @@ async def check_health():
       null,
       2
     ),
-    curlSnippet: `curl -X GET "https://api.odunayo-ml.internal/api/v1/models/metadata"`,
+    curlSnippet: `curl -X GET "https://api.opeyemi-ml.internal/api/v1/models/metadata"`,
     pythonSnippet: `import httpx
 
 async def get_models_metadata():
     async with httpx.AsyncClient() as client:
-        res = await client.get("https://api.odunayo-ml.internal/api/v1/models/metadata")
+        res = await client.get("https://api.opeyemi-ml.internal/api/v1/models/metadata")
         return res.json()`,
     averageLatencyMs: 3.4,
   },
@@ -333,7 +333,7 @@ async def get_models_metadata():
       null,
       2
     ),
-    curlSnippet: `curl -X POST "https://api.odunayo-ml.internal/api/v1/auth/token" \\
+    curlSnippet: `curl -X POST "https://api.opeyemi-ml.internal/api/v1/auth/token" \\
   -H "Content-Type: application/x-www-form-urlencoded" \\
   -d "username=service_client_frontend&password=SECRET&grant_type=password"`,
     pythonSnippet: `import httpx
@@ -341,7 +341,7 @@ async def get_models_metadata():
 async def authenticate(username: str, password: str):
     async with httpx.AsyncClient() as client:
         res = await client.post(
-            "https://api.odunayo-ml.internal/api/v1/auth/token",
+            "https://api.opeyemi-ml.internal/api/v1/auth/token",
             data={"username": username, "password": password, "grant_type": "password"},
         )
         return res.json()["access_token"]`,
@@ -415,7 +415,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
   const directMailtoUrl = `mailto:odunayoopamiju@gmail.com?subject=${encodeURIComponent(
     `FastAPI ML Service Demo Access Request - ${reqName || 'Hiring Team'}`
   )}&body=${encodeURIComponent(
-    `Hello Odunayo,\n\nI would like to request staging demo credentials and OpenAPI Swagger access for your FastAPI ML Service.\n\nName: ${reqName}\nCompany: ${reqCompany}\nRole: ${reqRole}\nEmail: ${reqEmail}\nNotes: ${reqNotes}\n\nThank you!`
+    `Hello Opeyemi,\n\nI would like to request staging demo credentials and OpenAPI Swagger access for your FastAPI ML Service.\n\nName: ${reqName}\nCompany: ${reqCompany}\nRole: ${reqRole}\nEmail: ${reqEmail}\nNotes: ${reqNotes}\n\nThank you!`
   )}`;
 
   return (
@@ -1068,7 +1068,7 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--worker
                     Request Noted &amp; Staging Credentials Ready
                   </h4>
                   <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed max-w-sm mx-auto">
-                    Thank you, <strong className="text-stone-900 dark:text-stone-100">{reqName || 'there'}</strong>! For instantaneous direct verification, click below to open a pre-filled access email or email Odunayo directly.
+                    Thank you, <strong className="text-stone-900 dark:text-stone-100">{reqName || 'there'}</strong>! For instantaneous direct verification, click below to open a pre-filled access email or email Opeyemi directly.
                   </p>
 
                   <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-2.5">

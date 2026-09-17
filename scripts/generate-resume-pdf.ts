@@ -57,12 +57,12 @@ function generateResumePdf() {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(22);
   doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-  doc.text('ODUNAYO OPAMIJU', margin, y + 5);
+  doc.text('OPEYEMI OLAMIJU', margin, y + 5);
 
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10);
   doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
-  doc.text('(BUILD WITH OPE)', margin + doc.getTextWidth('ODUNAYO OPAMIJU') + 8, y + 3);
+  doc.text('(BUILD WITH OPE)', margin + doc.getTextWidth('OPEYEMI OLAMIJU') + 8, y + 3);
 
   y += 20;
 
@@ -277,7 +277,7 @@ function generateResumePdf() {
 
   // Output
   const pdfBuffer = Buffer.from(doc.output('arraybuffer'));
-  const outputPath = path.join(process.cwd(), 'public', 'Odunayo_Opamiju_Resume.pdf');
+  const outputPath = path.join(process.cwd(), 'public', 'Opeyemi_Olamiju_Resume.pdf');
   fs.writeFileSync(outputPath, pdfBuffer);
 
   // Also write a copy as resume.pdf

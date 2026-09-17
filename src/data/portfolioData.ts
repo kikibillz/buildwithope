@@ -8,7 +8,7 @@ export const initialConfig: PortfolioConfig = {
   location: 'Lagos, Nigeria',
   linkedin: 'https://linkedin.com',
   github: 'https://github.com/kikibillz',
-  resumeUrl: '/Odunayo_Opamiju_Resume.pdf',
+  resumeUrl: '/Opeyemi_Olamiju_Resume.pdf',
   avatarUrl: '/images/opeyemi picture.png',
 };
 

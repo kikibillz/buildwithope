@@ -9,7 +9,7 @@ interface ResumeSectionProps {
 export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
   const [showFullPreview, setShowFullPreview] = useState(false);
 
-  const resumePdfPath = '/Odunayo_Opamiju_Resume.pdf';
+  const resumePdfPath = '/Opeyemi_Olamiju_Resume.pdf';
   const resumeHtmlPath = '/resume.html';
 
   return (
@@ -32,7 +32,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
         <div className="flex flex-wrap items-center justify-center gap-3.5 mb-10">
           <a
             href={resumePdfPath}
-            download="Odunayo_Opamiju_Resume.pdf"
+            download="Opeyemi_Olamiju_Resume.pdf"
             id="btn-download-resume"
             className="inline-flex items-center gap-2.5 bg-stone-900 hover:bg-stone-800 dark:bg-stone-100 dark:hover:bg-white text-white dark:text-stone-950 font-medium text-sm px-6 py-3 rounded-lg transition-all shadow-sm active:scale-[0.98] cursor-pointer"
           >
@@ -75,7 +75,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-xl sm:text-2xl font-bold text-stone-900 dark:text-stone-100">
-                    ODUNAYO OPAMIJU
+                    OPEYEMI OLAMIJU
                   </span>
                   <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                     Build with Ope
@@ -223,11 +223,11 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
               </span>
               <a
                 href={resumePdfPath}
-                download="Odunayo_Opamiju_Resume.pdf"
+                download="Opeyemi_Olamiju_Resume.pdf"
                 className="inline-flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-semibold hover:underline cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Download Odunayo_Opamiju_Resume.pdf</span>
+                <span>Download Opeyemi_Olamiju_Resume.pdf</span>
               </a>
             </div>
           </div>
