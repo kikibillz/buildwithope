@@ -1,4 +1,4 @@
-import { ExperienceItem, PortfolioConfig, Project, SkillCategory } from '../types';
+import { CertificationItem, ExperienceItem, PortfolioConfig, Project, SkillCategory } from '../types';
 
 export const initialConfig: PortfolioConfig = {
   name: 'Build with Ope',
@@ -6,9 +6,10 @@ export const initialConfig: PortfolioConfig = {
   subTitle: 'Data Scientist | AI Video Creator & Generative Media | Python Developer',
   email: 'odunayoopamiju@gmail.com',
   location: 'Lagos, Nigeria',
-  linkedin: 'https://linkedin.com',
+  linkedin: 'https://www.linkedin.com/in/opeyemiolamiju/',
   github: 'https://github.com/kikibillz',
   resumeUrl: '/Opeyemi_Olamiju_Resume.pdf',
+  certificationsUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
   avatarUrl: '/images/opeyemi picture.png',
 };
 
@@ -634,3 +635,153 @@ export const experienceItems: ExperienceItem[] = [
     ],
   },
 ];
+
+export const certificationsUrl = 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/';
+
+export const certifications: CertificationItem[] = [
+  {
+    id: 'cert-new-horizons-ds',
+    title: 'Certified Data Scientist',
+    issuer: 'New Horizons',
+    issueDate: 'Aug 2026',
+    category: 'Data & AI',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Data Analysis', 'Data Centers', 'Machine Learning', 'Python'],
+    description:
+      'Professional certification in Data Science, encompassing advanced data analysis, data center infrastructure, machine learning pipelines, and predictive analytics.',
+  },
+  {
+    id: 'cert-culturelligence-agile-hr',
+    title: 'Agile People Operation Specialist',
+    issuer: 'Culturelligence',
+    issueDate: 'Jul 2025',
+    category: 'Management & Agile',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Human Resources (HR)', 'People Operations', 'Agile Methodologies', 'Talent Enablement'],
+    description:
+      'Specialist certification in modern Agile People Operations, employee experience optimization, culture design, and adaptive HR frameworks.',
+  },
+  {
+    id: 'cert-betechified-cpm',
+    title: 'Certified Product Manager (CPM)',
+    issuer: 'BeTechified',
+    issueDate: 'Feb 2025',
+    category: 'Product & Design',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Product Management', 'Product Strategy', 'User Research', 'Cross-functional Collaboration'],
+    description:
+      'Results-driven product professional with expertise in product strategy, user research, and cross-functional collaboration. Skilled in driving business growth through user-centered product development.',
+  },
+  {
+    id: 'cert-dev-design-uiux',
+    title: 'UI/UX Design',
+    issuer: 'Dev and Design',
+    issueDate: 'May 2025',
+    category: 'Product & Design',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Product Design', 'UI/UX Design', 'Wireframing', 'User Research', 'Prototyping'],
+    description:
+      'User experience and interface design certification covering end-to-end product design, wireframing, high-fidelity mockups, and usability principles.',
+  },
+  {
+    id: 'cert-prodefied-pm',
+    title: 'Product Management',
+    issuer: 'Prodefied',
+    issueDate: 'Oct 2025',
+    category: 'Product & Design',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Product Management', 'Product Roadmapping', 'Feature Prioritization', 'Agile Delivery'],
+    description:
+      'Applied product lifecycle management, market validation, roadmap development, feature prioritization, and stakeholder synchronization.',
+  },
+  {
+    id: 'cert-alx-ai-career',
+    title: 'Artificial Intelligence Career Essentials',
+    issuer: 'alx_africa',
+    category: 'Data & AI',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Artificial Intelligence', 'Generative AI', 'Prompt Engineering', 'AI Productivity Tools'],
+    description:
+      'Specialized ALX certification mastering modern Artificial Intelligence workflows, generative AI platforms, prompt engineering, and intelligent workflow automation.',
+  },
+  {
+    id: 'cert-excelerate-data-viz',
+    title: 'Data Visualization Intern',
+    issuer: 'Excelerate',
+    issueDate: 'Sep 2024',
+    category: 'Data & AI',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Data Visualization', 'Interactive Dashboards', 'Business Intelligence', 'Analytical Storytelling'],
+    description:
+      'Hands-on practical data visualization internship creating dashboards, statistical visual analytics, and transforming datasets into executive insights.',
+  },
+  {
+    id: 'cert-hotjar-learning',
+    title: 'Hotjar Learning',
+    issuer: 'Hotjar | by Contentsquare',
+    issueDate: 'Jul 2024',
+    expiresDate: 'Dec 2030',
+    credentialId: 'x3ftgg2pwb2f',
+    category: 'Product & Design',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Product Analytics', 'Heatmaps', 'Session Recordings', 'User Behavior Analysis'],
+    description:
+      'Certified in behavioral product analytics, customer sentiment capture, heatmap interpretation, user session recordings, and funnel optimization.',
+  },
+  {
+    id: 'cert-hirist-tech-recruiter',
+    title: 'Tech Recruiter',
+    issuer: 'hirist',
+    credentialId: 'cert_bfxyxv9d',
+    category: 'Management & Agile',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Technical Recruitment', 'Candidate Sourcing', 'Talent Acquisition', 'Soft Skills'],
+    description:
+      'Credentialed in modern technical recruiting, engineering candidate screening, talent pipeline management, and recruitment negotiations.',
+  },
+  {
+    id: 'cert-fogdev-remote-work',
+    title: 'Remote Work Certification',
+    issuer: 'FOCUS ON GROWTH AND DEVELOPMENT- FOGDEV',
+    issueDate: 'Jun 2024',
+    category: 'Professional & Soft Skills',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Remote Work', 'Asynchronous Collaboration', 'Distributed Team Tools', 'Digital Productivity'],
+    description:
+      'Having successfully completed the program I have been certified to work remotely, covering asynchronous communication, self-management, and distributed tooling.',
+  },
+  {
+    id: 'cert-alx-virtual-assistant',
+    title: 'Virtual Assistant',
+    issuer: 'alx_africa',
+    category: 'Professional & Soft Skills',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Data Entry', 'Executive Support', 'Soft Skills', 'Workflow Organization'],
+    description:
+      'Accredited virtual assistance training from ALX covering executive support, task prioritization, data management, and digital client communication.',
+  },
+  {
+    id: 'cert-jobberman-soft-skills',
+    title: 'Jobberman Soft Skills Training',
+    issuer: 'Jobberman Youth Engagement & Learning',
+    issueDate: 'Oct 2020',
+    category: 'Professional & Soft Skills',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Soft Skills', 'Workplace Ethics', 'Emotional Intelligence', 'Teamwork', 'Communication'],
+    description:
+      'In-depth soft skills qualification focusing on emotional intelligence, workplace collaboration, problem solving, and professional presentation.',
+  },
+  {
+    id: 'cert-unesco-digital-teacher',
+    title: 'Digital Teacher',
+    issuer: 'Intergovernmental Oceanographic Commission (IOC) of UNESCO',
+    issueDate: 'Feb 2023',
+    expiresDate: 'Aug 2030',
+    category: 'Professional & Soft Skills',
+    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
+    skills: ['Digital Education', 'Knowledge Facilitation', 'Global Educational Standards', 'EdTech Tools'],
+    description:
+      'International certification under the IOC of UNESCO preparing professionals in digital pedagogical delivery, modern e-learning tools, and knowledge dissemination.',
+  },
+];
+

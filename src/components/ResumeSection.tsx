@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, ExternalLink, FileText, CheckCircle2, ChevronDown, ChevronUp, Printer, GraduationCap, Briefcase, Code } from 'lucide-react';
+import { Download, ExternalLink, FileText, CheckCircle2, ChevronDown, ChevronUp, Printer, GraduationCap, Briefcase, Code, Award } from 'lucide-react';
 import { PortfolioConfig } from '../types';
 
 interface ResumeSectionProps {
@@ -209,6 +209,83 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
                     </div>
                     <div className="text-xs text-stone-600 dark:text-stone-400 mt-2">
                       Focus: Algorithms, Object-Oriented Programming, Relational Databases (SQL), Software Engineering &amp; Statistics.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Certifications & Licenses */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2.5">
+                    <div className="flex items-center gap-2 text-xs font-mono font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wider">
+                      <Award className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span>Certifications &amp; Licenses (13 Total)</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="#certifications"
+                        className="text-xs font-mono text-emerald-700 dark:text-emerald-400 hover:underline"
+                      >
+                        Explore All 13
+                      </a>
+                      <a
+                        href={config.certificationsUrl || 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/'}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs font-mono text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 inline-flex items-center gap-1"
+                      >
+                        <span>LinkedIn</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                    <div className="rounded-lg p-2.5 bg-stone-50/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800">
+                      <div className="font-medium text-xs text-stone-900 dark:text-stone-100">
+                        Certified Data Scientist
+                      </div>
+                      <div className="text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-0.5">
+                        New Horizons • Aug 2026
+                      </div>
+                    </div>
+                    <div className="rounded-lg p-2.5 bg-stone-50/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800">
+                      <div className="font-medium text-xs text-stone-900 dark:text-stone-100">
+                        Certified Product Manager (CPM)
+                      </div>
+                      <div className="text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-0.5">
+                        BeTechified • Feb 2025
+                      </div>
+                    </div>
+                    <div className="rounded-lg p-2.5 bg-stone-50/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800">
+                      <div className="font-medium text-xs text-stone-900 dark:text-stone-100">
+                        Agile People Operation Specialist
+                      </div>
+                      <div className="text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-0.5">
+                        Culturelligence • Jul 2025
+                      </div>
+                    </div>
+                    <div className="rounded-lg p-2.5 bg-stone-50/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800">
+                      <div className="font-medium text-xs text-stone-900 dark:text-stone-100">
+                        UI/UX Design
+                      </div>
+                      <div className="text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-0.5">
+                        Dev and Design • May 2025
+                      </div>
+                    </div>
+                    <div className="rounded-lg p-2.5 bg-stone-50/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800">
+                      <div className="font-medium text-xs text-stone-900 dark:text-stone-100">
+                        AI Career Essentials
+                      </div>
+                      <div className="text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-0.5">
+                        alx_africa • Generative AI
+                      </div>
+                    </div>
+                    <div className="rounded-lg p-2.5 bg-stone-50/70 dark:bg-stone-900/40 border border-stone-200/80 dark:border-stone-800">
+                      <div className="font-medium text-xs text-stone-900 dark:text-stone-100">
+                        Hotjar Learning (Analytics)
+                      </div>
+                      <div className="text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-0.5">
+                        Hotjar | Contentsquare • ID: x3ftgg2pwb2f
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -20,7 +20,7 @@ import {
   Film,
   MapPin,
 } from 'lucide-react';
-import { initialConfig, projects, skillCategories, experienceItems } from './data/portfolioData';
+import { initialConfig, projects, skillCategories, experienceItems, certifications, certificationsUrl } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroWorkspaceVisual } from './components/HeroWorkspaceVisual';
@@ -33,6 +33,7 @@ import { AnimatedName } from './components/AnimatedName';
 import { AIVideoSection } from './components/AIVideoSection';
 import { AIVideoModal } from './components/AIVideoModal';
 import { FastApiBackendSection } from './components/FastApiBackendSection';
+import { CertificationsSection } from './components/CertificationsSection';
 import { ResumeSection } from './components/ResumeSection';
 
 export default function App() {
@@ -235,13 +236,13 @@ export default function App() {
 
                 <div className="space-y-4 text-base sm:text-lg text-stone-700 dark:text-stone-300 leading-relaxed font-normal">
                   <p>
-                    I earned my Bachelor of Science (BSc) in Computer Science from Olabisi Onabanjo University (O.O.U), building a rigorous foundation in algorithms, relational databases, Python scripting, and statistics.
+                    I am a Data Scientist, Python Developer, and AI Orchestrator who leverages artificial intelligence to solve complex business problems at scale. While my foundation is rooted in a Computer Science degree from Olabisi Onabanjo University (O.O.U), my true value lies in my ability to use AI as a force multiplier.
                   </p>
                   <p>
-                    My work combines machine learning, statistical modeling, exploratory data analysis, and interactive dashboard development. Alongside applied data science projects in predictive churn and attrition modeling, I have practical experience as an Agile People Operations Specialist and People Leader at Culturelligence and in virtual operational data management.
+                    Whether that means architecting high-throughput FastAPI machine learning services, building predictive churn models with XGBoost, or directing commercial-grade generative AI video productions, I don't just write code—I engineer solutions. I use advanced AI tools (like LLMs, Veo, and Runway) to accelerate development, automate workflows, and deliver production-ready software faster than traditional cycles.
                   </p>
                   <p>
-                    My goal is to continue deploying practical, value-driving machine learning models while contributing to forward-thinking engineering and analytics teams.
+                    If there is a problem to solve, I know how to engineer an AI-driven approach to do it efficiently, making me a versatile, high-impact addition ready to bring immediate velocity to any forward-thinking engineering or data team.
                   </p>
                 </div>
 
@@ -544,7 +545,16 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            6. RESUME SECTION
+            6. CERTIFICATIONS & LICENSES SECTION
+           ========================================================================= */}
+        <CertificationsSection
+          certifications={certifications}
+          certificationsUrl={certificationsUrl}
+          config={config}
+        />
+
+        {/* =========================================================================
+            7. RESUME SECTION
            ========================================================================= */}
         <ResumeSection config={config} />
 

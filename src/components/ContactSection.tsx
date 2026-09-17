@@ -9,7 +9,6 @@ import {
   AlertCircle,
   ExternalLink,
   RefreshCw,
-  ShieldCheck,
 } from 'lucide-react';
 import { PortfolioConfig } from '../types';
 
@@ -147,7 +146,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
         <div className="max-w-2xl mb-12">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 mb-3">
             <Mail className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-            <span>Direct Inbox Connection</span>
+            <span>Contact</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-2">
             Let&apos;s work together.
@@ -459,7 +458,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       className="inline-flex items-center justify-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 text-sm font-medium px-6 py-3 sm:py-2.5 min-h-[44px] rounded-md transition-colors disabled:opacity-50 shadow-xs cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
-                      <span>{status === 'sending' ? 'Transmitting to Mailbox...' : 'Send Message'}</span>
+                      <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
                     </button>
 
                     <a
@@ -472,14 +471,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       <span>Or open in email app</span>
                       <ExternalLink className="w-3 h-3 text-stone-400" />
                     </a>
-                  </div>
-
-                  {/* Privacy & Anti-Leak Statement */}
-                  <div className="pt-3 mt-2 border-t border-stone-100 dark:border-stone-800 flex items-start gap-2 text-[11px] text-stone-500 dark:text-stone-400 font-sans">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>
-                      <strong className="text-stone-700 dark:text-stone-300 font-medium">Privacy &amp; Data Security Guarantee:</strong> Inquiries are transmitted over encrypted TLS directly to the recipient inbox. Your contact details are never logged in marketing brokers, tracked in cookies, or sold to third parties.
-                    </span>
                   </div>
                 </form>
 

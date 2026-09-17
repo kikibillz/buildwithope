@@ -56,13 +56,26 @@ export interface SkillCategory {
 
 export interface ExperienceItem {
   id: string;
-  category: 'Education' | 'Experience';
+  category: 'Education' | 'Experience' | 'Certification';
   title: string;
   roleOrDegree: string;
   organization: string;
   period: string;
   description: string;
   highlights: string[];
+}
+
+export interface CertificationItem {
+  id: string;
+  title: string;
+  issuer: string;
+  issueDate?: string;
+  expiresDate?: string;
+  credentialId?: string;
+  credentialUrl?: string;
+  skills?: string[];
+  description?: string;
+  category?: 'Data & AI' | 'Product & Design' | 'Management & Agile' | 'Professional & Soft Skills' | 'Cloud & Backend';
 }
 
 export interface GitHubRepo {
@@ -111,5 +124,6 @@ export interface PortfolioConfig {
   linkedin: string;
   github: string;
   resumeUrl: string;
+  certificationsUrl?: string;
   avatarUrl?: string;
 }

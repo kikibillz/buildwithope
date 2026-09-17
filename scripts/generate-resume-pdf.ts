@@ -79,7 +79,7 @@ function generateResumePdf() {
     'Email: odunayoopamiju@gmail.com',
     'Location: Lagos, Nigeria',
     'GitHub: github.com/kikibillz',
-    'LinkedIn: linkedin.com',
+    'LinkedIn: linkedin.com/in/opeyemiolamiju',
   ];
   doc.text(contactParts.join('   •   '), margin, y);
 
@@ -97,7 +97,7 @@ function generateResumePdf() {
   doc.setFontSize(8.8);
   doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
   const summaryText =
-    'Results-driven Data Scientist, Python Developer, and Generative Media Specialist with a BSc in Computer Science. Experienced in architecting production machine learning systems, high-throughput asynchronous REST APIs (FastAPI, Pydantic v2), and interactive data products (Streamlit). Skilled in exploratory data analysis, predictive modeling (XGBoost, Scikit-learn), feature engineering, and directing commercial-grade AI video productions (Google Veo, Runway, Kling AI). Proven track record delivering scalable, verifiable software and cross-functional operations.';
+    'Data Scientist, Python Backend Developer, and AI Integration Specialist with a proven ability to leverage artificial intelligence to solve any complex engineering or business problem. Backed by a strong Computer Science foundation (BSc), I act as a technical force multiplier—using advanced AI tools, LLMs, and machine learning models to drastically accelerate development cycles, automate workflows, and deliver scalable solutions. From architecting high-throughput asynchronous REST APIs (FastAPI) and building predictive models (XGBoost) to directing commercial generative media productions (Veo, Runway), I blend traditional software engineering with cutting-edge AI capabilities. I am ready to bring immediate, high-impact technical velocity to forward-thinking teams.';
   const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
   doc.text(summaryLines, margin, y);
   y += summaryLines.length * 11 + 4;
@@ -274,6 +274,101 @@ function generateResumePdf() {
   const eduDetails = 'Key Coursework: Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems (SQL), Software Engineering, Probability & Statistics.';
   const eduLines = doc.splitTextToSize(eduDetails, contentWidth);
   doc.text(eduLines, margin, y);
+  y += eduLines.length * 9.5 + 4;
+
+  // 7. Certifications & Licenses
+  drawSectionHeading('Certifications & Licenses');
+  checkPageBreak(50);
+  const certs = [
+    {
+      name: 'Certified Data Scientist',
+      issuer: 'New Horizons • Advanced Data Analysis, Data Centers, Machine Learning Pipelines & Python',
+      period: 'Aug 2026',
+    },
+    {
+      name: 'Certified Product Manager (CPM)',
+      issuer: 'BeTechified • Product Strategy, User Research, Agile Roadmapping & Cross-Functional Growth',
+      period: 'Feb 2025',
+    },
+    {
+      name: 'Agile People Operation Specialist',
+      issuer: 'Culturelligence • People Operations, Human Resources (HR) & Agile Frameworks',
+      period: 'Jul 2025',
+    },
+    {
+      name: 'UI/UX Design',
+      issuer: 'Dev and Design • Product Design, Wireframing, User Research & Interactive Prototyping',
+      period: 'May 2025',
+    },
+    {
+      name: 'Product Management',
+      issuer: 'Prodefied • Product Roadmapping, Agile Delivery & Feature Prioritization',
+      period: 'Oct 2025',
+    },
+    {
+      name: 'Artificial Intelligence Career Essentials',
+      issuer: 'alx_africa • Generative AI Tooling, Modern AI Workflows & Prompt Engineering',
+      period: 'Credentialed',
+    },
+    {
+      name: 'Hotjar Learning (Product Behavioral Analytics)',
+      issuer: 'Hotjar | by Contentsquare • Heatmaps, User Journeys, Funnels • Credential ID: x3ftgg2pwb2f',
+      period: 'Jul 2024 - Dec 2030',
+    },
+    {
+      name: 'Tech Recruiter',
+      issuer: 'hirist • Technical Sourcing & Engineering Talent Acquisition • Credential ID: cert_bfxyxv9d',
+      period: 'Credentialed',
+    },
+    {
+      name: 'Remote Work Certification',
+      issuer: 'FOCUS ON GROWTH AND DEVELOPMENT- FOGDEV • Certified for Distributed Remote Operations',
+      period: 'Jun 2024',
+    },
+    {
+      name: 'Data Visualization Intern',
+      issuer: 'Excelerate • Visual Analytics, Interactive Dashboards & Business Intelligence',
+      period: 'Sep 2024',
+    },
+    {
+      name: 'Digital Teacher',
+      issuer: 'Intergovernmental Oceanographic Commission (IOC) of UNESCO • E-Learning Pedagogies',
+      period: 'Feb 2023 - Aug 2030',
+    },
+    {
+      name: 'Jobberman Soft Skills Training & Virtual Assistant',
+      issuer: 'Jobberman Youth Engagement / alx_africa • Workplace Emotional Intelligence, Executive Ops',
+      period: 'Certified',
+    },
+  ];
+
+  certs.forEach((c) => {
+    checkPageBreak(18);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.4);
+    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+    doc.text(c.name, margin, y);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.8);
+    doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
+    doc.text(c.period, margin + contentWidth - doc.getTextWidth(c.period), y);
+
+    y += 8.5;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.6);
+    doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
+    const lines = doc.splitTextToSize(c.issuer, contentWidth);
+    doc.text(lines, margin, y);
+    y += lines.length * 8.5 + 3.5;
+  });
+
+  // LinkedIn Certifications Verification note
+  checkPageBreak(15);
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(7.5);
+  doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
+  doc.text('* View all 13 verified credentials, badge thumbnails, and license IDs at linkedin.com/in/opeyemiolamiju/details/certifications/', margin, y);
 
   // Output
   const pdfBuffer = Buffer.from(doc.output('arraybuffer'));
