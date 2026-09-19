@@ -19,6 +19,11 @@ import {
   Play,
   Film,
   MapPin,
+  Award,
+  ShieldCheck,
+  Search,
+  Filter,
+  X,
 } from 'lucide-react';
 import { initialConfig, projects, skillCategories, experienceItems, certifications, certificationsUrl } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
@@ -42,6 +47,9 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [streamlitProject, setStreamlitProject] = useState<Project | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
+  const [projectFilter, setProjectFilter] = useState<string>('all');
+  const [projectSearch, setProjectSearch] = useState<string>('');
+  const [activeTrack, setActiveTrack] = useState<'all' | 'data' | 'ai-media'>('all');
 
   // Auto-detect and display the natural photograph (from local storage or candidate static paths)
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
@@ -102,21 +110,74 @@ export default function App() {
     avatarUrl: naturalPhoto || '/images/opeyemi picture.png',
   };
 
+  const filteredProjects = allProjects.filter((p) => {
+    const matchesCategory =
+      projectFilter === 'all'
+        ? true
+        : projectFilter === 'ml'
+        ? p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive')
+        : projectFilter === 'backend'
+        ? p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
+        : projectFilter === 'data'
+        ? p.category.toLowerCase().includes('data analysis') || p.category.toLowerCase().includes('automation') || p.category.toLowerCase().includes('analytics')
+        : projectFilter === 'web'
+        ? p.category.toLowerCase().includes('web') || p.category.toLowerCase().includes('product')
+        : true;
+
+    const query = projectSearch.trim().toLowerCase();
+    if (!query) return matchesCategory;
+
+    const matchesSearch =
+      p.title.toLowerCase().includes(query) ||
+      p.tagline.toLowerCase().includes(query) ||
+      p.description.toLowerCase().includes(query) ||
+      p.tools.some((t) => t.toLowerCase().includes(query)) ||
+      (p.businessImpact && p.businessImpact.toLowerCase().includes(query));
+
+    return matchesCategory && matchesSearch;
+  });
+
   return (
     <div className="min-h-screen bg-[#fafaf9] dark:bg-[#0c0a09] text-[#1c1917] dark:text-stone-100 flex flex-col font-sans selection:bg-stone-800 dark:selection:bg-stone-200 selection:text-white dark:selection:text-stone-950 transition-colors">
       {/* Navigation */}
       <Navbar config={activeConfig} />
 
-      <main className="flex-grow pt-20">
+      <main className="flex-grow pt-20 print:pt-4">
+        {/* =========================================================================
+            PRINT-ONLY RESUME & CV DOCUMENT HEADER
+           ========================================================================= */}
+        <div className="hidden print:block max-w-6xl mx-auto px-4 pb-6 mb-4 border-b-2 border-stone-800">
+          <div className="flex justify-between items-start gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-stone-950 tracking-tight font-sans">
+                {config.name}
+              </h1>
+              <p className="text-sm font-semibold text-stone-800 mt-1">
+                Data Scientist • Machine Learning Engineer • Python &amp; FastAPI Backend Developer
+              </p>
+              <p className="text-xs text-stone-600 font-mono mt-1">
+                B.Sc. Computer Science (First Class Honours, 4.87/5.0 CGPA) • Crawford University
+              </p>
+            </div>
+            <div className="text-right text-xs font-mono text-stone-700 space-y-1 shrink-0">
+              <div><strong>Email:</strong> {config.email}</div>
+              <div><strong>Phone:</strong> {config.phone}</div>
+              <div><strong>Location:</strong> {config.location}, Nigeria</div>
+              <div><strong>GitHub:</strong> github.com/kikibillz</div>
+              <div><strong>LinkedIn:</strong> linkedin.com/in/opeyemi-olamiju</div>
+            </div>
+          </div>
+        </div>
+
         {/* =========================================================================
             1. HERO SECTION
            ========================================================================= */}
-        <section id="hero" className="py-12 sm:py-20 lg:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-[#fafaf9] dark:bg-[#0c0a09] transition-colors">
+        <section id="hero" className="py-12 sm:py-20 lg:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-[#fafaf9] dark:bg-[#0c0a09] transition-colors print:py-4">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left Column: Natural, Credible Editorial Intro */}
-              <div className="lg:col-span-6 space-y-6">
-                <div className="flex items-center gap-3.5">
+              <div className="lg:col-span-6 print:col-span-12 space-y-6">
+                <div className="flex items-center gap-3.5 print:hidden">
                   <div className="relative shrink-0">
                     {activeConfig.avatarUrl ? (
                       <img
@@ -152,7 +213,7 @@ export default function App() {
                 </div>
 
                 <div className="space-y-2">
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-950 dark:text-stone-100 leading-[1.2] flex flex-wrap items-baseline gap-x-2.5">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-950 dark:text-stone-100 leading-[1.2] flex flex-wrap items-baseline gap-x-2.5 print:hidden">
                     <span>Hi, I&apos;m</span>
                     <AnimatedName name={config.name} variant="hero" />
                   </h1>
@@ -178,40 +239,153 @@ export default function App() {
                   <span>SQL</span>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="pt-2 flex flex-wrap items-center gap-3">
-                  <a
-                    href="#ai-videos"
-                    id="hero-btn-videos"
-                    className="inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 active:bg-emerald-950 text-white font-medium text-sm px-5 py-2.5 rounded-md transition-colors shadow-sm cursor-pointer"
-                  >
-                    <Film className="w-4 h-4 text-emerald-200" />
-                    <span>Watch AI Videos</span>
-                  </a>
-
+                {/* Action Buttons (hidden on print) */}
+                <div className="pt-2 flex flex-wrap items-center gap-3 print:hidden">
                   <a
                     href="#projects"
                     id="hero-btn-work"
-                    className="inline-flex items-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 font-medium text-sm px-5 py-2.5 rounded-md transition-colors shadow-sm cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 font-semibold text-sm px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow-md cursor-pointer"
                   >
-                    <span>ML Projects</span>
+                    <span>Explore Projects &amp; Code</span>
                     <ArrowDown className="w-4 h-4" />
+                  </a>
+
+                  <a
+                    href="#ai-videos"
+                    id="hero-btn-videos"
+                    className="inline-flex items-center gap-2 bg-stone-100 dark:bg-stone-850 hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300/80 dark:border-stone-700 font-medium text-sm px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Film className="w-4 h-4 text-stone-500 dark:text-stone-400" />
+                    <span>AI Video Reel</span>
                   </a>
 
                   <a
                     href="#contact"
                     id="hero-btn-talk"
-                    className="inline-flex items-center gap-1.5 bg-white dark:bg-stone-900 hover:bg-stone-100 dark:hover:bg-stone-800 active:bg-stone-200 text-stone-900 dark:text-stone-100 border border-stone-300 dark:border-stone-700 font-medium text-sm px-4 py-2.5 rounded-md transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white font-medium text-sm px-3.5 py-2.5 rounded-lg transition-colors cursor-pointer"
                   >
-                    <span>Let&apos;s Talk</span>
-                    <ArrowUpRight className="w-4 h-4 text-stone-500 dark:text-stone-400" />
+                    <span>Contact</span>
+                    <ArrowUpRight className="w-4 h-4" />
                   </a>
+                </div>
+
+                {/* Focus Lens Track Switcher (hidden on print) */}
+                <div className="pt-3 border-t border-stone-200/60 dark:border-stone-800/60 print:hidden">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[11px] font-mono text-stone-500 dark:text-stone-400 uppercase tracking-wider font-medium">
+                      Focus View:
+                    </span>
+                    <div className="inline-flex p-1 rounded-lg bg-stone-200/70 dark:bg-stone-900 border border-stone-300/70 dark:border-stone-800 text-xs font-mono">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveTrack('all');
+                          setProjectFilter('all');
+                        }}
+                        className={`px-3 py-1 rounded-md font-medium transition-all cursor-pointer ${
+                          activeTrack === 'all'
+                            ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
+                            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                        }`}
+                      >
+                        All Work
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveTrack('data');
+                          setProjectFilter('all');
+                          const el = document.getElementById('projects');
+                          el?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className={`px-3 py-1 rounded-md font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                          activeTrack === 'data'
+                            ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
+                            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                        }`}
+                      >
+                        <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                        <span>Data Science &amp; Python</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveTrack('ai-media');
+                          const el = document.getElementById('ai-videos');
+                          el?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className={`px-3 py-1 rounded-md font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                          activeTrack === 'ai-media'
+                            ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
+                            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                        }`}
+                      >
+                        <Film className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                        <span>AI Video Direction</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Right Column: Authentic Developer Workspace Visual */}
-              <div className="lg:col-span-6">
+              {/* Right Column: Authentic Developer Workspace Visual (hidden on print) */}
+              <div className="lg:col-span-6 print:hidden">
                 <HeroWorkspaceVisual />
+              </div>
+            </div>
+
+            {/* Executive Highlights & Value Delivery Matrix */}
+            <div className="mt-12 pt-8 border-t border-stone-200/70 dark:border-stone-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
+                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
+                  <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                  <span>Certifications</span>
+                </div>
+                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
+                  13 Verified
+                </div>
+                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
+                  Google Cloud • New Horizons • ALX
+                </div>
+              </div>
+
+              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
+                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
+                  <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>Production ML &amp; API</span>
+                </div>
+                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
+                  FastAPI &amp; ASGI
+                </div>
+                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
+                  Pydantic v2 • Docker • Scikit-learn
+                </div>
+              </div>
+
+              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
+                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
+                  <Film className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
+                  <span>AI Video Direction</span>
+                </div>
+                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
+                  Veo 3 &amp; Runway
+                </div>
+                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
+                  Cinematic Commercials &amp; Media
+                </div>
+              </div>
+
+              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
+                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                  <span>Engineering Rigor</span>
+                </div>
+                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
+                  90%+ Coverage
+                </div>
+                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
+                  Pytest • CI/CD • Contract Validated
+                </div>
               </div>
             </div>
           </div>
@@ -220,7 +394,7 @@ export default function App() {
         {/* =========================================================================
             2. ABOUT SECTION
            ========================================================================= */}
-        <section id="about" className="py-16 sm:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-[#f7f7f5] dark:bg-[#121214] transition-colors">
+        <section id="about" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-[#f7f7f5] dark:bg-[#121214] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* Left Column: Background, Education & Principles */}
@@ -239,7 +413,7 @@ export default function App() {
                     I am a Data Scientist, Python Developer, and AI Orchestrator who leverages artificial intelligence to solve complex business problems at scale. While my foundation is rooted in a Computer Science degree from Olabisi Onabanjo University (O.O.U), my true value lies in my ability to use AI as a force multiplier.
                   </p>
                   <p>
-                    Whether that means architecting high-throughput FastAPI machine learning services, building predictive churn models with XGBoost, or directing commercial-grade generative AI video productions, I don't just write code—I engineer solutions. I use advanced AI tools (like LLMs, Veo, and Runway) to accelerate development, automate workflows, and deliver production-ready software faster than traditional cycles.
+                    Whether that means architecting high-throughput FastAPI machine learning services, building predictive churn models with XGBoost, or directing commercial-grade generative AI video productions, I don't just write code; I engineer solutions. I use advanced AI tools (like LLMs, Veo, and Runway) to accelerate development, automate workflows, and deliver production-ready software faster than traditional cycles.
                   </p>
                   <p>
                     If there is a problem to solve, I know how to engineer an AI-driven approach to do it efficiently, making me a versatile, high-impact addition ready to bring immediate velocity to any forward-thinking engineering or data team.
@@ -328,7 +502,7 @@ export default function App() {
         {/* =========================================================================
             3. SKILLS SECTION
            ========================================================================= */}
-        <section id="skills" className="py-16 sm:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
+        <section id="skills" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="max-w-2xl mb-12">
               <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
@@ -381,71 +555,160 @@ export default function App() {
         {/* =========================================================================
             4. FEATURED PROJECTS
            ========================================================================= */}
-        <section id="projects" className="py-16 sm:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-[#f7f7f5] dark:bg-[#121214] transition-colors">
+        <section id="projects" className="py-20 sm:py-28 border-b border-stone-200/80 dark:border-stone-800 bg-[#f7f7f5] dark:bg-[#121214] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-3xl mb-10">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-stone-900 dark:bg-stone-800 text-stone-200 text-xs font-mono mb-3 border border-stone-800 dark:border-stone-700">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span>Streamlit Cloud Deployments Verified</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
-                Selected Projects
+            <div className="max-w-2xl mb-12">
+              <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
+                Engineering &amp; Code
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
+                Selected Work &amp; Case Studies
               </h2>
-              <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
-                Applied machine learning classifiers and interactive data intelligence systems deployed on Streamlit Community Cloud.
+              <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
+                Production REST microservices, machine learning classifiers with live inference, automated financial ledgers, and full-stack web applications.
               </p>
+            </div>
 
-              {/* Streamlit Entrypoints Quick Reference Bar */}
-              <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl shadow-sm">
-                <div className="text-[11px] font-mono uppercase text-stone-600 dark:text-stone-400 font-semibold tracking-wider mb-2.5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                    <span>Streamlit Model Entry Points (Live Cloud Deployments)</span>
-                  </div>
-                  <span className="text-stone-400 dark:text-stone-500 font-normal">branch: main</span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs font-mono">
-                  {allProjects
-                    .filter((p) => p.streamlitDeployment)
-                    .map((p) => (
-                      <button
-                        key={p.id}
-                        type="button"
-                        onClick={() => setStreamlitProject(p)}
-                        className="group flex flex-col p-2.5 rounded-lg bg-stone-50 dark:bg-stone-950 hover:bg-stone-900 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 hover:text-stone-100 dark:hover:text-white border border-stone-200 dark:border-stone-800 hover:border-stone-900 dark:hover:border-stone-700 transition-all text-left shadow-xs hover:shadow-md cursor-pointer"
+            {/* Project Showcase Controls (Category Filters & Live Search) (hidden on print) */}
+            <div className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 print:hidden">
+              {/* Category Pills */}
+              <div className="flex flex-wrap items-center gap-1.5 bg-stone-100 dark:bg-stone-900/90 p-1.5 rounded-lg border border-stone-200 dark:border-stone-800 text-xs font-mono">
+                {[
+                  { id: 'all', label: 'All Projects', count: allProjects.length },
+                  {
+                    id: 'backend',
+                    label: 'Backend & APIs',
+                    count: allProjects.filter(
+                      (p) => p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
+                    ).length,
+                  },
+                  {
+                    id: 'ml',
+                    label: 'Machine Learning',
+                    count: allProjects.filter(
+                      (p) => p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive')
+                    ).length,
+                  },
+                  {
+                    id: 'data',
+                    label: 'Data & Analytics',
+                    count: allProjects.filter(
+                      (p) =>
+                        p.category.toLowerCase().includes('data analysis') ||
+                        p.category.toLowerCase().includes('automation') ||
+                        p.category.toLowerCase().includes('analytics')
+                    ).length,
+                  },
+                  {
+                    id: 'web',
+                    label: 'Web Apps',
+                    count: allProjects.filter(
+                      (p) => p.category.toLowerCase().includes('web') || p.category.toLowerCase().includes('product')
+                    ).length,
+                  },
+                ].map((tab) => {
+                  const isActive = projectFilter === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setProjectFilter(tab.id)}
+                      className={`px-3 py-1.5 rounded-md font-medium transition-colors flex items-center gap-1.5 cursor-pointer ${
+                        isActive
+                          ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
+                          : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                      }`}
+                    >
+                      <span>{tab.label}</span>
+                      <span
+                        className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                          isActive
+                            ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
+                            : 'bg-stone-200/60 dark:bg-stone-800 text-stone-500 dark:text-stone-400'
+                        }`}
                       >
-                        <div className="flex items-center justify-between gap-1 mb-1">
-                          <span className="text-[11px] font-bold tracking-tight truncate group-hover:text-red-400 text-stone-900 dark:text-stone-100">
-                            {p.id === 'bank-churn'
-                              ? 'Bank Churn Predictor'
-                              : p.id === 'hr-analytics'
-                              ? 'HR Analytics System'
-                              : 'HR Attrition Classifier'}
-                          </span>
-                          <span className="p-1 rounded bg-red-100 dark:bg-red-950/70 group-hover:bg-red-600 text-red-700 dark:text-red-300 group-hover:text-white transition-colors flex-shrink-0">
-                            <Play className="w-2.5 h-2.5 fill-current" />
-                          </span>
-                        </div>
-                        <span className="text-[10px] text-stone-500 dark:text-stone-400 group-hover:text-stone-300 truncate">
-                          {p.streamlitDeployment}
-                        </span>
-                      </button>
-                    ))}
-                </div>
+                        {tab.count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Search Bar */}
+              <div className="relative min-w-[240px] sm:w-72">
+                <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  value={projectSearch}
+                  onChange={(e) => setProjectSearch(e.target.value)}
+                  placeholder="Filter by tech or keyword..."
+                  className="w-full pl-9 pr-8 py-1.5 text-xs font-mono bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400 dark:focus:ring-stone-600"
+                />
+                {projectSearch && (
+                  <button
+                    type="button"
+                    onClick={() => setProjectSearch('')}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-0.5"
+                    title="Clear search"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             </div>
+
+            {/* Results Counter if filtered */}
+            {(projectFilter !== 'all' || projectSearch) && (
+              <div className="mb-6 flex items-center justify-between text-xs font-mono text-stone-500 dark:text-stone-400 px-1 print:hidden">
+                <span>
+                  Showing {filteredProjects.length} of {allProjects.length} projects
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProjectFilter('all');
+                    setProjectSearch('');
+                  }}
+                  className="text-stone-900 dark:text-stone-200 underline hover:no-underline cursor-pointer"
+                >
+                  Reset all filters
+                </button>
+              </div>
+            )}
 
             {/* Project Showcase List */}
-            <div className="space-y-10 mb-16">
-              {allProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  onOpenCaseStudy={(p) => setSelectedProject(p)}
-                  onOpenStreamlit={(p) => setStreamlitProject(p)}
-                />
-              ))}
-            </div>
+            {filteredProjects.length === 0 ? (
+              <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-12 text-center my-10">
+                <Search className="w-8 h-8 text-stone-400 mx-auto mb-3" />
+                <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 mb-1">
+                  No matching projects found
+                </h3>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mb-4 max-w-sm mx-auto">
+                  Try clearing your search query or selecting a different project category.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProjectFilter('all');
+                    setProjectSearch('');
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 text-xs font-medium cursor-pointer"
+                >
+                  View All Projects
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-10 mb-16">
+                {filteredProjects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onOpenCaseStudy={(p) => setSelectedProject(p)}
+                    onOpenStreamlit={(p) => setStreamlitProject(p)}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* Dedicated FastAPI Backend Section */}
             <div className="mb-16">
@@ -467,7 +730,7 @@ export default function App() {
         {/* =========================================================================
             6. EXPERIENCE & EDUCATION
            ========================================================================= */}
-        <section id="experience" className="py-16 sm:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
+        <section id="experience" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="max-w-2xl mb-12">
               <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
@@ -615,7 +878,9 @@ export default function App() {
           </div>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-400 text-[11px] font-mono">
-            <div>&copy; 2026 {config.name}. All rights reserved.</div>
+            <div>
+              <span>&copy; 2026 {config.name}. All rights reserved.</span>
+            </div>
             <div className="text-stone-500">
               Data Science • Python Development • Generative Media
             </div>

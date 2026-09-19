@@ -419,7 +419,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
   )}`;
 
   return (
-    <div id="fastapi-backend-section" className="mb-14 scroll-mt-24">
+    <div id="fastapi-backend-section" className="mb-14 scroll-mt-24 break-inside-avoid print-break-avoid">
       {/* Section Frame */}
       <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl overflow-hidden shadow-sm">
         {/* Top Header Banner */}
@@ -448,8 +448,8 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
               </p>
             </div>
 
-            {/* Actions: Request Access & Technical Docs */}
-            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0">
+            {/* Actions: Request Access & Technical Docs (hidden on print) */}
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0 print:hidden">
               <button
                 type="button"
                 onClick={() => setIsDocsOpen(true)}
@@ -520,7 +520,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
               </h4>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 print:hidden">
               <a
                 href="https://github.com/kikibillz/fastapi-ml-service"
                 target="_blank"
@@ -534,8 +534,33 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
             </div>
           </div>
 
-          {/* Endpoint Selector Cards with Entrance Animation */}
-          <motion.div
+          {/* Print-Only API Endpoints and Specification Summary */}
+          <div className="hidden print:block space-y-3 mb-6">
+            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-stone-700">
+              API Service Endpoints &amp; Production Schema Specifications
+            </h4>
+            <div className="grid grid-cols-2 gap-3 text-xs font-mono">
+              {endpoints.map((ep) => (
+                <div key={ep.key} className="p-3 border border-stone-300 rounded bg-stone-50 break-inside-avoid">
+                  <div className="flex items-center justify-between font-bold mb-1">
+                    <span className="px-1.5 py-0.5 rounded bg-stone-200 text-[10px]">{ep.method}</span>
+                    <span className="text-[11px] text-stone-600 font-sans">{ep.name}</span>
+                  </div>
+                  <div className="font-semibold text-stone-900 mb-1">{ep.path}</div>
+                  <p className="font-sans text-[11px] text-stone-600 font-normal leading-relaxed">{ep.description}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-[11px] font-mono text-stone-600 pt-2 border-t border-stone-300 flex justify-between">
+              <span>Stack: FastAPI 0.115 • Python 3.12 • Pydantic v2 • Uvicorn • Docker</span>
+              <span>Repo: github.com/kikibillz/fastapi-ml-service</span>
+            </div>
+          </div>
+
+          {/* Interactive Playground (hidden on print) */}
+          <div className="print:hidden">
+            {/* Endpoint Selector Cards with Entrance Animation */}
+            <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-30px" }}
@@ -820,6 +845,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
               </div>
             </div>
           </motion.div>
+          </div>
 
           {/* Bottom Row: Swagger & ReDoc Links + Request Access Callout */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-stone-200 dark:border-stone-800 text-xs">
@@ -840,7 +866,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 print:hidden">
               <button
                 type="button"
                 onClick={() => setIsAccessOpen(true)}
@@ -875,7 +901,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100">
-                    FastAPI ML Service — Technical Specifications &amp; Architecture
+                    FastAPI ML Service: Technical Specifications &amp; Architecture
                   </h3>
                   <p className="text-xs text-stone-500 dark:text-stone-400">
                     Production serving lifecycle, schema validation, and deployment pipeline

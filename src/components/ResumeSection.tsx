@@ -13,7 +13,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
   const resumeHtmlPath = '/resume.html';
 
   return (
-    <section id="resume" className="py-16 sm:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-stone-100/70 dark:bg-stone-900/50 transition-colors">
+    <section id="resume" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-stone-100/70 dark:bg-stone-900/50 transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
@@ -28,8 +28,8 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
           </p>
         </div>
 
-        {/* Action Controls */}
-        <div className="flex flex-wrap items-center justify-center gap-3.5 mb-10">
+        {/* Action Controls (hidden on print) */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-10 print:hidden">
           <a
             href={resumePdfPath}
             download="Opeyemi_Olamiju_Resume.pdf"
@@ -43,6 +43,16 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             </span>
           </a>
 
+          <button
+            type="button"
+            onClick={() => window.print()}
+            id="btn-print-portfolio"
+            className="inline-flex items-center gap-2 bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 font-medium text-sm px-5 py-3 rounded-lg transition-all shadow-2xs active:scale-[0.98] cursor-pointer"
+          >
+            <Printer className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Print Portfolio to PDF</span>
+          </button>
+
           <a
             href={resumeHtmlPath}
             target="_blank"
@@ -50,9 +60,8 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             id="btn-view-printable-cv"
             className="inline-flex items-center gap-2 bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 font-medium text-sm px-5 py-3 rounded-lg transition-all shadow-2xs active:scale-[0.98] cursor-pointer"
           >
-            <Printer className="w-4 h-4 text-stone-500 dark:text-stone-400" />
-            <span>View &amp; Print Clean CV</span>
-            <ExternalLink className="w-3.5 h-3.5 text-stone-400" />
+            <ExternalLink className="w-4 h-4 text-stone-500 dark:text-stone-400" />
+            <span>View Standalone HTML CV</span>
           </a>
 
           <button
@@ -62,7 +71,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-200 px-3.5 py-2.5 rounded-lg border border-transparent hover:border-stone-300 dark:hover:border-stone-700 transition-colors cursor-pointer"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>{showFullPreview ? 'Hide Quick Preview' : 'Interactive On-Page Preview'}</span>
+            <span>{showFullPreview ? 'Hide On-Page Preview' : 'Expand On-Page Preview'}</span>
             {showFullPreview ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
         </div>
@@ -140,9 +149,8 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
               </div>
             </div>
 
-            {/* Expandable Extended Section */}
-            {showFullPreview && (
-              <div className="space-y-6 pt-4 border-t border-stone-100 dark:border-stone-900">
+            {/* Expandable Extended Section (always printed in PDF) */}
+            <div className={`space-y-6 pt-4 border-t border-stone-100 dark:border-stone-900 ${showFullPreview ? 'block' : 'hidden print:block'}`}>
                 {/* Experience Highlights */}
                 <div>
                   <div className="flex items-center gap-2 text-xs font-mono font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-3">
@@ -205,7 +213,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
                       </span>
                     </div>
                     <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
-                      Olabisi Onabanjo University (O.O.U) — Ogun State, Nigeria
+                      Olabisi Onabanjo University (O.O.U), Ogun State, Nigeria
                     </div>
                     <div className="text-xs text-stone-600 dark:text-stone-400 mt-2">
                       Focus: Algorithms, Object-Oriented Programming, Relational Databases (SQL), Software Engineering &amp; Statistics.
@@ -290,10 +298,9 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
                   </div>
                 </div>
               </div>
-            )}
 
-            {/* Bottom Card Bar */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-stone-500 dark:text-stone-400 border-t border-stone-100 dark:border-stone-900">
+            {/* Bottom Card Bar (hidden on print) */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-stone-500 dark:text-stone-400 border-t border-stone-100 dark:border-stone-900 print:hidden">
               <span className="flex items-center gap-1.5">
                 <FileText className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 Verified &amp; Updated Document • PDF and HTML Formats Available

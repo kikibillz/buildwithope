@@ -36,6 +36,8 @@ export interface Project {
   approachSummary: string;
   tools: string[];
   resultsSummary: string;
+  businessImpact?: string;
+  keyMetrics?: { label: string; value: string }[];
   links: {
     github: string;
     demo: string;

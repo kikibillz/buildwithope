@@ -43,7 +43,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
   return (
     <section
       id="certifications"
-      className="py-16 sm:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-[#fafaf9] dark:bg-[#0c0a09] transition-colors"
+      className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-[#fafaf9] dark:bg-[#0c0a09] transition-colors"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}

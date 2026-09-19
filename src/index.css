@@ -46,3 +46,156 @@ html.dark ::-webkit-scrollbar-thumb {
 html.dark ::-webkit-scrollbar-thumb:hover {
   background: #71717a;
 }
+
+/* =========================================================================
+   DEDICATED PRINT STYLESHEET (PDF & Document-Friendly Layout)
+   ========================================================================= */
+@media print {
+  @page {
+    margin: 12mm 14mm 14mm 14mm;
+    size: portrait;
+  }
+
+  *,
+  *::before,
+  *::after {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    color: #1c1917 !important;
+    border-color: #e7e5e4 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #1c1917 !important;
+    font-size: 10pt !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* 1. Hide interactive chrome and navigation */
+  #main-navbar,
+  nav,
+  header#site-header,
+  #theme-toggle,
+  #focus-view-switcher,
+  #project-filters,
+  #hero-workspace-visual,
+  #hero-btn-work,
+  #hero-btn-videos,
+  #hero-btn-talk,
+  #interactive-console,
+  #live-test-bench,
+  .print-hidden,
+  .no-print,
+  button,
+  input,
+  iframe,
+  video,
+  canvas,
+  dialog,
+  [role="dialog"],
+  .fixed,
+  .sticky,
+  .animate-pulse,
+  .animate-bounce {
+    display: none !important;
+  }
+
+  /* 2. Un-hide elements designed exclusively for print */
+  .print-only,
+  .print\:block {
+    display: block !important;
+  }
+  .print\:flex {
+    display: flex !important;
+  }
+  .print\:grid {
+    display: grid !important;
+  }
+
+  /* 3. Layout normalization */
+  main,
+  section,
+  article,
+  div {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  section {
+    padding-top: 14pt !important;
+    padding-bottom: 14pt !important;
+    border-bottom: 1pt solid #e7e5e4 !important;
+  }
+
+  /* 4. Page Break Discipline: Avoid awkward splits across pages */
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    color: #0c0a09 !important;
+    font-weight: 700 !important;
+  }
+
+  p, ul, ol, dl {
+    orphans: 3;
+    widows: 3;
+  }
+
+  article,
+  [id^="project-card-"],
+  .experience-item,
+  .skill-category-card,
+  .certification-item,
+  .print-break-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 12pt !important;
+  }
+
+  /* Clean up project card borders & padding for printed document */
+  [id^="project-card-"] {
+    border: 1pt solid #d6d3d1 !important;
+    border-radius: 6pt !important;
+    padding: 10pt !important;
+    box-shadow: none !important;
+  }
+
+  /* 5. Typography and Links */
+  a {
+    text-decoration: none !important;
+    color: #1c1917 !important;
+  }
+
+  /* Display clean repository URLs in print */
+  .print-show-url::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #78716c !important;
+    font-weight: normal;
+  }
+
+  /* Ensure badges and tags are cleanly boxed */
+  span.rounded,
+  span.rounded-md,
+  span.rounded-full {
+    border: 1pt solid #d6d3d1 !important;
+    padding: 1pt 4pt !important;
+    font-size: 8pt !important;
+    background: #f5f5f4 !important;
+  }
+
+  /* Image constraints for PDF page limits */
+  img {
+    max-height: 160pt !important;
+    object-fit: cover !important;
+    break-inside: avoid !important;
+  }
+}

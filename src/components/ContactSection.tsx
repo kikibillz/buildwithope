@@ -141,7 +141,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
+    <section id="contact" className="py-20 sm:py-28 lg:py-32 border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="max-w-2xl mb-12">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 mb-3">
@@ -283,7 +283,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     <AlertCircle className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100">
-                    Delivery Initiated — Activation Step
+                    Delivery Initiated: Activation Step
                   </h3>
                   <p className="text-sm text-stone-600 dark:text-stone-300 max-w-md mx-auto leading-relaxed">
                     FormSubmit has sent a 1-click activation email to{' '}

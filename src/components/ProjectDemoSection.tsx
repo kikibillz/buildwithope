@@ -10,6 +10,7 @@ import {
   Info,
   ImageIcon,
   Terminal,
+  Table,
 } from 'lucide-react';
 import { Project } from '../types';
 import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
@@ -20,6 +21,7 @@ import { SafeSitePreview } from './SafeSitePreview';
 import { LeadFinderPreview } from './LeadFinderPreview';
 import { IncomePredictionPreview } from './IncomePredictionPreview';
 import { FastApiServicePreview } from './FastApiServicePreview';
+import { AutomatedSpreadsheetPreview } from './AutomatedSpreadsheetPreview';
 
 interface ProjectDemoSectionProps {
   project: Project;
@@ -39,16 +41,19 @@ export const ProjectDemoSection: React.FC<ProjectDemoSectionProps> = ({
     project.id === 'nigerian-career-boost-hub';
 
   const isFastApiProject = project.id === 'fastapi-ml-service';
+  const isSpreadsheetProject = project.id === 'python-automated-ledger';
 
-  // Default to the interactive console for FastAPI, screenshot preview for others
+  // Default to interactive console for FastAPI and Python Spreadsheet Ledger
   const [activeTab, setActiveTab] = useState<'screenshot' | 'interactive'>(
-    isFastApiProject ? 'interactive' : 'screenshot'
+    isFastApiProject || isSpreadsheetProject ? 'interactive' : 'screenshot'
   );
 
   const renderInteractiveWidget = () => {
     switch (project.id) {
       case 'fastapi-ml-service':
         return <FastApiServicePreview />;
+      case 'python-automated-ledger':
+        return <AutomatedSpreadsheetPreview />;
       case 'bank-churn':
         return <BankCustomerChurnPreview />;
       case 'hr-analytics':
@@ -76,7 +81,9 @@ export const ProjectDemoSection: React.FC<ProjectDemoSectionProps> = ({
             <span>Application Interface</span>
           </span>
           <span className="text-[11px] font-mono text-stone-400 dark:text-stone-500 hidden sm:inline">
-            {isFastApiProject
+            {isSpreadsheetProject
+              ? '∙ automated excel & google sheets ledger engine'
+              : isFastApiProject
               ? '∙ interactive openapi console & rest test bench'
               : isLiveWebApp
               ? '∙ live embedded web app'
@@ -89,7 +96,7 @@ export const ProjectDemoSection: React.FC<ProjectDemoSectionProps> = ({
           <div className="flex items-center gap-2 text-xs font-mono">
             <span className="inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-2.5 py-1 rounded-md text-[11px] font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Live on Vercel</span>
+              <span>Live Production App</span>
             </span>
 
             {project.links?.demo && (
@@ -128,12 +135,20 @@ export const ProjectDemoSection: React.FC<ProjectDemoSectionProps> = ({
                   : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-200'
               }`}
             >
-              {isFastApiProject ? (
+              {isSpreadsheetProject ? (
+                <Table className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+              ) : isFastApiProject ? (
                 <Terminal className="w-3 h-3 text-teal-600 dark:text-teal-400" />
               ) : (
                 <Sliders className="w-3 h-3 text-stone-500" />
               )}
-              <span>{isFastApiProject ? 'OpenAPI Console' : 'Test Parameters'}</span>
+              <span>
+                {isSpreadsheetProject
+                  ? 'Interactive Sheet'
+                  : isFastApiProject
+                  ? 'OpenAPI Console'
+                  : 'Test Parameters'}
+              </span>
             </button>
           </div>
         )}

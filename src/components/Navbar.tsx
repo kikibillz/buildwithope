@@ -68,31 +68,28 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-        {/* Brand / Name */}
+        {/* Brand / Logo */}
         <a
           href="#"
           id="nav-brand"
           className="group flex items-center gap-2.5 text-stone-900 dark:text-stone-100 font-semibold tracking-tight text-base py-1"
         >
-          {config.avatarUrl ? (
-            <img
-              src={config.avatarUrl}
-              alt={config.name}
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                const target = e.currentTarget;
-                if (!target.dataset.triedFallback) {
-                  target.dataset.triedFallback = 'true';
-                  target.src = '/images/opeyemi.png';
-                } else {
-                  target.style.display = 'none';
-                }
-              }}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-stone-300 dark:border-stone-700 group-hover:ring-2 group-hover:ring-stone-400 dark:group-hover:ring-stone-600 transition-all shrink-0"
-            />
-          ) : (
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-700 dark:bg-emerald-400 inline-block transition-transform group-hover:scale-125 shrink-0" />
-          )}
+          {/* Architectural Graphic Logo Emblem */}
+          <div className="w-8 h-8 rounded-lg bg-stone-900 dark:bg-stone-100 text-stone-100 dark:text-stone-900 flex items-center justify-center font-mono font-bold text-xs shadow-xs border border-stone-800 dark:border-stone-300 shrink-0 group-hover:scale-105 transition-transform">
+            <svg
+              className="w-4 h-4 text-emerald-400 dark:text-emerald-700"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="7" cy="12" r="4.5" />
+              <circle cx="17" cy="12" r="4.5" />
+              <path d="M11.5 12h1" strokeWidth="2.5" />
+            </svg>
+          </div>
           <AnimatedName name={config.name} variant="nav" />
           <span className="text-stone-400 dark:text-stone-500 text-xs hidden sm:inline-block font-mono border-l border-stone-300 dark:border-stone-700 pl-2">
             portfolio
@@ -108,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
                 key={link.href}
                 href={link.href}
                 id={`nav-link-${link.href.substring(1)}`}
-                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                className={`px-2.5 lg:px-3 py-1.5 text-xs lg:text-sm rounded-md transition-colors ${
                   isActive
                     ? 'text-stone-950 dark:text-stone-100 font-medium bg-stone-200/60 dark:bg-stone-800'
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/60'

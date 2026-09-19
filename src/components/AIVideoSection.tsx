@@ -28,7 +28,7 @@ export const AIVideoSection: React.FC<AIVideoSectionProps> = ({ onSelectVideo })
   return (
     <section
       id="ai-videos"
-      className="py-16 sm:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-[#fbfbfa] dark:bg-[#0c0a09] transition-colors"
+      className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-[#fbfbfa] dark:bg-[#0c0a09] transition-colors"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
@@ -67,8 +67,8 @@ export const AIVideoSection: React.FC<AIVideoSectionProps> = ({ onSelectVideo })
           </div>
         </div>
 
-        {/* Filters Bar */}
-        <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-stone-200/70 dark:border-stone-800">
+        {/* Filters Bar (hidden on print) */}
+        <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-stone-200/70 dark:border-stone-800 print:hidden">
           <div className="flex flex-wrap items-center gap-1.5">
             {categories.map((cat) => (
               <button

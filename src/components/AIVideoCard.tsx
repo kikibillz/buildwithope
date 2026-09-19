@@ -26,7 +26,7 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
         }
       }}
       transition={{ duration: 0.2 }}
-      className="group bg-white dark:bg-stone-900 border border-stone-200/90 dark:border-stone-800 hover:border-emerald-500/60 dark:hover:border-emerald-500/60 rounded-xl overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between"
+      className="group bg-white dark:bg-stone-900 border border-stone-200/90 dark:border-stone-800 hover:border-emerald-500/60 dark:hover:border-emerald-500/60 rounded-xl overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between break-inside-avoid print-break-avoid"
     >
       {/* Media Video / Poster Container */}
       <div
@@ -71,7 +71,7 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
           </span>
 
           <div className="flex items-center gap-1.5">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-900/90 text-emerald-200 border border-emerald-500/30">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-900/90 text-emerald-200 border border-emerald-500/30 print:hidden">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>Playing</span>
             </span>
@@ -83,7 +83,7 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
         </div>
 
         {/* Center Hover Play Button */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none print:hidden">
           <motion.div
             whileHover={{ scale: 1.15 }}
             className="w-12 h-12 rounded-full bg-emerald-600/95 text-white flex items-center justify-center shadow-lg backdrop-blur-sm group-hover:bg-emerald-500 transition-colors transform group-hover:scale-110 duration-200"
@@ -141,12 +141,19 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
             type="button"
             onClick={() => onSelect(video)}
             id={`btn-view-video-${video.id}`}
-            className="w-full inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-stone-900 dark:text-stone-100 hover:text-white dark:hover:text-stone-950 bg-stone-100 dark:bg-stone-800 hover:bg-stone-900 dark:hover:bg-stone-100 border border-stone-200 dark:border-stone-700 hover:border-stone-900 dark:hover:border-stone-100 py-2.5 px-3 rounded-md transition-all shadow-2xs group/btn cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-stone-900 dark:text-stone-100 hover:text-white dark:hover:text-stone-950 bg-stone-100 dark:bg-stone-800 hover:bg-stone-900 dark:hover:bg-stone-100 border border-stone-200 dark:border-stone-700 hover:border-stone-900 dark:hover:border-stone-100 py-2.5 px-3 rounded-md transition-all shadow-2xs group/btn cursor-pointer print:hidden"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Watch Reel &amp; Breakdown</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-stone-500 group-hover/btn:text-white dark:group-hover/btn:text-stone-950 transition-colors ml-auto" />
           </button>
+
+          {/* Print-only pipeline metadata */}
+          <div className="hidden print:block text-[11px] font-mono text-stone-700 pt-2 border-t border-stone-300 space-y-0.5">
+            <div><strong>Spec:</strong> {video.aspectRatio} • {video.duration} runtime</div>
+            <div><strong>Workflow:</strong> {video.generationWorkflow.pipeline}</div>
+            <div><strong>Narration:</strong> {video.generationWorkflow.audio}</div>
+          </div>
         </div>
       </div>
     </motion.div>

@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Project } from '../types';
 import { LiveWebEmbedPreview } from './LiveWebEmbedPreview';
+import { AutomatedSpreadsheetPreview } from './AutomatedSpreadsheetPreview';
 
 import bankChurnImg from '../assets/images/bank_churn_app_1789401191137.jpg';
 import hrAnalyticsImg from '../assets/images/hr_analytics_app_1789401204328.jpg';
@@ -39,7 +40,7 @@ export const ProjectDemoScreenshotPreview: React.FC<ProjectDemoScreenshotPreview
     return (
       <LiveWebEmbedPreview
         url="https://begi-begi.vercel.app"
-        title="Begi-Begi — Social Micro-Funding Platform"
+        title="Begi-Begi: Social Micro-Funding Platform"
         domain="begi-begi.vercel.app"
         projectId={project.id}
         onExpand={onOpenLiveDemo}
@@ -72,6 +73,10 @@ export const ProjectDemoScreenshotPreview: React.FC<ProjectDemoScreenshotPreview
         heightClass="h-72 sm:h-84 md:h-[390px]"
       />
     );
+  }
+
+  if (project.id === 'python-automated-ledger') {
+    return <AutomatedSpreadsheetPreview />;
   }
 
   // Render high-fidelity demo interface screenshot based on project ID
