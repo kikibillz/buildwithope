@@ -142,7 +142,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 lg:py-32 border-t border-stone-200/80 dark:border-white/[0.08] bg-[#faf9f6] dark:bg-[#09090b] transition-colors">
+    <section id="contact" className="py-20 sm:py-28 lg:py-32 border-t border-amber-900/10 dark:border-amber-500/15 bg-[#faf8f4] dark:bg-[#15120f] transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -151,8 +151,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl mb-12"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800/60 mb-3 shadow-2xs">
-            <Mail className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium text-amber-900 dark:text-amber-200 bg-amber-500/15 dark:bg-amber-500/20 border border-amber-500/30 mb-3 shadow-2xs">
+            <Mail className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             <span>Contact</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-2">
@@ -162,7 +162,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
             Have a project, job opportunity, or question? Send a message directly to my inbox at{' '}
             <a
               href={`mailto:${targetEmail}`}
-              className="text-stone-950 dark:text-stone-100 font-medium underline underline-offset-4 decoration-stone-400 dark:decoration-stone-600 hover:decoration-emerald-500 transition-colors"
+              className="text-stone-950 dark:text-stone-100 font-medium underline underline-offset-4 decoration-amber-400 dark:decoration-amber-500 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
             >
               {targetEmail}
             </a>
@@ -179,7 +179,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl p-6 sm:p-7 space-y-4 shadow-xs">
+            <div className="bg-white/95 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-2xl p-6 sm:p-7 space-y-4 shadow-xs">
               <h3 className="text-xs font-semibold text-stone-900 dark:text-stone-100 uppercase tracking-widest font-mono">
                 Direct Channels
               </h3>
@@ -188,10 +188,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                 <a
                   href={`mailto:${targetEmail}`}
                   id="contact-channel-email"
-                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-white dark:hover:bg-stone-800 transition-colors"
+                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-amber-50/50 dark:hover:bg-[#201c18] transition-colors"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200/80 dark:border-emerald-800 flex items-center justify-center text-emerald-800 dark:text-emerald-300 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900 transition-colors shrink-0">
-                    <Mail className="w-4 h-4" />
+                  <div className="w-9 h-9 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-900 dark:text-amber-200 group-hover:bg-amber-500/25 transition-colors shrink-0">
+                    <Mail className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                   </div>
                   <div className="overflow-hidden">
                     <div className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase">Primary Email</div>
@@ -199,7 +199,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       {targetEmail}
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-stone-700 dark:group-hover:text-stone-300 ml-auto shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-amber-600 ml-auto shrink-0" />
                 </a>
 
                 <a
@@ -207,9 +207,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                   target="_blank"
                   rel="noreferrer"
                   id="contact-channel-linkedin"
-                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-white dark:hover:bg-stone-800 transition-colors"
+                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-amber-50/50 dark:hover:bg-[#201c18] transition-colors"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-600 dark:text-stone-300 group-hover:bg-stone-200 dark:group-hover:bg-stone-700 transition-colors shrink-0">
+                  <div className="w-9 h-9 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-600 dark:text-stone-300 group-hover:bg-amber-500/15 group-hover:text-amber-700 transition-colors shrink-0">
                     <Linkedin className="w-4 h-4" />
                   </div>
                   <div className="overflow-hidden">
@@ -218,7 +218,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       {config.linkedin.replace(/^https?:\/\/(www\.)?/, '')}
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-stone-700 dark:group-hover:text-stone-300 ml-auto shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-amber-600 ml-auto shrink-0" />
                 </a>
 
                 <a
@@ -226,9 +226,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                   target="_blank"
                   rel="noreferrer"
                   id="contact-channel-github"
-                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-white dark:hover:bg-stone-800 transition-colors"
+                  className="flex items-center gap-3 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 group p-2 rounded-lg hover:bg-amber-50/50 dark:hover:bg-[#201c18] transition-colors"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-600 dark:text-stone-300 group-hover:bg-stone-200 dark:group-hover:bg-stone-700 transition-colors shrink-0">
+                  <div className="w-9 h-9 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-600 dark:text-stone-300 group-hover:bg-amber-500/15 group-hover:text-amber-700 transition-colors shrink-0">
                     <Github className="w-4 h-4" />
                   </div>
                   <div className="overflow-hidden">
@@ -237,7 +237,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       {config.github.replace(/^https?:\/\/(www\.)?/, '')}
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-stone-700 dark:group-hover:text-stone-300 ml-auto shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 group-hover:text-amber-600 ml-auto shrink-0" />
                 </a>
 
                 <div className="flex items-center gap-3 text-stone-700 dark:text-stone-300 p-2">
@@ -253,7 +253,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
             </div>
 
             {/* Note on availability */}
-            <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl p-5 text-xs text-stone-600 dark:text-stone-400 leading-relaxed font-sans shadow-xs">
+            <div className="bg-white/95 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-2xl p-5 text-xs text-stone-600 dark:text-stone-400 leading-relaxed font-sans shadow-xs">
               <span className="font-semibold text-stone-900 dark:text-stone-100 block mb-1">Response Window</span>
               Open to Data Science, Python Developer, and Data/Business Analyst roles, as well as AI video &amp; ML collaborations. Emails are delivered directly to {targetEmail} and answered within 24–48 hours.
             </div>
@@ -267,12 +267,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
             transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7"
           >
-            <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl p-6 sm:p-8 shadow-xs">
+            <div className="bg-white/95 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-2xl p-6 sm:p-8 shadow-xs">
               {/* SUCCESS STATE */}
               {status === 'success' && (
                 <div className="text-center py-8 space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 flex items-center justify-center mx-auto border border-emerald-300 dark:border-emerald-800">
-                    <CheckCircle2 className="w-6 h-6" />
+                  <div className="w-12 h-12 rounded-full bg-amber-500/20 text-amber-800 dark:text-amber-300 flex items-center justify-center mx-auto border border-amber-500/40">
+                    <CheckCircle2 className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100">
                     Message Delivered to My Inbox
@@ -286,7 +286,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 underline underline-offset-4 cursor-pointer min-h-[44px] px-2"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-amber-800 dark:text-amber-300 hover:text-amber-950 dark:hover:text-amber-100 underline underline-offset-4 cursor-pointer min-h-[44px] px-2"
                     >
                       <RefreshCw className="w-3 h-3" />
                       <span>Send another message</span>
@@ -312,7 +312,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                   <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a
                       href={mailtoUrl}
-                      className="inline-flex items-center justify-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white text-white dark:text-stone-950 text-xs font-medium px-4 py-2.5 rounded-md transition-colors shadow-xs min-h-[44px]"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white text-xs font-medium px-4 py-2.5 rounded-full transition-colors shadow-xs min-h-[44px]"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       <span>Send Directly via Email App</span>
@@ -375,9 +375,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                           if (errors.name) setErrors({ ...errors, name: undefined });
                         }}
                         placeholder="e.g. Sarah Jenkins"
-                        className={`w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-stone-800 border ${
-                          errors.name ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300 dark:border-stone-700'
-                        } rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors`}
+                        className={`w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-[#141210] border ${
+                          errors.name ? 'border-rose-400 ring-1 ring-rose-300' : 'border-amber-900/15 dark:border-amber-500/20'
+                        } rounded-lg px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors`}
                       />
                       {errors.name && (
                         <p className="mt-1 text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1">
@@ -401,9 +401,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                           if (errors.email) setErrors({ ...errors, email: undefined });
                         }}
                         placeholder="sarah@company.com"
-                        className={`w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-stone-800 border ${
-                          errors.email ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300 dark:border-stone-700'
-                        } rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors`}
+                        className={`w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-[#141210] border ${
+                          errors.email ? 'border-rose-400 ring-1 ring-rose-300' : 'border-amber-900/15 dark:border-amber-500/20'
+                        } rounded-lg px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors`}
                       />
                       {errors.email && (
                         <p className="mt-1 text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1">
@@ -425,7 +425,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       disabled={status === 'sending'}
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="e.g. Data Science Opportunity / AI Video Project"
-                      className="w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors"
+                      className="w-full text-base sm:text-sm min-h-[44px] bg-white dark:bg-[#141210] border border-amber-900/15 dark:border-amber-500/20 rounded-lg px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     />
                   </div>
 
@@ -443,9 +443,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                         if (errors.message) setErrors({ ...errors, message: undefined });
                       }}
                       placeholder="Hi Opeyemi, I came across your portfolio and would like to connect regarding..."
-                      className={`w-full text-base sm:text-sm bg-white dark:bg-stone-800 border ${
-                        errors.message ? 'border-rose-400 ring-1 ring-rose-300' : 'border-stone-300 dark:border-stone-700'
-                      } rounded-md px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-600 dark:focus:ring-stone-400 transition-colors`}
+                      className={`w-full text-base sm:text-sm bg-white dark:bg-[#141210] border ${
+                        errors.message ? 'border-rose-400 ring-1 ring-rose-300' : 'border-amber-900/15 dark:border-amber-500/20'
+                      } rounded-lg px-3 py-2 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors`}
                     />
                     {errors.message && (
                       <p className="mt-1 text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1">
@@ -475,7 +475,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       id="contact-submit-btn"
                       disabled={status === 'sending'}
                       data-cursor-text="SEND"
-                      className="inline-flex items-center justify-center gap-2 bg-stone-900 dark:bg-emerald-400 hover:bg-stone-800 dark:hover:bg-emerald-300 active:bg-stone-950 dark:active:bg-emerald-500 text-white dark:text-stone-950 font-semibold text-sm px-6 py-2.5 min-h-[44px] rounded-full transition-all shadow-xs cursor-pointer disabled:opacity-50"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 active:scale-98 text-white font-semibold text-sm px-6 py-2.5 min-h-[44px] rounded-full transition-all shadow-xs cursor-pointer disabled:opacity-50"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
@@ -484,7 +484,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     <a
                       href={mailtoUrl}
                       id="contact-mailto-fallback"
-                      className="inline-flex items-center justify-center gap-1.5 text-xs text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-200 font-mono py-2.5 px-3 min-h-[44px] rounded-full hover:bg-stone-100 dark:hover:bg-white/[0.05] transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 text-xs text-stone-600 dark:text-stone-400 hover:text-amber-800 dark:hover:text-amber-300 font-mono py-2.5 px-3 min-h-[44px] rounded-full hover:bg-amber-500/10 transition-colors"
                       title="Open directly in your default email client"
                     >
                       <Mail className="w-3 h-3" />
@@ -493,7 +493,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     </a>
                   </div>
                 </form>
-
               )}
             </div>
           </motion.div>

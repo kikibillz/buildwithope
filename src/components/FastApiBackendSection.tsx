@@ -428,20 +428,20 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
       className="mb-14 scroll-mt-24 break-inside-avoid print-break-avoid"
     >
       {/* Section Frame */}
-      <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl overflow-hidden shadow-xs hover:border-emerald-500/30 dark:hover:border-emerald-400/25 transition-colors">
+      <div className="bg-white/95 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-2xl overflow-hidden shadow-xs hover:border-amber-500/40 dark:hover:border-amber-400/35 transition-colors">
         {/* Top Header Banner */}
-        <div className="p-6 sm:p-8 bg-gradient-to-r from-stone-950 via-stone-900 to-stone-950 text-white border-b border-stone-800">
+        <div className="p-6 sm:p-8 bg-gradient-to-r from-[#1c1815] via-[#241f1a] to-[#1c1815] text-white border-b border-amber-900/20">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2.5 max-w-2xl">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-teal-950/90 text-teal-300 border border-teal-800/80">
-                  <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
                   <span>Backend &amp; API Architecture</span>
                 </span>
-                <span className="text-xs font-mono text-stone-400 bg-stone-800/80 px-2 py-0.5 rounded border border-stone-700">
+                <span className="text-xs font-mono text-stone-300 bg-stone-800/80 px-2 py-0.5 rounded border border-amber-900/30">
                   FastAPI 0.115 • Python 3.12
                 </span>
-                <span className="text-xs font-mono text-stone-400 bg-stone-800/80 px-2 py-0.5 rounded border border-stone-700">
+                <span className="text-xs font-mono text-stone-300 bg-stone-800/80 px-2 py-0.5 rounded border border-amber-900/30">
                   Pydantic v2
                 </span>
               </div>
@@ -461,9 +461,9 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                 type="button"
                 onClick={() => setIsDocsOpen(true)}
                 id="btn-fastapi-view-docs"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 hover:text-white border border-stone-700 text-xs sm:text-sm font-medium transition-all shadow-xs"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2e2720] hover:bg-[#3d342b] text-amber-100 border border-amber-900/30 text-xs sm:text-sm font-medium transition-all shadow-xs cursor-pointer"
               >
-                <BookOpen className="w-4 h-4 text-teal-400" />
+                <BookOpen className="w-4 h-4 text-amber-400" />
                 <span>Technical Specs &amp; Docs</span>
               </button>
 
@@ -471,7 +471,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                 type="button"
                 onClick={() => setIsAccessOpen(true)}
                 id="btn-fastapi-request-access"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-teal-500 hover:bg-teal-400 text-stone-950 text-xs sm:text-sm font-semibold transition-all shadow-sm hover:shadow-md"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-sm hover:shadow-md cursor-pointer"
               >
                 <Key className="w-4 h-4" />
                 <span>Request Access</span>
@@ -492,13 +492,13 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                 transition: { staggerChildren: 0.07, delayChildren: 0.05 },
               },
             }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 mt-6 border-t border-stone-800 text-xs font-mono"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 mt-6 border-t border-amber-900/20 text-xs font-mono"
           >
             {[
-              { label: 'Latency (p95)', value: '< 15ms Inference', color: 'text-teal-400' },
+              { label: 'Latency (p95)', value: '< 15ms Inference', color: 'text-amber-400' },
               { label: 'Validation', value: 'Pydantic v2 Strict', color: 'text-white' },
               { label: 'Throughput', value: '1,200 req/sec', color: 'text-white' },
-              { label: 'Deployment', value: 'Docker ASGI / Uvicorn', color: 'text-teal-400' },
+              { label: 'Deployment', value: 'Docker ASGI / Uvicorn', color: 'text-orange-400' },
             ].map((metric) => (
               <motion.div
                 key={metric.label}
@@ -506,9 +506,9 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                   hidden: { opacity: 0, y: 12 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
                 }}
-                className="p-2.5 rounded-lg bg-stone-900/80 border border-stone-800"
+                className="p-2.5 rounded-lg bg-[#181512]/90 border border-amber-900/30"
               >
-                <div className="text-stone-400 text-[10px] uppercase">{metric.label}</div>
+                <div className="text-amber-200/60 text-[10px] uppercase">{metric.label}</div>
                 <div className={`${metric.color} font-bold text-sm mt-0.5`}>{metric.value}</div>
               </motion.div>
             ))}
@@ -611,14 +611,14 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                   }}
                   className={`p-3 rounded-xl border text-left transition-colors cursor-pointer relative overflow-hidden group ${
                     isSelected
-                      ? 'bg-stone-950 text-white border-stone-900 dark:bg-stone-800 dark:border-teal-500/80 shadow-md ring-1 ring-teal-500/30'
-                      : 'bg-stone-50 dark:bg-stone-950/60 border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-300 hover:border-stone-300 dark:hover:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800/60'
+                      ? 'bg-stone-950 text-white border-amber-600/80 dark:bg-[#201c18] dark:border-amber-500/80 shadow-md ring-1 ring-amber-500/30'
+                      : 'bg-white/70 dark:bg-[#15120f] border-amber-900/10 dark:border-amber-500/15 text-stone-800 dark:text-stone-300 hover:border-amber-500/40 hover:bg-amber-50/50 dark:hover:bg-[#1e1915]'
                   }`}
                 >
                   {isSelected && (
                     <motion.div
                       layoutId="activeEndpointIndicator"
-                      className="absolute inset-0 border-2 border-teal-500/70 dark:border-teal-400/80 rounded-xl pointer-events-none"
+                      className="absolute inset-0 border-2 border-amber-500/70 dark:border-amber-400/80 rounded-xl pointer-events-none"
                       transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -626,8 +626,8 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                     <span
                       className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${
                         ep.method === 'POST'
-                          ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
-                          : 'bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/30'
+                          ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30'
+                          : 'bg-orange-500/15 text-orange-700 dark:text-orange-300 border border-orange-500/30'
                       }`}
                     >
                       {ep.method}
@@ -649,15 +649,15 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="bg-stone-50 dark:bg-stone-950/70 border border-stone-200 dark:border-stone-800 rounded-xl p-4 sm:p-6 mb-6"
+            className="bg-[#fcfaf7] dark:bg-[#14110e] border border-amber-900/15 dark:border-amber-500/20 rounded-xl p-4 sm:p-6 mb-6"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-stone-200 dark:border-stone-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-amber-900/10 dark:border-amber-500/15">
               <div className="flex items-center gap-2.5">
                 <span
                   className={`text-xs font-mono font-bold px-2.5 py-1 rounded ${
                     activeEndpoint.method === 'POST'
-                      ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
-                      : 'bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-300 dark:border-sky-800'
+                      ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-700'
+                      : 'bg-orange-100 dark:bg-orange-950/80 text-orange-900 dark:text-orange-200 border border-orange-300 dark:border-orange-700'
                   }`}
                 >
                   {activeEndpoint.method}
@@ -673,16 +673,16 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                   onClick={handleSimulateRequest}
                   disabled={isSimulating}
                   id="btn-simulate-endpoint"
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white text-white dark:text-stone-950 text-xs font-mono font-semibold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 dark:bg-amber-500/20 dark:hover:bg-amber-500/30 text-white dark:text-amber-200 border border-stone-800 dark:border-amber-500/40 text-xs font-mono font-semibold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                 >
                   {isSimulating ? (
                     <>
-                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin text-amber-400" />
                       <span>Simulating ASGI Call...</span>
                     </>
                   ) : (
                     <>
-                      <Zap className="w-3.5 h-3.5 text-amber-400 dark:text-amber-500 fill-current" />
+                      <Zap className="w-3.5 h-3.5 text-amber-400 fill-current" />
                       <span>Execute Simulated Request</span>
                     </>
                   )}
@@ -818,7 +818,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                     </div>
 
                     {simulatedLatency !== null && activeTab === 'response' && (
-                      <span className="text-teal-400 font-bold flex items-center gap-1">
+                      <span className="text-amber-400 font-bold flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         <span>{simulatedLatency} ms</span>
                       </span>
@@ -826,7 +826,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                   </div>
 
                   {activeTab === 'response' && (
-                    <pre className="text-teal-300/90 leading-relaxed font-mono">
+                    <pre className="text-amber-300/90 leading-relaxed font-mono">
                       {activeEndpoint.responsePayload}
                     </pre>
                   )}
@@ -844,7 +844,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                   )}
 
                   {activeTab === 'python' && (
-                    <pre className="text-sky-300/90 leading-relaxed font-mono">
+                    <pre className="text-orange-300/90 leading-relaxed font-mono">
                       {activeEndpoint.pythonSnippet}
                     </pre>
                   )}
@@ -855,20 +855,20 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
           </div>
 
           {/* Bottom Row: Swagger & ReDoc Links + Request Access Callout */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-stone-200 dark:border-stone-800 text-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-amber-900/10 dark:border-amber-500/15 text-xs">
             <div className="flex flex-wrap items-center gap-3 text-stone-600 dark:text-stone-400 font-mono">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <ShieldCheck className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 <span>JWT Bearer Security</span>
               </span>
               <span>•</span>
               <span className="flex items-center gap-1.5">
-                <FileCode2 className="w-4 h-4 text-blue-500" />
+                <FileCode2 className="w-4 h-4 text-orange-500" />
                 <span>OpenAPI 3.1.0 Compatible</span>
               </span>
               <span>•</span>
               <span className="flex items-center gap-1.5">
-                <Layers className="w-4 h-4 text-purple-500" />
+                <Layers className="w-4 h-4 text-amber-500" />
                 <span>Pytest Coverage &gt; 90%</span>
               </span>
             </div>
@@ -877,7 +877,7 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
               <button
                 type="button"
                 onClick={() => setIsAccessOpen(true)}
-                className="text-teal-700 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 font-semibold font-mono underline underline-offset-4 cursor-pointer"
+                className="text-amber-800 dark:text-amber-300 hover:text-amber-950 dark:hover:text-amber-100 font-semibold font-mono underline underline-offset-4 cursor-pointer"
               >
                 Need staging API access or Swagger credentials? Click here &rarr;
               </button>

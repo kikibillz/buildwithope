@@ -20,10 +20,10 @@ export const ScrollProgress: React.FC = () => {
   return (
     <div
       aria-hidden="true"
-      className="fixed top-0 left-0 right-0 h-[2.5px] z-50 pointer-events-none bg-stone-200/20 dark:bg-white/5 print:hidden"
+      className="fixed top-0 left-0 right-0 h-[3px] z-50 pointer-events-none bg-amber-200/20 dark:bg-amber-500/10 print:hidden"
     >
       <div
-        className="h-full bg-gradient-to-r from-emerald-500 via-amber-500 to-indigo-500 transition-all duration-75 ease-out shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+        className="h-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 transition-all duration-75 ease-out shadow-[0_0_12px_rgba(245,158,11,0.6)]"
         style={{ width: `${scrollProgress}%` }}
       />
     </div>

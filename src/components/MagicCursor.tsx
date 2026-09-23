@@ -101,7 +101,7 @@ export const MagicCursor: React.FC = () => {
       {/* Inner precise dot */}
       <div
         ref={dotRef}
-        className={`fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white pointer-events-none transition-transform duration-75 ease-out ${
+        className={`fixed top-0 left-0 w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400 pointer-events-none transition-transform duration-75 ease-out shadow-[0_0_8px_rgba(245,158,11,0.6)] ${
           isHovered ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
         }`}
       />
@@ -111,12 +111,12 @@ export const MagicCursor: React.FC = () => {
         ref={ringRef}
         className={`fixed top-0 left-0 rounded-full flex items-center justify-center font-mono pointer-events-none transition-all duration-200 ease-out ${
           cursorText
-            ? 'w-16 h-16 bg-stone-900/90 dark:bg-white/95 text-white dark:text-stone-950 text-[10px] font-bold tracking-widest uppercase shadow-xl backdrop-blur-xs scale-100'
+            ? 'w-16 h-16 bg-gradient-to-br from-amber-600 to-orange-600 text-white text-[10px] font-bold tracking-widest uppercase shadow-[0_4px_20px_rgba(234,88,12,0.4)] backdrop-blur-xs scale-100'
             : isHovered
-            ? 'w-10 h-10 border border-stone-900/40 dark:border-white/50 bg-stone-900/10 dark:bg-white/10 backdrop-blur-xs scale-100'
+            ? 'w-10 h-10 border-2 border-amber-500/60 dark:border-amber-400/70 bg-amber-500/15 dark:bg-amber-400/15 backdrop-blur-xs scale-100'
             : isClicking
-            ? 'w-6 h-6 border border-stone-800 dark:border-stone-200 bg-stone-900/20 dark:bg-white/20 scale-90'
-            : 'w-8 h-8 border border-stone-400/50 dark:border-stone-500/50 scale-100'
+            ? 'w-6 h-6 border border-orange-500 bg-orange-500/30 scale-90'
+            : 'w-8 h-8 border border-amber-500/40 dark:border-amber-400/40 scale-100'
         }`}
       >
         {cursorText && <span className="select-none animate-in fade-in zoom-in-90 duration-150">{cursorText}</span>}

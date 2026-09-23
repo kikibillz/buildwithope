@@ -67,7 +67,7 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
           whileTap={{ scale: 0.98 }}
         >
           {/* Animated Background Highlight on Hover */}
-          <span className="absolute -inset-x-2 -inset-y-1 bg-stone-200/50 rounded-lg -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <span className="absolute -inset-x-2 -inset-y-1 bg-amber-500/10 dark:bg-amber-400/10 rounded-lg -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
 
           {/* Letter by letter render with subtle hover waves */}
           <span className="inline-flex tracking-tight">
@@ -90,8 +90,8 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
                   }}
                   className={`inline-block font-bold ${
                     isOpe
-                      ? 'text-emerald-700 font-extrabold underline decoration-emerald-400/60 decoration-2 underline-offset-4'
-                      : 'text-stone-900'
+                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 dark:from-amber-400 dark:via-orange-400 dark:to-amber-300 font-extrabold underline decoration-amber-500/60 decoration-2 underline-offset-4'
+                      : 'text-stone-900 dark:text-stone-100'
                   } ${char === ' ' ? 'mr-1.5' : ''}`}
                 >
                   {char === ' ' ? '\u00A0' : char}
@@ -109,7 +109,7 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="inline-block w-2.5 h-6 sm:h-8 bg-emerald-600 ml-1 rounded-xs align-middle"
+            className="inline-block w-2.5 h-6 sm:h-8 bg-gradient-to-b from-amber-500 to-orange-500 ml-1 rounded-xs align-middle shadow-[0_0_8px_rgba(245,158,11,0.6)]"
           />
         </motion.span>
 
@@ -118,9 +118,9 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
           onClick={toggleSyntaxMode}
           id="btn-toggle-name-mode"
           title="Toggle Python function syntax"
-          className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 border border-stone-200 transition-all shadow-2xs hover:scale-105 active:scale-95 ml-1"
+          className="inline-flex items-center gap-1 text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30 transition-all shadow-2xs hover:scale-105 active:scale-95 ml-1 cursor-pointer"
         >
-          <Code2 className="w-3 h-3 text-emerald-600" />
+          <Code2 className="w-3 h-3 text-amber-600 dark:text-amber-400" />
           <span>{syntaxMode === 'standard' ? 'def .py' : 'text'}</span>
         </button>
       </span>
@@ -133,13 +133,13 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
   if (variant === 'nav') {
     return (
       <span className={`inline-flex items-center gap-1 font-mono tracking-tight ${className}`}>
-        <span className="font-semibold text-stone-900 group-hover:text-emerald-800 transition-colors">
+        <span className="font-semibold text-stone-900 dark:text-stone-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
           {name}
         </span>
         <motion.span
           animate={{ opacity: [1, 0.2, 1] }}
           transition={{ duration: 1.2, repeat: Infinity }}
-          className="w-1.5 h-3 bg-emerald-600 inline-block rounded-xs ml-0.5"
+          className="w-1.5 h-3 bg-amber-500 inline-block rounded-xs ml-0.5 shadow-[0_0_6px_rgba(245,158,11,0.6)]"
         />
       </span>
     );
@@ -150,7 +150,7 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
   // ----------------------------------------------------
   return (
     <span className={`inline-flex items-center gap-1 font-mono text-xs ${className}`}>
-      <span className="text-emerald-700 font-bold">{name}</span>
+      <span className="text-amber-600 dark:text-amber-400 font-bold">{name}</span>
     </span>
   );
 };

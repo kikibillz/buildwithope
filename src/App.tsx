@@ -194,7 +194,7 @@ export default function App() {
   }, [projectFilter, projectSearch]);
 
   return (
-    <div className="min-h-screen bg-[#fafaf9] dark:bg-[#0c0a09] text-[#1c1917] dark:text-stone-100 flex flex-col font-sans selection:bg-stone-800 dark:selection:bg-stone-200 selection:text-white dark:selection:text-stone-950 transition-colors">
+    <div className="min-h-screen bg-[#fbf8f3] dark:bg-[#141210] text-[#1c1815] dark:text-[#faf5ee] flex flex-col font-sans selection:bg-amber-500 selection:text-white dark:selection:bg-orange-600 dark:selection:text-white transition-colors">
       {/* Top Scroll Reading Progress Indicator */}
       <ScrollProgress />
 
@@ -232,10 +232,20 @@ export default function App() {
         </div>
 
         {/* =========================================================================
-            1. HERO SECTION
+            1. HERO SECTION (Luminous Warm Lighting)
            ========================================================================= */}
-        <section id="hero" className="py-12 sm:py-20 lg:py-24 border-b border-stone-200/80 dark:border-stone-800 bg-[#fafaf9] dark:bg-[#0c0a09] transition-colors print:py-4">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <section id="hero" className="relative py-12 sm:py-20 lg:py-24 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#fbf8f3] dark:bg-[#141210] overflow-hidden transition-colors print:py-4">
+          {/* Subtle warm ambient radial glows */}
+          <div
+            aria-hidden="true"
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[520px] bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.14),rgba(234,88,12,0.07),transparent_70%)] pointer-events-none -z-0"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute top-1/3 -right-24 w-[450px] h-[450px] rounded-full bg-gradient-to-bl from-amber-400/10 via-orange-500/5 to-transparent blur-3xl pointer-events-none -z-0"
+          />
+
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left Column: Natural, Credible Editorial Intro */}
               <div className="lg:col-span-6 print:col-span-12 space-y-6">
@@ -255,20 +265,20 @@ export default function App() {
                             target.style.display = 'none';
                           }
                         }}
-                        className="w-13 h-13 sm:w-15 sm:h-15 rounded-full object-cover border-2 border-white dark:border-stone-800 shadow-sm ring-1 ring-stone-300 dark:ring-stone-700 shrink-0"
+                        className="w-13 h-13 sm:w-15 sm:h-15 rounded-full object-cover border-2 border-amber-500/40 dark:border-amber-400/50 shadow-md ring-2 ring-amber-500/20 shrink-0"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-950 font-mono font-bold text-base flex items-center justify-center shrink-0 shadow-xs ring-1 ring-stone-300 dark:ring-stone-700">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-orange-600 text-white font-mono font-bold text-base flex items-center justify-center shrink-0 shadow-md ring-2 ring-amber-500/20">
                         BO
                       </div>
                     )}
                   </div>
                   <div>
-                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 text-xs font-mono">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400 inline-block animate-pulse" />
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/25 dark:border-amber-400/25 text-amber-900 dark:text-amber-200 text-xs font-mono shadow-xs">
+                      <span className="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
                       <span>Available for Roles &amp; AI Media Projects</span>
                     </div>
-                    <div className="text-xs text-stone-500 dark:text-stone-400 font-mono mt-1">
+                    <div className="text-xs text-amber-900/60 dark:text-amber-400/60 font-mono mt-1">
                       {config.location} • Nigeria
                     </div>
                   </div>
@@ -279,26 +289,29 @@ export default function App() {
                     <span>Hi, I&apos;m</span>
                     <AnimatedName name={config.name} variant="hero" />
                   </h1>
-                  <h2 className="text-xl sm:text-2xl font-display font-semibold text-stone-700 dark:text-stone-300 tracking-tight">
-                    Data Scientist, ML Engineer &amp; AI Video Creator
+                  <h2 className="text-xl sm:text-2xl font-display font-semibold text-stone-800 dark:text-stone-200 tracking-tight">
+                    Data Scientist, ML Engineer &amp;{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 dark:from-amber-400 dark:via-orange-400 dark:to-amber-300">
+                      AI Video Creator
+                    </span>
                   </h2>
                 </div>
 
-                <p className="text-base sm:text-lg text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl font-normal">
+                <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed max-w-xl font-normal">
                   I engineer practical data &amp; machine learning solutions and direct cinematic, high-conversion AI video commercials using Google Veo 3, Runway Gen-3, Kling, and Luma.
                 </p>
 
-                {/* Secondary line */}
+                {/* Secondary line with warm highlights */}
                 <div className="pt-1 text-xs sm:text-sm font-mono text-stone-500 dark:text-stone-400 flex flex-wrap items-center gap-2">
-                  <span>Python</span>
-                  <span className="text-stone-300 dark:text-stone-700">•</span>
+                  <span className="text-amber-900 dark:text-amber-300 font-medium">Python 3.12</span>
+                  <span className="text-amber-400/60">•</span>
                   <span>Machine Learning</span>
-                  <span className="text-stone-300 dark:text-stone-700">•</span>
-                  <span className="text-emerald-700 dark:text-emerald-400 font-semibold">Generative AI Video</span>
-                  <span className="text-stone-300 dark:text-stone-700">•</span>
+                  <span className="text-amber-400/60">•</span>
+                  <span className="text-orange-600 dark:text-orange-400 font-semibold">Generative AI Video</span>
+                  <span className="text-amber-400/60">•</span>
                   <span>Veo 3 / Runway</span>
-                  <span className="text-stone-300 dark:text-stone-700">•</span>
-                  <span>SQL</span>
+                  <span className="text-amber-400/60">•</span>
+                  <span>FastAPI &amp; SQL</span>
                 </div>
 
                 {/* Action Buttons (hidden on print) */}
@@ -307,7 +320,7 @@ export default function App() {
                     href="#projects"
                     id="hero-btn-work"
                     data-cursor-text="WORK"
-                    className="inline-flex items-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 font-mono font-semibold text-xs tracking-wider uppercase px-6 py-3 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer border border-stone-900 dark:border-white"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 hover:from-amber-500 hover:via-orange-500 hover:to-amber-600 active:from-amber-700 active:to-orange-700 text-white font-mono font-semibold text-xs tracking-wider uppercase px-6 py-3 rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(234,88,12,0.3)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.45)] hover:scale-105 active:scale-95 cursor-pointer border border-amber-500/40"
                   >
                     <span>Explore Projects &amp; Code</span>
                     <ArrowDown className="w-3.5 h-3.5" />
@@ -317,9 +330,9 @@ export default function App() {
                     href="#ai-videos"
                     id="hero-btn-videos"
                     data-cursor-text="REEL"
-                    className="inline-flex items-center gap-2 bg-stone-100 dark:bg-[#151413] hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500 font-mono font-medium text-xs tracking-wider uppercase px-5 py-3 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs"
+                    className="inline-flex items-center gap-2 bg-white/80 dark:bg-[#1a1714] hover:bg-amber-50 dark:hover:bg-[#25201b] text-stone-800 dark:text-stone-200 border border-amber-900/15 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 font-mono font-medium text-xs tracking-wider uppercase px-5 py-3 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs"
                   >
-                    <Film className="w-3.5 h-3.5 text-stone-500 dark:text-stone-400" />
+                    <Film className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
                     <span>AI Video Reel</span>
                   </a>
 
@@ -327,7 +340,7 @@ export default function App() {
                     href="#contact"
                     id="hero-btn-talk"
                     data-cursor-text="TALK"
-                    className="inline-flex items-center gap-1.5 text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white font-mono font-medium text-xs tracking-wider uppercase px-4 py-3 rounded-full hover:bg-stone-100 dark:hover:bg-stone-850 transition-all duration-200 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-stone-700 dark:text-stone-300 hover:text-amber-800 dark:hover:text-amber-300 font-mono font-medium text-xs tracking-wider uppercase px-4 py-3 rounded-full hover:bg-amber-500/10 dark:hover:bg-amber-500/10 transition-all duration-200 cursor-pointer"
                   >
                     <span>Contact</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -335,12 +348,12 @@ export default function App() {
                 </div>
 
                 {/* Focus Lens Track Switcher (hidden on print) */}
-                <div className="pt-3 border-t border-stone-200/60 dark:border-stone-800/60 print:hidden">
+                <div className="pt-3 border-t border-amber-900/10 dark:border-amber-500/15 print:hidden">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[11px] font-mono text-stone-500 dark:text-stone-400 uppercase tracking-wider font-medium">
+                    <span className="text-[11px] font-mono text-amber-900/70 dark:text-amber-400/70 uppercase tracking-wider font-medium">
                       Focus View:
                     </span>
-                    <div className="inline-flex p-1 rounded-lg bg-stone-200/70 dark:bg-stone-900 border border-stone-300/70 dark:border-stone-800 text-xs font-mono">
+                    <div className="inline-flex p-1 rounded-lg bg-amber-500/10 dark:bg-[#1c1815] border border-amber-500/20 dark:border-amber-500/20 text-xs font-mono">
                       <button
                         type="button"
                         onClick={() => {
@@ -349,8 +362,8 @@ export default function App() {
                         }}
                         className={`px-3 py-1 rounded-md font-medium transition-all cursor-pointer ${
                           activeTrack === 'all'
-                            ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                            ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-xs font-semibold'
+                            : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200'
                         }`}
                       >
                         All Work
@@ -365,11 +378,11 @@ export default function App() {
                         }}
                         className={`px-3 py-1 rounded-md font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
                           activeTrack === 'data'
-                            ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                            ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-xs font-semibold'
+                            : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200'
                         }`}
                       >
-                        <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                        <Terminal className="w-3.5 h-3.5" />
                         <span>Data Science &amp; Python</span>
                       </button>
                       <button
@@ -381,11 +394,11 @@ export default function App() {
                         }}
                         className={`px-3 py-1 rounded-md font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
                           activeTrack === 'ai-media'
-                            ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                            ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-xs font-semibold'
+                            : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200'
                         }`}
                       >
-                        <Film className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                        <Film className="w-3.5 h-3.5" />
                         <span>AI Video Direction</span>
                       </button>
                     </div>
@@ -400,10 +413,10 @@ export default function App() {
             </div>
 
             {/* Executive Highlights & Value Delivery Matrix */}
-            <div className="mt-12 pt-8 border-t border-stone-200/70 dark:border-stone-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
-                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
-                  <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <div className="mt-12 pt-8 border-t border-amber-900/10 dark:border-amber-500/15 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
+                <div className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400 text-xs font-mono mb-1">
+                  <Award className="w-3.5 h-3.5" />
                   <span>Certifications</span>
                 </div>
                 <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
@@ -414,9 +427,9 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
-                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
-                  <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
+                <div className="flex items-center gap-1.5 text-orange-600 dark:text-orange-400 text-xs font-mono mb-1">
+                  <Terminal className="w-3.5 h-3.5" />
                   <span>Production ML &amp; API</span>
                 </div>
                 <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
@@ -427,9 +440,9 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
-                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
-                  <Film className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
+              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
+                <div className="flex items-center gap-1.5 text-rose-600 dark:text-rose-400 text-xs font-mono mb-1">
+                  <Film className="w-3.5 h-3.5" />
                   <span>AI Video Direction</span>
                 </div>
                 <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
@@ -440,9 +453,9 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="bg-white/70 dark:bg-stone-900/60 p-3.5 rounded-lg border border-stone-200/80 dark:border-stone-800 shadow-xs">
-                <div className="flex items-center gap-1.5 text-stone-500 dark:text-stone-400 text-xs font-mono mb-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
+                <div className="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 text-xs font-mono mb-1">
+                  <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Engineering Rigor</span>
                 </div>
                 <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
@@ -455,20 +468,20 @@ export default function App() {
             </div>
 
             {/* Montoya-Inspired Hero Footer Bar */}
-            <div className="mt-12 pt-6 border-t border-stone-200/80 dark:border-white/10 flex flex-wrap items-center justify-between gap-4 print:hidden">
+            <div className="mt-12 pt-6 border-t border-amber-900/10 dark:border-amber-500/15 flex flex-wrap items-center justify-between gap-4 print:hidden">
               <a
                 href="#projects"
                 data-cursor-text="SCROLL"
-                className="group inline-flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white transition-colors"
+                className="group inline-flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-stone-600 dark:text-stone-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors"
               >
-                <span className="w-8 h-8 rounded-full border border-stone-300 dark:border-stone-700 flex items-center justify-center group-hover:border-stone-900 dark:group-hover:border-white group-hover:scale-110 transition-all">
-                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
+                <span className="w-8 h-8 rounded-full border border-amber-900/20 dark:border-amber-500/30 flex items-center justify-center group-hover:border-amber-600 dark:group-hover:border-amber-400 group-hover:scale-110 transition-all">
+                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-amber-600 dark:text-amber-400" />
                 </span>
                 <span className="font-semibold">Scroll to Explore</span>
               </a>
 
               <div className="flex items-center gap-2 text-xs font-mono text-stone-500 dark:text-stone-400">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
                 <span className="tracking-wider uppercase">Featured Works • Machine Learning &amp; AI Systems</span>
               </div>
             </div>
@@ -479,9 +492,9 @@ export default function App() {
         <SkillsMarquee />
 
         {/* =========================================================================
-            2. ABOUT SECTION
+            2. ABOUT SECTION (Warm Earth & Linen Surfaces)
            ========================================================================= */}
-        <section id="about" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-[#f8f8f5] dark:bg-[#0c0c0f] transition-colors">
+        <section id="about" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#f6f2ea] dark:bg-[#181512] transition-colors">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -493,7 +506,7 @@ export default function App() {
               {/* Left Column: Background, Education & Principles */}
               <div className="lg:col-span-7 space-y-6">
                 <div>
-                  <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
+                  <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
                     Background &amp; Approach
                   </span>
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-6">
@@ -514,10 +527,10 @@ export default function App() {
                 </div>
 
                 {/* Pragmatic Working Principles */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 mt-6 border-t border-stone-300/80 dark:border-white/[0.08]">
-                  <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 mt-6 border-t border-amber-900/10 dark:border-amber-500/15">
+                  <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300 group">
                     <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                       <span>Clean Data First</span>
                     </div>
                     <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
@@ -525,9 +538,9 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300">
+                  <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300 group">
                     <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                       <span>Explainable Insights</span>
                     </div>
                     <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
@@ -535,9 +548,9 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300">
+                  <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300 group">
                     <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                       <span>Code Hygiene</span>
                     </div>
                     <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
@@ -549,8 +562,8 @@ export default function App() {
 
               {/* Right Column: Visual Portrait Card */}
               <div className="lg:col-span-5 pt-2">
-                <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-2xl p-4 sm:p-5 shadow-sm transition-all duration-300">
-                  <div className="relative aspect-[4/4.8] sm:aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-950 border border-stone-200/80 dark:border-white/[0.08]">
+                <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 dark:hover:border-amber-400/40 rounded-2xl p-4 sm:p-5 shadow-sm transition-all duration-300">
+                  <div className="relative aspect-[4/4.8] sm:aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 dark:bg-[#141210] border border-amber-900/10 dark:border-amber-500/20 shadow-inner">
                     <img
                       src={activeConfig.avatarUrl || '/images/opeyemi picture.png'}
                       alt={config.name}
@@ -567,24 +580,24 @@ export default function App() {
                         }
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent pointer-events-none" />
 
                     <div className="absolute bottom-4 left-4 right-4 text-white">
                       <div className="text-lg font-display font-bold tracking-tight">{config.name}</div>
-                      <div className="text-xs font-mono text-stone-200 mt-0.5">B.Sc. Computer Science • O.O.U</div>
-                      <div className="text-[11px] text-emerald-300 font-mono mt-1.5 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
+                      <div className="text-xs font-mono text-amber-200/90 mt-0.5">B.Sc. Computer Science • O.O.U</div>
+                      <div className="text-[11px] text-amber-300 font-mono mt-1.5 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 inline-block animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
                         <span>Data Scientist &amp; AI Video Creator</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-stone-100 dark:border-white/[0.08] flex items-center justify-between text-xs font-mono text-stone-600 dark:text-stone-400 px-1">
+                  <div className="mt-4 pt-3 border-t border-amber-900/10 dark:border-amber-500/20 flex items-center justify-between text-xs font-mono text-stone-600 dark:text-stone-400 px-1">
                     <div className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-stone-400" />
+                      <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                       <span>{config.location}</span>
                     </div>
-                    <span className="text-emerald-700 dark:text-emerald-400 font-medium">Remote &amp; Relocation Ready</span>
+                    <span className="text-amber-700 dark:text-amber-400 font-medium">Remote &amp; Relocation Ready</span>
                   </div>
                 </div>
               </div>
@@ -595,7 +608,7 @@ export default function App() {
         {/* =========================================================================
             3. SKILLS SECTION
            ========================================================================= */}
-        <section id="skills" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-white dark:bg-[#09090b] transition-colors">
+        <section id="skills" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#fbf8f3] dark:bg-[#141210] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 28 }}
@@ -604,7 +617,7 @@ export default function App() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-2xl mb-12"
             >
-              <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
+              <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
                 Technical Capabilities
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
@@ -625,12 +638,12 @@ export default function App() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.5, delay: catIdx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-[#fafaf8] dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-2xl p-6 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
+                  className="bg-white/90 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 dark:hover:border-amber-400/40 rounded-2xl p-6 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100 tracking-tight font-mono uppercase mb-2 flex items-center justify-between">
-                      <span className="group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{cat.title}</span>
-                      <span className="text-[10px] text-stone-400 dark:text-stone-500 font-mono">
+                      <span className="group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">{cat.title}</span>
+                      <span className="text-[10px] text-amber-900/60 dark:text-amber-400/60 font-mono">
                         {cat.skills.length} items
                       </span>
                     </h3>
@@ -639,11 +652,11 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-stone-200/60 dark:border-white/[0.06]">
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-amber-900/10 dark:border-amber-500/15">
                     {cat.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="inline-flex items-center text-xs font-mono bg-white dark:bg-white/[0.05] hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-700 dark:hover:text-emerald-300 text-stone-800 dark:text-stone-200 px-2.5 py-1 rounded-lg border border-stone-200/80 dark:border-white/[0.08] transition-all duration-200 shadow-2xs"
+                        className="inline-flex items-center text-xs font-mono bg-[#fdfbf7] dark:bg-[#201c18] hover:bg-amber-500/15 hover:border-amber-500/40 hover:text-amber-900 dark:hover:text-amber-200 text-stone-800 dark:text-stone-200 px-2.5 py-1 rounded-lg border border-amber-900/10 dark:border-amber-500/20 transition-all duration-200 shadow-2xs"
                       >
                         {skill}
                       </span>
@@ -658,7 +671,7 @@ export default function App() {
         {/* =========================================================================
             4. FEATURED PROJECTS
            ========================================================================= */}
-        <section id="projects" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-[#f8f8f5] dark:bg-[#0c0c0f] transition-colors">
+        <section id="projects" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#f6f2ea] dark:bg-[#181512] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 28 }}
@@ -667,7 +680,7 @@ export default function App() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-2xl mb-12"
             >
-              <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
+              <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
                 Engineering &amp; Code
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
@@ -681,7 +694,7 @@ export default function App() {
             {/* Project Showcase Controls (Category Filters & Live Search) (hidden on print) */}
             <div className="mb-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 print:hidden">
               {/* Category Pills */}
-              <div className="flex flex-wrap items-center gap-1.5 bg-stone-200/60 dark:bg-[#141418] p-1.5 rounded-full border border-stone-300/60 dark:border-white/[0.08] text-xs font-mono">
+              <div className="flex flex-wrap items-center gap-1.5 bg-amber-500/10 dark:bg-[#1c1815] p-1.5 rounded-full border border-amber-500/20 dark:border-amber-500/20 text-xs font-mono">
                 {[
                   { id: 'all', label: 'All Projects', count: allProjects.length },
                   {
@@ -725,16 +738,16 @@ export default function App() {
                       data-cursor-text="VIEW"
                       className={`px-3.5 py-1.5 rounded-full font-medium transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
                         isActive
-                          ? 'bg-stone-900 text-white dark:bg-emerald-400 dark:text-stone-950 font-semibold shadow-xs'
-                          : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
+                          ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold shadow-xs'
+                          : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200 hover:bg-amber-500/10'
                       }`}
                     >
                       <span>{tab.label}</span>
                       <span
                         className={`text-[10px] px-1.5 py-0.2 rounded-full ${
                           isActive
-                            ? 'bg-white/20 dark:bg-black/20 text-current'
-                            : 'bg-stone-300/60 dark:bg-white/[0.08] text-stone-500 dark:text-stone-400'
+                            ? 'bg-white/25 text-current'
+                            : 'bg-amber-900/10 dark:bg-white/10 text-stone-600 dark:text-stone-300'
                         }`}
                       >
                         {tab.count}
@@ -746,13 +759,13 @@ export default function App() {
 
               {/* Search Bar */}
               <div className="relative min-w-[240px] sm:w-72">
-                <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-4 h-4 text-amber-700/60 dark:text-amber-400/60 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={projectSearch}
                   onChange={(e) => setProjectSearch(e.target.value)}
                   placeholder="Filter by tech or keyword..."
-                  className="w-full pl-9 pr-8 py-2 text-xs font-mono bg-white dark:bg-[#141418] border border-stone-200/90 dark:border-white/[0.08] rounded-full text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 shadow-2xs"
+                  className="w-full pl-9 pr-8 py-2 text-xs font-mono bg-white/90 dark:bg-[#1c1815] border border-amber-900/15 dark:border-amber-500/20 rounded-full text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 shadow-2xs"
                 />
                 {projectSearch && (
                   <button
@@ -779,7 +792,7 @@ export default function App() {
                     setProjectFilter('all');
                     setProjectSearch('');
                   }}
-                  className="text-stone-900 dark:text-stone-200 underline hover:no-underline cursor-pointer"
+                  className="text-amber-800 dark:text-amber-300 underline hover:no-underline cursor-pointer"
                 >
                   Reset all filters
                 </button>
@@ -790,8 +803,8 @@ export default function App() {
             {filteredProjects.length > 0 && (
               <div className="mb-6 flex flex-wrap items-center justify-between gap-4 print:hidden">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-[#141418] border border-stone-200/80 dark:border-white/[0.08]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-stone-700 dark:text-stone-300 bg-amber-500/10 dark:bg-[#1c1815] border border-amber-500/20 dark:border-amber-500/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shadow-[0_0_6px_rgba(245,158,11,0.8)]" />
                     <span>Scroll or swipe left-to-right</span>
                   </span>
                   <span className="text-xs font-mono text-stone-500 dark:text-stone-400">
@@ -806,7 +819,7 @@ export default function App() {
                     disabled={!canScrollProjectsLeft}
                     data-cursor-text="PREV"
                     aria-label="Previous project"
-                    className="w-9 h-9 rounded-full bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
+                    className="w-9 h-9 rounded-full bg-white dark:bg-[#1a1714] border border-amber-900/15 dark:border-amber-500/20 hover:border-amber-500/50 text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200 flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
@@ -816,7 +829,7 @@ export default function App() {
                     disabled={!canScrollProjectsRight}
                     data-cursor-text="NEXT"
                     aria-label="Next project"
-                    className="w-9 h-9 rounded-full bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
+                    className="w-9 h-9 rounded-full bg-white dark:bg-[#1a1714] border border-amber-900/15 dark:border-amber-500/20 hover:border-amber-500/50 text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200 flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -826,8 +839,8 @@ export default function App() {
 
             {/* Project Showcase List - Horizontal Reel */}
             {filteredProjects.length === 0 ? (
-              <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-12 text-center my-10">
-                <Search className="w-8 h-8 text-stone-400 mx-auto mb-3" />
+              <div className="bg-white/90 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-xl p-12 text-center my-10">
+                <Search className="w-8 h-8 text-amber-500/60 mx-auto mb-3" />
                 <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 mb-1">
                   No matching projects found
                 </h3>
@@ -840,7 +853,7 @@ export default function App() {
                     setProjectFilter('all');
                     setProjectSearch('');
                   }}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 text-xs font-medium cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-600 to-orange-600 text-white text-xs font-medium cursor-pointer shadow-xs"
                 >
                   View All Projects
                 </button>
@@ -876,8 +889,8 @@ export default function App() {
                       data-cursor-text={`${dotIdx + 1}`}
                       className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                         dotIdx === activeProjectIndex
-                          ? 'w-8 bg-stone-900 dark:bg-emerald-400'
-                          : 'w-2 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-500'
+                          ? 'w-8 bg-gradient-to-r from-amber-500 to-orange-500 shadow-xs'
+                          : 'w-2 bg-amber-900/20 dark:bg-amber-400/20 hover:bg-amber-500/50'
                       }`}
                     />
                   ))}
@@ -905,7 +918,7 @@ export default function App() {
         {/* =========================================================================
             6. EXPERIENCE & EDUCATION
            ========================================================================= */}
-        <section id="experience" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-white dark:bg-[#09090b] transition-colors">
+        <section id="experience" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#fbf8f3] dark:bg-[#141210] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 28 }}
@@ -914,7 +927,7 @@ export default function App() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-2xl mb-12"
             >
-              <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
+              <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
                 Timeline
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
@@ -925,7 +938,7 @@ export default function App() {
               </p>
             </motion.div>
 
-            <div className="relative border-l border-stone-200 dark:border-white/[0.08] ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10">
+            <div className="relative border-l-2 border-amber-500/30 dark:border-amber-400/30 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10">
               {experienceItems.map((item, idx) => (
                 <motion.div
                   key={item.id}
@@ -937,32 +950,32 @@ export default function App() {
                   className="relative"
                 >
                   {/* Timeline dot */}
-                  <span className="absolute -left-[31px] sm:-left-[39px] top-2 w-3.5 h-3.5 rounded-full border-2 border-emerald-500 dark:border-emerald-400 bg-white dark:bg-[#09090b] shadow-xs" />
+                  <span className="absolute -left-[32px] sm:-left-[41px] top-2 w-4 h-4 rounded-full border-2 border-amber-500 dark:border-amber-400 bg-white dark:bg-[#141210] shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
 
-                  <div className="bg-[#fafaf8] dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-lg transition-all duration-300 max-w-3xl group">
+                  <div className="bg-white/90 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 dark:hover:border-amber-400/40 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-lg transition-all duration-300 max-w-3xl group">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                       <div className="flex items-center gap-2">
                         {item.category === 'Education' ? (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/60 px-2.5 py-0.5 rounded-md">
-                            <GraduationCap className="w-3.5 h-3.5" />
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-amber-900 dark:text-amber-200 bg-amber-500/15 dark:bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 rounded-md">
+                            <GraduationCap className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                             <span>{item.category}</span>
                           </span>
                         ) : item.id === 'exp-ds' ? (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-teal-800 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800/60 px-2.5 py-0.5 rounded-md">
-                            <Cpu className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-orange-900 dark:text-orange-200 bg-orange-500/15 dark:bg-orange-500/20 border border-orange-500/30 px-2.5 py-0.5 rounded-md">
+                            <Cpu className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
                             <span>Data Science &amp; ML</span>
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-stone-800 dark:text-stone-300 bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-white/[0.08] px-2.5 py-0.5 rounded-md">
-                            <Briefcase className="w-3.5 h-3.5" />
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-amber-900 dark:text-amber-300 bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 px-2.5 py-0.5 rounded-md">
+                            <Briefcase className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
                             <span>{item.category}</span>
                           </span>
                         )}
-                        <h3 className="text-base sm:text-lg font-display font-bold text-stone-900 dark:text-stone-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                        <h3 className="text-base sm:text-lg font-display font-bold text-stone-900 dark:text-stone-100 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                           {item.title}
                         </h3>
                       </div>
-                      <span className="text-xs font-mono text-stone-600 dark:text-stone-400 bg-stone-100 dark:bg-white/[0.05] px-2.5 py-0.5 rounded-md border border-stone-200/80 dark:border-white/[0.08]">
+                      <span className="text-xs font-mono text-stone-600 dark:text-stone-400 bg-[#fdfbf7] dark:bg-[#201c18] px-2.5 py-0.5 rounded-md border border-amber-900/10 dark:border-amber-500/15">
                         {item.period}
                       </span>
                     </div>
@@ -977,8 +990,8 @@ export default function App() {
                       {item.description}
                     </p>
 
-                    <div className="pt-3 border-t border-stone-200/60 dark:border-white/[0.06] space-y-1.5">
-                      <div className="text-xs font-mono text-stone-500 dark:text-stone-400 uppercase font-medium mb-1">
+                    <div className="pt-3 border-t border-amber-900/10 dark:border-amber-500/15 space-y-1.5">
+                      <div className="text-xs font-mono text-amber-900/70 dark:text-amber-400/70 uppercase font-medium mb-1">
                         Key Focus &amp; Responsibilities:
                       </div>
                       <ul className="space-y-1 text-xs text-stone-600 dark:text-stone-400 list-disc list-inside">
@@ -1019,15 +1032,16 @@ export default function App() {
       {/* =========================================================================
           8. FOOTER
          ========================================================================= */}
-      <footer id="site-footer" className="bg-[#121214] text-stone-400 py-12 border-t border-stone-800 text-xs">
+      <footer id="site-footer" className="bg-[#14110e] text-stone-400 py-12 border-t border-amber-900/25 text-xs">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-stone-800">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-amber-900/20">
             <div>
-              <div className="text-sm font-bold text-stone-100 font-mono tracking-tight">
-                {config.name}
+              <div className="text-sm font-bold text-stone-100 font-mono tracking-tight flex items-center gap-2">
+                <span>{config.name}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
               </div>
               <div className="text-stone-400 mt-0.5">
-                Data Scientist • Python Developer
+                Data Scientist • Python &amp; Backend Developer • AI Video Creator
               </div>
             </div>
 
@@ -1038,9 +1052,9 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
                 id="footer-link-github"
-                className="hover:text-stone-200 transition-colors flex items-center gap-1.5"
+                className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
               >
-                <Github className="w-3.5 h-3.5" />
+                <Github className="w-3.5 h-3.5 text-amber-500/80" />
                 <span>GitHub</span>
               </a>
 
@@ -1049,18 +1063,18 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
                 id="footer-link-linkedin"
-                className="hover:text-stone-200 transition-colors flex items-center gap-1.5"
+                className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
               >
-                <Linkedin className="w-3.5 h-3.5" />
+                <Linkedin className="w-3.5 h-3.5 text-amber-500/80" />
                 <span>LinkedIn</span>
               </a>
 
               <a
                 href={`mailto:${config.email}`}
                 id="footer-link-email"
-                className="hover:text-stone-200 transition-colors flex items-center gap-1.5"
+                className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
               >
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-3.5 h-3.5 text-amber-500/80" />
                 <span>Email</span>
               </a>
             </div>
@@ -1070,7 +1084,7 @@ export default function App() {
             <div>
               <span>&copy; 2026 {config.name}. All rights reserved.</span>
             </div>
-            <div className="text-stone-500">
+            <div className="text-amber-500/80">
               Data Science • Python Development • Generative Media
             </div>
           </div>

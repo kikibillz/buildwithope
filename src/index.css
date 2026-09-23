@@ -1,90 +1,216 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "../src";
+@source "../index.html";
+@import "tw-animate-css";
 
-@variant dark (&:where(.dark, .dark *));
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Archivo Black", sans-serif;
+  --font-mono: "Space Mono", monospace;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-status: var(--status);
+  --color-status-foreground: var(--status-foreground);
+  --color-project-one: var(--project-one);
+  --color-project-two: var(--project-two);
+  --color-project-three: var(--project-three);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.985 0.008 92);
+  --foreground: oklch(0.19 0.025 255);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.025 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.19 0.025 255);
+  --primary: oklch(0.64 0.23 31);
+  --primary-foreground: oklch(0.99 0.005 90);
+  --secondary: oklch(0.78 0.13 205);
+  --secondary-foreground: oklch(0.18 0.035 230);
+  --muted: oklch(0.94 0.012 90);
+  --muted-foreground: oklch(0.47 0.025 255);
+  --accent: oklch(0.71 0.17 339);
+  --accent-foreground: oklch(0.16 0.03 335);
+  --highlight: oklch(0.9 0.18 99);
+  --highlight-foreground: oklch(0.22 0.04 85);
+  --status: oklch(0.87 0.12 155);
+  --status-foreground: oklch(0.25 0.08 155);
+  --project-one: oklch(0.9 0.18 99);
+  --project-two: oklch(0.83 0.12 206);
+  --project-three: oklch(0.84 0.13 342);
+  --destructive: oklch(0.58 0.24 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.83 0.015 255);
+  --input: oklch(0.89 0.015 255);
+  --ring: oklch(0.64 0.23 31);
+  --shadow-button: 4px 4px 0 oklch(0.19 0.025 255);
+}
+
+.dark {
+  --background: oklch(0.14 0.02 255);
+  --foreground: oklch(0.985 0.008 92);
+  --card: oklch(0.18 0.025 255);
+  --card-foreground: oklch(0.985 0.008 92);
+  --popover: oklch(0.18 0.025 255);
+  --popover-foreground: oklch(0.985 0.008 92);
+  --muted: oklch(0.22 0.025 255);
+  --muted-foreground: oklch(0.72 0.015 90);
+  --border: oklch(0.30 0.025 255);
+  --input: oklch(0.28 0.025 255);
+  --shadow-button: 4px 4px 0 oklch(0 0 0);
+}
 
 @layer base {
-  html {
-    font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: #faf9f6;
-  }
-
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
   body {
-    background-color: #faf9f6;
-    color: #1c1917;
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+  ::selection { background: var(--color-highlight); color: var(--color-highlight-foreground); }
+  a { text-decoration: none; }
+}
 
-  html.dark {
-    color-scheme: dark;
-    background-color: #09090b;
+@utility nav-link {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -0.35rem;
+    left: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 180ms ease;
   }
+  &:hover::after { transform: scaleX(1); transform-origin: left; }
+}
 
-  html.dark body {
-    background-color: #09090b;
-    color: #f4f4f5;
+@utility marquee {
+  overflow: hidden;
+}
+
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+
+@utility project-row {
+  transition: padding 220ms ease, background-color 220ms ease;
+  &:hover { background: color-mix(in oklab, var(--color-foreground) 3%, transparent); }
+}
+
+/* Neo-Brutalist Hard Offset Shadows */
+@utility shadow-brutal {
+  box-shadow: 4px 4px 0 var(--color-foreground);
+}
+
+@utility shadow-brutal-sm {
+  box-shadow: 2px 2px 0 var(--color-foreground);
+}
+
+@utility shadow-brutal-lg {
+  box-shadow: 6px 6px 0 var(--color-foreground);
+}
+
+@utility shadow-brutal-coral {
+  box-shadow: 4px 4px 0 var(--color-primary);
+}
+
+@utility shadow-brutal-cyan {
+  box-shadow: 4px 4px 0 var(--color-secondary);
+}
+
+@utility shadow-brutal-pink {
+  box-shadow: 4px 4px 0 var(--color-accent);
+}
+
+@utility shadow-brutal-yellow {
+  box-shadow: 4px 4px 0 var(--color-highlight);
+}
+
+@utility brutal-btn {
+  box-shadow: 4px 4px 0 var(--color-foreground);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+  border: 2px solid var(--color-foreground);
+  border-radius: var(--radius);
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-foreground);
   }
-
-  code, kbd, samp, pre, .font-mono {
-    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-foreground);
   }
+}
 
-  .font-display {
-    font-family: "Poppins", "Plus Jakarta Sans", sans-serif;
-  }
-
-  ::selection {
-    background: #10b981;
-    color: #ffffff;
-  }
-
-  html.dark ::selection {
-    background: #059669;
-    color: #ffffff;
+@utility brutal-card {
+  border: 2px solid var(--color-foreground);
+  box-shadow: 4px 4px 0 var(--color-foreground);
+  border-radius: var(--radius);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-foreground);
   }
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 32s linear infinite;
+  to { transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
-  }
+  html { scroll-behavior: auto; }
+  .marquee-track { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
 }
 
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f5f5f4;
-}
-html.dark ::-webkit-scrollbar-track {
-  background: #18181b;
+  background: var(--color-muted);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d6d3d1;
-  border-radius: 9999px;
-}
-html.dark ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
+  background: var(--color-border);
+  border-radius: var(--radius);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a29e;
-}
-html.dark ::-webkit-scrollbar-thumb:hover {
-  background: #71717a;
+  background: var(--color-foreground);
 }
 
 /* =========================================================================
@@ -103,8 +229,8 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     background-image: none !important;
     box-shadow: none !important;
     text-shadow: none !important;
-    color: #1c1917 !important;
-    border-color: #e7e5e4 !important;
+    color: #0c141f !important;
+    border-color: #d6d3d1 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -112,7 +238,7 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   html,
   body {
     background: #ffffff !important;
-    color: #1c1917 !important;
+    color: #0c141f !important;
     font-size: 10pt !important;
     line-height: 1.45 !important;
     margin: 0 !important;
@@ -120,7 +246,7 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     width: 100% !important;
   }
 
-  /* 1. Hide interactive chrome and navigation */
+  /* Hide interactive chrome and navigation */
   #main-navbar,
   nav,
   header#site-header,
@@ -149,7 +275,6 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     display: none !important;
   }
 
-  /* 2. Un-hide elements designed exclusively for print */
   .print-only,
   .print\:block {
     display: block !important;
@@ -161,7 +286,6 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     display: grid !important;
   }
 
-  /* 3. Layout normalization */
   main,
   section,
   article,
@@ -176,11 +300,10 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     border-bottom: 1pt solid #e7e5e4 !important;
   }
 
-  /* 4. Page Break Discipline: Avoid awkward splits across pages */
   h1, h2, h3, h4, h5, h6 {
     break-after: avoid !important;
     page-break-after: avoid !important;
-    color: #0c0a09 !important;
+    color: #0c141f !important;
     font-weight: 700 !important;
   }
 
@@ -200,21 +323,18 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     margin-bottom: 12pt !important;
   }
 
-  /* Clean up project card borders & padding for printed document */
   [id^="project-card-"] {
     border: 1pt solid #d6d3d1 !important;
-    border-radius: 6pt !important;
+    border-radius: 4px !important;
     padding: 10pt !important;
     box-shadow: none !important;
   }
 
-  /* 5. Typography and Links */
   a {
     text-decoration: none !important;
-    color: #1c1917 !important;
+    color: #0c141f !important;
   }
 
-  /* Display clean repository URLs in print */
   .print-show-url::after {
     content: " (" attr(href) ")";
     font-size: 8pt;
@@ -222,7 +342,6 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     font-weight: normal;
   }
 
-  /* Ensure badges and tags are cleanly boxed */
   span.rounded,
   span.rounded-md,
   span.rounded-full {
@@ -232,7 +351,6 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     background: #f5f5f4 !important;
   }
 
-  /* Image constraints for PDF page limits */
   img {
     max-height: 160pt !important;
     object-fit: cover !important;

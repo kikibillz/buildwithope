@@ -61,10 +61,10 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
   return (
     <header
       id="site-header"
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
         isScrolled
-          ? 'bg-[#fafaf9]/90 dark:bg-[#0c0a09]/90 backdrop-blur-xl border-b border-stone-200/80 dark:border-white/10 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_25px_rgba(0,0,0,0.4)]'
-          : 'bg-transparent py-4 sm:py-5'
+          ? 'bg-background/95 backdrop-blur-md border-b-2 border-foreground py-2.5 shadow-sm'
+          : 'bg-background/80 backdrop-blur-xs py-3.5 sm:py-4 border-b border-border'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -73,16 +73,16 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
           href="#"
           id="nav-brand"
           data-cursor-text="HOME"
-          className="group flex items-center gap-2.5 text-stone-900 dark:text-stone-100 font-display font-bold tracking-tight text-base py-1"
+          className="group flex items-center gap-2.5 text-foreground font-display font-black tracking-tight text-base py-1"
         >
           {/* Architectural Graphic Logo Emblem */}
-          <div className="w-8 h-8 rounded-lg bg-stone-950 dark:bg-stone-100 text-stone-100 dark:text-stone-950 flex items-center justify-center font-mono font-bold text-xs shadow-xs border border-stone-800 dark:border-stone-200 shrink-0 group-hover:scale-105 transition-transform duration-300">
+          <div className="w-8 h-8 rounded-sm bg-primary text-primary-foreground flex items-center justify-center font-mono font-black text-xs border-2 border-foreground shadow-brutal-sm shrink-0 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform duration-150">
             <svg
-              className="w-4 h-4 text-emerald-400 dark:text-emerald-700"
+              className="w-4 h-4 text-white"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.2"
+              strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
@@ -92,13 +92,13 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
             </svg>
           </div>
           <AnimatedName name={config.name} variant="nav" />
-          <span className="text-stone-400 dark:text-stone-500 text-xs hidden sm:inline-block font-mono border-l border-stone-300 dark:border-stone-800 pl-2 tracking-widest uppercase">
+          <span className="text-muted-foreground text-xs hidden sm:inline-block font-mono border-l-2 border-foreground/30 pl-2 tracking-widest uppercase font-bold">
             portfolio
           </span>
         </a>
 
         {/* Desktop Navigation */}
-        <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center gap-1">
+        <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center gap-2">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.substring(1);
             return (
@@ -106,10 +106,10 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
                 key={link.href}
                 href={link.href}
                 id={`nav-link-${link.href.substring(1)}`}
-                className={`relative px-3 py-1.5 text-xs font-mono tracking-wider uppercase transition-all duration-200 rounded-md ${
+                className={`nav-link px-2.5 py-1 text-xs font-mono tracking-wider uppercase transition-colors ${
                   isActive
-                    ? 'text-stone-950 dark:text-stone-100 font-semibold bg-stone-200/70 dark:bg-stone-800/80 shadow-2xs'
-                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100 hover:bg-stone-100/80 dark:hover:bg-stone-800/50'
+                    ? 'text-primary font-bold'
+                    : 'text-foreground/80 hover:text-foreground font-semibold'
                 }`}
               >
                 {link.label}
@@ -125,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
             href="#contact"
             id="nav-cta-talk"
             data-cursor-text="TALK"
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold tracking-wider uppercase text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white px-5 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer border border-stone-900 dark:border-white"
+            className="brutal-btn inline-flex items-center gap-1.5 text-xs font-mono font-bold tracking-wider uppercase bg-primary text-primary-foreground px-4 py-2 cursor-pointer"
           >
             <span>Let&apos;s Talk</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
