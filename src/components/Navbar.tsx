@@ -61,9 +61,9 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
   return (
     <header
       id="site-header"
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#fafaf9]/95 dark:bg-[#121214]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-stone-800 py-2.5 sm:py-3 shadow-[0_1px_3px_rgba(0,0,0,0.02)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.3)]'
+          ? 'bg-[#fafaf9]/90 dark:bg-[#0c0a09]/90 backdrop-blur-xl border-b border-stone-200/80 dark:border-white/10 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_25px_rgba(0,0,0,0.4)]'
           : 'bg-transparent py-4 sm:py-5'
       }`}
     >
@@ -72,10 +72,11 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
         <a
           href="#"
           id="nav-brand"
-          className="group flex items-center gap-2.5 text-stone-900 dark:text-stone-100 font-semibold tracking-tight text-base py-1"
+          data-cursor-text="HOME"
+          className="group flex items-center gap-2.5 text-stone-900 dark:text-stone-100 font-display font-bold tracking-tight text-base py-1"
         >
           {/* Architectural Graphic Logo Emblem */}
-          <div className="w-8 h-8 rounded-lg bg-stone-900 dark:bg-stone-100 text-stone-100 dark:text-stone-900 flex items-center justify-center font-mono font-bold text-xs shadow-xs border border-stone-800 dark:border-stone-300 shrink-0 group-hover:scale-105 transition-transform">
+          <div className="w-8 h-8 rounded-lg bg-stone-950 dark:bg-stone-100 text-stone-100 dark:text-stone-950 flex items-center justify-center font-mono font-bold text-xs shadow-xs border border-stone-800 dark:border-stone-200 shrink-0 group-hover:scale-105 transition-transform duration-300">
             <svg
               className="w-4 h-4 text-emerald-400 dark:text-emerald-700"
               viewBox="0 0 24 24"
@@ -91,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
             </svg>
           </div>
           <AnimatedName name={config.name} variant="nav" />
-          <span className="text-stone-400 dark:text-stone-500 text-xs hidden sm:inline-block font-mono border-l border-stone-300 dark:border-stone-700 pl-2">
+          <span className="text-stone-400 dark:text-stone-500 text-xs hidden sm:inline-block font-mono border-l border-stone-300 dark:border-stone-800 pl-2 tracking-widest uppercase">
             portfolio
           </span>
         </a>
@@ -105,10 +106,10 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
                 key={link.href}
                 href={link.href}
                 id={`nav-link-${link.href.substring(1)}`}
-                className={`px-2.5 lg:px-3 py-1.5 text-xs lg:text-sm rounded-md transition-colors ${
+                className={`relative px-3 py-1.5 text-xs font-mono tracking-wider uppercase transition-all duration-200 rounded-md ${
                   isActive
-                    ? 'text-stone-950 dark:text-stone-100 font-medium bg-stone-200/60 dark:bg-stone-800'
-                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/60'
+                    ? 'text-stone-950 dark:text-stone-100 font-semibold bg-stone-200/70 dark:bg-stone-800/80 shadow-2xs'
+                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100 hover:bg-stone-100/80 dark:hover:bg-stone-800/50'
                 }`}
               >
                 {link.label}
@@ -118,12 +119,13 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
         </nav>
 
         {/* Desktop Action & Theme Toggle */}
-        <div className="hidden md:flex items-center gap-2.5">
+        <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <a
             href="#contact"
             id="nav-cta-talk"
-            className="inline-flex items-center gap-1 text-sm font-medium text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white px-4 py-1.5 rounded-md transition-colors shadow-2xs cursor-pointer"
+            data-cursor-text="TALK"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold tracking-wider uppercase text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white px-5 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer border border-stone-900 dark:border-white"
           >
             <span>Let&apos;s Talk</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -137,6 +139,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
             type="button"
+            data-cursor-text="MENU"
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
             className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer"

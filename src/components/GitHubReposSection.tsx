@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import {
   Github,
   ExternalLink,
@@ -182,17 +183,23 @@ export const GitHubReposSection: React.FC = () => {
   });
 
   return (
-    <div id="repositories" className="mt-14 pt-10 border-t border-stone-200 dark:border-stone-800">
+    <div id="repositories" className="mt-14 pt-10 border-t border-stone-200/80 dark:border-white/[0.08]">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6"
+      >
         <div>
-          <span className="text-xs font-mono font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wider block mb-1">
+          <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-1">
             Open Source Codebases
           </span>
-          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
+          <h3 className="text-xl sm:text-2xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100">
             Repositories &amp; Code
           </h3>
-          <p className="text-sm text-stone-600 dark:text-stone-300 mt-1 max-w-xl">
+          <p className="text-sm text-stone-600 dark:text-stone-400 mt-1 max-w-xl">
             Machine learning models, exploratory data pipelines, web platforms, and developer utilities on GitHub.
           </p>
         </div>
@@ -200,13 +207,14 @@ export const GitHubReposSection: React.FC = () => {
         {/* View Mode & Filter Controls */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Visual / Compact Switcher */}
-          <div className="inline-flex items-center bg-stone-100 dark:bg-stone-900 p-0.5 rounded-lg border border-stone-200 dark:border-stone-800 text-xs">
+          <div className="inline-flex items-center bg-stone-200/60 dark:bg-[#141418] p-1 rounded-full border border-stone-300/60 dark:border-white/[0.08] text-xs">
             <button
               onClick={() => setViewMode('visual')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all font-medium ${
+              data-cursor-text="GRID"
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full transition-all font-medium cursor-pointer ${
                 viewMode === 'visual'
-                  ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+                  ? 'bg-stone-900 text-white dark:bg-emerald-400 dark:text-stone-950 font-semibold shadow-xs'
+                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
               }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
@@ -214,10 +222,11 @@ export const GitHubReposSection: React.FC = () => {
             </button>
             <button
               onClick={() => setViewMode('compact')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all font-medium ${
+              data-cursor-text="LIST"
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full transition-all font-medium cursor-pointer ${
                 viewMode === 'compact'
-                  ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+                  ? 'bg-stone-900 text-white dark:bg-emerald-400 dark:text-stone-950 font-semibold shadow-xs'
+                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
               }`}
             >
               <ListFilter className="w-3.5 h-3.5" />
@@ -226,15 +235,16 @@ export const GitHubReposSection: React.FC = () => {
           </div>
 
           {/* Filter Pills */}
-          <div className="flex flex-wrap gap-1 bg-stone-100 dark:bg-stone-900 p-0.5 rounded-lg border border-stone-200 dark:border-stone-800">
+          <div className="flex flex-wrap gap-1 bg-stone-200/60 dark:bg-[#141418] p-1 rounded-full border border-stone-300/60 dark:border-white/[0.08]">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`text-xs px-2.5 py-1 rounded-md transition-colors font-medium ${
+                data-cursor-text={cat === 'All' ? 'ALL' : 'FILTER'}
+                className={`text-xs px-3 py-1 rounded-full transition-all font-medium cursor-pointer ${
                   filter === cat
-                    ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+                    ? 'bg-stone-900 text-white dark:bg-emerald-400 dark:text-stone-950 font-semibold shadow-xs'
+                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
                 }`}
               >
                 {cat}
@@ -242,15 +252,19 @@ export const GitHubReposSection: React.FC = () => {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Repositories Display */}
       {viewMode === 'visual' ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredRepos.map((repo) => (
-            <div
+          {filteredRepos.map((repo, idx) => (
+            <motion.div
               key={repo.name}
-              className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden flex flex-col justify-between hover:border-stone-400 dark:hover:border-stone-700 hover:shadow-md transition-all group"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl overflow-hidden flex flex-col justify-between hover:border-emerald-500/40 dark:hover:border-emerald-400/30 hover:shadow-lg transition-all group"
             >
               <div>
                 {/* Visual Screenshot with Hover Animation */}
@@ -318,21 +332,21 @@ export const GitHubReposSection: React.FC = () => {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       ) : (
         /* Compact Matrix Table View */
-        <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden divide-y divide-stone-200 dark:divide-stone-800 shadow-2xs">
+        <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl overflow-hidden divide-y divide-stone-200/80 dark:divide-white/[0.08] shadow-2xs">
           {filteredRepos.map((repo) => (
             <div
               key={repo.name}
-              className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-stone-50/70 dark:hover:bg-stone-800/50 transition-colors"
+              className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-stone-50/70 dark:hover:bg-white/[0.03] transition-colors"
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
                   <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100 font-mono">{repo.displayName}</h4>
-                  <span className="text-[10px] font-mono bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 px-1.5 py-0.2 rounded border border-stone-200 dark:border-stone-700">
+                  <span className="text-[10px] font-mono bg-stone-100 dark:bg-stone-800/80 text-stone-700 dark:text-stone-300 px-1.5 py-0.2 rounded border border-stone-200 dark:border-stone-700">
                     {repo.language}
                   </span>
                   {repo.isFeatured && (
@@ -356,7 +370,8 @@ export const GitHubReposSection: React.FC = () => {
                   href={repo.html_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white px-2.5 py-1 rounded bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors"
+                  data-cursor-text="CODE"
+                  className="inline-flex items-center gap-1 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white px-2.5 py-1 rounded-md bg-stone-100 dark:bg-[#1a1a20] hover:bg-stone-200 dark:hover:bg-[#222228] transition-colors"
                 >
                   <Github className="w-3 h-3" />
                   <span>GitHub</span>
@@ -366,7 +381,8 @@ export const GitHubReposSection: React.FC = () => {
                     href={repo.homepage}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 px-2.5 py-1 rounded bg-emerald-50 dark:bg-emerald-950/70 hover:bg-emerald-100 dark:hover:bg-emerald-900 transition-colors border border-emerald-200/60 dark:border-emerald-800"
+                    data-cursor-text="DEMO"
+                    className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-950/70 hover:bg-emerald-100 dark:hover:bg-emerald-900 transition-colors border border-emerald-200/60 dark:border-emerald-800"
                   >
                     <span>Demo</span>
                     <ExternalLink className="w-3 h-3" />

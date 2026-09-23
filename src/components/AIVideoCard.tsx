@@ -26,12 +26,13 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
         }
       }}
       transition={{ duration: 0.2 }}
-      className="group bg-white dark:bg-stone-900 border border-stone-200/90 dark:border-stone-800 hover:border-emerald-500/60 dark:hover:border-emerald-500/60 rounded-xl overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between break-inside-avoid print-break-avoid"
+      className="group bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-2xl overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between break-inside-avoid print-break-avoid"
     >
       {/* Media Video / Poster Container */}
       <div
         onClick={() => onSelect(video)}
-        className="relative overflow-hidden cursor-pointer bg-stone-950 block"
+        data-cursor-text="PLAY"
+        className="relative overflow-hidden cursor-pointer bg-stone-950 block group/media"
       >
         <div
           className={`w-full overflow-hidden ${
@@ -48,14 +49,14 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
               playsInline
               preload="metadata"
               onError={() => setVideoError(true)}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center group-hover/media:scale-105 transition-transform duration-700 ease-out"
             />
           ) : (
             <img
               src={video.posterUrl}
               alt={video.title}
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+              className="w-full h-full object-cover object-center group-hover/media:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover/media:opacity-100"
             />
           )}
         </div>
@@ -114,7 +115,8 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
 
           <h3
             onClick={() => onSelect(video)}
-            className="text-base sm:text-lg font-bold text-stone-950 dark:text-stone-100 tracking-tight hover:text-emerald-800 dark:hover:text-emerald-400 cursor-pointer transition-colors leading-snug"
+            data-cursor-text="PLAY"
+            className="text-base sm:text-lg font-display font-bold text-stone-950 dark:text-stone-100 tracking-tight hover:text-emerald-800 dark:hover:text-emerald-400 cursor-pointer transition-colors leading-snug"
           >
             {video.title}
           </h3>
@@ -141,7 +143,8 @@ export const AIVideoCard: React.FC<AIVideoCardProps> = ({ video, onSelect }) => 
             type="button"
             onClick={() => onSelect(video)}
             id={`btn-view-video-${video.id}`}
-            className="w-full inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-stone-900 dark:text-stone-100 hover:text-white dark:hover:text-stone-950 bg-stone-100 dark:bg-stone-800 hover:bg-stone-900 dark:hover:bg-stone-100 border border-stone-200 dark:border-stone-700 hover:border-stone-900 dark:hover:border-stone-100 py-2.5 px-3 rounded-md transition-all shadow-2xs group/btn cursor-pointer print:hidden"
+            data-cursor-text="WATCH"
+            className="w-full inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold tracking-wider uppercase text-stone-900 dark:text-stone-100 hover:text-white dark:hover:text-stone-950 bg-stone-100 dark:bg-stone-800 hover:bg-stone-900 dark:hover:bg-stone-100 border border-stone-200 dark:border-stone-700 hover:border-stone-900 dark:hover:border-stone-100 py-2.5 px-4 rounded-full transition-all duration-300 shadow-2xs hover:scale-102 active:scale-98 group/btn cursor-pointer print:hidden"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Watch Reel &amp; Breakdown</span>

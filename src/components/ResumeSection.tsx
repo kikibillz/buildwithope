@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { Download, ExternalLink, FileText, CheckCircle2, ChevronDown, ChevronUp, Printer, GraduationCap, Briefcase, Code, Award } from 'lucide-react';
 import { PortfolioConfig } from '../types';
 
@@ -13,20 +14,26 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
   const resumeHtmlPath = '/resume.html';
 
   return (
-    <section id="resume" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-stone-100/70 dark:bg-stone-900/50 transition-colors">
+    <section id="resume" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-[#f4f3ef] dark:bg-[#0a0a0c] transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-wider block mb-2">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-2xl mx-auto mb-10"
+        >
+          <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
             Curriculum Vitae &amp; Credentials
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
             Want the full picture?
           </h2>
           <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
             Download my comprehensive résumé detailing my technical skills, machine learning pipelines, backend services, work experience, and academic foundation.
           </p>
-        </div>
+        </motion.div>
 
         {/* Action Controls (hidden on print) */}
         <div className="flex flex-wrap items-center justify-center gap-3 mb-10 print:hidden">
@@ -34,11 +41,12 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             href={resumePdfPath}
             download="Opeyemi_Olamiju_Resume.pdf"
             id="btn-download-resume"
-            className="inline-flex items-center gap-2.5 bg-stone-900 hover:bg-stone-800 dark:bg-stone-100 dark:hover:bg-white text-white dark:text-stone-950 font-medium text-sm px-6 py-3 rounded-lg transition-all shadow-sm active:scale-[0.98] cursor-pointer"
+            data-cursor-text="DOWNLOAD"
+            className="inline-flex items-center gap-2.5 bg-stone-900 hover:bg-stone-800 dark:bg-emerald-400 dark:hover:bg-emerald-300 text-white dark:text-stone-950 font-semibold text-sm px-6 py-2.5 rounded-full transition-all shadow-xs cursor-pointer"
           >
-            <Download className="w-4 h-4 text-emerald-400 dark:text-emerald-600" />
+            <Download className="w-4 h-4 text-emerald-400 dark:text-stone-950" />
             <span>Download PDF Résumé</span>
-            <span className="text-[11px] font-mono opacity-70 px-1.5 py-0.5 rounded bg-white/10 dark:bg-black/10">
+            <span className="text-[11px] font-mono opacity-80 px-2 py-0.5 rounded-full bg-white/10 dark:bg-black/10">
               .PDF
             </span>
           </a>
@@ -47,7 +55,8 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             type="button"
             onClick={() => window.print()}
             id="btn-print-portfolio"
-            className="inline-flex items-center gap-2 bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 font-medium text-sm px-5 py-3 rounded-lg transition-all shadow-2xs active:scale-[0.98] cursor-pointer"
+            data-cursor-text="PRINT"
+            className="inline-flex items-center gap-2 bg-white dark:bg-[#121216] hover:bg-stone-100 dark:hover:bg-[#1a1a20] text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-white/[0.08] font-medium text-sm px-5 py-2.5 rounded-full transition-all shadow-2xs cursor-pointer"
           >
             <Printer className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Print Portfolio to PDF</span>
@@ -58,7 +67,8 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             target="_blank"
             rel="noreferrer"
             id="btn-view-printable-cv"
-            className="inline-flex items-center gap-2 bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 font-medium text-sm px-5 py-3 rounded-lg transition-all shadow-2xs active:scale-[0.98] cursor-pointer"
+            data-cursor-text="VIEW"
+            className="inline-flex items-center gap-2 bg-white dark:bg-[#121216] hover:bg-stone-100 dark:hover:bg-[#1a1a20] text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-white/[0.08] font-medium text-sm px-5 py-2.5 rounded-full transition-all shadow-2xs cursor-pointer"
           >
             <ExternalLink className="w-4 h-4 text-stone-500 dark:text-stone-400" />
             <span>View Standalone HTML CV</span>
@@ -68,7 +78,8 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             type="button"
             onClick={() => setShowFullPreview(!showFullPreview)}
             id="btn-toggle-resume-preview"
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-200 px-3.5 py-2.5 rounded-lg border border-transparent hover:border-stone-300 dark:hover:border-stone-700 transition-colors cursor-pointer"
+            data-cursor-text="PREVIEW"
+            className="inline-flex items-center gap-2 bg-stone-200/80 dark:bg-[#181820] hover:bg-stone-300/80 dark:hover:bg-[#202028] text-stone-800 dark:text-stone-200 font-medium text-sm px-5 py-2.5 rounded-full transition-all shadow-2xs cursor-pointer"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>{showFullPreview ? 'Hide On-Page Preview' : 'Expand On-Page Preview'}</span>

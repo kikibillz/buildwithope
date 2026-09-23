@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
@@ -24,6 +24,8 @@ import {
   Search,
   Filter,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { initialConfig, projects, skillCategories, experienceItems, certifications, certificationsUrl } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
@@ -40,6 +42,10 @@ import { AIVideoModal } from './components/AIVideoModal';
 import { FastApiBackendSection } from './components/FastApiBackendSection';
 import { CertificationsSection } from './components/CertificationsSection';
 import { ResumeSection } from './components/ResumeSection';
+import { MagicCursor } from './components/MagicCursor';
+import { ScrollProgress } from './components/ScrollProgress';
+import { SkillsMarquee } from './components/SkillsMarquee';
+import { BackToTop } from './components/BackToTop';
 
 export default function App() {
   const [config, setConfig] = useState<PortfolioConfig>(initialConfig);
@@ -137,8 +143,64 @@ export default function App() {
     return matchesCategory && matchesSearch;
   });
 
+  // Horizontal Carousel scroll logic for Projects
+  const projectsScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollProjectsLeft, setCanScrollProjectsLeft] = useState(false);
+  const [canScrollProjectsRight, setCanScrollProjectsRight] = useState(true);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+
+  const updateProjectsScrollState = () => {
+    if (!projectsScrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = projectsScrollRef.current;
+    setCanScrollProjectsLeft(scrollLeft > 15);
+    setCanScrollProjectsRight(scrollLeft < scrollWidth - clientWidth - 15);
+
+    const firstCard = projectsScrollRef.current.firstElementChild as HTMLElement;
+    if (firstCard) {
+      const cardWidth = firstCard.offsetWidth + 24; // card width + gap
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveProjectIndex(Math.min(Math.max(0, index), filteredProjects.length - 1));
+    }
+  };
+
+  const scrollProjects = (direction: 'left' | 'right') => {
+    if (!projectsScrollRef.current) return;
+    const container = projectsScrollRef.current;
+    const firstCard = container.firstElementChild as HTMLElement;
+    const cardWidth = firstCard ? firstCard.offsetWidth + 24 : 640;
+    container.scrollBy({
+      left: direction === 'left' ? -cardWidth : cardWidth,
+      behavior: 'smooth',
+    });
+  };
+
+  const scrollToProject = (index: number) => {
+    if (!projectsScrollRef.current) return;
+    const container = projectsScrollRef.current;
+    const card = container.children[index] as HTMLElement;
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      setActiveProjectIndex(index);
+    }
+  };
+
+  useEffect(() => {
+    if (projectsScrollRef.current) {
+      projectsScrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+    setActiveProjectIndex(0);
+    setCanScrollProjectsLeft(false);
+    setCanScrollProjectsRight(filteredProjects.length > 1);
+  }, [projectFilter, projectSearch]);
+
   return (
     <div className="min-h-screen bg-[#fafaf9] dark:bg-[#0c0a09] text-[#1c1917] dark:text-stone-100 flex flex-col font-sans selection:bg-stone-800 dark:selection:bg-stone-200 selection:text-white dark:selection:text-stone-950 transition-colors">
+      {/* Top Scroll Reading Progress Indicator */}
+      <ScrollProgress />
+
+      {/* Montoya-Inspired Smooth Magnetic Magic Cursor */}
+      <MagicCursor />
+
       {/* Navigation */}
       <Navbar config={activeConfig} />
 
@@ -212,12 +274,12 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-950 dark:text-stone-100 leading-[1.2] flex flex-wrap items-baseline gap-x-2.5 print:hidden">
+                <div className="space-y-3">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-stone-950 dark:text-stone-100 leading-[1.15] flex flex-wrap items-baseline gap-x-3 print:hidden">
                     <span>Hi, I&apos;m</span>
                     <AnimatedName name={config.name} variant="hero" />
                   </h1>
-                  <h2 className="text-xl sm:text-2xl font-semibold text-stone-700 dark:text-stone-300 tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-display font-semibold text-stone-700 dark:text-stone-300 tracking-tight">
                     Data Scientist, ML Engineer &amp; AI Video Creator
                   </h2>
                 </div>
@@ -244,28 +306,31 @@ export default function App() {
                   <a
                     href="#projects"
                     id="hero-btn-work"
-                    className="inline-flex items-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 font-semibold text-sm px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow-md cursor-pointer"
+                    data-cursor-text="WORK"
+                    className="inline-flex items-center gap-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white active:bg-stone-950 text-white dark:text-stone-950 font-mono font-semibold text-xs tracking-wider uppercase px-6 py-3 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer border border-stone-900 dark:border-white"
                   >
                     <span>Explore Projects &amp; Code</span>
-                    <ArrowDown className="w-4 h-4" />
+                    <ArrowDown className="w-3.5 h-3.5" />
                   </a>
 
                   <a
                     href="#ai-videos"
                     id="hero-btn-videos"
-                    className="inline-flex items-center gap-2 bg-stone-100 dark:bg-stone-850 hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300/80 dark:border-stone-700 font-medium text-sm px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
+                    data-cursor-text="REEL"
+                    className="inline-flex items-center gap-2 bg-stone-100 dark:bg-[#151413] hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500 font-mono font-medium text-xs tracking-wider uppercase px-5 py-3 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs"
                   >
-                    <Film className="w-4 h-4 text-stone-500 dark:text-stone-400" />
+                    <Film className="w-3.5 h-3.5 text-stone-500 dark:text-stone-400" />
                     <span>AI Video Reel</span>
                   </a>
 
                   <a
                     href="#contact"
                     id="hero-btn-talk"
-                    className="inline-flex items-center gap-1.5 text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white font-medium text-sm px-3.5 py-2.5 rounded-lg transition-colors cursor-pointer"
+                    data-cursor-text="TALK"
+                    className="inline-flex items-center gap-1.5 text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white font-mono font-medium text-xs tracking-wider uppercase px-4 py-3 rounded-full hover:bg-stone-100 dark:hover:bg-stone-850 transition-all duration-200 cursor-pointer"
                   >
                     <span>Contact</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
@@ -388,22 +453,50 @@ export default function App() {
                 </div>
               </div>
             </div>
+
+            {/* Montoya-Inspired Hero Footer Bar */}
+            <div className="mt-12 pt-6 border-t border-stone-200/80 dark:border-white/10 flex flex-wrap items-center justify-between gap-4 print:hidden">
+              <a
+                href="#projects"
+                data-cursor-text="SCROLL"
+                className="group inline-flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white transition-colors"
+              >
+                <span className="w-8 h-8 rounded-full border border-stone-300 dark:border-stone-700 flex items-center justify-center group-hover:border-stone-900 dark:group-hover:border-white group-hover:scale-110 transition-all">
+                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
+                </span>
+                <span className="font-semibold">Scroll to Explore</span>
+              </a>
+
+              <div className="flex items-center gap-2 text-xs font-mono text-stone-500 dark:text-stone-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                <span className="tracking-wider uppercase">Featured Works • Machine Learning &amp; AI Systems</span>
+              </div>
+            </div>
           </div>
         </section>
+
+        {/* Continuous Montoya-Style Capabilities Marquee Strip */}
+        <SkillsMarquee />
 
         {/* =========================================================================
             2. ABOUT SECTION
            ========================================================================= */}
-        <section id="about" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-[#f7f7f5] dark:bg-[#121214] transition-colors">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <section id="about" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-[#f8f8f5] dark:bg-[#0c0c0f] transition-colors">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-6xl mx-auto px-4 sm:px-6"
+          >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* Left Column: Background, Education & Principles */}
               <div className="lg:col-span-7 space-y-6">
                 <div>
-                  <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
+                  <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
                     Background &amp; Approach
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-6">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-6">
                     About Me
                   </h2>
                 </div>
@@ -421,10 +514,10 @@ export default function App() {
                 </div>
 
                 {/* Pragmatic Working Principles */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 mt-6 border-t border-stone-300/80 dark:border-stone-800">
-                  <div className="bg-white/90 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg p-4 shadow-2xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 mt-6 border-t border-stone-300/80 dark:border-white/[0.08]">
+                  <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300">
                     <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>Clean Data First</span>
                     </div>
                     <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
@@ -432,9 +525,9 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="bg-white/90 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg p-4 shadow-2xs">
+                  <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300">
                     <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>Explainable Insights</span>
                     </div>
                     <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
@@ -442,9 +535,9 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="bg-white/90 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg p-4 shadow-2xs">
+                  <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300">
                     <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>Code Hygiene</span>
                     </div>
                     <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
@@ -456,8 +549,8 @@ export default function App() {
 
               {/* Right Column: Visual Portrait Card */}
               <div className="lg:col-span-5 pt-2">
-                <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl p-4 sm:p-5 shadow-sm">
-                  <div className="relative aspect-[4/4.8] sm:aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-950 border border-stone-200/80 dark:border-stone-800">
+                <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-2xl p-4 sm:p-5 shadow-sm transition-all duration-300">
+                  <div className="relative aspect-[4/4.8] sm:aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-950 border border-stone-200/80 dark:border-white/[0.08]">
                     <img
                       src={activeConfig.avatarUrl || '/images/opeyemi picture.png'}
                       alt={config.name}
@@ -477,7 +570,7 @@ export default function App() {
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent pointer-events-none" />
 
                     <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <div className="text-lg font-bold tracking-tight">{config.name}</div>
+                      <div className="text-lg font-display font-bold tracking-tight">{config.name}</div>
                       <div className="text-xs font-mono text-stone-200 mt-0.5">B.Sc. Computer Science • O.O.U</div>
                       <div className="text-[11px] text-emerald-300 font-mono mt-1.5 flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
@@ -486,7 +579,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs font-mono text-stone-600 dark:text-stone-400 px-1">
+                  <div className="mt-4 pt-3 border-t border-stone-100 dark:border-white/[0.08] flex items-center justify-between text-xs font-mono text-stone-600 dark:text-stone-400 px-1">
                     <div className="flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-stone-400" />
                       <span>{config.location}</span>
@@ -496,39 +589,49 @@ export default function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* =========================================================================
             3. SKILLS SECTION
            ========================================================================= */}
-        <section id="skills" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
+        <section id="skills" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-white dark:bg-[#09090b] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-2xl mb-12">
-              <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-2xl mb-12"
+            >
+              <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
                 Technical Capabilities
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
                 Skills &amp; Technologies
               </h2>
               <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
                 Technologies I have actively learned and applied across coursework, personal data science projects, and analytical dashboards.
               </p>
-            </div>
+            </motion.div>
 
             {/* Categorized Skills Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skillCategories.map((cat) => (
-                <div
+              {skillCategories.map((cat, catIdx) => (
+                <motion.div
                   key={cat.title}
                   id={`skill-cat-${cat.title.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-5 sm:p-6 shadow-sm flex flex-col justify-between"
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.5, delay: catIdx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="bg-[#fafaf8] dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-2xl p-6 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
-                    <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100 tracking-tight font-mono uppercase mb-1.5 flex items-center justify-between">
-                      <span>{cat.title}</span>
-                      <span className="text-[10px] text-stone-500 dark:text-stone-400 font-mono">
-                        {cat.skills.length} item{cat.skills.length > 1 ? 's' : ''}
+                    <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100 tracking-tight font-mono uppercase mb-2 flex items-center justify-between">
+                      <span className="group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{cat.title}</span>
+                      <span className="text-[10px] text-stone-400 dark:text-stone-500 font-mono">
+                        {cat.skills.length} items
                       </span>
                     </h3>
                     <p className="text-xs text-stone-500 dark:text-stone-400 mb-4 leading-relaxed font-sans">
@@ -536,17 +639,17 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-stone-100 dark:border-stone-800">
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-stone-200/60 dark:border-white/[0.06]">
                     {cat.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="inline-flex items-center text-xs font-mono bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 px-2.5 py-1 rounded border border-stone-200/80 dark:border-stone-700 transition-colors"
+                        className="inline-flex items-center text-xs font-mono bg-white dark:bg-white/[0.05] hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-700 dark:hover:text-emerald-300 text-stone-800 dark:text-stone-200 px-2.5 py-1 rounded-lg border border-stone-200/80 dark:border-white/[0.08] transition-all duration-200 shadow-2xs"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -555,24 +658,30 @@ export default function App() {
         {/* =========================================================================
             4. FEATURED PROJECTS
            ========================================================================= */}
-        <section id="projects" className="py-20 sm:py-28 border-b border-stone-200/80 dark:border-stone-800 bg-[#f7f7f5] dark:bg-[#121214] transition-colors">
+        <section id="projects" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-[#f8f8f5] dark:bg-[#0c0c0f] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-2xl mb-12">
-              <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-2xl mb-12"
+            >
+              <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
                 Engineering &amp; Code
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
                 Selected Work &amp; Case Studies
               </h2>
               <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
                 Production REST microservices, machine learning classifiers with live inference, automated financial ledgers, and full-stack web applications.
               </p>
-            </div>
+            </motion.div>
 
             {/* Project Showcase Controls (Category Filters & Live Search) (hidden on print) */}
-            <div className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 print:hidden">
+            <div className="mb-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 print:hidden">
               {/* Category Pills */}
-              <div className="flex flex-wrap items-center gap-1.5 bg-stone-100 dark:bg-stone-900/90 p-1.5 rounded-lg border border-stone-200 dark:border-stone-800 text-xs font-mono">
+              <div className="flex flex-wrap items-center gap-1.5 bg-stone-200/60 dark:bg-[#141418] p-1.5 rounded-full border border-stone-300/60 dark:border-white/[0.08] text-xs font-mono">
                 {[
                   { id: 'all', label: 'All Projects', count: allProjects.length },
                   {
@@ -613,18 +722,19 @@ export default function App() {
                       key={tab.id}
                       type="button"
                       onClick={() => setProjectFilter(tab.id)}
-                      className={`px-3 py-1.5 rounded-md font-medium transition-colors flex items-center gap-1.5 cursor-pointer ${
+                      data-cursor-text="VIEW"
+                      className={`px-3.5 py-1.5 rounded-full font-medium transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
                         isActive
-                          ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                          : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                          ? 'bg-stone-900 text-white dark:bg-emerald-400 dark:text-stone-950 font-semibold shadow-xs'
+                          : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
                       }`}
                     >
                       <span>{tab.label}</span>
                       <span
-                        className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                        className={`text-[10px] px-1.5 py-0.2 rounded-full ${
                           isActive
-                            ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
-                            : 'bg-stone-200/60 dark:bg-stone-800 text-stone-500 dark:text-stone-400'
+                            ? 'bg-white/20 dark:bg-black/20 text-current'
+                            : 'bg-stone-300/60 dark:bg-white/[0.08] text-stone-500 dark:text-stone-400'
                         }`}
                       >
                         {tab.count}
@@ -636,13 +746,13 @@ export default function App() {
 
               {/* Search Bar */}
               <div className="relative min-w-[240px] sm:w-72">
-                <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={projectSearch}
                   onChange={(e) => setProjectSearch(e.target.value)}
                   placeholder="Filter by tech or keyword..."
-                  className="w-full pl-9 pr-8 py-1.5 text-xs font-mono bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400 dark:focus:ring-stone-600"
+                  className="w-full pl-9 pr-8 py-2 text-xs font-mono bg-white dark:bg-[#141418] border border-stone-200/90 dark:border-white/[0.08] rounded-full text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 shadow-2xs"
                 />
                 {projectSearch && (
                   <button
@@ -676,7 +786,45 @@ export default function App() {
               </div>
             )}
 
-            {/* Project Showcase List */}
+            {/* Horizontal Carousel Controls & Navigation Toolbar */}
+            {filteredProjects.length > 0 && (
+              <div className="mb-6 flex flex-wrap items-center justify-between gap-4 print:hidden">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-[#141418] border border-stone-200/80 dark:border-white/[0.08]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>Scroll or swipe left-to-right</span>
+                  </span>
+                  <span className="text-xs font-mono text-stone-500 dark:text-stone-400">
+                    Project <strong className="text-stone-900 dark:text-stone-100">{activeProjectIndex + 1}</strong> of {filteredProjects.length}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => scrollProjects('left')}
+                    disabled={!canScrollProjectsLeft}
+                    data-cursor-text="PREV"
+                    aria-label="Previous project"
+                    className="w-9 h-9 rounded-full bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollProjects('right')}
+                    disabled={!canScrollProjectsRight}
+                    data-cursor-text="NEXT"
+                    aria-label="Next project"
+                    className="w-9 h-9 rounded-full bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Project Showcase List - Horizontal Reel */}
             {filteredProjects.length === 0 ? (
               <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-12 text-center my-10">
                 <Search className="w-8 h-8 text-stone-400 mx-auto mb-3" />
@@ -692,21 +840,48 @@ export default function App() {
                     setProjectFilter('all');
                     setProjectSearch('');
                   }}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 text-xs font-medium cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 text-xs font-medium cursor-pointer"
                 >
                   View All Projects
                 </button>
               </div>
             ) : (
-              <div className="space-y-10 mb-16">
-                {filteredProjects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    onOpenCaseStudy={(p) => setSelectedProject(p)}
-                    onOpenStreamlit={(p) => setStreamlitProject(p)}
-                  />
-                ))}
+              <div className="mb-16">
+                <div
+                  ref={projectsScrollRef}
+                  onScroll={updateProjectsScrollState}
+                  className="flex gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth snap-x snap-mandatory print:block print:overflow-visible print:space-y-8 select-none"
+                  style={{ WebkitOverflowScrolling: 'touch' }}
+                >
+                  {filteredProjects.map((project, index) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      index={index}
+                      className="w-[88vw] sm:w-[620px] lg:w-[740px] shrink-0 snap-start print:w-full print:mb-8"
+                      onOpenCaseStudy={(p) => setSelectedProject(p)}
+                      onOpenStreamlit={(p) => setStreamlitProject(p)}
+                    />
+                  ))}
+                </div>
+
+                {/* Horizontal Navigation Dots */}
+                <div className="flex items-center justify-center gap-2 mt-4 print:hidden">
+                  {filteredProjects.map((p, dotIdx) => (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => scrollToProject(dotIdx)}
+                      aria-label={`Jump to project ${dotIdx + 1}: ${p.title}`}
+                      data-cursor-text={`${dotIdx + 1}`}
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        dotIdx === activeProjectIndex
+                          ? 'w-8 bg-stone-900 dark:bg-emerald-400'
+                          : 'w-2 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-500'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             )}
 
@@ -730,50 +905,64 @@ export default function App() {
         {/* =========================================================================
             6. EXPERIENCE & EDUCATION
            ========================================================================= */}
-        <section id="experience" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-[#0c0a09] transition-colors">
+        <section id="experience" className="py-20 sm:py-28 lg:py-32 border-b border-stone-200/80 dark:border-white/[0.08] bg-white dark:bg-[#09090b] transition-colors">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-2xl mb-12">
-              <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wider block mb-2">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-2xl mb-12"
+            >
+              <span className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block mb-2">
                 Timeline
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
                 Education &amp; Experience
               </h2>
               <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
                 Academic foundation in Computer Science from Olabisi Onabanjo University (O.O.U) combined with applied machine learning, people operations, and administrative data management.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="relative border-l border-stone-200 dark:border-stone-800 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10">
-              {experienceItems.map((item) => (
-                <div key={item.id} id={`timeline-${item.id}`} className="relative">
+            <div className="relative border-l border-stone-200 dark:border-white/[0.08] ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10">
+              {experienceItems.map((item, idx) => (
+                <motion.div
+                  key={item.id}
+                  id={`timeline-${item.id}`}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative"
+                >
                   {/* Timeline dot */}
-                  <span className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-stone-900 dark:border-stone-100 bg-white dark:bg-stone-900" />
+                  <span className="absolute -left-[31px] sm:-left-[39px] top-2 w-3.5 h-3.5 rounded-full border-2 border-emerald-500 dark:border-emerald-400 bg-white dark:bg-[#09090b] shadow-xs" />
 
-                  <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-5 sm:p-6 shadow-sm max-w-3xl">
+                  <div className="bg-[#fafaf8] dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-lg transition-all duration-300 max-w-3xl group">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                       <div className="flex items-center gap-2">
                         {item.category === 'Education' ? (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 px-2 py-0.5 rounded">
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/60 px-2.5 py-0.5 rounded-md">
                             <GraduationCap className="w-3.5 h-3.5" />
                             <span>{item.category}</span>
                           </span>
                         ) : item.id === 'exp-ds' ? (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-indigo-800 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800 px-2 py-0.5 rounded">
-                            <Cpu className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-teal-800 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800/60 px-2.5 py-0.5 rounded-md">
+                            <Cpu className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                             <span>Data Science &amp; ML</span>
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-stone-800 dark:text-stone-300 bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 px-2 py-0.5 rounded">
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-stone-800 dark:text-stone-300 bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-white/[0.08] px-2.5 py-0.5 rounded-md">
                             <Briefcase className="w-3.5 h-3.5" />
                             <span>{item.category}</span>
                           </span>
                         )}
-                        <h3 className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100">
+                        <h3 className="text-base sm:text-lg font-display font-bold text-stone-900 dark:text-stone-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
                           {item.title}
                         </h3>
                       </div>
-                      <span className="text-xs font-mono text-stone-600 dark:text-stone-400 bg-stone-50 dark:bg-stone-950 px-2 py-0.5 rounded border border-stone-200 dark:border-stone-800">
+                      <span className="text-xs font-mono text-stone-600 dark:text-stone-400 bg-stone-100 dark:bg-white/[0.05] px-2.5 py-0.5 rounded-md border border-stone-200/80 dark:border-white/[0.08]">
                         {item.period}
                       </span>
                     </div>
@@ -788,8 +977,8 @@ export default function App() {
                       {item.description}
                     </p>
 
-                    <div className="pt-3 border-t border-stone-100 dark:border-stone-800 space-y-1.5">
-                      <div className="text-xs font-mono text-stone-600 dark:text-stone-400 uppercase font-medium mb-1">
+                    <div className="pt-3 border-t border-stone-200/60 dark:border-white/[0.06] space-y-1.5">
+                      <div className="text-xs font-mono text-stone-500 dark:text-stone-400 uppercase font-medium mb-1">
                         Key Focus &amp; Responsibilities:
                       </div>
                       <ul className="space-y-1 text-xs text-stone-600 dark:text-stone-400 list-disc list-inside">
@@ -801,7 +990,7 @@ export default function App() {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -911,6 +1100,9 @@ export default function App() {
         video={selectedVideo}
         onClose={() => setSelectedVideo(null)}
       />
+
+      {/* Montoya-Inspired Floating Back to Top Trigger */}
+      <BackToTop />
     </div>
   );
 }

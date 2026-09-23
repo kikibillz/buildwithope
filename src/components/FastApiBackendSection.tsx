@@ -419,9 +419,16 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
   )}`;
 
   return (
-    <div id="fastapi-backend-section" className="mb-14 scroll-mt-24 break-inside-avoid print-break-avoid">
+    <motion.div
+      id="fastapi-backend-section"
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      className="mb-14 scroll-mt-24 break-inside-avoid print-break-avoid"
+    >
       {/* Section Frame */}
-      <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl overflow-hidden shadow-xs hover:border-emerald-500/30 dark:hover:border-emerald-400/25 transition-colors">
         {/* Top Header Banner */}
         <div className="p-6 sm:p-8 bg-gradient-to-r from-stone-950 via-stone-900 to-stone-950 text-white border-b border-stone-800">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -1240,6 +1247,6 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--worker
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };

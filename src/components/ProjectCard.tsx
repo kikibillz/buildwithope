@@ -6,34 +6,48 @@ import { ProjectDemoSection } from './ProjectDemoSection';
 
 interface ProjectCardProps {
   project: Project;
+  index?: number;
   onOpenCaseStudy: (project: Project) => void;
   onOpenStreamlit?: (project: Project) => void;
+  className?: string;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
+  index,
   onOpenCaseStudy,
   onOpenStreamlit,
+  className,
 }) => {
   return (
     <motion.article
       id={`project-card-${project.id}`}
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-stone-400 dark:hover:border-stone-700 hover:shadow-md transition-all duration-300"
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      className={`group bg-white dark:bg-[#121216] border border-stone-200/90 dark:border-white/[0.08] rounded-2xl overflow-hidden shadow-xs hover:shadow-xl hover:border-emerald-500/40 dark:hover:border-emerald-400/30 transition-all duration-500 flex flex-col justify-between ${
+        className || ''
+      }`}
     >
-      <div className="p-5 sm:p-7">
-        {/* Top meta & badges */}
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-wide">
-            {project.category}
-          </span>
+      <div className="p-6 sm:p-8">
+        {/* Top meta & Editorial Numbering */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-3">
+            {typeof index === 'number' && (
+              <span className="text-xs font-mono font-bold tracking-widest text-stone-400 dark:text-stone-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                {String(index + 1).padStart(2, '0')}.
+              </span>
+            )}
+            <span className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 uppercase tracking-widest">
+              {project.category}
+            </span>
+          </div>
+
           <div className="flex items-center gap-2">
             {project.badge && (
               <span
-                className={`text-xs font-mono px-2 py-0.5 rounded border ${
+                className={`text-xs font-mono px-2.5 py-0.5 rounded-full border ${
                   project.badge === 'FastAPI REST API'
                     ? 'bg-teal-50 dark:bg-teal-950/70 text-teal-800 dark:text-teal-300 border-teal-200 dark:border-teal-800 font-semibold'
                     : project.badge === 'Sample Dataset'
@@ -55,10 +69,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Streamlit / ASGI Deployment Ribbon */}
         {project.streamlitDeployment && (
-          <div className="mb-3.5 px-3 py-2 bg-stone-950 text-stone-200 rounded-lg flex flex-wrap items-center justify-between gap-2 text-xs font-mono border border-stone-800">
+          <div className="mb-4 px-3.5 py-2 bg-stone-950 text-stone-200 rounded-xl flex flex-wrap items-center justify-between gap-2 text-xs font-mono border border-stone-800">
             <div className="flex items-center gap-2">
               <span
-                className={`w-2.5 h-2.5 rounded-full inline-block animate-pulse ${
+                className={`w-2 h-2 rounded-full inline-block animate-pulse ${
                   project.id === 'fastapi-ml-service' ? 'bg-teal-400' : 'bg-red-500'
                 }`}
               />
@@ -71,7 +85,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <button
                 onClick={() => onOpenStreamlit(project)}
                 id={`btn-ribbon-live-${project.id}`}
-                className="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white px-2.5 py-1 rounded text-[11px] font-semibold transition-all hover:scale-105 active:scale-95 shadow-sm"
+                data-cursor-text="LIVE"
+                className="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-semibold transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
               >
                 <Play className="w-2.5 h-2.5 fill-current" />
                 <span>Live Model View</span>
@@ -81,10 +96,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
 
         {/* Title & Tagline */}
-        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-2">
+        <h3 className="text-xl sm:text-2xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-2 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
           {project.title}
         </h3>
-        <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed mb-4 font-sans max-w-3xl">
+        <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 leading-relaxed mb-5 font-sans max-w-3xl">
           {project.description}
         </p>
 
@@ -171,22 +186,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* CTA Actions (hidden on print) */}
-        <div className="mt-6 pt-4 border-t border-stone-100 dark:border-stone-800 flex flex-wrap items-center justify-between gap-3 print:hidden">
+        <div className="mt-8 pt-5 border-t border-stone-200/80 dark:border-white/10 flex flex-wrap items-center justify-between gap-3 print:hidden">
           <button
             onClick={() => onOpenCaseStudy(project)}
             id={`btn-case-study-${project.id}`}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-900 dark:text-stone-100 bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 px-3.5 py-2 rounded-md transition-colors"
+            data-cursor-text="STUDY"
+            className="inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-wider uppercase text-stone-900 dark:text-stone-100 bg-stone-100 dark:bg-stone-850 hover:bg-stone-900 hover:text-white dark:hover:bg-white dark:hover:text-stone-950 border border-stone-300 dark:border-stone-700 px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs"
           >
             <span>View Case Study</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             {project.streamlitDeployment && onOpenStreamlit && project.id !== 'fastapi-ml-service' && (
               <button
                 onClick={() => onOpenStreamlit(project)}
                 id={`btn-live-app-${project.id}`}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-red-600 hover:bg-red-500 px-3 py-1.5 rounded-md transition-all shadow-sm hover:scale-105 active:scale-95"
+                data-cursor-text="DEMO"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-white bg-red-600 hover:bg-red-500 px-3.5 py-1.5 rounded-full transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
               >
                 <Play className="w-3 h-3 fill-current" />
                 <span>Live Streamlit</span>
@@ -198,7 +215,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noreferrer"
               id={`btn-github-${project.id}`}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-600 px-3 py-1.5 rounded-md transition-colors"
+              data-cursor-text="CODE"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700 hover:border-stone-500 dark:hover:border-stone-500 px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer shadow-2xs"
             >
               <Github className="w-3.5 h-3.5" />
               <span>GitHub Repo</span>
@@ -209,7 +227,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noreferrer"
               id={`btn-demo-${project.id}`}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-stone-900 dark:bg-stone-100 dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-white px-3 py-1.5 rounded-md transition-colors"
+              data-cursor-text="VIEW"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold tracking-wide text-white bg-stone-900 dark:bg-stone-100 dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-white px-4 py-1.5 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>Explore Code</span>
