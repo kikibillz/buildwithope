@@ -1,33 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
   ArrowUpRight,
-  Download,
   Github,
   Linkedin,
   Mail,
-  FileText,
-  Briefcase,
-  GraduationCap,
-  Sparkles,
-  Terminal,
-  Layers,
-  BarChart3,
-  Cpu,
-  CheckCircle2,
-  Play,
-  Film,
+  CodeXml,
+  Check,
   MapPin,
-  Award,
-  ShieldCheck,
   Search,
-  Filter,
   X,
-  ChevronLeft,
-  ChevronRight,
+  Play,
+  LayoutGrid,
+  List,
 } from 'lucide-react';
-import { initialConfig, projects, skillCategories, experienceItems, certifications, certificationsUrl } from './data/portfolioData';
+import { initialConfig, projects, certifications, certificationsUrl } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroWorkspaceVisual } from './components/HeroWorkspaceVisual';
@@ -48,16 +36,15 @@ import { SkillsMarquee } from './components/SkillsMarquee';
 import { BackToTop } from './components/BackToTop';
 
 export default function App() {
-  const [config, setConfig] = useState<PortfolioConfig>(initialConfig);
-  const [allProjects, setAllProjects] = useState<Project[]>(projects);
+  const [config] = useState<PortfolioConfig>(initialConfig);
+  const [allProjects] = useState<Project[]>(projects);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [streamlitProject, setStreamlitProject] = useState<Project | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
   const [projectFilter, setProjectFilter] = useState<string>('all');
   const [projectSearch, setProjectSearch] = useState<string>('');
-  const [activeTrack, setActiveTrack] = useState<'all' | 'data' | 'ai-media'>('all');
+  const [viewMode, setViewMode] = useState<'rows' | 'cards'>('rows');
 
-  // Auto-detect and display the natural photograph (from local storage or candidate static paths)
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('portfolio_natural_photo');
@@ -72,13 +59,11 @@ export default function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Strict priority: ONLY Opeyemi picture paths
     const candidatePaths = [
       '/images/opeyemi picture.png',
       '/images/opeyemi%20picture.png',
       '/images/opeyemi.png',
       '/opeyemi picture.png',
-      '/opeyemi%20picture.png',
       '/opeyemi.png',
     ];
 
@@ -99,7 +84,7 @@ export default function App() {
             break;
           }
         } catch {
-          // continue checking next path
+          // continue checking
         }
       }
     };
@@ -120,10 +105,10 @@ export default function App() {
     const matchesCategory =
       projectFilter === 'all'
         ? true
-        : projectFilter === 'ml'
-        ? p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive')
         : projectFilter === 'backend'
         ? p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
+        : projectFilter === 'ml'
+        ? p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive')
         : projectFilter === 'data'
         ? p.category.toLowerCase().includes('data analysis') || p.category.toLowerCase().includes('automation') || p.category.toLowerCase().includes('analytics')
         : projectFilter === 'web'
@@ -143,874 +128,369 @@ export default function App() {
     return matchesCategory && matchesSearch;
   });
 
-  // Horizontal Carousel scroll logic for Projects
-  const projectsScrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollProjectsLeft, setCanScrollProjectsLeft] = useState(false);
-  const [canScrollProjectsRight, setCanScrollProjectsRight] = useState(true);
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-
-  const updateProjectsScrollState = () => {
-    if (!projectsScrollRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = projectsScrollRef.current;
-    setCanScrollProjectsLeft(scrollLeft > 15);
-    setCanScrollProjectsRight(scrollLeft < scrollWidth - clientWidth - 15);
-
-    const firstCard = projectsScrollRef.current.firstElementChild as HTMLElement;
-    if (firstCard) {
-      const cardWidth = firstCard.offsetWidth + 24; // card width + gap
-      const index = Math.round(scrollLeft / cardWidth);
-      setActiveProjectIndex(Math.min(Math.max(0, index), filteredProjects.length - 1));
-    }
-  };
-
-  const scrollProjects = (direction: 'left' | 'right') => {
-    if (!projectsScrollRef.current) return;
-    const container = projectsScrollRef.current;
-    const firstCard = container.firstElementChild as HTMLElement;
-    const cardWidth = firstCard ? firstCard.offsetWidth + 24 : 640;
-    container.scrollBy({
-      left: direction === 'left' ? -cardWidth : cardWidth,
-      behavior: 'smooth',
-    });
-  };
-
-  const scrollToProject = (index: number) => {
-    if (!projectsScrollRef.current) return;
-    const container = projectsScrollRef.current;
-    const card = container.children[index] as HTMLElement;
-    if (card) {
-      card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      setActiveProjectIndex(index);
-    }
-  };
-
-  useEffect(() => {
-    if (projectsScrollRef.current) {
-      projectsScrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-    }
-    setActiveProjectIndex(0);
-    setCanScrollProjectsLeft(false);
-    setCanScrollProjectsRight(filteredProjects.length > 1);
-  }, [projectFilter, projectSearch]);
-
   return (
-    <div className="min-h-screen bg-[#fbf8f3] dark:bg-[#141210] text-[#1c1815] dark:text-[#faf5ee] flex flex-col font-sans selection:bg-amber-500 selection:text-white dark:selection:bg-orange-600 dark:selection:text-white transition-colors">
-      {/* Top Scroll Reading Progress Indicator */}
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-highlight selection:text-highlight-foreground transition-colors overflow-x-hidden">
+      {/* Scroll Progress & Cursor */}
       <ScrollProgress />
-
-      {/* Montoya-Inspired Smooth Magnetic Magic Cursor */}
       <MagicCursor />
 
       {/* Navigation */}
       <Navbar config={activeConfig} />
 
-      <main className="flex-grow pt-20 print:pt-4">
+      <main className="flex-grow">
         {/* =========================================================================
-            PRINT-ONLY RESUME & CV DOCUMENT HEADER
+            1. HERO SECTION (Hi, I'm + def .py Switch + Multi-Discipline Punchline)
            ========================================================================= */}
-        <div className="hidden print:block max-w-6xl mx-auto px-4 pb-6 mb-4 border-b-2 border-stone-800">
-          <div className="flex justify-between items-start gap-4">
-            <div>
-              <h1 className="text-2xl font-bold text-stone-950 tracking-tight font-sans">
-                {config.name}
-              </h1>
-              <p className="text-sm font-semibold text-stone-800 mt-1">
-                Data Scientist • Machine Learning Engineer • Python &amp; FastAPI Backend Developer
-              </p>
-              <p className="text-xs text-stone-600 font-mono mt-1">
-                B.Sc. Computer Science (First Class Honours, 4.87/5.0 CGPA) • Crawford University
-              </p>
+        <section id="top" className="relative mx-auto grid max-w-7xl gap-8 lg:gap-12 px-4 sm:px-6 lg:px-10 pb-12 sm:pb-16 lg:pb-24 pt-8 sm:pt-14 lg:pt-20 lg:grid-cols-[1.2fr_.8fr] items-start">
+          <div className="relative z-10 w-full min-w-0">
+            {/* Status Badge & Location */}
+            <div className="mb-5 sm:mb-7 flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs font-bold uppercase tracking-widest font-mono">
+              <span className="inline-flex items-center gap-2 bg-status px-3 py-1.5 sm:py-2 text-status-foreground shadow-brutal-sm rounded-xs">
+                <span className="size-2 animate-pulse rounded-full bg-current" />
+                Available for roles &amp; projects
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-muted-foreground font-semibold">
+                <MapPin className="size-3.5" />
+                Lagos, Nigeria
+              </span>
             </div>
-            <div className="text-right text-xs font-mono text-stone-700 space-y-1 shrink-0">
-              <div><strong>Email:</strong> {config.email}</div>
-              <div><strong>Phone:</strong> {config.phone}</div>
-              <div><strong>Location:</strong> {config.location}, Nigeria</div>
-              <div><strong>GitHub:</strong> github.com/kikibillz</div>
-              <div><strong>LinkedIn:</strong> linkedin.com/in/opeyemi-olamiju</div>
+
+            {/* Giant Display Headline: Hi, I'm + AnimatedName (with def .py switch) */}
+            <div className="max-w-4xl">
+              <span className="block text-foreground/75 font-sans text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-wider mb-2">
+                Hi, I&apos;m
+              </span>
+              
+              <div className="mb-2 sm:mb-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-display uppercase tracking-tight text-foreground leading-[1.05]">
+                <AnimatedName name="Opeyemi Olamiju" variant="hero" />
+              </div>
+
+              <h1 className="font-display uppercase tracking-tight text-foreground leading-[.92] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
+                <span className="block text-primary">Data Scientist,</span>
+                <span className="block text-accent">ML Engineer</span>
+                <span className="block text-secondary">&amp; AI Video Creator</span>
+              </h1>
+            </div>
+
+            {/* Subtext and Action Buttons */}
+            <div className="mt-8 sm:mt-9 grid gap-6 border-t border-foreground/15 pt-6 sm:pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
+              <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
+                Computer science foundation in predictive modeling, high-throughput FastAPI services, and cinematic generative AI video commercials.
+              </p>
+              <div className="flex flex-col xs:flex-row flex-wrap gap-3 w-full sm:w-auto">
+                <a
+                  href="#work"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow-[var(--shadow-button)] hover:bg-primary/88 hover:-translate-y-0.5 h-12 rounded-xs px-6 text-sm font-mono uppercase"
+                >
+                  <span>Explore work</span>
+                  <ArrowDown className="size-4" />
+                </a>
+                <a
+                  href="#video"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors border-2 border-foreground bg-card text-foreground shadow-brutal-sm hover:shadow-brutal hover:bg-foreground hover:text-background h-12 rounded-xs px-6 text-sm font-mono uppercase"
+                >
+                  <Play className="size-4" />
+                  <span>Watch reel</span>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* =========================================================================
-            1. HERO SECTION (Luminous Warm Lighting)
-           ========================================================================= */}
-        <section id="hero" className="relative py-12 sm:py-20 lg:py-24 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#fbf8f3] dark:bg-[#141210] overflow-hidden transition-colors print:py-4">
-          {/* Subtle warm ambient radial glows */}
-          <div
-            aria-hidden="true"
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[520px] bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.14),rgba(234,88,12,0.07),transparent_70%)] pointer-events-none -z-0"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute top-1/3 -right-24 w-[450px] h-[450px] rounded-full bg-gradient-to-bl from-amber-400/10 via-orange-500/5 to-transparent blur-3xl pointer-events-none -z-0"
-          />
-
-          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Left Column: Natural, Credible Editorial Intro */}
-              <div className="lg:col-span-6 print:col-span-12 space-y-6">
-                <div className="flex items-center gap-3.5 print:hidden">
-                  <div className="relative shrink-0">
-                    {activeConfig.avatarUrl ? (
-                      <img
-                        src={activeConfig.avatarUrl}
-                        alt={config.name}
-                        referrerPolicy="no-referrer"
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (!target.dataset.triedFallback) {
-                            target.dataset.triedFallback = 'true';
-                            target.src = '/images/opeyemi.png';
-                          } else {
-                            target.style.display = 'none';
-                          }
-                        }}
-                        className="w-13 h-13 sm:w-15 sm:h-15 rounded-full object-cover border-2 border-amber-500/40 dark:border-amber-400/50 shadow-md ring-2 ring-amber-500/20 shrink-0"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-orange-600 text-white font-mono font-bold text-base flex items-center justify-center shrink-0 shadow-md ring-2 ring-amber-500/20">
-                        BO
-                      </div>
-                    )}
-                  </div>
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/25 dark:border-amber-400/25 text-amber-900 dark:text-amber-200 text-xs font-mono shadow-xs">
-                      <span className="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
-                      <span>Available for Roles &amp; AI Media Projects</span>
-                    </div>
-                    <div className="text-xs text-amber-900/60 dark:text-amber-400/60 font-mono mt-1">
-                      {config.location} • Nigeria
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-stone-950 dark:text-stone-100 leading-[1.15] flex flex-wrap items-baseline gap-x-3 print:hidden">
-                    <span>Hi, I&apos;m</span>
-                    <AnimatedName name={config.name} variant="hero" />
-                  </h1>
-                  <h2 className="text-xl sm:text-2xl font-display font-semibold text-stone-800 dark:text-stone-200 tracking-tight">
-                    Data Scientist, ML Engineer &amp;{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 dark:from-amber-400 dark:via-orange-400 dark:to-amber-300">
-                      AI Video Creator
-                    </span>
-                  </h2>
-                </div>
-
-                <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed max-w-xl font-normal">
-                  I engineer practical data &amp; machine learning solutions and direct cinematic, high-conversion AI video commercials using Google Veo 3, Runway Gen-3, Kling, and Luma.
-                </p>
-
-                {/* Secondary line with warm highlights */}
-                <div className="pt-1 text-xs sm:text-sm font-mono text-stone-500 dark:text-stone-400 flex flex-wrap items-center gap-2">
-                  <span className="text-amber-900 dark:text-amber-300 font-medium">Python 3.12</span>
-                  <span className="text-amber-400/60">•</span>
-                  <span>Machine Learning</span>
-                  <span className="text-amber-400/60">•</span>
-                  <span className="text-orange-600 dark:text-orange-400 font-semibold">Generative AI Video</span>
-                  <span className="text-amber-400/60">•</span>
-                  <span>Veo 3 / Runway</span>
-                  <span className="text-amber-400/60">•</span>
-                  <span>FastAPI &amp; SQL</span>
-                </div>
-
-                {/* Action Buttons (hidden on print) */}
-                <div className="pt-2 flex flex-wrap items-center gap-3 print:hidden">
-                  <a
-                    href="#projects"
-                    id="hero-btn-work"
-                    data-cursor-text="WORK"
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 hover:from-amber-500 hover:via-orange-500 hover:to-amber-600 active:from-amber-700 active:to-orange-700 text-white font-mono font-semibold text-xs tracking-wider uppercase px-6 py-3 rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(234,88,12,0.3)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.45)] hover:scale-105 active:scale-95 cursor-pointer border border-amber-500/40"
-                  >
-                    <span>Explore Projects &amp; Code</span>
-                    <ArrowDown className="w-3.5 h-3.5" />
-                  </a>
-
-                  <a
-                    href="#ai-videos"
-                    id="hero-btn-videos"
-                    data-cursor-text="REEL"
-                    className="inline-flex items-center gap-2 bg-white/80 dark:bg-[#1a1714] hover:bg-amber-50 dark:hover:bg-[#25201b] text-stone-800 dark:text-stone-200 border border-amber-900/15 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 font-mono font-medium text-xs tracking-wider uppercase px-5 py-3 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-2xs"
-                  >
-                    <Film className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
-                    <span>AI Video Reel</span>
-                  </a>
-
-                  <a
-                    href="#contact"
-                    id="hero-btn-talk"
-                    data-cursor-text="TALK"
-                    className="inline-flex items-center gap-1.5 text-stone-700 dark:text-stone-300 hover:text-amber-800 dark:hover:text-amber-300 font-mono font-medium text-xs tracking-wider uppercase px-4 py-3 rounded-full hover:bg-amber-500/10 dark:hover:bg-amber-500/10 transition-all duration-200 cursor-pointer"
-                  >
-                    <span>Contact</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                {/* Focus Lens Track Switcher (hidden on print) */}
-                <div className="pt-3 border-t border-amber-900/10 dark:border-amber-500/15 print:hidden">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[11px] font-mono text-amber-900/70 dark:text-amber-400/70 uppercase tracking-wider font-medium">
-                      Focus View:
-                    </span>
-                    <div className="inline-flex p-1 rounded-lg bg-amber-500/10 dark:bg-[#1c1815] border border-amber-500/20 dark:border-amber-500/20 text-xs font-mono">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setActiveTrack('all');
-                          setProjectFilter('all');
-                        }}
-                        className={`px-3 py-1 rounded-md font-medium transition-all cursor-pointer ${
-                          activeTrack === 'all'
-                            ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-xs font-semibold'
-                            : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200'
-                        }`}
-                      >
-                        All Work
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setActiveTrack('data');
-                          setProjectFilter('all');
-                          const el = document.getElementById('projects');
-                          el?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className={`px-3 py-1 rounded-md font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
-                          activeTrack === 'data'
-                            ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-xs font-semibold'
-                            : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200'
-                        }`}
-                      >
-                        <Terminal className="w-3.5 h-3.5" />
-                        <span>Data Science &amp; Python</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setActiveTrack('ai-media');
-                          const el = document.getElementById('ai-videos');
-                          el?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className={`px-3 py-1 rounded-md font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
-                          activeTrack === 'ai-media'
-                            ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-xs font-semibold'
-                            : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200'
-                        }`}
-                      >
-                        <Film className="w-3.5 h-3.5" />
-                        <span>AI Video Direction</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Authentic Developer Workspace Visual (hidden on print) */}
-              <div className="lg:col-span-6 print:hidden">
-                <HeroWorkspaceVisual />
-              </div>
-            </div>
-
-            {/* Executive Highlights & Value Delivery Matrix */}
-            <div className="mt-12 pt-8 border-t border-amber-900/10 dark:border-amber-500/15 grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
-                <div className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400 text-xs font-mono mb-1">
-                  <Award className="w-3.5 h-3.5" />
-                  <span>Certifications</span>
-                </div>
-                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
-                  13 Verified
-                </div>
-                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
-                  Google Cloud • New Horizons • ALX
-                </div>
-              </div>
-
-              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
-                <div className="flex items-center gap-1.5 text-orange-600 dark:text-orange-400 text-xs font-mono mb-1">
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>Production ML &amp; API</span>
-                </div>
-                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
-                  FastAPI &amp; ASGI
-                </div>
-                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
-                  Pydantic v2 • Docker • Scikit-learn
-                </div>
-              </div>
-
-              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
-                <div className="flex items-center gap-1.5 text-rose-600 dark:text-rose-400 text-xs font-mono mb-1">
-                  <Film className="w-3.5 h-3.5" />
-                  <span>AI Video Direction</span>
-                </div>
-                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
-                  Veo 3 &amp; Runway
-                </div>
-                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
-                  Cinematic Commercials &amp; Media
-                </div>
-              </div>
-
-              <div className="bg-white/80 dark:bg-[#1a1714] p-3.5 rounded-xl border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 shadow-xs transition-colors">
-                <div className="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 text-xs font-mono mb-1">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Engineering Rigor</span>
-                </div>
-                <div className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 font-mono">
-                  90%+ Coverage
-                </div>
-                <div className="text-[11px] text-stone-500 dark:text-stone-400 truncate">
-                  Pytest • CI/CD • Contract Validated
-                </div>
-              </div>
-            </div>
-
-            {/* Montoya-Inspired Hero Footer Bar */}
-            <div className="mt-12 pt-6 border-t border-amber-900/10 dark:border-amber-500/15 flex flex-wrap items-center justify-between gap-4 print:hidden">
-              <a
-                href="#projects"
-                data-cursor-text="SCROLL"
-                className="group inline-flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-stone-600 dark:text-stone-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors"
-              >
-                <span className="w-8 h-8 rounded-full border border-amber-900/20 dark:border-amber-500/30 flex items-center justify-center group-hover:border-amber-600 dark:group-hover:border-amber-400 group-hover:scale-110 transition-all">
-                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-amber-600 dark:text-amber-400" />
-                </span>
-                <span className="font-semibold">Scroll to Explore</span>
-              </a>
-
-              <div className="flex items-center gap-2 text-xs font-mono text-stone-500 dark:text-stone-400">
-                <span className="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
-                <span className="tracking-wider uppercase">Featured Works • Machine Learning &amp; AI Systems</span>
-              </div>
-            </div>
+          {/* Right Column: Terminal Workspace Box (Responsive on Android/Tablet/Laptop) */}
+          <div className="w-full min-w-0">
+            <HeroWorkspaceVisual onSelectVideo={setSelectedVideo} />
           </div>
         </section>
 
-        {/* Continuous Montoya-Style Capabilities Marquee Strip */}
+        {/* Marquee Ticker */}
         <SkillsMarquee />
 
         {/* =========================================================================
-            2. ABOUT SECTION (Warm Earth & Linen Surfaces)
+            01 / SELECTED WORK
            ========================================================================= */}
-        <section id="about" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#f6f2ea] dark:bg-[#181512] transition-colors">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-6xl mx-auto px-4 sm:px-6"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-              {/* Left Column: Background, Education & Principles */}
-              <div className="lg:col-span-7 space-y-6">
-                <div>
-                  <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
-                    Background &amp; Approach
-                  </span>
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-6">
-                    About Me
-                  </h2>
-                </div>
-
-                <div className="space-y-4 text-base sm:text-lg text-stone-700 dark:text-stone-300 leading-relaxed font-normal">
-                  <p>
-                    I am a Data Scientist, Python Developer, and AI Orchestrator who leverages artificial intelligence to solve complex business problems at scale. While my foundation is rooted in a Computer Science degree from Olabisi Onabanjo University (O.O.U), my true value lies in my ability to use AI as a force multiplier.
-                  </p>
-                  <p>
-                    Whether that means architecting high-throughput FastAPI machine learning services, building predictive churn models with XGBoost, or directing commercial-grade generative AI video productions, I don't just write code; I engineer solutions. I use advanced AI tools (like LLMs, Veo, and Runway) to accelerate development, automate workflows, and deliver production-ready software faster than traditional cycles.
-                  </p>
-                  <p>
-                    If there is a problem to solve, I know how to engineer an AI-driven approach to do it efficiently, making me a versatile, high-impact addition ready to bring immediate velocity to any forward-thinking engineering or data team.
-                  </p>
-                </div>
-
-                {/* Pragmatic Working Principles */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 mt-6 border-t border-amber-900/10 dark:border-amber-500/15">
-                  <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300 group">
-                    <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-                      <span>Clean Data First</span>
-                    </div>
-                    <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                      Handling missing values, outliers, and schema validation before any modeling.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300 group">
-                    <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                      <span>Explainable Insights</span>
-                    </div>
-                    <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                      Prioritizing interpretable metrics and charts operational teams can trust.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 rounded-xl p-4.5 shadow-2xs hover:shadow-md transition-all duration-300 group">
-                    <div className="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-semibold text-sm mb-1.5 font-mono">
-                      <CheckCircle2 className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-                      <span>Code Hygiene</span>
-                    </div>
-                    <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                      Writing structured Python pipelines and lightweight Streamlit apps for testing.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Visual Portrait Card */}
-              <div className="lg:col-span-5 pt-2">
-                <div className="bg-white/90 dark:bg-[#1f1b17] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 dark:hover:border-amber-400/40 rounded-2xl p-4 sm:p-5 shadow-sm transition-all duration-300">
-                  <div className="relative aspect-[4/4.8] sm:aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 dark:bg-[#141210] border border-amber-900/10 dark:border-amber-500/20 shadow-inner">
-                    <img
-                      src={activeConfig.avatarUrl || '/images/opeyemi picture.png'}
-                      alt={config.name}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-center"
-                      onError={(e) => {
-                        // Fallback strictly to /images/opeyemi.png
-                        const target = e.currentTarget;
-                        if (!target.dataset.triedFallback) {
-                          target.dataset.triedFallback = 'true';
-                          target.src = '/images/opeyemi.png';
-                        } else {
-                          (e.target as HTMLElement).style.display = 'none';
-                        }
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent pointer-events-none" />
-
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <div className="text-lg font-display font-bold tracking-tight">{config.name}</div>
-                      <div className="text-xs font-mono text-amber-200/90 mt-0.5">B.Sc. Computer Science • O.O.U</div>
-                      <div className="text-[11px] text-amber-300 font-mono mt-1.5 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-amber-400 inline-block animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
-                        <span>Data Scientist &amp; AI Video Creator</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-amber-900/10 dark:border-amber-500/20 flex items-center justify-between text-xs font-mono text-stone-600 dark:text-stone-400 px-1">
-                    <div className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-                      <span>{config.location}</span>
-                    </div>
-                    <span className="text-amber-700 dark:text-amber-400 font-medium">Remote &amp; Relocation Ready</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* =========================================================================
-            3. SKILLS SECTION
-           ========================================================================= */}
-        <section id="skills" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#fbf8f3] dark:bg-[#141210] transition-colors">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-2xl mb-12"
-            >
-              <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
-                Technical Capabilities
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
-                Skills &amp; Technologies
-              </h2>
-              <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
-                Technologies I have actively learned and applied across coursework, personal data science projects, and analytical dashboards.
-              </p>
-            </motion.div>
-
-            {/* Categorized Skills Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skillCategories.map((cat, catIdx) => (
-                <motion.div
-                  key={cat.title}
-                  id={`skill-cat-${cat.title.toLowerCase().replace(/\s+/g, '-')}`}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.5, delay: catIdx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white/90 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 dark:hover:border-amber-400/40 rounded-2xl p-6 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100 tracking-tight font-mono uppercase mb-2 flex items-center justify-between">
-                      <span className="group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">{cat.title}</span>
-                      <span className="text-[10px] text-amber-900/60 dark:text-amber-400/60 font-mono">
-                        {cat.skills.length} items
-                      </span>
-                    </h3>
-                    <p className="text-xs text-stone-500 dark:text-stone-400 mb-4 leading-relaxed font-sans">
-                      {cat.description}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-amber-900/10 dark:border-amber-500/15">
-                    {cat.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="inline-flex items-center text-xs font-mono bg-[#fdfbf7] dark:bg-[#201c18] hover:bg-amber-500/15 hover:border-amber-500/40 hover:text-amber-900 dark:hover:text-amber-200 text-stone-800 dark:text-stone-200 px-2.5 py-1 rounded-lg border border-amber-900/10 dark:border-amber-500/20 transition-all duration-200 shadow-2xs"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+        <section id="work" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28">
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-[180px_1fr] sm:items-end">
+            <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
+              01 / Selected work
+            </p>
+            <h2 className="max-w-4xl font-display text-3xl xs:text-4xl sm:text-5xl lg:text-7xl uppercase leading-[.92] text-foreground">
+              Built to solve real problems.
+            </h2>
           </div>
-        </section>
 
-        {/* =========================================================================
-            4. FEATURED PROJECTS
-           ========================================================================= */}
-        <section id="projects" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#f6f2ea] dark:bg-[#181512] transition-colors">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-2xl mb-12"
-            >
-              <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
-                Engineering &amp; Code
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
-                Selected Work &amp; Case Studies
-              </h2>
-              <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
-                Production REST microservices, machine learning classifiers with live inference, automated financial ledgers, and full-stack web applications.
-              </p>
-            </motion.div>
+          {/* Filter & Controls Toolbar */}
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-4 border-b border-foreground/15">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none font-mono text-xs w-full sm:w-auto">
+              {[
+                { id: 'all', label: 'All' },
+                { id: 'backend', label: 'Backend & APIs' },
+                { id: 'ml', label: 'Machine Learning' },
+                { id: 'data', label: 'Data & Automation' },
+                { id: 'web', label: 'Web Apps' },
+              ].map((tab) => {
+                const isActive = projectFilter === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setProjectFilter(tab.id)}
+                    className={`px-3 py-1.5 rounded-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                      isActive
+                        ? 'bg-foreground text-background shadow-brutal-sm'
+                        : 'border border-foreground/20 text-foreground/70 hover:text-foreground'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
 
-            {/* Project Showcase Controls (Category Filters & Live Search) (hidden on print) */}
-            <div className="mb-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 print:hidden">
-              {/* Category Pills */}
-              <div className="flex flex-wrap items-center gap-1.5 bg-amber-500/10 dark:bg-[#1c1815] p-1.5 rounded-full border border-amber-500/20 dark:border-amber-500/20 text-xs font-mono">
-                {[
-                  { id: 'all', label: 'All Projects', count: allProjects.length },
-                  {
-                    id: 'backend',
-                    label: 'Backend & APIs',
-                    count: allProjects.filter(
-                      (p) => p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
-                    ).length,
-                  },
-                  {
-                    id: 'ml',
-                    label: 'Machine Learning',
-                    count: allProjects.filter(
-                      (p) => p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive')
-                    ).length,
-                  },
-                  {
-                    id: 'data',
-                    label: 'Data & Analytics',
-                    count: allProjects.filter(
-                      (p) =>
-                        p.category.toLowerCase().includes('data analysis') ||
-                        p.category.toLowerCase().includes('automation') ||
-                        p.category.toLowerCase().includes('analytics')
-                    ).length,
-                  },
-                  {
-                    id: 'web',
-                    label: 'Web Apps',
-                    count: allProjects.filter(
-                      (p) => p.category.toLowerCase().includes('web') || p.category.toLowerCase().includes('product')
-                    ).length,
-                  },
-                ].map((tab) => {
-                  const isActive = projectFilter === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      type="button"
-                      onClick={() => setProjectFilter(tab.id)}
-                      data-cursor-text="VIEW"
-                      className={`px-3.5 py-1.5 rounded-full font-medium transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-                        isActive
-                          ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold shadow-xs'
-                          : 'text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200 hover:bg-amber-500/10'
-                      }`}
-                    >
-                      <span>{tab.label}</span>
-                      <span
-                        className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                          isActive
-                            ? 'bg-white/25 text-current'
-                            : 'bg-amber-900/10 dark:bg-white/10 text-stone-600 dark:text-stone-300'
-                        }`}
-                      >
-                        {tab.count}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Search Bar */}
-              <div className="relative min-w-[240px] sm:w-72">
-                <Search className="w-4 h-4 text-amber-700/60 dark:text-amber-400/60 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className="flex items-center gap-3">
+              {/* Search */}
+              <div className="relative w-full sm:w-64">
+                <Search className="w-3.5 h-3.5 text-foreground/50 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={projectSearch}
                   onChange={(e) => setProjectSearch(e.target.value)}
-                  placeholder="Filter by tech or keyword..."
-                  className="w-full pl-9 pr-8 py-2 text-xs font-mono bg-white/90 dark:bg-[#1c1815] border border-amber-900/15 dark:border-amber-500/20 rounded-full text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 shadow-2xs"
+                  placeholder="Search projects..."
+                  className="w-full pl-8 pr-7 py-1.5 text-xs font-mono bg-card border border-foreground/30 rounded-xs text-foreground placeholder-foreground/50 focus:outline-none focus:border-foreground"
                 />
                 {projectSearch && (
                   <button
                     type="button"
                     onClick={() => setProjectSearch('')}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-0.5"
-                    title="Clear search"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-foreground/50 hover:text-foreground p-0.5"
                   >
-                    <X className="w-3.5 h-3.5" />
+                    <X className="w-3 h-3" />
                   </button>
                 )}
               </div>
-            </div>
 
-            {/* Results Counter if filtered */}
-            {(projectFilter !== 'all' || projectSearch) && (
-              <div className="mb-6 flex items-center justify-between text-xs font-mono text-stone-500 dark:text-stone-400 px-1 print:hidden">
-                <span>
-                  Showing {filteredProjects.length} of {allProjects.length} projects
-                </span>
+              {/* View Switcher */}
+              <div className="hidden sm:flex items-center border border-foreground/30 p-0.5 rounded-xs bg-card shrink-0">
                 <button
                   type="button"
-                  onClick={() => {
-                    setProjectFilter('all');
-                    setProjectSearch('');
-                  }}
-                  className="text-amber-800 dark:text-amber-300 underline hover:no-underline cursor-pointer"
+                  onClick={() => setViewMode('rows')}
+                  title="Editorial Rows View"
+                  className={`p-1.5 rounded-xs cursor-pointer ${
+                    viewMode === 'rows' ? 'bg-foreground text-background' : 'text-foreground/60'
+                  }`}
                 >
-                  Reset all filters
+                  <List className="size-4" />
                 </button>
-              </div>
-            )}
-
-            {/* Horizontal Carousel Controls & Navigation Toolbar */}
-            {filteredProjects.length > 0 && (
-              <div className="mb-6 flex flex-wrap items-center justify-between gap-4 print:hidden">
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-stone-700 dark:text-stone-300 bg-amber-500/10 dark:bg-[#1c1815] border border-amber-500/20 dark:border-amber-500/20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shadow-[0_0_6px_rgba(245,158,11,0.8)]" />
-                    <span>Scroll or swipe left-to-right</span>
-                  </span>
-                  <span className="text-xs font-mono text-stone-500 dark:text-stone-400">
-                    Project <strong className="text-stone-900 dark:text-stone-100">{activeProjectIndex + 1}</strong> of {filteredProjects.length}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => scrollProjects('left')}
-                    disabled={!canScrollProjectsLeft}
-                    data-cursor-text="PREV"
-                    aria-label="Previous project"
-                    className="w-9 h-9 rounded-full bg-white dark:bg-[#1a1714] border border-amber-900/15 dark:border-amber-500/20 hover:border-amber-500/50 text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200 flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => scrollProjects('right')}
-                    disabled={!canScrollProjectsRight}
-                    data-cursor-text="NEXT"
-                    aria-label="Next project"
-                    className="w-9 h-9 rounded-full bg-white dark:bg-[#1a1714] border border-amber-900/15 dark:border-amber-500/20 hover:border-amber-500/50 text-stone-700 dark:text-stone-300 hover:text-amber-900 dark:hover:text-amber-200 flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Project Showcase List - Horizontal Reel */}
-            {filteredProjects.length === 0 ? (
-              <div className="bg-white/90 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-xl p-12 text-center my-10">
-                <Search className="w-8 h-8 text-amber-500/60 mx-auto mb-3" />
-                <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 mb-1">
-                  No matching projects found
-                </h3>
-                <p className="text-xs text-stone-500 dark:text-stone-400 mb-4 max-w-sm mx-auto">
-                  Try clearing your search query or selecting a different project category.
-                </p>
                 <button
                   type="button"
-                  onClick={() => {
-                    setProjectFilter('all');
-                    setProjectSearch('');
-                  }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-600 to-orange-600 text-white text-xs font-medium cursor-pointer shadow-xs"
+                  onClick={() => setViewMode('cards')}
+                  title="Card Grid View"
+                  className={`p-1.5 rounded-xs cursor-pointer ${
+                    viewMode === 'cards' ? 'bg-foreground text-background' : 'text-foreground/60'
+                  }`}
                 >
-                  View All Projects
+                  <LayoutGrid className="size-4" />
                 </button>
               </div>
-            ) : (
-              <div className="mb-16">
-                <div
-                  ref={projectsScrollRef}
-                  onScroll={updateProjectsScrollState}
-                  className="flex gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth snap-x snap-mandatory print:block print:overflow-visible print:space-y-8 select-none"
-                  style={{ WebkitOverflowScrolling: 'touch' }}
-                >
-                  {filteredProjects.map((project, index) => (
-                    <ProjectCard
-                      key={project.id}
-                      project={project}
-                      index={index}
-                      className="w-[88vw] sm:w-[620px] lg:w-[740px] shrink-0 snap-start print:w-full print:mb-8"
-                      onOpenCaseStudy={(p) => setSelectedProject(p)}
-                      onOpenStreamlit={(p) => setStreamlitProject(p)}
-                    />
-                  ))}
-                </div>
-
-                {/* Horizontal Navigation Dots */}
-                <div className="flex items-center justify-center gap-2 mt-4 print:hidden">
-                  {filteredProjects.map((p, dotIdx) => (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => scrollToProject(dotIdx)}
-                      aria-label={`Jump to project ${dotIdx + 1}: ${p.title}`}
-                      data-cursor-text={`${dotIdx + 1}`}
-                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                        dotIdx === activeProjectIndex
-                          ? 'w-8 bg-gradient-to-r from-amber-500 to-orange-500 shadow-xs'
-                          : 'w-2 bg-amber-900/20 dark:bg-amber-400/20 hover:bg-amber-500/50'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Dedicated FastAPI Backend Section */}
-            <div className="mb-16">
-              <FastApiBackendSection />
             </div>
-
-            {/* All Public GitHub Repositories */}
-            <GitHubReposSection />
           </div>
-        </section>
 
-        {/* =========================================================================
-            5. AI VIDEO & GENERATIVE MEDIA SHOWCASE
-           ========================================================================= */}
-        <AIVideoSection
-          onSelectVideo={(v) => setSelectedVideo(v)}
-        />
-
-        {/* =========================================================================
-            6. EXPERIENCE & EDUCATION
-           ========================================================================= */}
-        <section id="experience" className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#fbf8f3] dark:bg-[#141210] transition-colors">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-2xl mb-12"
-            >
-              <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2">
-                Timeline
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
-                Education &amp; Experience
-              </h2>
-              <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
-                Academic foundation in Computer Science from Olabisi Onabanjo University (O.O.U) combined with applied machine learning, people operations, and administrative data management.
-              </p>
-            </motion.div>
-
-            <div className="relative border-l-2 border-amber-500/30 dark:border-amber-400/30 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10">
-              {experienceItems.map((item, idx) => (
-                <motion.div
-                  key={item.id}
-                  id={`timeline-${item.id}`}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative"
+          {/* Editorial Project Rows */}
+          {viewMode === 'rows' ? (
+            <div className="mt-8 divide-y divide-foreground/15 border-y border-foreground/15">
+              {filteredProjects.map((project, idx) => (
+                <article
+                  key={project.id}
+                  onClick={() => setSelectedProject(project)}
+                  className="project-row group grid gap-4 sm:gap-6 py-6 sm:py-9 grid-cols-1 sm:grid-cols-[50px_1fr] lg:grid-cols-[60px_1fr_1.1fr_auto] lg:items-center cursor-pointer transition-colors"
                 >
-                  {/* Timeline dot */}
-                  <span className="absolute -left-[32px] sm:-left-[41px] top-2 w-4 h-4 rounded-full border-2 border-amber-500 dark:border-amber-400 bg-white dark:bg-[#141210] shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
+                  <span className="font-mono text-xs text-muted-foreground font-bold">
+                    /{String(idx + 1).padStart(2, '0')}
+                  </span>
 
-                  <div className="bg-white/90 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/40 dark:hover:border-amber-400/40 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-lg transition-all duration-300 max-w-3xl group">
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <div className="flex items-center gap-2">
-                        {item.category === 'Education' ? (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-amber-900 dark:text-amber-200 bg-amber-500/15 dark:bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 rounded-md">
-                            <GraduationCap className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-                            <span>{item.category}</span>
-                          </span>
-                        ) : item.id === 'exp-ds' ? (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-orange-900 dark:text-orange-200 bg-orange-500/15 dark:bg-orange-500/20 border border-orange-500/30 px-2.5 py-0.5 rounded-md">
-                            <Cpu className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
-                            <span>Data Science &amp; ML</span>
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-amber-900 dark:text-amber-300 bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 px-2.5 py-0.5 rounded-md">
-                            <Briefcase className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
-                            <span>{item.category}</span>
-                          </span>
-                        )}
-                        <h3 className="text-base sm:text-lg font-display font-bold text-stone-900 dark:text-stone-100 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
-                          {item.title}
-                        </h3>
-                      </div>
-                      <span className="text-xs font-mono text-stone-600 dark:text-stone-400 bg-[#fdfbf7] dark:bg-[#201c18] px-2.5 py-0.5 rounded-md border border-amber-900/10 dark:border-amber-500/15">
-                        {item.period}
-                      </span>
-                    </div>
-
-                    <div className="text-xs font-mono text-stone-600 dark:text-stone-400 mb-3">
-                      <span>{item.roleOrDegree}</span>
-                      <span className="mx-2">•</span>
-                      <span>{item.organization}</span>
-                    </div>
-
-                    <p className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed mb-4">
-                      {item.description}
-                    </p>
-
-                    <div className="pt-3 border-t border-amber-900/10 dark:border-amber-500/15 space-y-1.5">
-                      <div className="text-xs font-mono text-amber-900/70 dark:text-amber-400/70 uppercase font-medium mb-1">
-                        Key Focus &amp; Responsibilities:
-                      </div>
-                      <ul className="space-y-1 text-xs text-stone-600 dark:text-stone-400 list-disc list-inside">
-                        {item.highlights.map((h, i) => (
-                          <li key={i} className="leading-relaxed">
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div>
+                    <span
+                      className={`inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-xs ${
+                        idx % 3 === 0
+                          ? 'bg-project-one text-foreground'
+                          : idx % 3 === 1
+                          ? 'bg-project-two text-foreground'
+                          : 'bg-project-three text-foreground'
+                      }`}
+                    >
+                      {project.category}
+                    </span>
+                    <h3 className="mt-2.5 sm:mt-3 max-w-md text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight text-foreground group-hover:text-primary transition-colors font-display">
+                      {project.title}
+                    </h3>
                   </div>
-                </motion.div>
+
+                  <div>
+                    <p className="max-w-xl leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
+                      {project.description}
+                    </p>
+                    {project.businessImpact && (
+                      <p className="mt-2.5 sm:mt-3 font-mono text-xs font-bold uppercase text-primary">
+                        {project.businessImpact.split('.')[0]}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between gap-4 lg:flex-col lg:items-end pt-2 lg:pt-0">
+                    <span className="font-mono text-[11px] text-muted-foreground font-bold">
+                      {project.tools.slice(0, 3).join(' · ')}
+                    </span>
+                    <span className="grid size-10 sm:size-11 place-items-center rounded-full border border-foreground/20 transition-all group-hover:bg-foreground group-hover:text-background shrink-0">
+                      <ArrowUpRight className="size-5" />
+                    </span>
+                  </div>
+                </article>
               ))}
             </div>
+          ) : (
+            /* Card Grid View */
+            <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              {filteredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  onOpenCaseStudy={(p) => setSelectedProject(p)}
+                  onOpenStreamlit={(p) => setStreamlitProject(p)}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* =========================================================================
+            02 / AI VIDEO DIRECTION
+           ========================================================================= */}
+        <AIVideoSection onSelectVideo={(v) => setSelectedVideo(v)} />
+
+        {/* =========================================================================
+            03 / CAPABILITIES
+           ========================================================================= */}
+        <section id="skills" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28">
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-[180px_1fr] sm:items-end">
+            <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
+              03 / Capabilities
+            </p>
+            <h2 className="max-w-4xl font-display text-3xl xs:text-4xl sm:text-5xl lg:text-7xl uppercase leading-[.92] text-foreground">
+              One builder. Three disciplines.
+            </h2>
+          </div>
+
+          <div className="mt-8 sm:mt-12 grid border-2 border-foreground grid-cols-1 md:grid-cols-3">
+            {/* Discipline 1 */}
+            <article className="p-6 sm:p-8 lg:p-9">
+              <div className="grid size-12 place-items-center font-mono text-sm font-bold bg-accent text-accent-foreground shadow-brutal-sm rounded-xs">
+                01
+              </div>
+              <h3 className="mt-8 sm:mt-10 text-xl sm:text-2xl font-extrabold font-display uppercase text-foreground">
+                Data &amp; machine learning
+              </h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
+                From messy source data to explainable models, statistical validation, and decision-ready insights.
+              </p>
+              <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
+                {['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'SQL', 'Plotly'].map((tool) => (
+                  <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            {/* Discipline 2 */}
+            <article className="p-6 sm:p-8 lg:p-9 border-t-2 border-foreground md:border-l-2 md:border-t-0">
+              <div className="grid size-12 place-items-center font-mono text-sm font-bold bg-secondary text-secondary-foreground shadow-brutal-sm rounded-xs">
+                02
+              </div>
+              <h3 className="mt-8 sm:mt-10 text-xl sm:text-2xl font-extrabold font-display uppercase text-foreground">
+                Production engineering
+              </h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
+                Reliable APIs and automated pipelines designed to move smoothly from notebook exploration to production runtime.
+              </p>
+              <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
+                {['FastAPI', 'Pydantic', 'Docker', 'PostgreSQL', 'Pytest', 'CI/CD'].map((tool) => (
+                  <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            {/* Discipline 3 */}
+            <article className="p-6 sm:p-8 lg:p-9 border-t-2 border-foreground md:border-l-2 md:border-t-0">
+              <div className="grid size-12 place-items-center font-mono text-sm font-bold bg-highlight text-highlight-foreground shadow-brutal-sm rounded-xs">
+                03
+              </div>
+              <h3 className="mt-8 sm:mt-10 text-xl sm:text-2xl font-extrabold font-display uppercase text-foreground">
+                Generative AI video
+              </h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
+                Cinematic concepts, multi-shot direction, sound design, and pacing for memorable commercial brand stories.
+              </p>
+              <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
+                {['Veo 3', 'Runway Gen-3', 'Kling', 'Luma', 'Midjourney', 'ElevenLabs'].map((tool) => (
+                  <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+            </article>
           </div>
         </section>
 
         {/* =========================================================================
-            6. CERTIFICATIONS & LICENSES SECTION
+            04 / ABOUT OPE
+           ========================================================================= */}
+        <section id="about" className="border-y-2 border-foreground bg-secondary text-secondary-foreground">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:gap-12 px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28 lg:grid-cols-[.7fr_1.3fr]">
+            <div>
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-secondary-foreground">
+                04 / About Ope
+              </p>
+              <div className="mt-6 sm:mt-8 aspect-[4/3] bg-foreground p-6 text-background flex flex-col justify-between shadow-brutal border-2 border-foreground rounded-xs">
+                <CodeXml className="size-9 sm:size-10 text-accent" />
+                <blockquote className="mt-10 sm:mt-16 font-display text-2xl sm:text-3xl uppercase leading-tight text-background">
+                  “I don&apos;t just write code; I engineer solutions.”
+                </blockquote>
+              </div>
+            </div>
+
+            <div className="lg:pt-12">
+              <h2 className="max-w-3xl text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-display uppercase text-secondary-foreground">
+                Computer science foundations. AI-powered execution. Business-minded outcomes.
+              </h2>
+              <p className="mt-5 sm:mt-7 max-w-3xl text-base sm:text-lg leading-relaxed text-secondary-foreground/90 font-sans">
+                I use artificial intelligence as a force multiplier—from high-throughput FastAPI services and predictive models to commercial-grade generative video. My focus is practical: clean inputs, explainable decisions, structured delivery, and work people can use.
+              </p>
+              <div className="mt-7 sm:mt-9 grid gap-3 sm:gap-4 sm:grid-cols-2">
+                <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
+                  <Check className="size-4 shrink-0 text-accent" />
+                  <span>B.Sc. Computer Science · Crawford University</span>
+                </div>
+                <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
+                  <Check className="size-4 shrink-0 text-accent" />
+                  <span>13 verified certifications</span>
+                </div>
+                <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
+                  <Check className="size-4 shrink-0 text-accent" />
+                  <span>Remote &amp; relocation ready</span>
+                </div>
+                <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
+                  <Check className="size-4 shrink-0 text-accent" />
+                  <span>Data, engineering &amp; creative AI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            05 / CREDENTIALS (13 Verified Certifications)
            ========================================================================= */}
         <CertificationsSection
           certifications={certifications}
@@ -1019,103 +499,151 @@ export default function App() {
         />
 
         {/* =========================================================================
-            7. RESUME SECTION
+            06 / PRODUCTION API (FastAPI Backend Console)
            ========================================================================= */}
-        <ResumeSection config={config} />
+        <section id="fastapi" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-background">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="mb-8 sm:mb-12">
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
+                06 / Production API
+              </p>
+              <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
+                FastAPI REST Service.
+              </h2>
+            </div>
+            <FastApiBackendSection />
+          </div>
+        </section>
 
         {/* =========================================================================
-            7. CONTACT SECTION
+            07 / CODE REPOSITORIES (GitHub Repos)
            ========================================================================= */}
-        <ContactSection config={config} />
-      </main>
-
-      {/* =========================================================================
-          8. FOOTER
-         ========================================================================= */}
-      <footer id="site-footer" className="bg-[#14110e] text-stone-400 py-12 border-t border-amber-900/25 text-xs">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-amber-900/20">
-            <div>
-              <div className="text-sm font-bold text-stone-100 font-mono tracking-tight flex items-center gap-2">
-                <span>{config.name}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
-              </div>
-              <div className="text-stone-400 mt-0.5">
-                Data Scientist • Python &amp; Backend Developer • AI Video Creator
-              </div>
+        <section id="repos" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-muted">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="mb-8 sm:mb-12">
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-secondary">
+                07 / Open Source
+              </p>
+              <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
+                Production Code Repositories.
+              </h2>
             </div>
+            <GitHubReposSection />
+          </div>
+        </section>
 
-            {/* Clean footer links */}
-            <div className="flex flex-wrap items-center gap-6">
+        {/* =========================================================================
+            08 / EXECUTIVE RECORD & RESUME
+           ========================================================================= */}
+        <section id="resume" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-background">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="mb-8 sm:mb-12">
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-accent">
+                08 / Executive Record
+              </p>
+              <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
+                Curriculum Vitae &amp; Credentials.
+              </h2>
+            </div>
+            <ResumeSection config={activeConfig} />
+          </div>
+        </section>
+
+        {/* =========================================================================
+            09 / START A CONVERSATION & FOOTER
+           ========================================================================= */}
+        <section id="contact" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28">
+          <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
+            <div>
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
+                09 / Start a conversation
+              </p>
+              <h2 className="mt-4 sm:mt-5 max-w-4xl font-display text-3xl xs:text-4xl sm:text-6xl md:text-7xl uppercase leading-[.88] text-foreground">
+                Have a problem worth <span className="text-primary">solving?</span>
+              </h2>
+            </div>
+            <div>
+              <p className="text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
+                I&apos;m open to data and ML roles, engineering collaborations, and ambitious AI media projects.
+              </p>
               <a
-                href={config.github}
+                href={`mailto:${config.email || 'odunayoopamiju@gmail.com'}`}
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors bg-primary text-primary-foreground shadow-[var(--shadow-button)] hover:bg-primary/88 hover:-translate-y-0.5 h-12 rounded-xs px-6 text-sm mt-6 sm:mt-7 w-full sm:w-auto font-mono uppercase"
+              >
+                <Mail className="size-4" />
+                <span>Send an email</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Interactive Contact Form */}
+          <div className="mt-12 sm:mt-16">
+            <ContactSection config={activeConfig} />
+          </div>
+
+          {/* Site Footer */}
+          <footer className="mt-16 sm:mt-20 flex flex-col gap-4 sm:gap-5 border-t border-foreground/15 pt-6 sm:pt-7 sm:flex-row sm:items-center sm:justify-between text-foreground">
+            <span className="font-bold font-mono text-xs sm:text-sm">Build with Ope © 2026</span>
+            <div className="flex gap-3">
+              <a
+                href="https://github.com/kikibillz"
                 target="_blank"
                 rel="noreferrer"
-                id="footer-link-github"
-                className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
+                aria-label="GitHub"
+                className="inline-flex items-center justify-center size-9 rounded-full border border-foreground/20 bg-card hover:bg-foreground hover:text-background transition-colors"
               >
-                <Github className="w-3.5 h-3.5 text-amber-500/80" />
-                <span>GitHub</span>
+                <Github className="size-4" />
               </a>
-
               <a
                 href={config.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                id="footer-link-linkedin"
-                className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
+                aria-label="LinkedIn"
+                className="inline-flex items-center justify-center size-9 rounded-full border border-foreground/20 bg-card hover:bg-foreground hover:text-background transition-colors"
               >
-                <Linkedin className="w-3.5 h-3.5 text-amber-500/80" />
-                <span>LinkedIn</span>
+                <Linkedin className="size-4" />
               </a>
-
               <a
-                href={`mailto:${config.email}`}
-                id="footer-link-email"
-                className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
+                href={`mailto:${config.email || 'odunayoopamiju@gmail.com'}`}
+                aria-label="Email"
+                className="inline-flex items-center justify-center size-9 rounded-full border border-foreground/20 bg-card hover:bg-foreground hover:text-background transition-colors"
               >
-                <Mail className="w-3.5 h-3.5 text-amber-500/80" />
-                <span>Email</span>
+                <Mail className="size-4" />
               </a>
             </div>
-          </div>
+          </footer>
+        </section>
+      </main>
 
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-400 text-[11px] font-mono">
-            <div>
-              <span>&copy; 2026 {config.name}. All rights reserved.</span>
-            </div>
-            <div className="text-amber-500/80">
-              Data Science • Python Development • Generative Media
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/* Case Study Modal */}
+      {selectedProject && (
+        <ProjectCaseStudyModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+          onOpenStreamlit={(p) => {
+            setSelectedProject(null);
+            setStreamlitProject(p);
+          }}
+        />
+      )}
 
-      {/* Case Study Deep-Dive Modal */}
-      <ProjectCaseStudyModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      {/* Streamlit Live Preview Modal */}
+      {streamlitProject && (
+        <LiveStreamlitModal
+          project={streamlitProject}
+          onClose={() => setStreamlitProject(null)}
+        />
+      )}
 
-      {/* Live Streamlit Model Explorer Modal */}
-      <LiveStreamlitModal
-        project={streamlitProject}
-        isOpen={!!streamlitProject}
-        onClose={() => setStreamlitProject(null)}
-        onUpdateStreamlitUrl={(projectId, newUrl) => {
-          setAllProjects((prev) =>
-            prev.map((p) => (p.id === projectId ? { ...p, streamlitUrl: newUrl } : p))
-          );
-        }}
-      />
+      {/* AI Video Modal */}
+      {selectedVideo && (
+        <AIVideoModal
+          video={selectedVideo}
+          onClose={() => setSelectedVideo(null)}
+        />
+      )}
 
-      {/* AI Video Modal & Interactive Player */}
-      <AIVideoModal
-        video={selectedVideo}
-        onClose={() => setSelectedVideo(null)}
-      />
-
-      {/* Montoya-Inspired Floating Back to Top Trigger */}
+      {/* Floating Back to Top Button */}
       <BackToTop />
     </div>
   );

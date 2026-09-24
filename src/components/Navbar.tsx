@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { PortfolioConfig } from '../types';
-import { AnimatedName } from './AnimatedName';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
@@ -9,15 +8,12 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ config }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('about');
+  const [activeSection, setActiveSection] = useState('top');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      const sections = ['about', 'skills', 'projects', 'ai-videos', 'experience', 'certifications', 'resume', 'contact'];
+      const sections = ['top', 'work', 'skills', 'about', 'video', 'certifications', 'resume', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -48,68 +44,47 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
   }, []);
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'AI Videos', href: '#ai-videos' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Certifications', href: '#certifications' },
-    { label: 'Resume', href: '#resume' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Work', href: '#work', id: 'work' },
+    { label: 'Skills', href: '#skills', id: 'skills' },
+    { label: 'About', href: '#about', id: 'about' },
+    { label: 'AI video', href: '#video', id: 'video' },
+    { label: 'Certifications', href: '#certifications', id: 'certifications' },
+    { label: 'Resume', href: '#resume', id: 'resume' },
   ];
 
   return (
     <header
       id="site-header"
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
-        isScrolled
-          ? 'bg-background/95 backdrop-blur-md border-b-2 border-foreground py-2.5 shadow-sm'
-          : 'bg-background/80 backdrop-blur-xs py-3.5 sm:py-4 border-b border-border'
-      }`}
+      className="sticky top-0 z-50 border-b border-foreground/10 bg-background/90 backdrop-blur-xl transition-colors"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-10">
         {/* Brand / Logo */}
         <a
-          href="#"
+          href="#top"
           id="nav-brand"
           data-cursor-text="HOME"
-          className="group flex items-center gap-2.5 text-foreground font-display font-black tracking-tight text-base py-1"
+          className="flex items-center gap-3 group"
+          aria-label={`${config.name}, home`}
         >
-          {/* Architectural Graphic Logo Emblem */}
-          <div className="w-8 h-8 rounded-sm bg-primary text-primary-foreground flex items-center justify-center font-mono font-black text-xs border-2 border-foreground shadow-brutal-sm shrink-0 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform duration-150">
-            <svg
-              className="w-4 h-4 text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="7" cy="12" r="4.5" />
-              <circle cx="17" cy="12" r="4.5" />
-              <path d="M11.5 12h1" strokeWidth="2.5" />
-            </svg>
-          </div>
-          <AnimatedName name={config.name} variant="nav" />
-          <span className="text-muted-foreground text-xs hidden sm:inline-block font-mono border-l-2 border-foreground/30 pl-2 tracking-widest uppercase font-bold">
-            portfolio
+          <span className="grid size-9 place-items-center bg-foreground font-display text-sm text-background transition-transform group-hover:scale-105">
+            O.
+          </span>
+          <span className="font-bold text-foreground tracking-tight">
+            Build with Ope
           </span>
         </a>
 
         {/* Desktop Navigation */}
-        <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center gap-2">
+        <nav className="hidden items-center gap-7 text-sm font-semibold md:flex" aria-label="Main navigation">
           {navLinks.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
+            const isActive = activeSection === link.id;
             return (
               <a
                 key={link.href}
                 href={link.href}
-                id={`nav-link-${link.href.substring(1)}`}
-                className={`nav-link px-2.5 py-1 text-xs font-mono tracking-wider uppercase transition-colors ${
-                  isActive
-                    ? 'text-primary font-bold'
-                    : 'text-foreground/80 hover:text-foreground font-semibold'
+                id={`nav-link-${link.id}`}
+                className={`nav-link transition-colors ${
+                  isActive ? 'text-primary font-bold' : 'text-foreground/85 hover:text-foreground'
                 }`}
               >
                 {link.label}
@@ -118,75 +93,65 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
           })}
         </nav>
 
-        {/* Desktop Action & Theme Toggle */}
+        {/* Desktop Actions & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <a
             href="#contact"
             id="nav-cta-talk"
             data-cursor-text="TALK"
-            className="brutal-btn inline-flex items-center gap-1.5 text-xs font-mono font-bold tracking-wider uppercase bg-primary text-primary-foreground px-4 py-2 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed bg-primary text-primary-foreground shadow-[var(--shadow-button)] hover:bg-primary/88 hover:-translate-y-0.5 h-8 rounded-md px-3 text-xs"
           >
-            <span>Let&apos;s Talk</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Let&apos;s talk</span>
+            <ArrowUpRight className="size-4" />
           </a>
         </div>
 
-        {/* Mobile Actions: Theme Toggle + Hamburger with min 44px touch targets */}
-        <div className="flex md:hidden items-center gap-1.5">
+        {/* Mobile Actions */}
+        <div className="flex md:hidden items-center gap-2">
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
             type="button"
-            data-cursor-text="MENU"
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
-            className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer"
+            className="min-w-[40px] min-h-[40px] flex items-center justify-center p-2 text-foreground rounded-md hover:bg-foreground/5 transition-colors cursor-pointer"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown & Backdrop */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <>
           <div
-            className="fixed inset-0 top-[57px] bg-stone-950/40 dark:bg-black/60 backdrop-blur-xs md:hidden z-30 animate-in fade-in duration-150"
+            className="fixed inset-0 top-16 bg-foreground/20 backdrop-blur-xs md:hidden z-30"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <div
-            id="mobile-nav-menu"
-            className="relative z-40 md:hidden bg-[#fafaf9] dark:bg-[#121214] border-b border-stone-200 dark:border-stone-800 px-4 pt-3 pb-6 space-y-1 shadow-xl max-h-[calc(100vh-65px)] overflow-y-auto"
-          >
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
-              return (
+          <div className="relative md:hidden z-40 bg-background border-b border-foreground/15 px-5 py-6 space-y-4">
+            <nav className="flex flex-col space-y-3 font-semibold text-sm">
+              {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center min-h-[44px] px-3.5 py-2.5 text-base font-medium rounded-lg transition-colors ${
-                    isActive
-                      ? 'bg-stone-200/80 dark:bg-stone-800 text-stone-950 dark:text-stone-100 font-semibold'
-                      : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800/80'
-                  }`}
+                  className="px-2 py-1.5 text-foreground hover:text-primary transition-colors"
                 >
                   {link.label}
                 </a>
-              );
-            })}
-            <div className="pt-3 mt-2 border-t border-stone-200 dark:border-stone-800 flex flex-col gap-3">
-              <ThemeToggle variant="expanded" />
+              ))}
+            </nav>
+            <div className="pt-3 border-t border-foreground/10">
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 text-center text-sm font-semibold min-h-[44px] text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 active:bg-stone-800 dark:active:bg-white px-4 py-2.5 rounded-lg transition-colors shadow-sm cursor-pointer"
+                className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground shadow-[var(--shadow-button)] h-10 rounded-md text-xs font-bold uppercase tracking-wider"
               >
-                <span>Let&apos;s Talk</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <span>Let&apos;s talk</span>
+                <ArrowUpRight className="size-4" />
               </a>
             </div>
           </div>

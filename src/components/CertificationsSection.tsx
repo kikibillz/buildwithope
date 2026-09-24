@@ -105,7 +105,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
   return (
     <section
       id="certifications"
-      className="py-20 sm:py-28 lg:py-32 border-b border-amber-900/10 dark:border-amber-500/15 bg-[#f6f2ea] dark:bg-[#181512] transition-colors"
+      className="py-20 sm:py-28 lg:py-32 border-b border-foreground/15 bg-background text-foreground transition-colors"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
@@ -113,18 +113,17 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
         >
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium text-amber-900 dark:text-amber-200 bg-amber-500/15 dark:bg-amber-500/20 border border-amber-500/30 mb-3 shadow-2xs">
-              <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-              <span>Verified Qualifications &amp; Licenses</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-stone-900 dark:text-stone-100 mb-3">
-              Certifications &amp; Licenses
+            <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary mb-2">
+              05 / Credentials
+            </p>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display uppercase leading-[.92] text-foreground mb-3">
+              13 Verified Certifications.
             </h2>
-            <p className="text-base text-stone-600 dark:text-stone-400 leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed font-sans">
               Verified credentials, specialized industry certifications, and accredited licenses spanning Data Science, Product Management, UI/UX, Agile Operations, and AI workflows.
             </p>
           </div>
@@ -137,12 +136,12 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
               rel="noreferrer"
               id="btn-linkedin-certifications"
               data-cursor-text="LINKEDIN"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-[#1a1714] text-stone-800 dark:text-stone-200 hover:text-amber-900 dark:hover:text-amber-200 border border-amber-900/15 dark:border-amber-500/20 hover:border-amber-500/50 shadow-2xs hover:shadow-xs transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xs text-xs font-mono font-bold uppercase bg-card text-foreground border-2 border-foreground shadow-brutal-sm hover:shadow-brutal hover:-translate-y-0.5 transition-all"
               title="View all 13 credentials on LinkedIn"
             >
-              <Linkedin className="w-4 h-4 text-[#0077b5]" />
+              <Linkedin className="w-4 h-4 text-primary" />
               <span>LinkedIn Credentials</span>
-              <ExternalLink className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500 ml-0.5" />
+              <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
             </a>
           </div>
         </motion.div>
@@ -150,7 +149,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
         {/* Filter and Search Controls */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-8">
           {/* Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none font-mono">
             {categories.map((cat) => {
               const count =
                 cat === 'All'
@@ -163,18 +162,18 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   data-cursor-text={cat === 'All' ? 'ALL' : 'FILTER'}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono transition-all whitespace-nowrap cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xs text-xs font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
                     isActive
-                      ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold shadow-xs'
-                      : 'bg-amber-500/10 dark:bg-[#1a1714] text-stone-700 dark:text-stone-300 hover:bg-amber-500/20 border border-amber-500/20'
+                      ? 'bg-foreground text-background shadow-brutal-sm'
+                      : 'border border-foreground/20 text-foreground/70 hover:text-foreground'
                   }`}
                 >
                   <span>{cat}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                    className={`text-[10px] px-1.5 py-0.2 rounded-xs ${
                       isActive
-                        ? 'bg-white/25 text-current'
-                        : 'bg-amber-900/10 dark:bg-white/10 text-stone-600 dark:text-stone-300'
+                        ? 'bg-background text-foreground'
+                        : 'bg-muted text-foreground'
                     }`}
                   >
                     {count}
@@ -186,13 +185,13 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
 
           {/* Search Input */}
           <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 text-amber-700/60 dark:text-amber-400/60 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-3.5 h-3.5 text-foreground/50 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              placeholder="Search credentials, skills..."
+              placeholder="Search credentials..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 rounded-full text-xs bg-white/90 dark:bg-[#1a1714] border border-amber-900/15 dark:border-amber-500/20 text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 transition-colors shadow-2xs"
+              className="w-full pl-8 pr-3 py-1.5 rounded-xs text-xs font-mono bg-card border border-foreground/30 text-foreground placeholder-foreground/50 focus:outline-none focus:border-foreground"
             />
           </div>
         </div>
@@ -266,18 +265,18 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.5, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white/95 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-400/40 rounded-2xl p-5.5 shadow-2xs hover:shadow-[0_8px_30px_rgba(234,88,12,0.12)] transition-all duration-300 flex flex-col justify-between group w-[310px] sm:w-[350px] md:w-[380px] shrink-0 snap-start print:w-full"
+                  className="bg-card text-foreground border-2 border-foreground rounded-xs p-6 shadow-brutal hover:shadow-brutal-lg transition-all duration-200 flex flex-col justify-between group w-[310px] sm:w-[350px] md:w-[380px] shrink-0 snap-start print:w-full"
                 >
                   <div>
                     {/* Category & Date */}
-                    <div className="flex items-center justify-between gap-2 mb-2.5">
-                      <span className="inline-flex items-center gap-1 text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-md bg-amber-500/10 dark:bg-amber-500/15 text-amber-900 dark:text-amber-200 border border-amber-500/20">
-                        <BadgeCheck className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-xs bg-muted text-foreground border border-foreground/30">
+                        <BadgeCheck className="w-3.5 h-3.5 text-primary" />
                         <span>{cert.category || 'Professional'}</span>
                       </span>
 
                       {(cert.issueDate || cert.expiresDate) && (
-                        <span className="text-[11px] font-mono text-stone-500 dark:text-stone-400 text-right">
+                        <span className="text-[11px] font-mono text-foreground/70 font-semibold text-right">
                           {cert.issueDate && `Issued ${cert.issueDate}`}
                           {cert.expiresDate && ` · Exp ${cert.expiresDate}`}
                         </span>
@@ -285,35 +284,35 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                     </div>
 
                     {/* Title & Issuer */}
-                    <h3 className="text-base font-display font-bold text-stone-900 dark:text-stone-100 mb-1 leading-snug group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                    <h3 className="text-base sm:text-lg font-display font-black text-foreground mb-1 leading-snug group-hover:text-primary transition-colors">
                       {cert.title}
                     </h3>
-                    <div className="text-xs font-mono font-medium text-stone-600 dark:text-stone-400 mb-2.5">
+                    <div className="text-xs font-mono font-bold text-foreground/80 mb-3">
                       {cert.issuer}
                     </div>
 
                     {/* Credential ID badge if present */}
                     {cert.credentialId && (
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#fdfbf7] dark:bg-[#15120f] text-stone-600 dark:text-stone-400 font-mono text-[10.5px] border border-amber-900/10 dark:border-amber-500/15 mb-3">
-                        <Key className="w-2.5 h-2.5 text-amber-600/70 dark:text-amber-400/70 shrink-0" />
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-muted text-foreground font-mono text-[11px] border border-foreground/30 mb-3">
+                        <Key className="w-3 h-3 text-foreground/70 shrink-0" />
                         <span>ID: <strong>{cert.credentialId}</strong></span>
                       </div>
                     )}
 
                     {/* Description */}
                     {cert.description && (
-                      <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed mb-3.5 line-clamp-3">
+                      <p className="text-xs text-foreground/80 leading-relaxed font-sans mb-4 line-clamp-3">
                         {cert.description}
                       </p>
                     )}
 
                     {/* Skills tags */}
                     {cert.skills && cert.skills.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mb-4">
+                      <div className="flex flex-wrap gap-1.5 mb-4">
                         {cert.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2 py-0.5 rounded-md bg-[#fdfbf7] dark:bg-[#201c18] text-stone-700 dark:text-stone-300 font-mono text-[10.5px] border border-amber-900/10 dark:border-amber-500/15"
+                            className="px-2 py-0.5 rounded-xs bg-muted text-foreground font-mono text-[10.5px] font-semibold border border-foreground/30"
                           >
                             {skill}
                           </span>
@@ -323,9 +322,9 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   </div>
 
                   {/* Action Footer */}
-                  <div className="pt-3 border-t border-amber-900/10 dark:border-amber-500/15 flex items-center justify-between text-xs">
-                    <span className="inline-flex items-center gap-1 text-[11px] text-amber-800 dark:text-amber-300 font-mono">
-                      <CheckCircle2 className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+                  <div className="pt-3 border-t border-foreground/15 flex items-center justify-between text-xs">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-foreground">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-status-foreground fill-status" />
                       Verified
                     </span>
 
@@ -335,10 +334,10 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                       rel="noreferrer"
                       id={`cert-link-${cert.id}`}
                       data-cursor-text="VIEW"
-                      className="inline-flex items-center gap-1 text-xs font-medium text-stone-800 dark:text-stone-200 hover:text-amber-600 dark:hover:text-amber-400 group-hover:underline transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-foreground hover:text-primary transition-colors uppercase"
                     >
                       <span>View on LinkedIn</span>
-                      <ExternalLink className="w-3 h-3 text-stone-400 ml-0.5" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 </motion.div>
@@ -346,7 +345,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             </div>
 
             {/* Pagination indicator dots */}
-            <div className="flex items-center justify-center gap-1.5 mt-4 print:hidden">
+            <div className="flex items-center justify-center gap-2 mt-4 print:hidden">
               {filteredCertifications.map((c, dotIdx) => (
                 <button
                   key={c.id}
@@ -354,10 +353,10 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   onClick={() => scrollToCert(dotIdx)}
                   aria-label={`Jump to credential ${dotIdx + 1}: ${c.title}`}
                   data-cursor-text={`${dotIdx + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  className={`h-2 rounded-xs transition-all duration-200 cursor-pointer ${
                     dotIdx === activeCertIndex
-                      ? 'w-7 bg-gradient-to-r from-amber-500 to-orange-500 shadow-xs'
-                      : 'w-1.5 bg-amber-900/20 dark:bg-amber-400/20 hover:bg-amber-500/50'
+                      ? 'w-8 bg-foreground shadow-brutal-sm'
+                      : 'w-2 bg-foreground/20 hover:bg-foreground/50'
                   }`}
                 />
               ))}
@@ -366,13 +365,13 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
         )}
 
         {/* Live sync callout */}
-        <div className="mt-10 bg-amber-500/10 dark:bg-[#1a1714] border border-amber-500/20 dark:border-amber-500/20 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="mt-10 bg-card border-2 border-foreground rounded-xs p-5 shadow-brutal flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-white dark:bg-[#201c18] border border-amber-500/25 flex items-center justify-center text-stone-700 dark:text-stone-300 shrink-0 shadow-2xs">
-              <Shield className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+            <div className="w-9 h-9 rounded-xs bg-highlight text-highlight-foreground border border-foreground flex items-center justify-center shrink-0">
+              <Shield className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-stone-900 dark:text-stone-100 font-mono">
+              <div className="text-xs font-bold text-foreground font-mono uppercase tracking-wider">
                 {certifications.length} Verified Licenses &amp; Certificates
               </div>
             </div>
@@ -383,10 +382,10 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             target="_blank"
             rel="noreferrer"
             id="cert-callout-linkedin"
-            className="shrink-0 inline-flex items-center gap-1.5 text-xs font-mono font-medium text-amber-800 dark:text-amber-300 hover:text-amber-950 dark:hover:text-amber-100 hover:underline"
+            className="shrink-0 inline-flex items-center gap-2 text-xs font-mono font-bold text-foreground hover:text-primary uppercase"
           >
-            <span>Open linkedin.com/in/opeyemiolamiju/details/certifications</span>
-            <ExternalLink className="w-3 h-3" />
+            <span>Open LinkedIn Certifications</span>
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
       </div>

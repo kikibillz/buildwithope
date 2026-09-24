@@ -36,17 +36,17 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
         </motion.div>
 
         {/* Action Controls (hidden on print) */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-10 print:hidden">
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-10 print:hidden font-mono text-xs font-bold uppercase">
           <a
             href={resumePdfPath}
             download="Opeyemi_Olamiju_Resume.pdf"
             id="btn-download-resume"
             data-cursor-text="DOWNLOAD"
-            className="inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-semibold text-sm px-6 py-2.5 rounded-full transition-all shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground shadow-[var(--shadow-button)] hover:bg-primary/88 px-5 py-3 rounded-xs transition-transform hover:-translate-y-0.5 cursor-pointer"
           >
             <Download className="w-4 h-4 text-white" />
             <span>Download PDF Résumé</span>
-            <span className="text-[11px] font-mono opacity-80 px-2 py-0.5 rounded-full bg-white/20">
+            <span className="text-[10px] font-mono opacity-80 px-1.5 py-0.5 rounded-xs bg-white/20">
               .PDF
             </span>
           </a>
@@ -56,9 +56,9 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             onClick={() => window.print()}
             id="btn-print-portfolio"
             data-cursor-text="PRINT"
-            className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1714] hover:bg-amber-50 dark:hover:bg-[#221d19] text-stone-800 dark:text-stone-200 border border-amber-900/15 dark:border-amber-500/20 font-medium text-sm px-5 py-2.5 rounded-full transition-all shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-2 bg-card text-foreground border-2 border-foreground shadow-brutal-sm hover:shadow-brutal px-5 py-3 rounded-xs transition-transform hover:-translate-y-0.5 cursor-pointer"
           >
-            <Printer className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+            <Printer className="w-4 h-4 text-primary" />
             <span>Print Portfolio to PDF</span>
           </button>
 
@@ -68,10 +68,10 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             rel="noreferrer"
             id="btn-view-printable-cv"
             data-cursor-text="VIEW"
-            className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1714] hover:bg-amber-50 dark:hover:bg-[#221d19] text-stone-800 dark:text-stone-200 border border-amber-900/15 dark:border-amber-500/20 font-medium text-sm px-5 py-2.5 rounded-full transition-all shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-2 bg-card text-foreground border-2 border-foreground shadow-brutal-sm hover:shadow-brutal px-5 py-3 rounded-xs transition-transform hover:-translate-y-0.5 cursor-pointer"
           >
-            <ExternalLink className="w-4 h-4 text-amber-700/60 dark:text-amber-400/60" />
-            <span>View Standalone HTML CV</span>
+            <ExternalLink className="w-4 h-4 text-secondary" />
+            <span>Standalone HTML CV</span>
           </a>
 
           <button
@@ -79,32 +79,32 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
             onClick={() => setShowFullPreview(!showFullPreview)}
             id="btn-toggle-resume-preview"
             data-cursor-text="PREVIEW"
-            className="inline-flex items-center gap-2 bg-amber-500/10 dark:bg-[#1e1915] hover:bg-amber-500/20 text-stone-800 dark:text-stone-200 border border-amber-500/20 font-medium text-sm px-5 py-2.5 rounded-full transition-all shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-2 bg-muted text-foreground border-2 border-foreground shadow-brutal-sm px-4 py-3 rounded-xs transition-transform cursor-pointer"
           >
-            <FileText className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-            <span>{showFullPreview ? 'Hide On-Page Preview' : 'Expand On-Page Preview'}</span>
+            <FileText className="w-3.5 h-3.5" />
+            <span>{showFullPreview ? 'Hide Preview' : 'Expand Preview'}</span>
             {showFullPreview ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
         </div>
 
         {/* Executive Resume Card Preview */}
-        <div className="bg-white/95 dark:bg-[#1a1714] rounded-2xl border border-amber-900/15 dark:border-amber-500/20 shadow-sm overflow-hidden transition-all">
+        <div className="bg-card text-foreground rounded-xs border-2 border-foreground shadow-brutal overflow-hidden transition-all">
           {/* Card Top Banner */}
-          <div className="p-6 sm:p-8 border-b border-amber-900/10 dark:border-amber-500/15 bg-amber-50/30 dark:bg-[#15120f]/60">
+          <div className="p-6 sm:p-8 border-b-2 border-foreground bg-muted/60">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl sm:text-2xl font-bold text-stone-900 dark:text-stone-100">
+                  <span className="text-xl sm:text-2xl font-black font-display text-foreground">
                     OPEYEMI OLAMIJU
                   </span>
-                  <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-amber-500/15 text-amber-900 dark:text-amber-200 border border-amber-500/30">
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-xs bg-highlight text-highlight-foreground border border-foreground">
                     Build with Ope
                   </span>
                 </div>
-                <p className="text-sm font-medium text-stone-600 dark:text-stone-400 mt-1">
+                <p className="text-sm font-bold text-foreground/80 mt-1 font-mono">
                   Data Scientist • Python &amp; FastAPI Backend Developer • AI Video Creator
                 </p>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-mono text-stone-500 dark:text-stone-400 mt-2">
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-mono text-foreground/70 mt-2">
                   <span>📍 Lagos, Nigeria</span>
                   <span>✉️ {config.email}</span>
                   <span>💻 github.com/kikibillz</span>
@@ -112,11 +112,11 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ config }) => {
               </div>
 
               <div className="shrink-0 flex sm:flex-col items-start sm:items-end gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-900 dark:text-amber-200 border border-amber-500/25 text-xs font-mono">
-                  <CheckCircle2 className="w-3 h-3 text-amber-600 dark:text-amber-400" />
-                  Available for Roles &amp; Contracts
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-status text-status-foreground border border-foreground text-xs font-mono font-bold shadow-brutal-sm">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  Available for Roles
                 </span>
-                <span className="text-[11px] font-mono text-stone-400 dark:text-stone-500">
+                <span className="text-[11px] font-mono text-foreground/70 font-semibold">
                   BSc in Computer Science (2023)
                 </span>
               </div>

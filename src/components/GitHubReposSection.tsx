@@ -241,10 +241,10 @@ export const GitHubReposSection: React.FC = () => {
                 key={cat}
                 onClick={() => setFilter(cat)}
                 data-cursor-text={cat === 'All' ? 'ALL' : 'FILTER'}
-                className={`text-xs px-3 py-1 rounded-full transition-all font-medium cursor-pointer ${
+                className={`text-xs px-3 py-1 rounded-xs transition-all font-mono font-bold uppercase cursor-pointer ${
                   filter === cat
-                    ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold shadow-xs'
-                    : 'text-stone-600 dark:text-stone-400 hover:text-amber-900 dark:hover:text-amber-200'
+                    ? 'bg-foreground text-background shadow-brutal-sm'
+                    : 'text-foreground/70 hover:text-foreground border border-foreground/20'
                 }`}
               >
                 {cat}
@@ -256,66 +256,66 @@ export const GitHubReposSection: React.FC = () => {
 
       {/* Repositories Display */}
       {viewMode === 'visual' ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredRepos.map((repo, idx) => (
             <motion.div
               key={repo.name}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white/95 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-amber-500/50 dark:hover:border-amber-400/40 hover:shadow-[0_10px_35px_rgba(234,88,12,0.12)] transition-all group"
+              transition={{ duration: 0.4, delay: idx * 0.04 }}
+              className="bg-card text-foreground border-2 border-foreground rounded-xs overflow-hidden flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition-all group"
             >
               <div>
                 {/* Visual Screenshot with Hover Animation */}
-                <div className="p-2 pb-0">
+                <div className="p-2 pb-0 bg-muted/40 border-b border-foreground/15">
                   <RepoDemoScreenshotPreview repo={repo} />
                 </div>
 
                 {/* Card Content */}
-                <div className="p-4 pt-3">
-                  <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-mono text-stone-500 dark:text-stone-400">
-                      <FolderGit2 className="w-3.5 h-3.5 text-amber-700/60 dark:text-amber-400/60" />
+                <div className="p-5 pt-4">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-foreground">
+                      <FolderGit2 className="w-3.5 h-3.5 text-primary" />
                       <span>{repo.language || 'Code'}</span>
                     </span>
                     {repo.isFeatured && (
-                      <span className="text-[10px] font-mono text-amber-900 dark:text-amber-200 bg-amber-500/15 dark:bg-amber-500/20 border border-amber-500/30 px-1.5 py-0.2 rounded font-medium flex items-center gap-1">
-                        <Sparkles className="w-2.5 h-2.5 text-amber-600 dark:text-amber-400" />
+                      <span className="text-[10px] font-mono text-foreground bg-highlight px-2 py-0.5 rounded-xs font-bold border border-foreground uppercase flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5" />
                         <span>Featured</span>
                       </span>
                     )}
                   </div>
 
-                  <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100 font-mono tracking-tight mb-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                  <h4 className="text-base font-bold text-foreground font-mono tracking-tight mb-2 group-hover:text-primary transition-colors">
                     {repo.displayName}
                   </h4>
-                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed font-sans mb-3 line-clamp-2">
+                  <p className="text-xs text-foreground/80 leading-relaxed font-sans mb-3 line-clamp-2">
                     {repo.description}
                   </p>
                 </div>
               </div>
 
-              <div className="p-4 pt-0">
-                <div className="flex flex-wrap gap-1 mb-3 pt-2.5 border-t border-amber-900/10 dark:border-amber-500/15">
+              <div className="p-5 pt-0">
+                <div className="flex flex-wrap gap-1 mb-3 pt-3 border-t border-foreground/15">
                   {repo.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] font-mono bg-[#fdfbf7] dark:bg-[#201c18] text-stone-700 dark:text-stone-300 px-1.5 py-0.5 rounded border border-amber-900/10 dark:border-amber-500/15"
+                      className="text-[10px] font-mono font-semibold bg-muted text-foreground px-2 py-0.5 rounded-xs border border-foreground/30"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-amber-900/10 dark:border-amber-500/15 text-xs">
+                <div className="flex items-center justify-between pt-3 border-t border-foreground/15 text-xs">
                   <a
                     href={repo.html_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-stone-800 dark:text-stone-200 hover:text-amber-900 dark:hover:text-amber-200 font-medium hover:underline"
+                    className="inline-flex items-center gap-1.5 font-mono text-foreground hover:text-primary font-bold transition-colors"
                   >
-                    <Github className="w-3.5 h-3.5" />
+                    <Github className="w-4 h-4" />
                     <span>View Code</span>
                   </a>
 
