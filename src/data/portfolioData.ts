@@ -5,7 +5,7 @@ export const initialConfig: PortfolioConfig = {
   title: 'Data Scientist & AI Video Creator',
   subTitle: 'Data Scientist | AI Video Creator & Generative Media | Python Developer',
   email: 'odunayoopamiju@gmail.com',
-  location: 'Lagos, Nigeria',
+  location: 'Remote & Relocation Ready',
   linkedin: 'https://www.linkedin.com/in/opeyemiolamiju/',
   github: 'https://github.com/kikibillz',
   resumeUrl: '/Opeyemi_Olamiju_Resume.pdf',

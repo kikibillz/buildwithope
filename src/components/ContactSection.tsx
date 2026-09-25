@@ -245,8 +245,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase">Location</div>
-                    <div className="text-xs sm:text-sm font-medium text-stone-900 dark:text-stone-100">{config.location}</div>
+                    <div className="text-[10px] font-mono text-stone-500 dark:text-stone-400 uppercase">Availability</div>
+                    <div className="text-xs sm:text-sm font-medium text-stone-900 dark:text-stone-100">{config.location || 'Remote & Relocation Ready'}</div>
                   </div>
                 </div>
               </div>

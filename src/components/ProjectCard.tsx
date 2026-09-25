@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Github, ExternalLink, ArrowRight, Play, TrendingUp } from 'lucide-react';
+import {
+  Github,
+  ExternalLink,
+  ArrowRight,
+  Play,
+  TrendingUp,
+  Maximize2,
+  Terminal,
+  FileSpreadsheet,
+  ShieldAlert,
+  Binary,
+  CheckCircle2,
+  Cpu,
+  Layers,
+} from 'lucide-react';
 import { Project } from '../types';
-import { ProjectDemoSection } from './ProjectDemoSection';
+
+import bankChurnImg from '../assets/images/bank_churn_app_1789401191137.jpg';
+import hrAnalyticsImg from '../assets/images/hr_analytics_app_1789401204328.jpg';
+import leadFinderImg from '../assets/images/lead_finder_app_1789401276532.jpg';
+import begiBegiImg from '../assets/images/begibegi_site_1789401219333.jpg';
+import careerBoostImg from '../assets/images/career_boost_site_1789401234185.jpg';
 
 interface ProjectCardProps {
   project: Project;
@@ -12,12 +31,6 @@ interface ProjectCardProps {
   className?: string;
 }
 
-const tintStyles = [
-  { badgeBg: 'bg-project-one text-foreground border-foreground', ribbon: 'bg-project-one/20 border-foreground text-foreground' },
-  { badgeBg: 'bg-project-two text-foreground border-foreground', ribbon: 'bg-project-two/20 border-foreground text-foreground' },
-  { badgeBg: 'bg-project-three text-foreground border-foreground', ribbon: 'bg-project-three/20 border-foreground text-foreground' },
-];
-
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   index = 0,
@@ -25,205 +38,479 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onOpenStreamlit,
   className,
 }) => {
-  const currentTint = tintStyles[index % 3];
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Status and URL for mockup browser chrome
+  const getMockupMeta = () => {
+    switch (project.id) {
+      case 'fastapi-ml-service':
+        return {
+          url: 'fastapi-service.internal/docs',
+          type: 'FastAPI ASGI',
+          status: 'Active · < 15ms',
+          accent: 'text-teal-400',
+        };
+      case 'python-automated-ledger':
+        return {
+          url: 'client-ledger-automated.xlsx',
+          type: 'Excel & Sheets ETL',
+          status: '100% Tax Accuracy',
+          accent: 'text-emerald-400',
+        };
+      case 'bank-churn':
+        return {
+          url: 'bank-customer-churn.streamlit.app',
+          type: 'Streamlit Cloud',
+          status: '86.4% Recall',
+          accent: 'text-rose-400',
+        };
+      case 'hr-analytics':
+      case 'hr-attrition':
+        return {
+          url: 'hr-analytics-2026.streamlit.app',
+          type: 'Streamlit Cloud',
+          status: '87.1% Accuracy',
+          accent: 'text-cyan-400',
+        };
+      case 'lead-finder':
+        return {
+          url: 'api.cqc.org.uk/python-etl',
+          type: 'REST Automation',
+          status: '100 hrs/mo saved',
+          accent: 'text-amber-400',
+        };
+      case 'begi-begi':
+        return {
+          url: 'begi-begi.vercel.app',
+          type: 'Vercel Production',
+          status: 'Live Web App',
+          accent: 'text-emerald-400',
+        };
+      case 'career-boost':
+      case 'nigerian-career-boost-hub':
+        return {
+          url: 'career-boostng.vercel.app',
+          type: 'Vercel Production',
+          status: 'Live Web App',
+          accent: 'text-blue-400',
+        };
+      case 'safesite':
+        return {
+          url: 'safesite-incident-risk.streamlit.app',
+          type: 'Safety Classifier',
+          status: '3 Risk Tiers',
+          accent: 'text-orange-400',
+        };
+      case 'income-prediction':
+      default:
+        return {
+          url: 'census-income-pipeline.py',
+          type: 'Scikit-learn ML',
+          status: 'ROC-AUC 0.868',
+          accent: 'text-indigo-400',
+        };
+    }
+  };
+
+  const mockupMeta = getMockupMeta();
+
+  // Render 16:9 Visual Preview
+  const renderVisualContent = () => {
+    switch (project.id) {
+      case 'bank-churn':
+        return (
+          <img
+            src={bankChurnImg}
+            alt="Bank Customer Churn Predictor"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        );
+      case 'hr-analytics':
+      case 'hr-attrition':
+        return (
+          <img
+            src={hrAnalyticsImg}
+            alt="HR Workforce Analytics System"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        );
+      case 'lead-finder':
+        return (
+          <img
+            src={leadFinderImg}
+            alt="Healthcare Provider Data Extraction Tool"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        );
+      case 'begi-begi':
+        return (
+          <img
+            src={begiBegiImg}
+            alt="Begi-Begi Social Micro-Funding Platform"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        );
+      case 'career-boost':
+      case 'nigerian-career-boost-hub':
+        return (
+          <img
+            src={careerBoostImg}
+            alt="Career Boost Platform"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        );
+      case 'fastapi-ml-service':
+        return (
+          <div className="w-full h-full bg-[#0a0f18] text-slate-100 p-3 sm:p-4 flex flex-col justify-between font-mono text-[11px] select-none">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-[10px] text-slate-400 border-b border-slate-800 pb-1.5">
+                <span className="flex items-center gap-1.5 text-teal-400 font-bold">
+                  <Terminal className="size-3" />
+                  FastAPI OpenAPI Swagger UI
+                </span>
+                <span className="bg-teal-950/80 text-teal-300 px-1.5 py-0.5 rounded border border-teal-800 text-[9px]">
+                  v2.0 Pydantic
+                </span>
+              </div>
+              <div className="bg-slate-900/90 border border-emerald-900/40 rounded p-2 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="bg-emerald-600 text-slate-950 font-bold px-1.5 py-0.5 rounded text-[10px]">
+                    POST
+                  </span>
+                  <span className="text-slate-200 font-semibold text-xs">/api/v1/predict/churn</span>
+                </div>
+                <span className="text-emerald-400 font-bold text-[10px]">200 OK · 12ms</span>
+              </div>
+              <div className="bg-slate-900/90 border border-blue-900/40 rounded p-2 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="bg-blue-600 text-slate-950 font-bold px-1.5 py-0.5 rounded text-[10px]">
+                    POST
+                  </span>
+                  <span className="text-slate-200 font-semibold text-xs">/api/v1/predict/attrition</span>
+                </div>
+                <span className="text-blue-400 font-bold text-[10px]">200 OK · 14ms</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-slate-800/80">
+              <span className="text-teal-400">Lifespan Hooks: XGBoost &amp; Joblib</span>
+              <span className="text-slate-300">Pytest Coverage: 92%</span>
+            </div>
+          </div>
+        );
+      case 'python-automated-ledger':
+        return (
+          <div className="w-full h-full bg-[#06140e] text-slate-100 p-3 sm:p-4 flex flex-col justify-between font-mono text-[11px] select-none">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-[10px] text-slate-400 border-b border-emerald-950 pb-1.5">
+                <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                  <FileSpreadsheet className="size-3" />
+                  Automated Reconciliation Ledger
+                </span>
+                <span className="bg-emerald-950 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-800 text-[9px]">
+                  OpenPyXL + Pandas
+                </span>
+              </div>
+              <div className="grid grid-cols-4 gap-1 text-[10px] bg-emerald-950/60 p-1.5 rounded border border-emerald-800/50 text-emerald-200 font-semibold">
+                <span>Invoice #</span>
+                <span>Client</span>
+                <span className="text-right">Gross</span>
+                <span className="text-right">Net (80%)</span>
+              </div>
+              <div className="space-y-1 text-[10px]">
+                <div className="grid grid-cols-4 gap-1 bg-slate-900/80 px-1.5 py-1 rounded border border-slate-800">
+                  <span className="text-emerald-400 font-bold">INV-1042</span>
+                  <span className="truncate text-slate-300">Nexus Fintech</span>
+                  <span className="text-right text-slate-200">$4,500</span>
+                  <span className="text-right text-emerald-300 font-bold">$3,600</span>
+                </div>
+                <div className="grid grid-cols-4 gap-1 bg-slate-900/80 px-1.5 py-1 rounded border border-slate-800">
+                  <span className="text-emerald-400 font-bold">INV-1043</span>
+                  <span className="truncate text-slate-300">Crestview Media</span>
+                  <span className="text-right text-slate-200">$3,200</span>
+                  <span className="text-right text-emerald-300 font-bold">$2,560</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-emerald-950">
+              <span className="text-emerald-400 font-bold">=SUM(Net) Auto-Computed</span>
+              <span className="text-slate-300">85% Faster Bookkeeping</span>
+            </div>
+          </div>
+        );
+      case 'safesite':
+        return (
+          <div className="w-full h-full bg-[#140f07] text-slate-100 p-3 sm:p-4 flex flex-col justify-between font-mono text-[11px] select-none">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-[10px] text-slate-400 border-b border-orange-950 pb-1.5">
+                <span className="flex items-center gap-1.5 text-orange-400 font-bold">
+                  <ShieldAlert className="size-3" />
+                  SafeSite Incident Stratification Engine
+                </span>
+                <span className="bg-orange-950 text-orange-300 px-1.5 py-0.5 rounded border border-orange-800 text-[9px]">
+                  Scikit-learn RF
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between bg-red-950/40 border border-red-800/50 p-1.5 rounded">
+                  <span className="text-red-400 font-bold text-xs">Tier 1: High Hazard Incident</span>
+                  <span className="text-[10px] text-red-300 font-mono">Immediate Alert</span>
+                </div>
+                <div className="flex items-center justify-between bg-amber-950/40 border border-amber-800/50 p-1.5 rounded">
+                  <span className="text-amber-400 font-bold text-xs">Tier 2: Moderate Operational Risk</span>
+                  <span className="text-[10px] text-amber-300 font-mono">Monitor Shift</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-orange-950">
+              <span className="text-orange-400 font-bold">40% Faster Intervention</span>
+              <span className="text-slate-300">Macro-F1 Precision Focus</span>
+            </div>
+          </div>
+        );
+      case 'income-prediction':
+      default:
+        return (
+          <div className="w-full h-full bg-[#0b101b] text-slate-100 p-3 sm:p-4 flex flex-col justify-between font-mono text-[11px] select-none">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-[10px] text-slate-400 border-b border-indigo-950 pb-1.5">
+                <span className="flex items-center gap-1.5 text-indigo-400 font-bold">
+                  <Cpu className="size-3" />
+                  Census Income Classification Pipeline
+                </span>
+                <span className="bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-800 text-[9px]">
+                  ColumnTransformer
+                </span>
+              </div>
+              <div className="bg-slate-900/90 border border-indigo-900/40 rounded p-2.5 flex items-center justify-between">
+                <div>
+                  <div className="text-[10px] text-slate-400">Predicted Socioeconomic Bracket</div>
+                  <div className="text-emerald-400 font-extrabold text-sm sm:text-base mt-0.5">
+                    &gt; $50,000 / yr (84% Probability)
+                  </div>
+                </div>
+                <span className="text-indigo-400 font-bold text-xs bg-indigo-950 px-2 py-1 rounded border border-indigo-800">
+                  ROC-AUC: 0.868
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-indigo-950">
+              <span className="text-indigo-400">Zero Data Leakage Guard</span>
+              <span className="text-slate-300">5-Fold Stratified Split</span>
+            </div>
+          </div>
+        );
+    }
+  };
 
   return (
     <motion.article
       id={`project-card-${project.id}`}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className={`group bg-card border-2 border-foreground rounded-sm overflow-hidden shadow-brutal hover:shadow-brutal-lg transition-all duration-200 flex flex-col justify-between ${
         className || ''
       }`}
     >
-      <div className="p-6 sm:p-8">
-        {/* Top meta & Editorial Numbering */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <span className={`text-xs font-mono font-black tracking-wider px-2 py-0.5 border-2 border-foreground rounded-sm ${currentTint.badgeBg}`}>
-              PROJ {String(index + 1).padStart(2, '0')}
-            </span>
-            <span className="text-xs font-mono font-bold text-foreground/70 uppercase tracking-wider">
-              {project.category}
+      {/* 1. TOP 16:9 VISUAL PREVIEW FRAME (Uniform across all cards) */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-stone-950 border-b-2 border-foreground cursor-pointer select-none">
+        {/* Mockup Browser / Terminal Chrome Bar */}
+        <div className="bg-stone-950/95 text-stone-400 px-3 py-1.5 border-b border-stone-800 flex items-center justify-between text-[11px] font-mono z-10 relative">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shrink-0" />
+            <span className="text-stone-400 font-mono text-[10px] ml-1 truncate">
+              {mockupMeta.url}
             </span>
           </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-[10px] bg-stone-900 text-stone-300 px-2 py-0.5 rounded border border-stone-800 font-semibold hidden xs:inline">
+              {mockupMeta.type}
+            </span>
+            <span className={`text-[10px] font-bold flex items-center gap-1 ${mockupMeta.accent}`}>
+              <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
+              <span>{mockupMeta.status}</span>
+            </span>
+          </div>
+        </div>
 
-          <div className="flex items-center gap-2">
+        {/* Visual Content Frame */}
+        <div className="w-full h-[calc(100%-29px)] overflow-hidden relative" onClick={() => onOpenCaseStudy(project)}>
+          {renderVisualContent()}
+
+          {/* Hover Overlay with Quick Actions */}
+          <div
+            className={`absolute inset-0 bg-stone-950/80 backdrop-blur-xs flex flex-col items-center justify-center p-4 gap-3 text-center transition-opacity duration-200 ${
+              isHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <div className="space-y-1 max-w-sm">
+              <h4 className="text-white font-extrabold text-base tracking-tight font-display uppercase line-clamp-1">
+                {project.title}
+              </h4>
+              <p className="text-xs text-stone-300 font-sans line-clamp-2">
+                {project.tagline}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-1" onClick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                onClick={() => onOpenCaseStudy(project)}
+                className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-xs font-mono font-bold px-3.5 py-1.5 rounded-xs shadow-sm hover:scale-105 active:scale-95 transition-transform cursor-pointer uppercase"
+              >
+                <Maximize2 className="size-3" />
+                <span>Case Study</span>
+              </button>
+
+              {project.streamlitDeployment && onOpenStreamlit && project.id !== 'fastapi-ml-service' && (
+                <button
+                  type="button"
+                  onClick={() => onOpenStreamlit(project)}
+                  className="inline-flex items-center gap-1.5 bg-foreground text-background text-xs font-mono font-bold px-3.5 py-1.5 rounded-xs shadow-sm hover:scale-105 active:scale-95 transition-transform cursor-pointer uppercase"
+                >
+                  <Play className="size-3 fill-current" />
+                  <span>Launch Demo</span>
+                </button>
+              )}
+
+              {project.links.demo && project.links.demo.startsWith('http') && !project.links.demo.includes('github') && (
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 bg-secondary text-secondary-foreground text-xs font-mono font-bold px-3.5 py-1.5 rounded-xs shadow-sm hover:scale-105 transition-transform cursor-pointer uppercase"
+                >
+                  <ExternalLink className="size-3" />
+                  <span>Live Web App</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. CARD BODY (Balanced Typography & Quantified Impact) */}
+      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+        <div>
+          {/* Index & Category Row */}
+          <div className="flex items-center justify-between gap-2 mb-2.5">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="font-mono text-xs font-black px-2 py-0.5 border-2 border-foreground bg-primary/20 text-foreground rounded-xs shrink-0">
+                PROJ {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="font-mono text-[11px] font-bold text-muted-foreground uppercase tracking-wider truncate">
+                {project.category}
+              </span>
+            </div>
+
             {project.badge && (
-              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-sm border-2 border-foreground bg-muted text-foreground">
+              <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-xs border border-foreground/30 bg-muted text-foreground shrink-0">
                 {project.badge}
               </span>
             )}
           </div>
-        </div>
 
-        {/* Streamlit / ASGI Deployment Ribbon */}
-        {project.streamlitDeployment && (
-          <div className="mb-4 px-3.5 py-2 bg-foreground text-background rounded-sm flex flex-wrap items-center justify-between gap-2 text-xs font-mono border-2 border-foreground shadow-brutal-sm">
-            <div className="flex items-center gap-2">
-              <span
-                className={`w-2 h-2 rounded-full inline-block animate-pulse ${
-                  project.id === 'fastapi-ml-service' ? 'bg-secondary' : 'bg-primary'
-                }`}
-              />
-              <span className="text-background/70 font-bold">
-                {project.id === 'fastapi-ml-service' ? 'Deployment:' : 'Streamlit:'}
-              </span>
-              <span className="text-background font-bold">{project.streamlitDeployment}</span>
-            </div>
-            {onOpenStreamlit && project.id !== 'fastapi-ml-service' && (
-              <button
-                onClick={() => onOpenStreamlit(project)}
-                id={`btn-ribbon-live-${project.id}`}
-                data-cursor-text="LIVE"
-                className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-3 py-1 rounded-sm text-[11px] font-mono font-bold uppercase transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-primary-foreground"
-              >
-                <Play className="w-2.5 h-2.5 fill-current" />
-                <span>Live Model View</span>
-              </button>
-            )}
-          </div>
-        )}
+          {/* Title */}
+          <h3
+            onClick={() => onOpenCaseStudy(project)}
+            className="font-display font-extrabold text-xl sm:text-2xl text-foreground leading-tight group-hover:text-primary transition-colors cursor-pointer line-clamp-2"
+          >
+            {project.title}
+          </h3>
 
-        {/* Title & Tagline */}
-        <h3 className="text-xl sm:text-2xl font-display font-black tracking-tight text-foreground mb-2 group-hover:text-primary transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-sm sm:text-base text-foreground/80 leading-relaxed mb-5 font-sans max-w-3xl">
-          {project.description}
-        </p>
+          {/* Tagline / Summary (Strictly clamped to 2 lines for uniform card alignment) */}
+          <p className="mt-2 text-sm text-foreground/80 font-sans leading-relaxed line-clamp-2">
+            {project.description}
+          </p>
 
-        {/* Quantified Business Impact & Metric Chips */}
-        {project.businessImpact && (
-          <div className="mb-5 p-4 rounded-sm bg-muted border-2 border-foreground shadow-brutal-sm">
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-foreground uppercase tracking-wider mb-1.5">
-              <TrendingUp className="w-3.5 h-3.5 text-primary shrink-0" />
-              <span>Quantified Business Impact &amp; ROI</span>
-            </div>
-            <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed font-sans mb-3">
-              {project.businessImpact}
-            </p>
-            {project.keyMetrics && project.keyMetrics.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2.5 border-t border-foreground/20">
-                {project.keyMetrics.map((metric, idx) => (
-                  <div key={idx} className="bg-card p-2 rounded-sm border border-foreground/30">
-                    <div className="text-[10px] font-mono text-foreground/60 uppercase tracking-tight font-bold">
-                      {metric.label}
-                    </div>
-                    <div className="text-xs sm:text-sm font-mono font-black text-primary mt-0.5 truncate">
-                      {metric.value}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Problem & Approach Two-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 bg-muted/60 border-2 border-foreground/30 rounded-sm p-4 text-xs sm:text-sm">
-          <div>
-            <div className="text-foreground/70 font-mono text-xs uppercase mb-1 font-bold">Problem</div>
-            <p className="text-foreground/90 leading-relaxed font-sans">{project.problemSummary}</p>
-          </div>
-          <div>
-            <div className="text-foreground/70 font-mono text-xs uppercase mb-1 font-bold">Approach</div>
-            <p className="text-foreground/90 leading-relaxed font-sans">{project.approachSummary}</p>
-          </div>
-        </div>
-
-        {/* Live Demo Showcase with Screenshots & Interactive Tweaks (hidden on print) */}
-        <div className="mb-6 print:hidden">
-          <ProjectDemoSection
-            project={project}
-            onOpenStreamlit={onOpenStreamlit}
-            onOpenCaseStudy={onOpenCaseStudy}
-          />
-        </div>
-
-        {/* Print-only Business Impact & Repository details */}
-        <div className="hidden print:block my-3 p-3 bg-muted rounded-sm border border-foreground text-xs font-mono">
-          <div className="text-foreground">
-            <span className="font-bold">Business Impact:</span> {project.businessImpact}
-          </div>
-          <div className="mt-1.5 text-foreground/70">
-            <span className="font-bold">Repository URL:</span> {project.links.github}
-          </div>
-        </div>
-
-        {/* Tools and Result */}
-        <div className="pt-4 border-t-2 border-foreground/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <div className="text-xs font-mono text-foreground/70 uppercase mb-1.5 font-bold">Tools &amp; Stack</div>
-            <div className="flex flex-wrap gap-1.5">
-              {project.tools.map((tool) => (
-                <span
-                  key={tool}
-                  className="font-mono text-xs bg-muted text-foreground px-2 py-0.5 rounded-sm border border-foreground font-semibold"
+          {/* 3. QUANTIFIED BUSINESS IMPACT & METRICS GRID */}
+          {project.keyMetrics && project.keyMetrics.length > 0 && (
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {project.keyMetrics.slice(0, 3).map((metric, mIdx) => (
+                <div
+                  key={mIdx}
+                  className="bg-muted/70 border border-foreground/20 rounded-xs p-2 flex flex-col justify-between"
                 >
-                  {tool}
-                </span>
+                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider font-semibold truncate">
+                    {metric.label}
+                  </span>
+                  <span className="font-mono text-xs sm:text-sm font-black text-foreground mt-0.5 truncate">
+                    {metric.value}
+                  </span>
+                </div>
               ))}
             </div>
-          </div>
+          )}
 
-          <div className="text-left sm:text-right">
-            <div className="text-xs font-mono text-foreground/70 uppercase mb-1 font-bold">Evaluation &amp; Result</div>
-            <p className="text-xs text-foreground/90 font-sans italic">
-              {project.resultsSummary}
-            </p>
+          {/* 4. TECH STACK PILLS */}
+          <div className="mt-4 flex flex-wrap gap-1.5 items-center">
+            {project.tools.slice(0, 5).map((tool) => (
+              <span
+                key={tool}
+                className="font-mono text-[11px] px-2 py-0.5 rounded-xs bg-muted text-foreground/80 border border-foreground/20 font-medium"
+              >
+                {tool}
+              </span>
+            ))}
+            {project.tools.length > 5 && (
+              <span className="font-mono text-[10px] px-1.5 py-0.5 rounded-xs text-muted-foreground font-semibold">
+                +{project.tools.length - 5}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* CTA Actions (hidden on print) */}
-        <div className="mt-8 pt-5 border-t-2 border-foreground/20 flex flex-wrap items-center justify-between gap-3 print:hidden">
+        {/* 5. CARD ACTION FOOTER */}
+        <div className="pt-4 border-t-2 border-foreground/15 flex flex-wrap items-center justify-between gap-2.5">
           <button
+            type="button"
             onClick={() => onOpenCaseStudy(project)}
-            id={`btn-case-study-${project.id}`}
-            data-cursor-text="STUDY"
-            className="brutal-btn inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-background bg-foreground px-4 py-2 cursor-pointer"
+            className="inline-flex items-center gap-1.5 bg-foreground text-background px-4 py-2 rounded-xs font-mono text-xs font-bold uppercase tracking-wider shadow-brutal-sm hover:translate-x-0.5 transition-all cursor-pointer"
           >
-            <span>View Case Study</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+            <span>Case Study</span>
+            <ArrowRight className="size-3.5" />
           </button>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             {project.streamlitDeployment && onOpenStreamlit && project.id !== 'fastapi-ml-service' && (
               <button
+                type="button"
                 onClick={() => onOpenStreamlit(project)}
-                id={`btn-live-app-${project.id}`}
-                data-cursor-text="DEMO"
-                className="brutal-btn inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-primary-foreground bg-primary px-3.5 py-1.5 cursor-pointer"
+                className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-3 py-2 rounded-xs font-mono text-xs font-bold uppercase tracking-wider shadow-brutal-sm hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
               >
-                <Play className="w-3 h-3 fill-current" />
-                <span>Live Streamlit</span>
+                <Play className="size-3 fill-current" />
+                <span>Live Demo</span>
               </button>
             )}
+
+            {project.links.demo &&
+              project.links.demo.startsWith('http') &&
+              !project.links.demo.includes('github') && (
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 bg-secondary text-secondary-foreground px-3 py-2 rounded-xs font-mono text-xs font-bold uppercase tracking-wider shadow-brutal-sm hover:scale-[1.02] transition-all cursor-pointer"
+                >
+                  <ExternalLink className="size-3" />
+                  <span>Live App</span>
+                </a>
+              )}
 
             <a
               href={project.links.github}
               target="_blank"
               rel="noreferrer"
-              id={`btn-github-${project.id}`}
-              data-cursor-text="CODE"
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-foreground bg-card border-2 border-foreground rounded-sm px-3.5 py-1.5 shadow-brutal-sm hover:shadow-brutal transition-all cursor-pointer"
+              className="inline-flex items-center gap-1 bg-card text-foreground border-2 border-foreground/30 px-3 py-2 rounded-xs font-mono text-xs font-bold uppercase tracking-wider shadow-brutal-sm hover:border-foreground transition-all cursor-pointer"
+              title="View GitHub Repository"
             >
-              <Github className="w-3.5 h-3.5" />
-              <span>GitHub Repo</span>
-            </a>
-
-            <a
-              href={project.links.demo}
-              target="_blank"
-              rel="noreferrer"
-              id={`btn-demo-${project.id}`}
-              data-cursor-text="VIEW"
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-secondary-foreground bg-secondary border-2 border-foreground rounded-sm px-4 py-1.5 shadow-brutal-sm hover:shadow-brutal transition-all cursor-pointer"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span>Explore Code</span>
+              <Github className="size-3.5" />
+              <span className="hidden xs:inline">Code</span>
             </a>
           </div>
         </div>

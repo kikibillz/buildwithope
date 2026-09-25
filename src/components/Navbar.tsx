@@ -66,10 +66,10 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
           className="flex items-center gap-3 group"
           aria-label={`${config.name}, home`}
         >
-          <span className="grid size-9 place-items-center bg-foreground font-display text-sm text-background transition-transform group-hover:scale-105">
+          <span className="grid size-9 place-items-center bg-foreground font-display text-sm text-background shadow-brutal-xs transition-transform group-hover:scale-105 rounded-xs">
             O.
           </span>
-          <span className="font-bold text-foreground tracking-tight">
+          <span className="font-bold text-foreground tracking-tight font-mono text-sm sm:text-base">
             Build with Ope
           </span>
         </a>

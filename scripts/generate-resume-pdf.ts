@@ -10,376 +10,450 @@ function generateResumePdf() {
 
   const pageWidth = 612;
   const pageHeight = 792;
-  const margin = 40;
-  const contentWidth = pageWidth - margin * 2; // 532 pt
+  const margin = 36;
+  const contentWidth = pageWidth - margin * 2; // 540 pt
 
   let y = margin;
 
   // Colors
-  const darkColor = [24, 24, 27]; // #18181b
-  const accentColor = [16, 115, 85]; // #107355 (Forest/Emerald)
-  const mutedColor = [82, 82, 91]; // #52525b
-  const lightBgColor = [244, 244, 245]; // #f4f4f5
-  const lineCol = [228, 228, 231]; // #e4e4e7
+  const darkSlate = [15, 23, 42];      // #0f172a - rich deep slate
+  const bodyText = [51, 65, 85];       // #334155 - comfortable readable slate
+  const tealAccent = [13, 148, 136];    // #0d9488 - vibrant deep teal
+  const tealDark = [15, 118, 110];     // #0f766e - dark teal
+  const lightMuted = [100, 116, 139];  // #64748b - muted label slate
+  const borderLight = [226, 232, 240]; // #e2e8f0 - soft divider line
+  const tagBg = [241, 245, 249];       // #f1f5f9 - light tag background
 
-  // Helpers
-  const checkPageBreak = (neededHeight: number) => {
-    if (y + neededHeight > pageHeight - margin) {
-      doc.addPage();
-      y = margin;
-      return true;
-    }
-    return false;
-  };
-
-  const drawSectionHeading = (title: string) => {
-    checkPageBreak(30);
+  // Section Heading Helper
+  const drawSectionHeading = (title: string, iconLetter?: string) => {
     y += 10;
+    doc.setDrawColor(tealAccent[0], tealAccent[1], tealAccent[2]);
+    doc.setFillColor(tealAccent[0], tealAccent[1], tealAccent[2]);
+    doc.rect(margin, y - 9, 3, 12, 'F');
+
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text(title.toUpperCase(), margin, y);
+    doc.setFontSize(10.5);
+    doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+    doc.text(title.toUpperCase(), margin + 8, y);
 
-    // Section underline
-    const textWidth = doc.getTextWidth(title.toUpperCase());
-    doc.setDrawColor(accentColor[0], accentColor[1], accentColor[2]);
-    doc.setLineWidth(1.5);
-    doc.line(margin, y + 3, margin + textWidth + 10, y + 3);
+    const titleWidth = doc.getTextWidth(title.toUpperCase());
+    doc.setDrawColor(borderLight[0], borderLight[1], borderLight[2]);
+    doc.setLineWidth(0.75);
+    doc.line(margin + 12 + titleWidth, y - 3, margin + contentWidth, y - 3);
 
-    doc.setDrawColor(lineCol[0], lineCol[1], lineCol[2]);
-    doc.setLineWidth(0.5);
-    doc.line(margin + textWidth + 12, y + 3, margin + contentWidth, y + 3);
-
-    y += 16;
+    y += 14;
   };
 
-  // 1. Header (Name, Title, Contact Info)
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(22);
-  doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-  doc.text('OPEYEMI OLAMIJU', margin, y + 5);
+  // Page 1 Footer Helper
+  const drawFooter = (pageNum: number, totalPages: number) => {
+    const footerY = pageHeight - 22;
+    doc.setDrawColor(borderLight[0], borderLight[1], borderLight[2]);
+    doc.setLineWidth(0.5);
+    doc.line(margin, footerY - 8, margin + contentWidth, footerY - 8);
 
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10);
-  doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
-  doc.text('(BUILD WITH OPE)', margin + doc.getTextWidth('OPEYEMI OLAMIJU') + 8, y + 3);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(lightMuted[0], lightMuted[1], lightMuted[2]);
+    doc.text('Opeyemi Olamiju — Curriculum Vitae', margin, footerY);
+    
+    const pageStr = `Page ${pageNum} of ${totalPages}`;
+    const pageStrWidth = doc.getTextWidth(pageStr);
+    doc.text(pageStr, margin + contentWidth - pageStrWidth, footerY);
+  };
 
-  y += 20;
+  // ==========================================
+  // PAGE 1: HEADER & CORE PROFILE
+  // ==========================================
 
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10.5);
-  doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
-  doc.text('Data Scientist | Python & FastAPI Developer | AI Video Creator', margin, y);
-
+  // Top Accent Band
+  doc.setFillColor(15, 118, 110); // #0f766e
+  doc.rect(margin, y, contentWidth, 3, 'F');
   y += 14;
 
-  // Contact line
-  doc.setFontSize(8.5);
-  const contactParts = [
-    'Email: odunayoopamiju@gmail.com',
-    'Location: Lagos, Nigeria',
-    'GitHub: github.com/kikibillz',
-    'LinkedIn: linkedin.com/in/opeyemiolamiju',
+  // Name
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
+  doc.text('OPEYEMI OLAMIJU', margin, y);
+
+  // Brand Sub-badge
+  const nameWidth = doc.getTextWidth('OPEYEMI OLAMIJU');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+  doc.text('(BUILD WITH OPE)', margin + nameWidth + 8, y - 2);
+
+  // Status Badge on Right
+  doc.setFillColor(240, 253, 250); // teal-50
+  doc.setDrawColor(153, 246, 228); // teal-200
+  doc.roundedRect(margin + contentWidth - 148, y - 14, 148, 18, 3, 3, 'FD');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7.5);
+  doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+  doc.text('AVAILABLE FOR IMMEDIATE ROLES', margin + contentWidth - 143, y - 2.5);
+
+  y += 15;
+
+  // Professional Title
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+  doc.text('Data Scientist • Python & FastAPI Backend Developer • AI Video Creator', margin, y);
+
+  y += 13;
+
+  // Contact Row (No "Lagos, Nigeria" - clean & professional)
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.2);
+  doc.setTextColor(bodyText[0], bodyText[1], bodyText[2]);
+  
+  const contacts = [
+    'odunayoopamiju@gmail.com',
+    'linkedin.com/in/opeyemiolamiju',
+    'github.com/kikibillz',
+    'Remote / Relocation Ready',
   ];
-  doc.text(contactParts.join('   •   '), margin, y);
+  doc.text(contacts.join('   •   '), margin, y);
 
-  y += 12;
-
-  // Top divider
-  doc.setDrawColor(lineCol[0], lineCol[1], lineCol[2]);
+  y += 10;
+  doc.setDrawColor(borderLight[0], borderLight[1], borderLight[2]);
   doc.setLineWidth(0.75);
   doc.line(margin, y, margin + contentWidth, y);
   y += 4;
 
-  // 2. Professional Summary
+  // 1. Professional Summary
   drawSectionHeading('Professional Summary');
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.8);
-  doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+  doc.setFontSize(8.4);
+  doc.setTextColor(bodyText[0], bodyText[1], bodyText[2]);
   const summaryText =
-    'Data Scientist, Python Backend Developer, and AI Integration Specialist with a proven ability to leverage artificial intelligence to solve any complex engineering or business problem. Backed by a strong Computer Science foundation (BSc), I act as a technical force multiplier—using advanced AI tools, LLMs, and machine learning models to drastically accelerate development cycles, automate workflows, and deliver scalable solutions. From architecting high-throughput asynchronous REST APIs (FastAPI) and building predictive models (XGBoost) to directing commercial generative media productions (Veo, Runway), I blend traditional software engineering with cutting-edge AI capabilities. I am ready to bring immediate, high-impact technical velocity to forward-thinking teams.';
+    'Data Scientist, Python Backend Developer, and AI Integration Specialist with a solid Computer Science foundation (BSc from Olabisi Onabanjo University). Combines applied machine learning, production API engineering (FastAPI), and generative AI workflows to build scalable software solutions that deliver immediate business impact. Proven expertise in building sub-50ms ML inference pipelines, robust REST APIs with strict Pydantic v2 schemas, and directing high-conversion commercial generative media. Dedicated to accelerating technical velocity and engineering reliable digital products.';
   const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
   doc.text(summaryLines, margin, y);
-  y += summaryLines.length * 11 + 4;
+  y += summaryLines.length * 10.5 + 4;
 
-  // 3. Technical Skills
-  drawSectionHeading('Technical Skills');
-  const skillsData = [
-    { cat: 'Programming', items: 'Python, TypeScript, JavaScript, HTML, SQL' },
-    { cat: 'Data Science & ML', items: 'Pandas, NumPy, Scikit-learn, XGBoost, Regression, Classification, Feature Engineering, SMOTE' },
-    { cat: 'Backend & APIs', items: 'FastAPI, Pydantic v2, Uvicorn ASGI, RESTful APIs, Docker, SQLAlchemy, OpenAPI / Swagger, Pytest' },
-    { cat: 'Visualization & UI', items: 'Matplotlib, Seaborn, Plotly, Streamlit, React, Tailwind CSS' },
-    { cat: 'Generative AI & Video', items: 'Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs, Prompt Engineering' },
-    { cat: 'Tools & DevOps', items: 'Git, GitHub, Docker, Postman, Linux, Jupyter Notebook, VS Code, Vercel' },
+  // 2. Core Technical Proficiencies
+  drawSectionHeading('Core Technical Proficiencies');
+  const skillsCategories = [
+    { label: 'Programming & Web', items: 'Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs' },
+    { label: 'Data Science & ML', items: 'Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE, Model Serialization (Joblib)' },
+    { label: 'Backend & Architecture', items: 'FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest (>90% cov)' },
+    { label: 'Generative AI & Media', items: 'Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs' },
+    { label: 'Visualization & Interfaces', items: 'Streamlit, Matplotlib, Seaborn, Plotly Dashboards, React, Tailwind CSS' },
+    { label: 'DevOps & Workflows', items: 'Git, GitHub, Docker, Postman, Linux CLI, Jupyter Lab, VS Code, CI/CD, Vercel' },
   ];
 
-  doc.setFontSize(8.5);
-  skillsData.forEach((s) => {
+  doc.setFontSize(8);
+  skillsCategories.forEach((cat) => {
+    // Label
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    const label = `${s.cat}: `;
-    doc.text(label, margin, y);
-    const labelWidth = doc.getTextWidth(label);
+    doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
+    const labelText = `${cat.label}: `;
+    doc.text(labelText, margin, y);
+    const labelWidth = doc.getTextWidth(labelText);
 
+    // Items
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
-    const valLines = doc.splitTextToSize(s.items, contentWidth - labelWidth);
+    doc.setTextColor(bodyText[0], bodyText[1], bodyText[2]);
+    const valLines = doc.splitTextToSize(cat.items, contentWidth - labelWidth);
     doc.text(valLines, margin + labelWidth, y);
-    y += valLines.length * 10.5 + 2;
+    y += valLines.length * 9.5 + 2;
   });
 
-  // 4. Professional Experience
+  y += 2;
+
+  // 3. Professional Experience
   drawSectionHeading('Professional Experience');
 
   const experiences = [
     {
       role: 'Machine Learning Developer & Data Analyst',
       org: 'Independent & Applied Open-Source Deployments',
+      location: 'Remote / Global',
       period: '2023 – Present',
       bullets: [
-        'Engineered, evaluated, and deployed machine learning pipelines and interactive web applications using Streamlit and FastAPI.',
+        'Architected, evaluated, and deployed machine learning systems and interactive applications using Python, Streamlit, and FastAPI.',
         'Serialized trained classification models (XGBoost, Random Forest) via Joblib, enabling sub-50ms real-time inference latency.',
-        'Engineered interaction variables, resolved high-cardinality categorical features, and handled severe class imbalance using SMOTE.',
+        'Engineered domain-specific interaction variables, resolved high-cardinality categorical data, and countered severe class imbalance with SMOTE.',
         'Built asynchronous REST API endpoints with FastAPI and Pydantic v2 validation contracts, achieving >90% test coverage with Pytest.',
-      ],
-    },
-    {
-      role: 'Administrative Support & Virtual Assistant',
-      org: 'Freelance / Various Clients',
-      period: 'Dec 2024 – Present',
-      bullets: [
-        'Managed operational datasets, automated administrative workflows, and maintained structured tracking spreadsheets with zero error rate.',
-        'Standardized standard operating procedures (SOPs), cleaned multi-source business data, and delivered weekly progress summaries.',
       ],
     },
     {
       role: 'People Leader (Promoted) & Agile People Operations Specialist',
       org: 'Culturelligence',
+      location: 'Hybrid / Remote',
       period: 'Aug 2024 – Jul 2025',
       bullets: [
-        'Maintained workforce records, monitored recruitment analytics, and optimized internal onboarding data pipelines.',
-        'Prepared departmental headcount, tenure summaries, and attrition indicators for leadership review.',
-        'Promoted to People Leader for workflow efficiency, cross-team accountability, and operational excellence.',
+        'Managed workforce databases, monitored recruitment funnels, and optimized internal employee onboarding data operations.',
+        'Prepared departmental headcount distributions, tenure analytics, and employee retention summaries for leadership review.',
+        'Rapidly promoted to People Leader for workflow efficiency, cross-team accountability, and operational excellence.',
+      ],
+    },
+    {
+      role: 'Administrative Support & Virtual Assistant',
+      org: 'Freelance & Private Clients',
+      location: 'Remote',
+      period: 'Dec 2024 – Present',
+      bullets: [
+        'Automated administrative workflows, maintaining structured tracking spreadsheets and executive databases with zero error rate.',
+        'Standardized operational SOPs, cleaned multi-source business data, and authored weekly KPI progress briefs for stakeholders.',
       ],
     },
   ];
 
   experiences.forEach((exp) => {
-    checkPageBreak(50);
+    // Role Title
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.5);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+    doc.setFontSize(9.2);
+    doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
     doc.text(exp.role, margin, y);
 
+    // Date
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8.5);
-    doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
-    doc.text(exp.period, margin + contentWidth - doc.getTextWidth(exp.period), y);
+    doc.setFontSize(8.2);
+    doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+    const periodWidth = doc.getTextWidth(exp.period);
+    doc.text(exp.period, margin + contentWidth - periodWidth, y);
 
-    y += 11;
+    y += 10.5;
+
+    // Org & Location
     doc.setFont('helvetica', 'italic');
-    doc.setFontSize(8.5);
-    doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
-    doc.text(exp.org, margin, y);
+    doc.setFontSize(8);
+    doc.setTextColor(lightMuted[0], lightMuted[1], lightMuted[2]);
+    doc.text(`${exp.org}  •  ${exp.location}`, margin, y);
 
-    y += 10;
+    y += 9.5;
 
+    // Bullets
     exp.bullets.forEach((bullet) => {
-      checkPageBreak(25);
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8.3);
-      doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+      doc.setFontSize(7.9);
+      doc.setTextColor(bodyText[0], bodyText[1], bodyText[2]);
 
       // Bullet dot
-      doc.text('•', margin + 4, y);
-      const bulletLines = doc.splitTextToSize(bullet, contentWidth - 16);
-      doc.text(bulletLines, margin + 14, y);
-      y += bulletLines.length * 10 + 1.5;
+      doc.setFillColor(tealAccent[0], tealAccent[1], tealAccent[2]);
+      doc.circle(margin + 4, y - 2.5, 1.2, 'F');
+
+      const bulletLines = doc.splitTextToSize(bullet, contentWidth - 14);
+      doc.text(bulletLines, margin + 12, y);
+      y += bulletLines.length * 9.2 + 1.2;
     });
 
-    y += 4;
+    y += 3.5;
   });
 
-  // 5. Featured Projects
-  drawSectionHeading('Featured Projects');
+  // Footer for Page 1
+  drawFooter(1, 2);
 
-  const featuredProjects = [
+  // ==========================================
+  // PAGE 2: PROJECTS, EDUCATION & CREDENTIALS
+  // ==========================================
+  doc.addPage();
+  y = margin;
+
+  // Mini Header on Page 2
+  doc.setFillColor(15, 118, 110);
+  doc.rect(margin, y, contentWidth, 2, 'F');
+  y += 10;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
+  doc.text('OPEYEMI OLAMIJU', margin, y);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(lightMuted[0], lightMuted[1], lightMuted[2]);
+  doc.text('Curriculum Vitae  •  odunayoopamiju@gmail.com  •  github.com/kikibillz', margin + 115, y);
+
+  y += 6;
+  doc.setDrawColor(borderLight[0], borderLight[1], borderLight[2]);
+  doc.setLineWidth(0.5);
+  doc.line(margin, y, margin + contentWidth, y);
+  y += 4;
+
+  // 4. Key Applied Projects
+  drawSectionHeading('Key Applied Projects');
+
+  const projects = [
     {
       name: 'FastAPI Production ML Inference & Validation Service',
-      stack: 'FastAPI, Pydantic v2, Uvicorn, Docker, Scikit-learn',
-      desc: 'Production-ready asynchronous REST API serving ML models with dynamic request validation, automated Swagger UI docs, and sub-15ms latency.',
+      stack: 'FastAPI • Pydantic v2 • Uvicorn • Docker • Scikit-learn',
+      desc: 'High-throughput asynchronous REST API serving ML models with strict request validation, automated interactive Swagger UI docs, and sub-15ms response latency.',
     },
     {
       name: 'Bank Customer Churn Predictor & Retention Engine',
-      stack: 'Python, Scikit-learn, XGBoost, Streamlit, Pandas',
-      desc: 'Supervised classification app predicting customer departure with 86% ROC-AUC, interactive risk dials, and automated financial retention suggestions.',
+      stack: 'Python • Scikit-learn • XGBoost • Streamlit • Pandas',
+      desc: 'Supervised classification platform predicting customer churn with 86% ROC-AUC, interactive risk probability gauges, and dynamic retention recommendations.',
     },
     {
       name: 'HR Analytics & Employee Attrition Intelligence',
-      stack: 'Python, Streamlit, Seaborn, Random Forest',
-      desc: 'Diagnostic platform uncovering turnover drivers across salary, tenure, and department metrics with real-time risk scoring.',
+      stack: 'Python • Streamlit • Seaborn • Random Forest',
+      desc: 'Workforce analytics platform diagnosing turnover drivers across tenure, salary, and satisfaction metrics to forecast retention risks with real-time scoring.',
     },
     {
-      name: 'Commercial AI Video Productions (Google Veo & Runway Gen-3)',
-      stack: 'Google Veo 3, Runway Gen-3, Kling AI, ElevenLabs',
-      desc: 'High-retention commercial adverts (e.g. Indomie, Luxury Real Estate, AI Tech Promos) directing prompt cinematography and dynamic voiceovers.',
+      name: 'Commercial Generative AI Video Productions',
+      stack: 'Google Veo 3 • Runway Gen-3 • Kling AI • ElevenLabs',
+      desc: 'Directed commercial video campaigns (Indomie Noodles, Luxury Real Estate, AI Tech Promos) engineering cinematic prompts, motion brush cameras, and audio design.',
     },
   ];
 
-  featuredProjects.forEach((proj) => {
-    checkPageBreak(40);
+  projects.forEach((p) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text(proj.name, margin, y);
+    doc.setFontSize(8.8);
+    doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
+    doc.text(p.name, margin, y);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.6);
+    doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+    const stackWidth = doc.getTextWidth(p.stack);
+    doc.text(p.stack, margin + contentWidth - stackWidth, y);
+
+    y += 9.5;
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
-    const stackText = `[${proj.stack}]`;
-    doc.text(stackText, margin + contentWidth - doc.getTextWidth(stackText), y);
-
-    y += 10;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.3);
-    doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
-    const descLines = doc.splitTextToSize(proj.desc, contentWidth - 8);
-    doc.text(descLines, margin + 8, y);
-    y += descLines.length * 9.5 + 4;
+    doc.setFontSize(7.9);
+    doc.setTextColor(bodyText[0], bodyText[1], bodyText[2]);
+    const descLines = doc.splitTextToSize(p.desc, contentWidth - 6);
+    doc.text(descLines, margin + 6, y);
+    y += descLines.length * 9.2 + 3.5;
   });
 
-  // 6. Education
-  drawSectionHeading('Education');
-  checkPageBreak(40);
+  y += 2;
+
+  // 5. Education
+  drawSectionHeading('Education & Academic Background');
+
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9.5);
-  doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+  doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
   doc.text('Bachelor of Science (BSc) in Computer Science', margin, y);
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8.5);
-  doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
-  const eduPeriod = '2019 – 2023';
-  doc.text(eduPeriod, margin + contentWidth - doc.getTextWidth(eduPeriod), y);
-
-  y += 11;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
-  doc.text('Olabisi Onabanjo University (O.O.U) — Ogun State, Nigeria', margin, y);
-
-  y += 10;
-  doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.2);
-  const eduDetails = 'Key Coursework: Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems (SQL), Software Engineering, Probability & Statistics.';
+  doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+  const dateStr = '2019 – 2023';
+  doc.text(dateStr, margin + contentWidth - doc.getTextWidth(dateStr), y);
+
+  y += 10.5;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8.4);
+  doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+  doc.text('Olabisi Onabanjo University (OOU)', margin, y);
+
+  y += 9.5;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7.8);
+  doc.setTextColor(bodyText[0], bodyText[1], bodyText[2]);
+  const eduDetails =
+    'Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming (Python/Java), Database Management Systems (SQL), Software Engineering, Probability & Statistics, Discrete Mathematics, Computer Architecture.';
   const eduLines = doc.splitTextToSize(eduDetails, contentWidth);
   doc.text(eduLines, margin, y);
-  y += eduLines.length * 9.5 + 4;
+  y += eduLines.length * 9 + 4;
 
-  // 7. Certifications & Licenses
-  drawSectionHeading('Certifications & Licenses');
-  checkPageBreak(50);
-  const certs = [
-    {
-      name: 'Certified Data Scientist',
-      issuer: 'New Horizons • Advanced Data Analysis, Data Centers, Machine Learning Pipelines & Python',
-      period: 'Aug 2026',
-    },
-    {
-      name: 'Certified Product Manager (CPM)',
-      issuer: 'BeTechified • Product Strategy, User Research, Agile Roadmapping & Cross-Functional Growth',
-      period: 'Feb 2025',
-    },
-    {
-      name: 'Agile People Operation Specialist',
-      issuer: 'Culturelligence • People Operations, Human Resources (HR) & Agile Frameworks',
-      period: 'Jul 2025',
-    },
-    {
-      name: 'UI/UX Design',
-      issuer: 'Dev and Design • Product Design, Wireframing, User Research & Interactive Prototyping',
-      period: 'May 2025',
-    },
-    {
-      name: 'Product Management',
-      issuer: 'Prodefied • Product Roadmapping, Agile Delivery & Feature Prioritization',
-      period: 'Oct 2025',
-    },
-    {
-      name: 'Artificial Intelligence Career Essentials',
-      issuer: 'alx_africa • Generative AI Tooling, Modern AI Workflows & Prompt Engineering',
-      period: 'Credentialed',
-    },
-    {
-      name: 'Hotjar Learning (Product Behavioral Analytics)',
-      issuer: 'Hotjar | by Contentsquare • Heatmaps, User Journeys, Funnels • Credential ID: x3ftgg2pwb2f',
-      period: 'Jul 2024 - Dec 2030',
-    },
-    {
-      name: 'Tech Recruiter',
-      issuer: 'hirist • Technical Sourcing & Engineering Talent Acquisition • Credential ID: cert_bfxyxv9d',
-      period: 'Credentialed',
-    },
-    {
-      name: 'Remote Work Certification',
-      issuer: 'FOCUS ON GROWTH AND DEVELOPMENT- FOGDEV • Certified for Distributed Remote Operations',
-      period: 'Jun 2024',
-    },
-    {
-      name: 'Data Visualization Intern',
-      issuer: 'Excelerate • Visual Analytics, Interactive Dashboards & Business Intelligence',
-      period: 'Sep 2024',
-    },
-    {
-      name: 'Digital Teacher',
-      issuer: 'Intergovernmental Oceanographic Commission (IOC) of UNESCO • E-Learning Pedagogies',
-      period: 'Feb 2023 - Aug 2030',
-    },
-    {
-      name: 'Jobberman Soft Skills Training & Virtual Assistant',
-      issuer: 'Jobberman Youth Engagement / alx_africa • Workplace Emotional Intelligence, Executive Ops',
-      period: 'Certified',
-    },
+  // 6. Verified Certifications & Licenses
+  drawSectionHeading('Verified Certifications & Licenses (13 Total)');
+
+  const certsCol1 = [
+    { title: 'Certified Data Scientist', issuer: 'New Horizons', date: 'Aug 2026' },
+    { title: 'Certified Product Manager (CPM)', issuer: 'BeTechified', date: 'Feb 2025' },
+    { title: 'Agile People Operation Specialist', issuer: 'Culturelligence', date: 'Jul 2025' },
+    { title: 'UI/UX Design', issuer: 'Dev and Design', date: 'May 2025' },
+    { title: 'Product Management', issuer: 'Prodefied', date: 'Oct 2025' },
+    { title: 'AI Career Essentials', issuer: 'alx_africa (Generative AI)', date: 'Certified' },
+    { title: 'Hotjar Behavioral Analytics', issuer: 'Contentsquare (ID: x3ftgg2pwb2f)', date: '2024–2030' },
   ];
 
-  certs.forEach((c) => {
-    checkPageBreak(18);
+  const certsCol2 = [
+    { title: 'Tech Recruiter', issuer: 'hirist (ID: cert_bfxyxv9d)', date: 'Certified' },
+    { title: 'Remote Work Certification', issuer: 'FOGDEV (Distributed Ops)', date: 'Jun 2024' },
+    { title: 'Data Visualization Intern', issuer: 'Excelerate (Dashboards)', date: 'Sep 2024' },
+    { title: 'Digital Teacher', issuer: 'UNESCO IOC (E-Learning)', date: '2023–2030' },
+    { title: 'Virtual Assistant', issuer: 'alx_africa (Executive Support)', date: 'Certified' },
+    { title: 'Jobberman Soft Skills Training', issuer: 'Jobberman (Emotional Intel)', date: 'Oct 2020' },
+  ];
+
+  const colWidth = (contentWidth - 16) / 2;
+  const col1X = margin;
+  const col2X = margin + colWidth + 16;
+  const certStartY = y;
+
+  let y1 = certStartY;
+  certsCol1.forEach((c) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8.4);
-    doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
-    doc.text(c.name, margin, y);
-
-    doc.setFont('helvetica', 'normal');
     doc.setFontSize(7.8);
-    doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
-    doc.text(c.period, margin + contentWidth - doc.getTextWidth(c.period), y);
+    doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
+    doc.text(c.title, col1X, y1);
 
-    y += 8.5;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.6);
-    doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
-    const lines = doc.splitTextToSize(c.issuer, contentWidth);
-    doc.text(lines, margin, y);
-    y += lines.length * 8.5 + 3.5;
+    doc.setFontSize(7.2);
+    doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+    const dWidth = doc.getTextWidth(c.date);
+    doc.text(c.date, col1X + colWidth - dWidth, y1);
+
+    y1 += 8.5;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.2);
+    doc.setTextColor(lightMuted[0], lightMuted[1], lightMuted[2]);
+    doc.text(c.issuer, col1X, y1);
+
+    y1 += 9.5;
   });
 
-  // LinkedIn Certifications Verification note
-  checkPageBreak(15);
+  let y2 = certStartY;
+  certsCol2.forEach((c) => {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.8);
+    doc.setTextColor(darkSlate[0], darkSlate[1], darkSlate[2]);
+    doc.text(c.title, col2X, y2);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.2);
+    doc.setTextColor(tealDark[0], tealDark[1], tealDark[2]);
+    const dWidth = doc.getTextWidth(c.date);
+    doc.text(c.date, col2X + colWidth - dWidth, y2);
+
+    y2 += 8.5;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.2);
+    doc.setTextColor(lightMuted[0], lightMuted[1], lightMuted[2]);
+    doc.text(c.issuer, col2X, y2);
+
+    y2 += 9.5;
+  });
+
+  y = Math.max(y1, y2) + 2;
+
+  // LinkedIn Verification Callout Box
+  doc.setFillColor(248, 250, 252);
+  doc.setDrawColor(226, 232, 240);
+  doc.roundedRect(margin, y, contentWidth, 18, 3, 3, 'FD');
+
   doc.setFont('helvetica', 'italic');
-  doc.setFontSize(7.5);
-  doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
-  doc.text('* View all 13 verified credentials, badge thumbnails, and license IDs at linkedin.com/in/opeyemiolamiju/details/certifications/', margin, y);
+  doc.setFontSize(7.2);
+  doc.setTextColor(lightMuted[0], lightMuted[1], lightMuted[2]);
+  doc.text(
+    '✓ All 13 credentials, licenses, and verified skill badges are publicly authenticated on LinkedIn: linkedin.com/in/opeyemiolamiju/details/certifications/',
+    margin + 8,
+    y + 11.5
+  );
+
+  // Footer for Page 2
+  drawFooter(2, 2);
 
   // Output
   const pdfBuffer = Buffer.from(doc.output('arraybuffer'));
   const outputPath = path.join(process.cwd(), 'public', 'Opeyemi_Olamiju_Resume.pdf');
   fs.writeFileSync(outputPath, pdfBuffer);
 
-  // Also write a copy as resume.pdf
   const resumeCopy = path.join(process.cwd(), 'public', 'resume.pdf');
   fs.writeFileSync(resumeCopy, pdfBuffer);
 
-  console.log(`Successfully generated resume PDF at ${outputPath} (${pdfBuffer.length} bytes)`);
+  console.log(`Successfully generated premium resume PDF at ${outputPath} (${pdfBuffer.length} bytes)`);
 }
 
 generateResumePdf();

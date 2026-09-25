@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
+  ArrowRight,
   ArrowUpRight,
   Github,
   Linkedin,
@@ -30,6 +31,7 @@ import { AIVideoModal } from './components/AIVideoModal';
 import { FastApiBackendSection } from './components/FastApiBackendSection';
 import { CertificationsSection } from './components/CertificationsSection';
 import { ResumeSection } from './components/ResumeSection';
+import { PrintableResume } from './components/PrintableResume';
 import { MagicCursor } from './components/MagicCursor';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SkillsMarquee } from './components/SkillsMarquee';
@@ -43,7 +45,7 @@ export default function App() {
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
   const [projectFilter, setProjectFilter] = useState<string>('all');
   const [projectSearch, setProjectSearch] = useState<string>('');
-  const [viewMode, setViewMode] = useState<'rows' | 'cards'>('rows');
+  const [viewMode, setViewMode] = useState<'cards' | 'rows'>('cards');
 
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
@@ -101,57 +103,70 @@ export default function App() {
     avatarUrl: naturalPhoto || '/images/opeyemi picture.png',
   };
 
-  const filteredProjects = allProjects.filter((p) => {
-    const matchesCategory =
-      projectFilter === 'all'
-        ? true
-        : projectFilter === 'backend'
-        ? p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
-        : projectFilter === 'ml'
-        ? p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive')
-        : projectFilter === 'data'
-        ? p.category.toLowerCase().includes('data analysis') || p.category.toLowerCase().includes('automation') || p.category.toLowerCase().includes('analytics')
-        : projectFilter === 'web'
-        ? p.category.toLowerCase().includes('web') || p.category.toLowerCase().includes('product')
-        : true;
+  const categoryCounts = useMemo(() => {
+    return {
+      all: allProjects.length,
+      ml: allProjects.filter((p) => p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive') || p.category.toLowerCase().includes('safety')).length,
+      backend: allProjects.filter((p) => p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))).length,
+      data: allProjects.filter((p) => p.category.toLowerCase().includes('data analysis') || p.category.toLowerCase().includes('automation') || p.category.toLowerCase().includes('spreadsheets') || p.category.toLowerCase().includes('etl')).length,
+      web: allProjects.filter((p) => p.category.toLowerCase().includes('web') || p.category.toLowerCase().includes('product') || p.category.toLowerCase().includes('career')).length,
+    };
+  }, [allProjects]);
 
-    const query = projectSearch.trim().toLowerCase();
-    if (!query) return matchesCategory;
+  const filteredProjects = useMemo(() => {
+    return allProjects.filter((p) => {
+      const matchesCategory =
+        projectFilter === 'all'
+          ? true
+          : projectFilter === 'backend'
+          ? p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
+          : projectFilter === 'ml'
+          ? p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive') || p.category.toLowerCase().includes('safety')
+          : projectFilter === 'data'
+          ? p.category.toLowerCase().includes('data analysis') || p.category.toLowerCase().includes('automation') || p.category.toLowerCase().includes('spreadsheets') || p.category.toLowerCase().includes('etl')
+          : projectFilter === 'web'
+          ? p.category.toLowerCase().includes('web') || p.category.toLowerCase().includes('product') || p.category.toLowerCase().includes('career')
+          : true;
 
-    const matchesSearch =
-      p.title.toLowerCase().includes(query) ||
-      p.tagline.toLowerCase().includes(query) ||
-      p.description.toLowerCase().includes(query) ||
-      p.tools.some((t) => t.toLowerCase().includes(query)) ||
-      (p.businessImpact && p.businessImpact.toLowerCase().includes(query));
+      const query = projectSearch.trim().toLowerCase();
+      if (!query) return matchesCategory;
 
-    return matchesCategory && matchesSearch;
-  });
+      const matchesSearch =
+        p.title.toLowerCase().includes(query) ||
+        p.tagline.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.tools.some((t) => t.toLowerCase().includes(query)) ||
+        (p.businessImpact && p.businessImpact.toLowerCase().includes(query));
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [allProjects, projectFilter, projectSearch]);
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-highlight selection:text-highlight-foreground transition-colors overflow-x-hidden">
-      {/* Scroll Progress & Cursor */}
-      <ScrollProgress />
-      <MagicCursor />
+      {/* Interactive Website Shell (Hidden on Print) */}
+      <div id="portfolio-interactive-shell" className="print:hidden flex flex-col flex-grow w-full">
+        {/* Scroll Progress & Cursor */}
+        <ScrollProgress />
+        <MagicCursor />
 
-      {/* Navigation */}
-      <Navbar config={activeConfig} />
+        {/* Navigation */}
+        <Navbar config={activeConfig} />
 
-      <main className="flex-grow">
+        <main className="flex-grow">
         {/* =========================================================================
             1. HERO SECTION (Hi, I'm + def .py Switch + Multi-Discipline Punchline)
            ========================================================================= */}
         <section id="top" className="relative mx-auto grid max-w-7xl gap-8 lg:gap-12 px-4 sm:px-6 lg:px-10 pb-12 sm:pb-16 lg:pb-24 pt-8 sm:pt-14 lg:pt-20 lg:grid-cols-[1.2fr_.8fr] items-start">
           <div className="relative z-10 w-full min-w-0">
-            {/* Status Badge & Location */}
+            {/* Status Badge & OOU Credential */}
             <div className="mb-5 sm:mb-7 flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs font-bold uppercase tracking-widest font-mono">
               <span className="inline-flex items-center gap-2 bg-status px-3 py-1.5 sm:py-2 text-status-foreground shadow-brutal-sm rounded-xs">
                 <span className="size-2 animate-pulse rounded-full bg-current" />
                 Available for roles &amp; projects
               </span>
-              <span className="inline-flex items-center gap-1.5 text-muted-foreground font-semibold">
-                <MapPin className="size-3.5" />
-                Lagos, Nigeria
+              <span className="inline-flex items-center gap-1.5 text-foreground/85 font-bold px-2.5 py-1.5 rounded-xs bg-muted border border-foreground/30">
+                B.Sc. Computer Science · OOU
               </span>
             </div>
 
@@ -160,7 +175,6 @@ export default function App() {
               <span className="block text-foreground/75 font-sans text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-wider mb-2">
                 Hi, I&apos;m
               </span>
-              
               <div className="mb-2 sm:mb-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-display uppercase tracking-tight text-foreground leading-[1.05]">
                 <AnimatedName name="Opeyemi Olamiju" variant="hero" />
               </div>
@@ -219,14 +233,15 @@ export default function App() {
           </div>
 
           {/* Filter & Controls Toolbar */}
-          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-4 border-b border-foreground/15">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none font-mono text-xs w-full sm:w-auto">
+          <div className="mt-8 sm:mt-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-4 border-b-2 border-foreground/15">
+            {/* Category Filter Pills with counts */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 scrollbar-none font-mono text-xs w-full md:w-auto">
               {[
-                { id: 'all', label: 'All' },
-                { id: 'backend', label: 'Backend & APIs' },
-                { id: 'ml', label: 'Machine Learning' },
-                { id: 'data', label: 'Data & Automation' },
-                { id: 'web', label: 'Web Apps' },
+                { id: 'all', label: 'All', count: categoryCounts.all },
+                { id: 'ml', label: 'Machine Learning', count: categoryCounts.ml },
+                { id: 'backend', label: 'Backend & APIs', count: categoryCounts.backend },
+                { id: 'data', label: 'Data & Automation', count: categoryCounts.data },
+                { id: 'web', label: 'Web Apps', count: categoryCounts.web },
               ].map((tab) => {
                 const isActive = projectFilter === tab.id;
                 return (
@@ -234,121 +249,122 @@ export default function App() {
                     key={tab.id}
                     type="button"
                     onClick={() => setProjectFilter(tab.id)}
-                    className={`px-3 py-1.5 rounded-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                    className={`px-3 py-1.5 rounded-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer shrink-0 inline-flex items-center gap-1.5 ${
                       isActive
                         ? 'bg-foreground text-background shadow-brutal-sm'
-                        : 'border border-foreground/20 text-foreground/70 hover:text-foreground'
+                        : 'border border-foreground/20 text-foreground/70 hover:text-foreground hover:border-foreground/40 bg-card'
                     }`}
                   >
-                    {tab.label}
+                    <span>{tab.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-xs font-mono font-bold ${
+                        isActive
+                          ? 'bg-background/20 text-background'
+                          : 'bg-muted text-muted-foreground'
+                      }`}
+                    >
+                      {tab.count}
+                    </span>
                   </button>
                 );
               })}
             </div>
 
+            {/* Search & View Switcher */}
             <div className="flex items-center gap-3">
               {/* Search */}
               <div className="relative w-full sm:w-64">
-                <Search className="w-3.5 h-3.5 text-foreground/50 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-3.5 h-3.5 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={projectSearch}
                   onChange={(e) => setProjectSearch(e.target.value)}
-                  placeholder="Search projects..."
-                  className="w-full pl-8 pr-7 py-1.5 text-xs font-mono bg-card border border-foreground/30 rounded-xs text-foreground placeholder-foreground/50 focus:outline-none focus:border-foreground"
+                  placeholder="Search work, stack, ROI..."
+                  className="w-full pl-8 pr-7 py-1.5 text-xs font-mono bg-card border border-foreground/30 rounded-xs text-foreground placeholder-muted-foreground focus:outline-none focus:border-foreground"
                 />
                 {projectSearch && (
                   <button
                     type="button"
                     onClick={() => setProjectSearch('')}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-foreground/50 hover:text-foreground p-0.5"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-0.5 cursor-pointer"
                   >
                     <X className="w-3 h-3" />
                   </button>
                 )}
               </div>
 
-              {/* View Switcher */}
-              <div className="hidden sm:flex items-center border border-foreground/30 p-0.5 rounded-xs bg-card shrink-0">
-                <button
-                  type="button"
-                  onClick={() => setViewMode('rows')}
-                  title="Editorial Rows View"
-                  className={`p-1.5 rounded-xs cursor-pointer ${
-                    viewMode === 'rows' ? 'bg-foreground text-background' : 'text-foreground/60'
-                  }`}
-                >
-                  <List className="size-4" />
-                </button>
+              {/* View Switcher: Card Grid vs Table List */}
+              <div className="flex items-center border border-foreground/30 p-0.5 rounded-xs bg-card shrink-0">
                 <button
                   type="button"
                   onClick={() => setViewMode('cards')}
                   title="Card Grid View"
-                  className={`p-1.5 rounded-xs cursor-pointer ${
-                    viewMode === 'cards' ? 'bg-foreground text-background' : 'text-foreground/60'
+                  className={`p-1.5 rounded-xs cursor-pointer transition-colors ${
+                    viewMode === 'cards'
+                      ? 'bg-foreground text-background shadow-2xs'
+                      : 'text-foreground/60 hover:text-foreground'
                   }`}
                 >
                   <LayoutGrid className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('rows')}
+                  title="Table / List View"
+                  className={`p-1.5 rounded-xs cursor-pointer transition-colors ${
+                    viewMode === 'rows'
+                      ? 'bg-foreground text-background shadow-2xs'
+                      : 'text-foreground/60 hover:text-foreground'
+                  }`}
+                >
+                  <List className="size-4" />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Editorial Project Rows */}
-          {viewMode === 'rows' ? (
-            <div className="mt-8 divide-y divide-foreground/15 border-y border-foreground/15">
-              {filteredProjects.map((project, idx) => (
-                <article
-                  key={project.id}
-                  onClick={() => setSelectedProject(project)}
-                  className="project-row group grid gap-4 sm:gap-6 py-6 sm:py-9 grid-cols-1 sm:grid-cols-[50px_1fr] lg:grid-cols-[60px_1fr_1.1fr_auto] lg:items-center cursor-pointer transition-colors"
-                >
-                  <span className="font-mono text-xs text-muted-foreground font-bold">
-                    /{String(idx + 1).padStart(2, '0')}
-                  </span>
+          {/* Results summary counter */}
+          <div className="mt-3 flex items-center justify-between text-xs font-mono text-muted-foreground">
+            <span>
+              Showing <b className="text-foreground">{filteredProjects.length}</b> of {allProjects.length} production projects
+            </span>
+            {(projectFilter !== 'all' || projectSearch) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setProjectFilter('all');
+                  setProjectSearch('');
+                }}
+                className="text-primary hover:underline cursor-pointer font-bold"
+              >
+                Reset filters
+              </button>
+            )}
+          </div>
 
-                  <div>
-                    <span
-                      className={`inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-xs ${
-                        idx % 3 === 0
-                          ? 'bg-project-one text-foreground'
-                          : idx % 3 === 1
-                          ? 'bg-project-two text-foreground'
-                          : 'bg-project-three text-foreground'
-                      }`}
-                    >
-                      {project.category}
-                    </span>
-                    <h3 className="mt-2.5 sm:mt-3 max-w-md text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight text-foreground group-hover:text-primary transition-colors font-display">
-                      {project.title}
-                    </h3>
-                  </div>
-
-                  <div>
-                    <p className="max-w-xl leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
-                      {project.description}
-                    </p>
-                    {project.businessImpact && (
-                      <p className="mt-2.5 sm:mt-3 font-mono text-xs font-bold uppercase text-primary">
-                        {project.businessImpact.split('.')[0]}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="flex items-center justify-between gap-4 lg:flex-col lg:items-end pt-2 lg:pt-0">
-                    <span className="font-mono text-[11px] text-muted-foreground font-bold">
-                      {project.tools.slice(0, 3).join(' · ')}
-                    </span>
-                    <span className="grid size-10 sm:size-11 place-items-center rounded-full border border-foreground/20 transition-all group-hover:bg-foreground group-hover:text-background shrink-0">
-                      <ArrowUpRight className="size-5" />
-                    </span>
-                  </div>
-                </article>
-              ))}
+          {/* Content View: Card Grid vs Table List */}
+          {filteredProjects.length === 0 ? (
+            <div className="mt-8 p-12 text-center border-2 border-dashed border-foreground/20 rounded-sm bg-card">
+              <p className="font-mono text-sm text-foreground/80 font-bold uppercase tracking-wider">
+                No matching projects found
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground font-sans">
+                Try searching for a different keyword or resetting your filter.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setProjectFilter('all');
+                  setProjectSearch('');
+                }}
+                className="mt-4 px-4 py-1.5 bg-foreground text-background font-mono text-xs font-bold uppercase rounded-xs cursor-pointer"
+              >
+                Show All Projects
+              </button>
             </div>
-          ) : (
-            /* Card Grid View */
-            <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          ) : viewMode === 'cards' ? (
+            /* Pristine Card Grid View: 2 equal-height columns on desktop, 1 on mobile */
+            <div className="mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
               {filteredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.id}
@@ -357,6 +373,111 @@ export default function App() {
                   onOpenCaseStudy={(p) => setSelectedProject(p)}
                   onOpenStreamlit={(p) => setStreamlitProject(p)}
                 />
+              ))}
+            </div>
+          ) : (
+            /* Pristine Table / List View: Linear & Bloomberg-grade alignment */
+            <div className="mt-6 sm:mt-8 border-2 border-foreground rounded-sm overflow-hidden bg-card shadow-brutal divide-y-2 divide-foreground/15">
+              {/* Header */}
+              <div className="hidden lg:grid grid-cols-[50px_2.2fr_1.6fr_1.4fr_auto] items-center gap-4 px-6 py-3.5 bg-muted font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground border-b-2 border-foreground">
+                <span>#</span>
+                <span>Project &amp; Category</span>
+                <span>Quantified Impact</span>
+                <span>Tech Stack</span>
+                <span className="text-right">Actions</span>
+              </div>
+
+              {/* Rows */}
+              {filteredProjects.map((project, idx) => (
+                <article
+                  key={project.id}
+                  onClick={() => setSelectedProject(project)}
+                  className="group grid grid-cols-1 lg:grid-cols-[50px_2.2fr_1.6fr_1.4fr_auto] items-start lg:items-center gap-3 lg:gap-4 p-4 sm:p-5 hover:bg-muted/40 transition-colors cursor-pointer"
+                >
+                  <span className="font-mono text-xs font-black text-primary">
+                    /{String(idx + 1).padStart(2, '0')}
+                  </span>
+
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs bg-muted text-foreground border border-foreground/20">
+                        {project.category.split('&')[0].trim()}
+                      </span>
+                      {project.badge && (
+                        <span className="font-mono text-[10px] text-muted-foreground font-semibold">
+                          · {project.badge}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-display font-extrabold text-base sm:text-lg text-foreground group-hover:text-primary transition-colors truncate">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground font-sans line-clamp-1 mt-0.5">
+                      {project.tagline}
+                    </p>
+                  </div>
+
+                  <div>
+                    {project.keyMetrics && project.keyMetrics[0] ? (
+                      <div className="inline-flex items-center gap-2 bg-muted/80 border border-foreground/20 px-2.5 py-1 rounded-xs">
+                        <span className="font-mono text-[10px] uppercase text-muted-foreground font-semibold">
+                          {project.keyMetrics[0].label}:
+                        </span>
+                        <span className="font-mono text-xs font-black text-foreground">
+                          {project.keyMetrics[0].value}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-xs text-muted-foreground font-mono">Rule-Enforced</span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap gap-1">
+                    {project.tools.slice(0, 4).map((tool) => (
+                      <span
+                        key={tool}
+                        className="font-mono text-[11px] px-2 py-0.5 bg-muted rounded-xs text-foreground/75 border border-foreground/10"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div
+                    className="flex items-center gap-2 justify-end pt-2 lg:pt-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setSelectedProject(project)}
+                      className="inline-flex items-center gap-1 bg-foreground text-background px-3 py-1.5 rounded-xs font-mono text-[11px] font-bold uppercase tracking-wider shadow-brutal-sm hover:bg-foreground/90 transition-all cursor-pointer shrink-0"
+                    >
+                      <span>Case Study</span>
+                      <ArrowRight className="size-3" />
+                    </button>
+
+                    {project.streamlitDeployment && (
+                      <button
+                        type="button"
+                        onClick={() => setStreamlitProject(project)}
+                        className="p-1.5 border border-foreground/30 rounded-xs bg-primary text-primary-foreground hover:scale-105 transition-all shrink-0 cursor-pointer"
+                        title="Live Streamlit"
+                      >
+                        <Play className="size-3.5 fill-current" />
+                      </button>
+                    )}
+
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-1.5 border border-foreground/30 rounded-xs bg-card hover:border-foreground text-foreground transition-all shrink-0"
+                      title="GitHub"
+                    >
+                      <Github className="size-3.5" />
+                    </a>
+                  </div>
+                </article>
               ))}
             </div>
           )}
@@ -452,11 +573,27 @@ export default function App() {
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-secondary-foreground">
                 04 / About Ope
               </p>
-              <div className="mt-6 sm:mt-8 aspect-[4/3] bg-foreground p-6 text-background flex flex-col justify-between shadow-brutal border-2 border-foreground rounded-xs">
-                <CodeXml className="size-9 sm:size-10 text-accent" />
-                <blockquote className="mt-10 sm:mt-16 font-display text-2xl sm:text-3xl uppercase leading-tight text-background">
-                  “I don&apos;t just write code; I engineer solutions.”
-                </blockquote>
+              <div className="mt-6 sm:mt-8 relative border-2 border-foreground bg-foreground rounded-xs shadow-brutal overflow-hidden group">
+                <div className="aspect-[4/3] sm:aspect-square w-full overflow-hidden bg-foreground">
+                  <img
+                    src={activeConfig.avatarUrl}
+                    alt="Opeyemi Olamiju - Data Scientist & AI Video Creator"
+                    className="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-105 transition-all duration-500"
+                  />
+                </div>
+                <div className="p-5 sm:p-6 bg-foreground text-background border-t-2 border-foreground">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-accent">
+                      Opeyemi Olamiju
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-xs bg-highlight text-highlight-foreground font-bold">
+                      OOU ALUMNI
+                    </span>
+                  </div>
+                  <blockquote className="font-display text-lg sm:text-xl uppercase leading-tight text-background">
+                    “I don&apos;t just write code; I engineer solutions.”
+                  </blockquote>
+                </div>
               </div>
             </div>
 
@@ -470,7 +607,7 @@ export default function App() {
               <div className="mt-7 sm:mt-9 grid gap-3 sm:gap-4 sm:grid-cols-2">
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
-                  <span>B.Sc. Computer Science · Crawford University</span>
+                  <span>B.Sc. Computer Science · OOU (Olabisi Onabanjo University)</span>
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
@@ -646,5 +783,13 @@ export default function App() {
       {/* Floating Back to Top Button */}
       <BackToTop />
     </div>
-  );
+
+    {/* ========================================================
+        DEDICATED PRINTABLE RESUME (Active exclusively on print)
+       ======================================================== */}
+    <div id="printable-resume-wrapper" className="hidden print:block w-full">
+      <PrintableResume config={activeConfig} certifications={certifications} />
+    </div>
+  </div>
+);
 }

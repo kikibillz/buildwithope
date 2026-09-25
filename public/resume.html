@@ -3,15 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Opeyemi Olamiju : Resume / Curriculum Vitae</title>
+  <title>Opeyemi Olamiju — Curriculum Vitae &amp; Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #18181b;
+      --primary: #0f172a;
+      --secondary: #334155;
+      --muted: #64748b;
       --accent: #0f766e;
-      --muted: #52525b;
-      --light-border: #e4e4e7;
-      --bg: #ffffff;
-      --tag-bg: #f4f4f5;
+      --accent-light: #f0fdfa;
+      --accent-border: #99f6e4;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
     }
 
     * {
@@ -21,93 +27,119 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--primary);
-      background-color: #f8fafc;
+      background-color: var(--bg);
       line-height: 1.5;
       padding: 24px;
-      font-size: 13.5px;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .no-print-bar {
-      max-width: 850px;
-      margin: 0 auto 16px auto;
+    .no-print-toolbar {
+      max-width: 860px;
+      margin: 0 auto 20px auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 12px 18px;
+      padding: 12px 20px;
       background: #ffffff;
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      border: 1px solid var(--light-border);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    .no-print-bar .title {
+    .toolbar-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 2px 8px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+      border-radius: 4px;
       font-weight: 600;
-      font-size: 14px;
-      color: #27272a;
     }
 
-    .no-print-bar .actions {
+    .toolbar-actions {
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 14px;
-      font-size: 12.5px;
-      font-weight: 500;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
       text-decoration: none;
       transition: all 0.15s ease;
       border: 1px solid transparent;
+      font-family: inherit;
     }
 
     .btn-primary {
-      background: #18181b;
+      background: var(--primary);
       color: #ffffff;
     }
     .btn-primary:hover {
-      background: #27272a;
+      background: #1e293b;
     }
 
-    .btn-secondary {
-      background: #f4f4f5;
-      color: #27272a;
-      border-color: #e4e4e7;
+    .btn-accent {
+      background: var(--accent);
+      color: #ffffff;
     }
-    .btn-secondary:hover {
-      background: #e4e4e7;
+    .btn-accent:hover {
+      background: #115e59;
     }
 
-    .resume-container {
-      max-width: 850px;
+    .btn-outline {
+      background: #ffffff;
+      color: var(--secondary);
+      border-color: var(--border);
+    }
+    .btn-outline:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .resume-sheet {
+      max-width: 860px;
       margin: 0 auto;
       background: #ffffff;
-      padding: 44px 50px;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-      border: 1px solid var(--light-border);
+      padding: 44px 48px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
     /* Header */
     header {
-      border-bottom: 2px solid var(--light-border);
-      padding-bottom: 18px;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 16px;
       margin-bottom: 20px;
     }
 
-    .header-top {
+    .header-row {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: flex-start;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 10px;
     }
 
     h1 {
@@ -115,44 +147,68 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--primary);
+      line-height: 1.1;
     }
 
-    .brand-alias {
-      color: var(--accent);
-      font-size: 14px;
+    .brand-tag {
+      font-size: 13px;
       font-weight: 700;
-      margin-left: 8px;
+      color: var(--accent);
+      margin-left: 6px;
+      font-family: 'JetBrains Mono', monospace;
     }
 
-    .headline {
+    .role-headline {
       font-size: 14.5px;
       font-weight: 600;
-      color: #3f3f46;
-      margin-top: 4px;
+      color: var(--accent);
+      margin-top: 5px;
     }
 
-    .contact-line {
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .contact-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 10px;
-      font-size: 12.5px;
-      color: var(--muted);
+      gap: 8px 18px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--secondary);
     }
 
-    .contact-line a {
+    .contact-grid a {
       color: var(--primary);
-      text-decoration: none;
       font-weight: 500;
+      text-decoration: none;
     }
-    .contact-line a:hover {
-      text-decoration: underline;
+    .contact-grid a:hover {
       color: var(--accent);
+      text-decoration: underline;
     }
 
     /* Sections */
     section {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     h2 {
@@ -161,7 +217,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      border-bottom: 1.5px solid #ccfbf1;
+      border-bottom: 1px solid var(--border);
       padding-bottom: 4px;
       margin-bottom: 10px;
       display: flex;
@@ -169,168 +225,268 @@
       gap: 6px;
     }
 
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 1px;
+    }
+
     p.summary {
-      font-size: 13px;
-      color: #27272a;
+      font-size: 12.5px;
+      color: var(--secondary);
       line-height: 1.6;
     }
 
-    /* Skills Grid */
-    .skills-table {
+    /* Skills Table */
+    .skills-grid {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 6px 12px;
-      font-size: 12.5px;
+      grid-template-columns: 160px 1fr;
+      gap: 6px 14px;
+      font-size: 12px;
     }
 
-    .skill-cat {
+    .skill-label {
       font-weight: 600;
       color: var(--primary);
     }
 
-    .skill-items {
-      color: #3f3f46;
+    .skill-value {
+      color: var(--secondary);
     }
 
-    /* Experience & Projects */
-    .item {
-      margin-bottom: 14px;
+    /* Experience Items */
+    .exp-item {
+      margin-bottom: 12px;
     }
 
-    .item-header {
+    .exp-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 8px;
     }
 
-    .item-title {
-      font-size: 13.5px;
+    .exp-title {
+      font-size: 13px;
       font-weight: 700;
       color: var(--primary);
     }
 
-    .item-date {
-      font-size: 12px;
+    .exp-date {
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
       white-space: nowrap;
     }
 
-    .item-sub {
-      font-size: 12.5px;
-      font-style: italic;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    ul.bullets {
-      padding-left: 18px;
-      margin-top: 4px;
-    }
-
-    ul.bullets li {
-      font-size: 12.5px;
-      color: #3f3f46;
-      margin-bottom: 3.5px;
-      line-height: 1.5;
-    }
-
-    .project-stack {
+    .exp-company {
       font-size: 11.5px;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    ul.bullet-list {
+      padding-left: 16px;
+      margin-top: 3px;
+    }
+
+    ul.bullet-list li {
+      font-size: 12px;
+      color: var(--secondary);
+      margin-bottom: 2.5px;
+      line-height: 1.45;
+    }
+
+    /* Projects */
+    .project-item {
+      margin-bottom: 10px;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .project-tech {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
       color: var(--accent);
-      font-family: monospace;
       font-weight: 600;
     }
 
+    .project-desc {
+      font-size: 11.8px;
+      color: var(--secondary);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    /* Certifications Grid */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px 16px;
+      font-size: 11.5px;
+    }
+
+    .cert-entry {
+      border-left: 2px solid var(--accent-border);
+      padding-left: 8px;
+    }
+
+    .cert-name {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .cert-issuer {
+      color: var(--muted);
+      font-size: 10.8px;
+    }
+
+    .cert-date {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+
+    /* Footer Note */
+    .resume-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Print Styles */
     @media print {
       body {
-        background: #ffffff;
-        padding: 0;
-        font-size: 11pt;
+        background: #ffffff !important;
+        padding: 0 !important;
+        color: #0f172a !important;
+        font-size: 10pt !important;
       }
-      .no-print-bar {
+
+      .no-print-toolbar {
         display: none !important;
       }
-      .resume-container {
-        box-shadow: none;
-        border: none;
-        padding: 0;
-        max-width: 100%;
+
+      .resume-sheet {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
       }
+
       a {
         text-decoration: none !important;
         color: inherit !important;
       }
+
+      .page-break {
+        page-break-after: always;
+        break-after: page;
+      }
+
       @page {
-        margin: 12mm 15mm;
+        size: letter portrait;
+        margin: 10mm 14mm;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="no-print-bar">
-    <div class="title">Opeyemi Olamiju — Official Resume / CV</div>
-    <div class="actions">
-      <button onclick="window.print()" class="btn btn-primary">
+  <!-- Top Action Toolbar (Hidden during print) -->
+  <aside class="no-print-toolbar" aria-label="Resume Actions">
+    <div class="toolbar-title">
+      <span>Opeyemi Olamiju</span>
+      <span class="toolbar-badge">OFFICIAL CV</span>
+    </div>
+    <div class="toolbar-actions">
+      <button onclick="window.print()" class="btn btn-primary" id="btn-print-cv">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-        Print / Save as PDF
+        Print / Save to PDF
       </button>
-      <a href="/Opeyemi_Olamiju_Resume.pdf" download="Opeyemi_Olamiju_Resume.pdf" class="btn btn-secondary">
+      <a href="/Opeyemi_Olamiju_Resume.pdf" download="Opeyemi_Olamiju_Resume.pdf" class="btn btn-accent" id="btn-download-pdf">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         Download .PDF
       </a>
-      <a href="/" class="btn btn-secondary">Back to Portfolio</a>
+      <a href="/" class="btn btn-outline">
+        &larr; Back to Portfolio
+      </a>
     </div>
-  </div>
+  </aside>
 
-  <main class="resume-container">
+  <!-- Printable Resume Document -->
+  <main class="resume-sheet">
     <!-- Header -->
     <header>
-      <div class="header-top">
+      <div class="header-row">
         <div>
-          <h1>OPEYEMI OLAMIJU <span class="brand-alias">(Build with Ope)</span></h1>
-          <div class="headline">Data Scientist | Python & FastAPI Developer | AI Video Creator</div>
+          <h1>OPEYEMI OLAMIJU <span class="brand-tag">(Build with Ope)</span></h1>
+          <div class="role-headline">Data Scientist • Python &amp; FastAPI Backend Developer • AI Video Creator</div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>AVAILABLE FOR ROLES</span>
         </div>
       </div>
-      <div class="contact-line">
-        <span><strong>Location:</strong> Lagos, Nigeria</span>
+      <div class="contact-grid">
         <span><strong>Email:</strong> <a href="mailto:odunayoopamiju@gmail.com">odunayoopamiju@gmail.com</a></span>
         <span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/opeyemiolamiju/" target="_blank" rel="noreferrer">linkedin.com/in/opeyemiolamiju</a></span>
         <span><strong>GitHub:</strong> <a href="https://github.com/kikibillz" target="_blank" rel="noreferrer">github.com/kikibillz</a></span>
+        <span><strong>Work Model:</strong> Remote &amp; Relocation Ready</span>
       </div>
     </header>
 
-    <!-- Summary -->
+    <!-- Professional Summary -->
     <section>
-      <h2>Executive Summary</h2>
+      <h2>Professional Summary</h2>
       <p class="summary">
-        Data Scientist, Python Backend Developer, and AI Integration Specialist with a proven ability to leverage artificial intelligence to solve any complex engineering or business problem. Backed by a strong Computer Science foundation (BSc), I act as a technical force multiplier—using advanced AI tools, LLMs, and machine learning models to drastically accelerate development cycles, automate workflows, and deliver scalable solutions. From architecting high-throughput asynchronous REST APIs (FastAPI) and building predictive models (XGBoost) to directing commercial generative media productions (Veo, Runway), I blend traditional software engineering with cutting-edge AI capabilities. I am ready to bring immediate, high-impact technical velocity to forward-thinking teams.
+        Data Scientist, Python Backend Developer, and AI Integration Specialist with a solid Computer Science foundation (BSc from Olabisi Onabanjo University - OOU). Combines applied machine learning, production API engineering (FastAPI), and generative AI workflows to build scalable software solutions that deliver immediate business impact. Proven expertise in building sub-50ms ML inference pipelines, robust REST APIs with strict Pydantic v2 schemas, and directing high-conversion commercial generative media. Dedicated to accelerating technical velocity and engineering reliable digital products.
       </p>
     </section>
 
-    <!-- Technical Skills -->
+    <!-- Technical Proficiencies -->
     <section>
-      <h2>Technical Competencies</h2>
-      <div class="skills-table">
-        <div class="skill-cat">Programming</div>
-        <div class="skill-items">Python, TypeScript, JavaScript, HTML, SQL</div>
+      <h2>Core Technical Proficiencies</h2>
+      <div class="skills-grid">
+        <div class="skill-label">Programming &amp; Web</div>
+        <div class="skill-value">Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs</div>
 
-        <div class="skill-cat">Data Science & ML</div>
-        <div class="skill-items">Pandas, NumPy, Scikit-learn, XGBoost, Regression, Classification, Feature Engineering, SMOTE Imbalance Handling, Model Evaluation</div>
+        <div class="skill-label">Data Science &amp; ML</div>
+        <div class="skill-value">Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE Imbalance Handling, Model Serialization (Joblib)</div>
 
-        <div class="skill-cat">Backend & APIs</div>
-        <div class="skill-items">FastAPI, Pydantic v2, Uvicorn ASGI, RESTful Architecture, Docker Containerization, SQLAlchemy, OpenAPI / Swagger UI, Pytest</div>
+        <div class="skill-label">Backend &amp; Architecture</div>
+        <div class="skill-value">FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest (&gt;90% cov)</div>
 
-        <div class="skill-cat">Visualization & UI</div>
-        <div class="skill-items">Matplotlib, Seaborn, Plotly, Streamlit, React, Next.js, Tailwind CSS</div>
+        <div class="skill-label">Generative AI &amp; Video</div>
+        <div class="skill-value">Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs, Advanced Cinematographic Prompting</div>
 
-        <div class="skill-cat">Generative AI & Video</div>
-        <div class="skill-items">Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs, Advanced Cinematographic Prompting</div>
+        <div class="skill-label">Visualization &amp; UI</div>
+        <div class="skill-value">Streamlit, Matplotlib, Seaborn, Plotly Dashboards, React, Tailwind CSS</div>
 
-        <div class="skill-cat">Tools & Workflows</div>
-        <div class="skill-items">Git, GitHub, Docker, Postman, Linux CLI, Jupyter Notebook, VS Code, Vercel</div>
+        <div class="skill-label">DevOps &amp; Workflows</div>
+        <div class="skill-value">Git, GitHub, Docker, Postman, Linux CLI, Jupyter Lab, VS Code, CI/CD, Vercel</div>
       </div>
     </section>
 
@@ -338,221 +494,173 @@
     <section>
       <h2>Professional Experience</h2>
 
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Machine Learning Developer & Data Analyst</div>
-          <div class="item-date">2023 – Present</div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Machine Learning Developer &amp; Data Analyst</div>
+          <div class="exp-date">2023 – Present</div>
         </div>
-        <div class="item-sub">Independent & Applied Open-Source Deployments • Lagos, Nigeria</div>
-        <ul class="bullets">
-          <li>Architected, evaluated, and deployed production machine learning systems and interactive web apps using Streamlit and FastAPI.</li>
+        <div class="exp-company">Independent &amp; Applied Open-Source Deployments • Remote / Global</div>
+        <ul class="bullet-list">
+          <li>Architected, evaluated, and deployed machine learning systems and interactive applications using Python, Streamlit, and FastAPI.</li>
           <li>Serialized trained classification models (XGBoost, Random Forest) via Joblib, enabling sub-50ms real-time inference latency.</li>
-          <li>Engineered domain-specific interaction features, addressed high-cardinality categorical data, and countered extreme class imbalance with SMOTE resampling.</li>
-          <li>Engineered asynchronous REST APIs with FastAPI, Uvicorn, and Pydantic v2 validation contracts, achieving >90% test coverage with Pytest.</li>
+          <li>Engineered domain-specific interaction variables, resolved high-cardinality categorical data, and countered severe class imbalance with SMOTE.</li>
+          <li>Built asynchronous REST API endpoints with FastAPI and Pydantic v2 validation contracts, achieving &gt;90% test coverage with Pytest.</li>
         </ul>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Administrative Support & Virtual Assistant</div>
-          <div class="item-date">Dec 2024 – Present</div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">People Leader (Promoted) &amp; Agile People Operations Specialist</div>
+          <div class="exp-date">Aug 2024 – Jul 2025</div>
         </div>
-        <div class="item-sub">Freelance / Private Clients • Remote</div>
-        <ul class="bullets">
-          <li>Managed multi-source business data, automated administrative workflows, and maintained structured tracking spreadsheets with zero error rate.</li>
-          <li>Standardized standard operating procedures (SOPs), cleaned business datasets, and authored weekly KPI progress briefs for stakeholders.</li>
+        <div class="exp-company">Culturelligence • Hybrid / Remote</div>
+        <ul class="bullet-list">
+          <li>Managed workforce databases, monitored recruitment funnels, and optimized internal employee onboarding data operations.</li>
+          <li>Prepared departmental headcount distributions, tenure analytics, and employee retention summaries for leadership review.</li>
+          <li>Rapidly promoted to People Leader for workflow efficiency, cross-team accountability, and operational excellence.</li>
         </ul>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">People Leader (Promoted) & Agile People Operations Specialist</div>
-          <div class="item-date">Aug 2024 – Jul 2025</div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Administrative Support &amp; Virtual Assistant</div>
+          <div class="exp-date">Dec 2024 – Present</div>
         </div>
-        <div class="item-sub">Culturelligence • Hybrid / Remote</div>
-        <ul class="bullets">
-          <li>Maintained workforce databases, monitored recruitment funnels, and streamlined internal onboarding data operations.</li>
-          <li>Prepared departmental headcount distributions, tenure trends, and employee retention summaries for executive review.</li>
-          <li>Promoted to People Leader role for demonstrated leadership, workflow optimization, and high cross-team operational fidelity.</li>
+        <div class="exp-company">Freelance &amp; Private Clients • Remote</div>
+        <ul class="bullet-list">
+          <li>Automated administrative workflows, maintaining structured tracking spreadsheets and executive databases with zero error rate.</li>
+          <li>Standardized operational SOPs, cleaned multi-source business data, and authored weekly KPI progress briefs for stakeholders.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Featured Projects -->
+    <!-- Key Applied Projects -->
     <section>
       <h2>Key Applied Projects</h2>
 
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">FastAPI Production ML Inference & Validation Service</div>
-          <div class="project-stack">FastAPI • Pydantic v2 • Uvicorn • Docker • Scikit-learn</div>
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-name">FastAPI Production ML Inference &amp; Validation Service</span>
+          <span class="project-tech">FastAPI • Pydantic v2 • Uvicorn • Docker • Scikit-learn</span>
         </div>
-        <ul class="bullets">
-          <li>Engineered high-throughput asynchronous REST API serving ML models with dynamic request validation, automated Swagger UI documentation, and sub-15ms latency.</li>
-        </ul>
+        <p class="project-desc">High-throughput asynchronous REST API serving ML models with strict request validation, automated interactive Swagger UI docs, and sub-15ms response latency.</p>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Bank Customer Churn Predictor & Retention Engine</div>
-          <div class="project-stack">Python • Scikit-learn • XGBoost • Streamlit • Pandas</div>
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-name">Bank Customer Churn Predictor &amp; Retention Engine</span>
+          <span class="project-tech">Python • Scikit-learn • XGBoost • Streamlit • Pandas</span>
         </div>
-        <ul class="bullets">
-          <li>Developed an interactive supervised classification app predicting customer departure with 86% ROC-AUC, interactive risk gauges, and financial ROI retention recommendations.</li>
-        </ul>
+        <p class="project-desc">Supervised classification platform predicting customer churn with 86% ROC-AUC, interactive risk probability gauges, and dynamic retention recommendations.</p>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">HR Analytics & Employee Attrition Intelligence</div>
-          <div class="project-stack">Python • Streamlit • Seaborn • Random Forest</div>
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-name">HR Analytics &amp; Employee Attrition Intelligence</span>
+          <span class="project-tech">Python • Streamlit • Seaborn • Random Forest</span>
         </div>
-        <ul class="bullets">
-          <li>Constructed an organizational turnover diagnostics platform analyzing salary, satisfaction, and tenure factors to pinpoint workforce risk.</li>
-        </ul>
+        <p class="project-desc">Workforce analytics platform diagnosing turnover drivers across tenure, salary, and satisfaction metrics to forecast retention risks with real-time scoring.</p>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Commercial Generative AI Video Productions</div>
-          <div class="project-stack">Google Veo 3 • Runway Gen-3 • Kling AI • ElevenLabs</div>
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-name">Commercial Generative AI Video Productions</span>
+          <span class="project-tech">Google Veo 3 • Runway Gen-3 • Kling AI • ElevenLabs</span>
         </div>
-        <ul class="bullets">
-          <li>Directed viral and commercial video advertisements (Indomie, Luxury Real Estate, AI Tech Promos) utilizing advanced text-to-video prompts, motion brush kinematics, and sound design.</li>
-        </ul>
+        <p class="project-desc">Directed commercial video campaigns (Indomie Noodles, Luxury Real Estate, AI Tech Promos) engineering cinematic prompts, motion brush cameras, and audio design.</p>
       </div>
     </section>
 
     <!-- Education -->
     <section>
-      <h2>Education</h2>
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Bachelor of Science (BSc) in Computer Science</div>
-          <div class="item-date">2019 – 2023</div>
+      <h2>Education &amp; Academic Background</h2>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Bachelor of Science (BSc) in Computer Science</div>
+          <div class="exp-date">2019 – 2023</div>
         </div>
-        <div class="item-sub">Olabisi Onabanjo University (O.O.U) — Ogun State, Nigeria</div>
-        <ul class="bullets">
-          <li>Core coursework: Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems (SQL), Software Engineering, Probability & Statistics.</li>
-          <li>Applied computing projects focusing on algorithmic efficiency, Python scripting, and relational data architecture.</li>
-        </ul>
+        <div class="exp-company"><strong>Olabisi Onabanjo University (OOU)</strong> — Ogun State</div>
+        <p class="project-desc">Core Coursework: Data Structures &amp; Algorithms, Object-Oriented Programming (Python &amp; Java), Database Management Systems (SQL), Software Engineering, Probability &amp; Statistics, Discrete Mathematics, Computer Architecture.</p>
       </div>
     </section>
 
-    <!-- Certifications & Licenses -->
+    <!-- Certifications & Licenses (13 Total) -->
     <section>
-      <h2>Certifications &amp; Licenses</h2>
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Certified Data Scientist</div>
-          <div class="item-date">Aug 2026</div>
+      <h2>Verified Certifications &amp; Licenses (13 Total)</h2>
+      <div class="certs-grid">
+        <div class="cert-entry">
+          <div class="cert-name">Certified Data Scientist</div>
+          <div class="cert-issuer">New Horizons • Data Science &amp; ML</div>
+          <div class="cert-date">Aug 2026</div>
         </div>
-        <div class="item-sub">New Horizons • Data Analysis, Data Centers, Machine Learning &amp; Python</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Certified Product Manager (CPM)</div>
-          <div class="item-date">Feb 2025</div>
+        <div class="cert-entry">
+          <div class="cert-name">Certified Product Manager (CPM)</div>
+          <div class="cert-issuer">BeTechified • Product Strategy &amp; Growth</div>
+          <div class="cert-date">Feb 2025</div>
         </div>
-        <div class="item-sub">BeTechified • Product Strategy, User Research, Cross-Functional Collaboration &amp; Growth</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Agile People Operation Specialist</div>
-          <div class="item-date">Jul 2025</div>
+        <div class="cert-entry">
+          <div class="cert-name">Agile People Operation Specialist</div>
+          <div class="cert-issuer">Culturelligence • PeopleOps &amp; Agile</div>
+          <div class="cert-date">Jul 2025</div>
         </div>
-        <div class="item-sub">Culturelligence • Human Resources (HR), Agile PeopleOps Framework &amp; Culture Design</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">UI/UX Design</div>
-          <div class="item-date">May 2025</div>
+        <div class="cert-entry">
+          <div class="cert-name">UI/UX Design</div>
+          <div class="cert-issuer">Dev and Design • Wireframing &amp; UX Research</div>
+          <div class="cert-date">May 2025</div>
         </div>
-        <div class="item-sub">Dev and Design • Product Design, Wireframing, User Research &amp; Interactive Prototyping</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Product Management</div>
-          <div class="item-date">Oct 2025</div>
+        <div class="cert-entry">
+          <div class="cert-name">Product Management</div>
+          <div class="cert-issuer">Prodefied • Roadmapping &amp; Agile Delivery</div>
+          <div class="cert-date">Oct 2025</div>
         </div>
-        <div class="item-sub">Prodefied • Roadmapping, Feature Prioritization, Market Validation &amp; Agile Delivery</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Artificial Intelligence Career Essentials</div>
-          <div class="item-date">Accredited</div>
+        <div class="cert-entry">
+          <div class="cert-name">AI Career Essentials</div>
+          <div class="cert-issuer">alx_africa • Generative AI Tooling</div>
+          <div class="cert-date">Certified</div>
         </div>
-        <div class="item-sub">alx_africa • Generative AI Tooling, Modern AI Workflows &amp; Prompt Engineering</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Hotjar Learning (Behavioral Analytics)</div>
-          <div class="item-date">Jul 2024 · Exp Dec 2030</div>
+        <div class="cert-entry">
+          <div class="cert-name">Hotjar Learning (Analytics)</div>
+          <div class="cert-issuer">Contentsquare • Credential ID: x3ftgg2pwb2f</div>
+          <div class="cert-date">2024 – 2030</div>
         </div>
-        <div class="item-sub">Hotjar | by Contentsquare • Heatmaps, User Journeys, Funnels • <strong>Credential ID: x3ftgg2pwb2f</strong></div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Tech Recruiter</div>
-          <div class="item-date">Accredited</div>
+        <div class="cert-entry">
+          <div class="cert-name">Tech Recruiter</div>
+          <div class="cert-issuer">hirist • Credential ID: cert_bfxyxv9d</div>
+          <div class="cert-date">Certified</div>
         </div>
-        <div class="item-sub">hirist • Technical Sourcing, Candidate Screening &amp; Talent Pipeline • <strong>Credential ID: cert_bfxyxv9d</strong></div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Remote Work Certification</div>
-          <div class="item-date">Jun 2024</div>
+        <div class="cert-entry">
+          <div class="cert-name">Remote Work Certification</div>
+          <div class="cert-issuer">FOGDEV • Certified Remote Operations</div>
+          <div class="cert-date">Jun 2024</div>
         </div>
-        <div class="item-sub">FOCUS ON GROWTH AND DEVELOPMENT - FOGDEV • Certified to Work Remotely</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Data Visualization Intern</div>
-          <div class="item-date">Sep 2024</div>
+        <div class="cert-entry">
+          <div class="cert-name">Data Visualization Intern</div>
+          <div class="cert-issuer">Excelerate • Dashboards &amp; Visual Analytics</div>
+          <div class="cert-date">Sep 2024</div>
         </div>
-        <div class="item-sub">Excelerate • Business Intelligence, Dashboarding &amp; Data Storytelling</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Digital Teacher</div>
-          <div class="item-date">Feb 2023 · Exp Aug 2030</div>
+        <div class="cert-entry">
+          <div class="cert-name">Digital Teacher</div>
+          <div class="cert-issuer">UNESCO IOC • E-Learning Pedagogies</div>
+          <div class="cert-date">2023 – 2030</div>
         </div>
-        <div class="item-sub">Intergovernmental Oceanographic Commission (IOC) of UNESCO • Digital Education &amp; EdTech</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Virtual Assistant</div>
-          <div class="item-date">Accredited</div>
+        <div class="cert-entry">
+          <div class="cert-name">Virtual Assistant</div>
+          <div class="cert-issuer">alx_africa • Executive Data Operations</div>
+          <div class="cert-date">Certified</div>
         </div>
-        <div class="item-sub">alx_africa • Data Entry, Executive Support &amp; Remote Operations</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <div class="item-title">Jobberman Soft Skills Training</div>
-          <div class="item-date">Oct 2020</div>
+        <div class="cert-entry">
+          <div class="cert-name">Jobberman Soft Skills Training</div>
+          <div class="cert-issuer">Jobberman • Emotional Intelligence</div>
+          <div class="cert-date">Oct 2020</div>
         </div>
-        <div class="item-sub">Jobberman Youth Engagement &amp; Learning • Emotional Intelligence &amp; Workplace Collaboration</div>
       </div>
-
-      <p style="font-size: 11.5px; color: var(--muted); margin-top: 12px; font-style: italic;">
-        * All 13 verified credentials, badge thumbnails, and license IDs are authenticated on LinkedIn at 
-        <a href="https://www.linkedin.com/in/opeyemiolamiju/details/certifications/" target="_blank" rel="noreferrer" style="color: var(--accent); text-decoration: underline;">
-          linkedin.com/in/opeyemiolamiju/details/certifications/
-        </a>
-      </p>
     </section>
+
+    <!-- Footer -->
+    <footer class="resume-footer">
+      <span>Opeyemi Olamiju — Curriculum Vitae</span>
+      <span>Verified on LinkedIn: <a href="https://www.linkedin.com/in/opeyemiolamiju/details/certifications/" target="_blank" rel="noreferrer" style="color: var(--accent); text-decoration: underline;">linkedin.com/in/opeyemiolamiju</a></span>
+    </footer>
   </main>
 
 </body>

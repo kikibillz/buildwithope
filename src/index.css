@@ -214,53 +214,21 @@
 }
 
 /* =========================================================================
-   DEDICATED PRINT STYLESHEET (PDF & Document-Friendly Layout)
+   DEDICATED PRINT STYLESHEET (Executive 2-Page CV Print Layout)
    ========================================================================= */
 @media print {
   @page {
-    margin: 12mm 14mm 14mm 14mm;
-    size: portrait;
+    size: letter portrait;
+    margin: 10mm 12mm;
   }
 
-  *,
-  *::before,
-  *::after {
-    background-color: transparent !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    color: #0c141f !important;
-    border-color: #d6d3d1 !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  html,
-  body {
-    background: #ffffff !important;
-    color: #0c141f !important;
-    font-size: 10pt !important;
-    line-height: 1.45 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-  }
-
-  /* Hide interactive chrome and navigation */
+  /* Completely hide the website interactive chrome & content */
+  #portfolio-interactive-shell,
   #main-navbar,
   nav,
-  header#site-header,
-  #theme-toggle,
-  #focus-view-switcher,
-  #project-filters,
-  #hero-workspace-visual,
-  #hero-btn-work,
-  #hero-btn-videos,
-  #hero-btn-talk,
-  #interactive-console,
-  #live-test-bench,
-  .print-hidden,
-  .no-print,
+  header,
+  footer,
+  aside,
   button,
   input,
   iframe,
@@ -270,90 +238,61 @@
   [role="dialog"],
   .fixed,
   .sticky,
-  .animate-pulse,
-  .animate-bounce {
+  .print-hidden,
+  .no-print {
     display: none !important;
   }
 
-  .print-only,
-  .print\:block {
+  /* Show ONLY the pristine printable resume */
+  #printable-resume-wrapper {
     display: block !important;
-  }
-  .print\:flex {
-    display: flex !important;
-  }
-  .print\:grid {
-    display: grid !important;
-  }
-
-  main,
-  section,
-  article,
-  div {
-    transform: none !important;
-    transition: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
   }
 
-  section {
-    padding-top: 14pt !important;
-    padding-bottom: 14pt !important;
-    border-bottom: 1pt solid #e7e5e4 !important;
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    break-after: avoid !important;
-    page-break-after: avoid !important;
-    color: #0c141f !important;
-    font-weight: 700 !important;
+  .printable-resume-root {
+    background: #ffffff !important;
+    color: #0f172a !important;
   }
 
-  p, ul, ol, dl {
-    orphans: 3;
-    widows: 3;
-  }
-
-  article,
-  [id^="project-card-"],
-  .experience-item,
-  .skill-category-card,
-  .certification-item,
-  .print-break-avoid {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    margin-bottom: 12pt !important;
-  }
-
-  [id^="project-card-"] {
-    border: 1pt solid #d6d3d1 !important;
-    border-radius: 4px !important;
-    padding: 10pt !important;
+  .resume-page {
+    background: #ffffff !important;
+    border: none !important;
     box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .page-break {
+    page-break-after: always !important;
+    break-after: page !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
 
   a {
     text-decoration: none !important;
-    color: #0c141f !important;
-  }
-
-  .print-show-url::after {
-    content: " (" attr(href) ")";
-    font-size: 8pt;
-    color: #78716c !important;
-    font-weight: normal;
-  }
-
-  span.rounded,
-  span.rounded-md,
-  span.rounded-full {
-    border: 1pt solid #d6d3d1 !important;
-    padding: 1pt 4pt !important;
-    font-size: 8pt !important;
-    background: #f5f5f4 !important;
-  }
-
-  img {
-    max-height: 160pt !important;
-    object-fit: cover !important;
-    break-inside: avoid !important;
+    color: inherit !important;
   }
 }
+
