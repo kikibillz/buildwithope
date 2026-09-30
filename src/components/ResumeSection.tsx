@@ -28,6 +28,7 @@ Data Scientist, Python Backend Developer, and AI Integration Specialist with a s
 
 TECHNICAL SKILLS:
 - Programming: Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs
+- Databases & Storage: Relational SQL (PostgreSQL, MySQL, SQLite), NoSQL (MongoDB), Schema Design, Complex Joins & CTEs, Window Functions, Indexing & Query Tuning, Redis
 - Machine Learning & Data: Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE, Joblib
 - Backend & Architecture: FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest (>90% coverage)
 - Generative AI & Video: Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs
@@ -255,6 +256,14 @@ Verification URL: https://www.linkedin.com/in/opeyemiolamiju/details/certificati
                 </span>
                 <span className="text-foreground/80 font-mono text-[11px]">
                   Python, TypeScript, JavaScript, SQL, HTML
+                </span>
+              </div>
+              <div className="p-2.5 rounded-xs bg-muted/50 border border-foreground/20">
+                <span className="font-mono font-bold block text-[11px] text-primary uppercase mb-1">
+                  Databases &amp; Storage
+                </span>
+                <span className="text-foreground/80 font-mono text-[11px]">
+                  SQL (PostgreSQL), NoSQL (MongoDB), SQLite, Redis
                 </span>
               </div>
               <div className="p-2.5 rounded-xs bg-muted/50 border border-foreground/20">

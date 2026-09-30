@@ -108,6 +108,7 @@ export default function App() {
       all: allProjects.length,
       ml: allProjects.filter((p) => p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive') || p.category.toLowerCase().includes('safety')).length,
       backend: allProjects.filter((p) => p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))).length,
+      databases: allProjects.filter((p) => p.category.toLowerCase().includes('database') || p.category.toLowerCase().includes('sql') || p.tools.some((t) => t.toLowerCase().includes('sql') || t.toLowerCase().includes('mongo'))).length,
       data: allProjects.filter((p) => p.category.toLowerCase().includes('data analysis') || p.category.toLowerCase().includes('automation') || p.category.toLowerCase().includes('spreadsheets') || p.category.toLowerCase().includes('etl')).length,
       web: allProjects.filter((p) => p.category.toLowerCase().includes('web') || p.category.toLowerCase().includes('product') || p.category.toLowerCase().includes('career')).length,
     };
@@ -122,6 +123,8 @@ export default function App() {
           ? p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
           : projectFilter === 'ml'
           ? p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive') || p.category.toLowerCase().includes('safety')
+          : projectFilter === 'databases'
+          ? p.category.toLowerCase().includes('database') || p.category.toLowerCase().includes('sql') || p.tools.some((t) => t.toLowerCase().includes('sql') || t.toLowerCase().includes('mongo'))
           : projectFilter === 'data'
           ? p.category.toLowerCase().includes('data analysis') || p.category.toLowerCase().includes('automation') || p.category.toLowerCase().includes('spreadsheets') || p.category.toLowerCase().includes('etl')
           : projectFilter === 'web'
@@ -159,14 +162,11 @@ export default function App() {
            ========================================================================= */}
         <section id="top" className="relative mx-auto grid max-w-7xl gap-8 lg:gap-12 px-4 sm:px-6 lg:px-10 pb-12 sm:pb-16 lg:pb-24 pt-8 sm:pt-14 lg:pt-20 lg:grid-cols-[1.2fr_.8fr] items-start">
           <div className="relative z-10 w-full min-w-0">
-            {/* Status Badge & OOU Credential */}
+            {/* Status Badge */}
             <div className="mb-5 sm:mb-7 flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs font-bold uppercase tracking-widest font-mono">
               <span className="inline-flex items-center gap-2 bg-status px-3 py-1.5 sm:py-2 text-status-foreground shadow-brutal-sm rounded-xs">
                 <span className="size-2 animate-pulse rounded-full bg-current" />
                 Available for roles &amp; projects
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-foreground/85 font-bold px-2.5 py-1.5 rounded-xs bg-muted border border-foreground/30">
-                B.Sc. Computer Science · OOU
               </span>
             </div>
 
@@ -238,6 +238,7 @@ export default function App() {
             <div className="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 scrollbar-none font-mono text-xs w-full md:w-auto">
               {[
                 { id: 'all', label: 'All', count: categoryCounts.all },
+                { id: 'databases', label: 'Databases & SQL', count: categoryCounts.databases },
                 { id: 'ml', label: 'Machine Learning', count: categoryCounts.ml },
                 { id: 'backend', label: 'Backend & APIs', count: categoryCounts.backend },
                 { id: 'data', label: 'Data & Automation', count: categoryCounts.data },
@@ -382,7 +383,7 @@ export default function App() {
               <div className="hidden lg:grid grid-cols-[50px_2.2fr_1.6fr_1.4fr_auto] items-center gap-4 px-6 py-3.5 bg-muted font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground border-b-2 border-foreground">
                 <span>#</span>
                 <span>Project &amp; Category</span>
-                <span>Quantified Impact</span>
+                <span>Key Performance Indicators</span>
                 <span>Tech Stack</span>
                 <span className="text-right">Actions</span>
               </div>
@@ -514,7 +515,7 @@ export default function App() {
                 From messy source data to explainable models, statistical validation, and decision-ready insights.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
-                {['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'SQL', 'Plotly'].map((tool) => (
+                {['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'SQL (PostgreSQL)', 'NoSQL (MongoDB)'].map((tool) => (
                   <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
                     {tool}
                   </li>
@@ -534,7 +535,7 @@ export default function App() {
                 Reliable APIs and automated pipelines designed to move smoothly from notebook exploration to production runtime.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
-                {['FastAPI', 'Pydantic', 'Docker', 'PostgreSQL', 'Pytest', 'CI/CD'].map((tool) => (
+                {['FastAPI', 'Pydantic', 'Docker', 'PostgreSQL (SQL)', 'MongoDB (NoSQL)', 'CI/CD'].map((tool) => (
                   <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
                     {tool}
                   </li>

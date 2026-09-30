@@ -136,6 +136,7 @@ function generateResumePdf() {
   drawSectionHeading('Core Technical Proficiencies');
   const skillsCategories = [
     { label: 'Programming & Web', items: 'Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs' },
+    { label: 'Databases & Storage', items: 'SQL (PostgreSQL, MySQL, SQLite), NoSQL (MongoDB), Schema Design, Complex Joins, Window Functions, Indexing, Redis' },
     { label: 'Data Science & ML', items: 'Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE, Model Serialization (Joblib)' },
     { label: 'Backend & Architecture', items: 'FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest (>90% cov)' },
     { label: 'Generative AI & Media', items: 'Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs' },
@@ -277,6 +278,11 @@ function generateResumePdf() {
   drawSectionHeading('Key Applied Projects');
 
   const projects = [
+    {
+      name: 'Enterprise Hybrid Data Platform (PostgreSQL & MongoDB)',
+      stack: 'SQL • PostgreSQL • NoSQL • MongoDB • PyMongo • SQLAlchemy • Docker',
+      desc: 'Dual-engine data platform integrating ACID relational PostgreSQL schemas with MongoDB document collections for real-time telemetry, 4.5x indexing speedup, and sub-25ms analytical queries across 1.2M+ records.',
+    },
     {
       name: 'FastAPI Production ML Inference & Validation Service',
       stack: 'FastAPI • Pydantic v2 • Uvicorn • Docker • Scikit-learn',

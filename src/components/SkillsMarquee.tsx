@@ -2,6 +2,8 @@ import React from 'react';
 
 const skillsTicker = [
   'Python',
+  'SQL (PostgreSQL)',
+  'NoSQL (MongoDB)',
   'Machine Learning',
   'FastAPI',
   'Generative AI Video',
@@ -10,7 +12,7 @@ const skillsTicker = [
   'Docker & CI/CD',
   'Veo 3 & Runway',
   'Scikit-learn',
-  'PostgreSQL',
+  'Database Indexing & Joins',
 ];
 
 export const SkillsMarquee: React.FC = () => {

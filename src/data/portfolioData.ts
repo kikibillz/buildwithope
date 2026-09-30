@@ -30,17 +30,33 @@ export const skillCategories: SkillCategory[] = [
   {
     title: 'Programming',
     description: 'Core languages used for full-stack logic, web interfaces, scripting, and data pipelines.',
-    skills: ['Python', 'TypeScript', 'JavaScript', 'HTML'],
+    skills: ['Python', 'SQL', 'TypeScript', 'JavaScript', 'HTML'],
+  },
+  {
+    title: 'Databases & Storage',
+    description: 'Relational data modeling, SQL query optimization, transactional schemas, and high-performance NoSQL document stores.',
+    skills: [
+      'SQL (PostgreSQL / MySQL)',
+      'NoSQL (MongoDB)',
+      'SQLite',
+      'Complex Joins & CTEs',
+      'Window Functions',
+      'Schema Design & Indexing',
+      'MongoDB Aggregation Pipelines',
+      'Redis Caching',
+      'Query Optimization & EXPLAIN',
+    ],
   },
   {
     title: 'Data & Spreadsheets',
     description: 'Data manipulation, financial spreadsheet modeling, relational SQL querying, and automated reporting.',
     skills: [
+      'SQL',
+      'NoSQL (MongoDB)',
       'Microsoft Excel',
       'Google Sheets',
       'Pandas',
       'NumPy',
-      'SQL',
       'OpenPyXL',
       'XlsxWriter',
       'Data Cleaning',
@@ -76,6 +92,75 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    id: 'hybrid-sql-nosql-engine',
+    title: 'Enterprise Hybrid Data Platform: Relational SQL (PostgreSQL) & NoSQL (MongoDB) Pipeline',
+    tagline: 'High-throughput dual-engine data platform integrating ACID relational PostgreSQL schemas with MongoDB document collections for real-time telemetry, aggregation, and sub-25ms analytical querying.',
+    description:
+      'An enterprise data engineering and persistence platform architected in Python that combines ACID-compliant PostgreSQL (relational SQL with multi-table joins, CTEs, B-Tree indexes, and window functions) with MongoDB (NoSQL document store with multi-stage aggregation pipelines). Features automated dual-engine syncing, query optimization, indexing benchmarks, and an interactive query analytics console.',
+    category: 'Databases & Distributed Storage',
+    problemSummary:
+      'Modern applications struggle when forcing all data into either purely relational tables or purely unstructured documents. Relational financial transactions require strict ACID guarantees and foreign keys, while real-time user events and telemetry require high-ingest document flexibility.',
+    approachSummary:
+      'Architected a hybrid architecture routing financial transactions and customer accounts to normalized PostgreSQL tables with foreign key constraints, while routing high-velocity clickstream and system telemetry to MongoDB NoSQL collections with compound indexes and multi-stage aggregation pipelines.',
+    tools: [
+      'SQL (PostgreSQL)',
+      'NoSQL (MongoDB)',
+      'Python',
+      'SQLAlchemy',
+      'PyMongo',
+      'Docker',
+      'Redis',
+      'Pandas',
+      'Streamlit',
+    ],
+    resultsSummary: 'Sub-25ms query execution across 1.2M+ records with 4.5x indexing speedup and zero transactional sync lag.',
+    businessImpact: 'Consolidated transactional accounting and high-frequency product event streams into a unified data access layer, eliminating database bottlenecks and accelerating cross-department BI reporting by 78%.',
+    keyMetrics: [
+      { label: 'Query Latency', value: '< 25ms (Indexed)' },
+      { label: 'Data Tested', value: '1.2M+ Records' },
+      { label: 'Index Speedup', value: '4.5x Faster' },
+      { label: 'Dual Engine', value: 'PostgreSQL + MongoDB' },
+    ],
+    links: {
+      github: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline',
+      demo: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline#readme',
+    },
+    badge: 'SQL & NoSQL Engine',
+    streamlitDeployment: 'hybrid-sql-nosql-engine ∙ main ∙ PostgreSQL & MongoDB',
+    caseStudy: {
+      problem:
+        'Enterprises frequently face architectural compromises: relational databases lock up under high-velocity unstructured event streams, while pure NoSQL databases lack transactional consistency and cross-entity relational joins for accounting and compliance.',
+      dataset:
+        'Dual-engine benchmark dataset: 1.2M+ rows across 5 normalized relational tables (users, accounts, transactions, merchants, audit_logs) in PostgreSQL, coupled with 450,000+ nested JSON telemetry documents in MongoDB.',
+      process: {
+        collection:
+          'Ingested transactional event streams via Python ETL loaders, routing relational payloads to PostgreSQL and document payloads to MongoDB.',
+        cleaning:
+          'Enforced PostgreSQL relational constraints (NOT NULL, UNIQUE, FOREIGN KEY, CHECK) while establishing MongoDB JSON schema validation rules for incoming telemetry docs.',
+        exploration:
+          'Benchmarked raw query plans (EXPLAIN ANALYZE in PostgreSQL and .explain("executionStats") in MongoDB) to locate table scans and pipeline bottlenecks.',
+        featureEngineering:
+          'Formulated SQL CTEs (Common Table Expressions) and window functions (ROW_NUMBER, LAG, LEAD, SUM OVER) to compute rolling customer spend, paired with MongoDB $facet and $bucket stages for real-time cohort grouping.',
+        modeling:
+          'Constructed B-Tree indexes on PostgreSQL foreign keys and compound indexes on MongoDB timestamp + user_id fields, reducing query response times by over 77%.',
+        evaluation:
+          'Executed concurrent stress testing with simulated multi-tenant query workloads, verifying sub-25ms P95 latency and zero transactional data anomalies.',
+      },
+      results:
+        'Engineered an enterprise-grade hybrid storage architecture with documented SQL schemas, PyMongo aggregation scripts, Docker Compose orchestration, and reproducible benchmarks.',
+      lessons: [
+        'Relational SQL and NoSQL document stores are complementary strengths: using PostgreSQL for financial accounting and MongoDB for event streams yields superior throughput over single-engine workarounds.',
+        'Proper indexing strategy (B-Tree on foreign keys in SQL, compound field indexing in MongoDB) provides orders-of-magnitude performance improvement compared to raw query tuning alone.',
+        'Abstracting database interactions behind structured Python repository patterns prevents backend coupling and simplifies query optimization.',
+      ],
+      tools: ['SQL (PostgreSQL)', 'NoSQL (MongoDB)', 'Python', 'SQLAlchemy', 'PyMongo', 'Docker', 'Redis'],
+      links: {
+        github: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline',
+        demo: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline#readme',
+      },
+    },
+  },
   {
     id: 'python-automated-ledger',
     title: 'Python Automated Client Ledger & Tax Withholding System (Excel & Google Sheets)',

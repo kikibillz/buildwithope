@@ -14,6 +14,9 @@ import {
   CheckCircle2,
   Cpu,
   Layers,
+  Database,
+  Table,
+  Gauge,
 } from 'lucide-react';
 import { Project } from '../types';
 
@@ -43,6 +46,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   // Status and URL for mockup browser chrome
   const getMockupMeta = () => {
     switch (project.id) {
+      case 'hybrid-sql-nosql-engine':
+        return {
+          url: 'hybrid-database-engine.internal/sql-nosql-bench',
+          type: 'PostgreSQL & MongoDB',
+          status: '1.2M Records · < 25ms',
+          accent: 'text-cyan-400',
+        };
       case 'fastapi-ml-service':
         return {
           url: 'fastapi-service.internal/docs',
@@ -158,6 +168,65 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             alt="Career Boost Platform"
             className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
           />
+        );
+      case 'hybrid-sql-nosql-engine':
+        return (
+          <div className="w-full h-full bg-[#080d1a] text-slate-100 p-3 sm:p-4 flex flex-col justify-between font-mono text-[11px] select-none">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-[10px] text-slate-400 border-b border-slate-800 pb-1.5">
+                <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
+                  <Database className="size-3" />
+                  Dual-Engine: Relational SQL + NoSQL Document Store
+                </span>
+                <span className="bg-cyan-950/80 text-cyan-300 px-1.5 py-0.5 rounded border border-cyan-800 text-[9px]">
+                  PostgreSQL &amp; MongoDB
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="bg-slate-900/90 border border-blue-900/50 rounded p-2">
+                  <div className="flex items-center justify-between text-[9px] mb-1">
+                    <span className="text-blue-400 font-bold flex items-center gap-1">
+                      <Table className="size-2.5" /> PostgreSQL (SQL)
+                    </span>
+                    <span className="text-slate-400 font-mono">B-Tree Index</span>
+                  </div>
+                  <code className="text-[9.5px] text-blue-200 block truncate">
+                    SELECT c.id, SUM(o.amt)
+                  </code>
+                  <code className="text-[9.5px] text-slate-400 block truncate">
+                    FROM clients c JOIN orders o
+                  </code>
+                  <div className="mt-1 flex items-center justify-between text-[9px] text-emerald-400 pt-1 border-t border-slate-800">
+                    <span>ACID Schema</span>
+                    <span className="font-bold">14ms · 850k rows</span>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900/90 border border-emerald-900/50 rounded p-2">
+                  <div className="flex items-center justify-between text-[9px] mb-1">
+                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                      <Layers className="size-2.5" /> MongoDB (NoSQL)
+                    </span>
+                    <span className="text-slate-400 font-mono">Aggregation</span>
+                  </div>
+                  <code className="text-[9.5px] text-emerald-200 block truncate">
+                    db.telemetry.aggregate([
+                  </code>
+                  <code className="text-[9.5px] text-slate-400 block truncate">
+                    {`{ $match: { status: 'live' } }`}
+                  </code>
+                  <div className="mt-1 flex items-center justify-between text-[9px] text-emerald-400 pt-1 border-t border-slate-800">
+                    <span>Flexible JSON</span>
+                    <span className="font-bold">18ms · 380k docs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-slate-800/80">
+              <span className="text-cyan-400 font-bold">Query Speedup: 4.5x Index Optimization</span>
+              <span className="text-slate-300">1.2M+ Records Tested</span>
+            </div>
+          </div>
         );
       case 'fastapi-ml-service':
         return (
@@ -428,22 +497,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.description}
           </p>
 
-          {/* 3. QUANTIFIED BUSINESS IMPACT & METRICS GRID */}
+          {/* 3. KEY PERFORMANCE INDICATORS ROW */}
           {project.keyMetrics && project.keyMetrics.length > 0 && (
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {project.keyMetrics.slice(0, 3).map((metric, mIdx) => (
-                <div
-                  key={mIdx}
-                  className="bg-muted/70 border border-foreground/20 rounded-xs p-2 flex flex-col justify-between"
-                >
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider font-semibold truncate">
-                    {metric.label}
-                  </span>
-                  <span className="font-mono text-xs sm:text-sm font-black text-foreground mt-0.5 truncate">
-                    {metric.value}
-                  </span>
-                </div>
-              ))}
+            <div className="mt-4">
+              <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
+                <Gauge className="size-3 text-primary shrink-0" />
+                <span>Key Performance Indicators</span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {project.keyMetrics.slice(0, 3).map((metric, mIdx) => (
+                  <div
+                    key={mIdx}
+                    className="bg-muted/70 border border-foreground/20 rounded-xs p-2 flex flex-col justify-between"
+                  >
+                    <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider font-semibold truncate">
+                      {metric.label}
+                    </span>
+                    <span className="font-mono text-xs sm:text-sm font-black text-foreground mt-0.5 truncate">
+                      {metric.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

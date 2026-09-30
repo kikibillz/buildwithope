@@ -74,6 +74,9 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
             <span className="font-bold text-slate-900">Programming &amp; Web:</span>
             <span className="text-slate-700">Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs</span>
 
+            <span className="font-bold text-slate-900">Databases &amp; Storage:</span>
+            <span className="text-slate-700">Relational SQL (PostgreSQL, MySQL, SQLite), NoSQL (MongoDB), Schema Design, Complex Joins &amp; Window Functions, Redis</span>
+
             <span className="font-bold text-slate-900">Data Science &amp; ML:</span>
             <span className="text-slate-700">Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE, Joblib Serialization</span>
 
@@ -198,6 +201,20 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
           </div>
 
           <div className="space-y-2.5">
+            <div>
+              <div className="flex justify-between items-baseline flex-wrap gap-1">
+                <h3 className="text-xs font-bold text-slate-900">
+                  Enterprise Hybrid Data Platform (PostgreSQL SQL &amp; MongoDB NoSQL)
+                </h3>
+                <span className="text-[10px] font-mono font-bold text-[#0f766e]">
+                  SQL • PostgreSQL • NoSQL • MongoDB • SQLAlchemy • PyMongo
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-700 mt-0.5">
+                Dual-engine data platform integrating ACID relational PostgreSQL schemas with MongoDB document collections for real-time telemetry, 4.5x indexing speedup, and sub-25ms analytical queries across 1.2M+ records.
+              </p>
+            </div>
+
             <div>
               <div className="flex justify-between items-baseline flex-wrap gap-1">
                 <h3 className="text-xs font-bold text-slate-900">

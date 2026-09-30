@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal, Sparkles, TrendingUp } from 'lucide-react';
+import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal, Sparkles, TrendingUp, Gauge } from 'lucide-react';
 import { Project } from '../types';
 import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
 
@@ -76,6 +76,37 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
             <X className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Key Performance Indicators Row (Prominent Quick Scanning Banner) */}
+        {project.keyMetrics && project.keyMetrics.length > 0 && (
+          <div className="bg-[#18181b] dark:bg-[#0c0a09] border-b border-stone-800 px-5 sm:px-6 py-4">
+            <div className="flex items-center justify-between gap-2 mb-2.5">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                <Gauge className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Key Performance Indicators</span>
+              </div>
+              <span className="text-[10px] font-mono text-stone-400 uppercase tracking-wider hidden xs:inline">
+                Data-Driven Benchmarks
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {project.keyMetrics.map((kpi, idx) => (
+                <div
+                  key={idx}
+                  className="bg-stone-900/90 border border-stone-800 hover:border-emerald-500/50 rounded-md p-2.5 sm:p-3 flex flex-col justify-between transition-colors shadow-2xs"
+                >
+                  <span className="text-[10px] font-mono text-stone-400 uppercase tracking-tight font-semibold truncate">
+                    {kpi.label}
+                  </span>
+                  <div className="text-xs sm:text-sm font-mono font-bold text-emerald-400 mt-1 truncate">
+                    {kpi.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Modal Body: Editorial Structured 01 - 08 Layout */}
         <div className="p-5 sm:p-7 space-y-7 max-h-[75vh] overflow-y-auto font-sans text-stone-800 dark:text-stone-200">
