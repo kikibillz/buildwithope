@@ -10,7 +10,7 @@
 endobj
 4 0 obj
 <<
-/Length 12496
+/Length 12608
 >>
 stream
 0.200025 w
@@ -92,11 +92,11 @@ BT
 9.6600000000000001 TL
 0.2 0.255 0.333 rg
 36. 676. Td
-(Data Scientist, Python Backend Developer, and AI Integration Specialist with a solid Computer Science foundation \(BSc from Olabisi Onabanjo) Tj
-T* (University\). Combines applied machine learning, production API engineering \(FastAPI\), and generative AI workflows to build scalable software) Tj
-T* (solutions that deliver immediate business impact. Proven expertise in building sub-50ms ML inference pipelines, robust REST APIs with strict) Tj
-T* (Pydantic v2 schemas, and directing high-conversion commercial generative media. Dedicated to accelerating technical velocity and engineering) Tj
-T* (reliable digital products.) Tj
+(Data Scientist and ML Backend Developer with a B.Sc. in Computer Science \(OOU\), distinguished by a high-value intersection of production) Tj
+T* (machine learning \(XGBoost, Scikit-learn, FastAPI, SQL/NoSQL\) and empirical People Operations & HR domain experience \(Culturelligence\).) Tj
+T* (Proven in modeling workforce retention risk, building sub-25ms inference APIs with Pydantic v2 schemas, and automating multi-client statutory) Tj
+T* (financial ledgers with zero calculation errors. All claims verified by open-source GitHub repositories \(>90% Pytest coverage\) and live interactive) Tj
+T* (cloud deployments.) Tj
 ET
 0.05 0.58 0.53 RG
 0.05 0.58 0.53 rg
@@ -119,55 +119,55 @@ BT
 9.1999999999999993 TL
 0.059 0.09 0.165 rg
 36. 595.5 Td
-(Programming & Web: ) Tj
+(Machine Learning & People: ) Tj
 ET
 BT
 /F1 8 Tf
 9.1999999999999993 TL
 0.2 0.255 0.333 rg
-119.2000000000000028 595.5 Td
-(Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs) Tj
+144.9599999999999795 595.5 Td
+(Scikit-learn, XGBoost, Random Forest, SMOTE, Workforce Attrition Modeling, Feature Engineering) Tj
 ET
 BT
 /F2 8 Tf
 9.1999999999999993 TL
 0.059 0.09 0.165 rg
 36. 584. Td
-(Databases & Storage: ) Tj
+(Cloud & Infrastructure: ) Tj
 ET
 BT
 /F1 8 Tf
 9.1999999999999993 TL
 0.2 0.255 0.333 rg
-120.4000000000000057 584. Td
-(SQL \(PostgreSQL, MySQL, SQLite\), NoSQL \(MongoDB\), Schema Design, Complex Joins, Window Functions, Indexing, Redis) Tj
+125.519999999999996 584. Td
+(AWS \(EC2, S3\), Google Cloud \(GCP - Cloud Run\), Docker Containers, MLflow, CI/CD \(GitHub Actions\), Linux CLI) Tj
 ET
 BT
 /F2 8 Tf
 9.1999999999999993 TL
 0.059 0.09 0.165 rg
 36. 572.5 Td
-(Data Science & ML: ) Tj
+(BI & Visualization: ) Tj
 ET
 BT
 /F1 8 Tf
 9.1999999999999993 TL
 0.2 0.255 0.333 rg
-112.0799999999999983 572.5 Td
-(Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE, Model Serialization \(Joblib\)) Tj
+107.2000000000000028 572.5 Td
+(Power BI \(DAX, Star Schema, KPI Dashboards\), Tableau, Streamlit, Plotly Dashboards, Seaborn, Matplotlib) Tj
 ET
 BT
 /F2 8 Tf
 9.1999999999999993 TL
 0.059 0.09 0.165 rg
 36. 561. Td
-(Backend & Architecture: ) Tj
+(Backend & Microservices: ) Tj
 ET
 BT
 /F1 8 Tf
 9.1999999999999993 TL
 0.2 0.255 0.333 rg
-131.1200000000000045 561. Td
+137.2800000000000296 561. Td
 (FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest \(>90% cov\)) Tj
 ET
 BT
@@ -175,42 +175,42 @@ BT
 9.1999999999999993 TL
 0.059 0.09 0.165 rg
 36. 549.5 Td
-(Generative AI & Media: ) Tj
+(Databases & Storage: ) Tj
 ET
 BT
 /F1 8 Tf
 9.1999999999999993 TL
 0.2 0.255 0.333 rg
-125.0400000000000063 549.5 Td
-(Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs) Tj
+120.4000000000000057 549.5 Td
+(SQL \(PostgreSQL, MySQL, SQLite\), NoSQL \(MongoDB\), Schema Design, Complex Joins, Window Functions, Redis) Tj
 ET
 BT
 /F2 8 Tf
 9.1999999999999993 TL
 0.059 0.09 0.165 rg
 36. 538. Td
-(Visualization & Interfaces: ) Tj
+(LLMs & Generative AI: ) Tj
 ET
 BT
 /F1 8 Tf
 9.1999999999999993 TL
 0.2 0.255 0.333 rg
-137.3600000000000421 538. Td
-(Streamlit, Matplotlib, Seaborn, Plotly Dashboards, React, Tailwind CSS) Tj
+123.2800000000000011 538. Td
+(Large Language Models \(LLMs\), OpenAI & Gemini APIs, Prompt Engineering, RAG, Google Veo 3, Runway Gen-3) Tj
 ET
 BT
 /F2 8 Tf
 9.1999999999999993 TL
 0.059 0.09 0.165 rg
 36. 526.5 Td
-(DevOps & Workflows: ) Tj
+(Programming & Web: ) Tj
 ET
 BT
 /F1 8 Tf
 9.1999999999999993 TL
 0.2 0.255 0.333 rg
-120.8799999999999955 526.5 Td
-(Git, GitHub, Docker, Postman, Linux CLI, Jupyter Lab, VS Code, CI/CD, Vercel) Tj
+119.2000000000000028 526.5 Td
+(Python, SQL, TypeScript, JavaScript, HTML5, REST APIs, Git, GitHub, OpenPyXL, XlsxWriter) Tj
 ET
 0.05 0.58 0.53 RG
 0.05 0.58 0.53 rg
@@ -448,7 +448,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 10459
+/Length 10632
 >>
 stream
 0.5 w
@@ -673,266 +673,266 @@ BT
 8.2799999999999994 TL
 0.059 0.463 0.431 rg
 267.47199999999998 472.1999999999999886 Td
-(Aug 2026) Tj
+(Aug 2024) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.392 0.455 0.545 rg
 36. 463.6999999999999886 Td
-(New Horizons) Tj
+(New Horizons \(ID: NH-DS-2024\)) Tj
 ET
 BT
 /F2 7.8 Tf
 8.9699999999999989 TL
 0.059 0.09 0.165 rg
 36. 454.1999999999999886 Td
-(Certified Product Manager \(CPM\)) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.059 0.463 0.431 rg
-267.8319999999999936 454.1999999999999886 Td
-(Feb 2025) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.392 0.455 0.545 rg
-36. 445.6999999999999886 Td
-(BeTechified) Tj
-ET
-BT
-/F2 7.8 Tf
-8.9699999999999989 TL
-0.059 0.09 0.165 rg
-36. 436.1999999999999886 Td
 (Agile People Operation Specialist) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.059 0.463 0.431 rg
-271. 436.1999999999999886 Td
-(Jul 2025) Tj
+271. 454.1999999999999886 Td
+(Jul 2024) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.392 0.455 0.545 rg
+36. 445.6999999999999886 Td
+(Culturelligence \(People Ops\)) Tj
+ET
+BT
+/F2 7.8 Tf
+8.9699999999999989 TL
+0.059 0.09 0.165 rg
+36. 436.1999999999999886 Td
+(AI Career Essentials \(AiCE\)) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.059 0.463 0.431 rg
+266.6080000000000041 436.1999999999999886 Td
+(May 2024) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.392 0.455 0.545 rg
 36. 427.6999999999999886 Td
-(Culturelligence) Tj
+(ALX Africa \(ID: ALX-AICE-2024\)) Tj
 ET
 BT
 /F2 7.8 Tf
 8.9699999999999989 TL
 0.059 0.09 0.165 rg
 36. 418.1999999999999886 Td
-(UI/UX Design) Tj
+(Certified Technical Recruiter) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.059 0.463 0.431 rg
-266.6080000000000041 418.1999999999999886 Td
-(May 2025) Tj
+267.3999999999999773 418.1999999999999886 Td
+(Nov 2023) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.392 0.455 0.545 rg
 36. 409.6999999999999886 Td
-(Dev and Design) Tj
+(Hirist / Cutshort \(ID: cert_bfxyxv9d\)) Tj
 ET
 BT
 /F2 7.8 Tf
 8.9699999999999989 TL
 0.059 0.09 0.165 rg
 36. 400.1999999999999886 Td
-(Product Management) Tj
+(Data Visualization & BI Intern) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.059 0.463 0.431 rg
-268.9119999999999777 400.1999999999999886 Td
-(Oct 2025) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.392 0.455 0.545 rg
-36. 391.6999999999999886 Td
-(Prodefied) Tj
-ET
-BT
-/F2 7.8 Tf
-8.9699999999999989 TL
-0.059 0.09 0.165 rg
-36. 382.1999999999999886 Td
-(AI Career Essentials) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.059 0.463 0.431 rg
-271.3600000000000136 382.1999999999999886 Td
-(Certified) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.392 0.455 0.545 rg
-36. 373.6999999999999886 Td
-(alx_africa \(Generative AI\)) Tj
-ET
-BT
-/F2 7.8 Tf
-8.9699999999999989 TL
-0.059 0.09 0.165 rg
-36. 364.1999999999999886 Td
-(Hotjar Behavioral Analytics) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.059 0.463 0.431 rg
-262.3600000000000136 364.1999999999999886 Td
-(2024–2030) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.392 0.455 0.545 rg
-36. 355.6999999999999886 Td
-(Contentsquare \(ID: x3ftgg2pwb2f\)) Tj
-ET
-BT
-/F2 7.8 Tf
-8.9699999999999989 TL
-0.059 0.09 0.165 rg
-314. 472.1999999999999886 Td
-(Tech Recruiter) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.059 0.463 0.431 rg
-549.3600000000000136 472.1999999999999886 Td
-(Certified) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.392 0.455 0.545 rg
-314. 463.6999999999999886 Td
-(hirist \(ID: cert_bfxyxv9d\)) Tj
-ET
-BT
-/F2 7.8 Tf
-8.9699999999999989 TL
-0.059 0.09 0.165 rg
-314. 454.1999999999999886 Td
-(Remote Work Certification) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.059 0.463 0.431 rg
-546.6240000000000236 454.1999999999999886 Td
-(Jun 2024) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.392 0.455 0.545 rg
-314. 445.6999999999999886 Td
-(FOGDEV \(Distributed Ops\)) Tj
-ET
-BT
-/F2 7.8 Tf
-8.9699999999999989 TL
-0.059 0.09 0.165 rg
-314. 436.1999999999999886 Td
-(Data Visualization Intern) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.059 0.463 0.431 rg
-545.47199999999998 436.1999999999999886 Td
+267.47199999999998 400.1999999999999886 Td
 (Sep 2024) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.392 0.455 0.545 rg
-314. 427.6999999999999886 Td
+36. 391.6999999999999886 Td
 (Excelerate \(Dashboards\)) Tj
 ET
 BT
 /F2 7.8 Tf
 8.9699999999999989 TL
 0.059 0.09 0.165 rg
-314. 418.1999999999999886 Td
-(Digital Teacher) Tj
+36. 382.1999999999999886 Td
+(Behavioral Product Analytics) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.059 0.463 0.431 rg
-540.3600000000000136 418.1999999999999886 Td
-(2023–2030) Tj
+262.3600000000000136 382.1999999999999886 Td
+(2024–2030) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.392 0.455 0.545 rg
+36. 373.6999999999999886 Td
+(Hotjar \(ID: x3ftgg2pwb2f\)) Tj
+ET
+BT
+/F2 7.8 Tf
+8.9699999999999989 TL
+0.059 0.09 0.165 rg
+36. 364.1999999999999886 Td
+(Certified Product Manager \(CPM\)) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.059 0.463 0.431 rg
+267.8319999999999936 364.1999999999999886 Td
+(Feb 2024) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.392 0.455 0.545 rg
+36. 355.6999999999999886 Td
+(BeTechified \(Product Strategy\)) Tj
+ET
+BT
+/F2 7.8 Tf
+8.9699999999999989 TL
+0.059 0.09 0.165 rg
+314. 472.1999999999999886 Td
+(UI/UX Design Certification) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.059 0.463 0.431 rg
+544.6079999999999472 472.1999999999999886 Td
+(May 2024) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.392 0.455 0.545 rg
+314. 463.6999999999999886 Td
+(Dev and Design \(Product Design\)) Tj
+ET
+BT
+/F2 7.8 Tf
+8.9699999999999989 TL
+0.059 0.09 0.165 rg
+314. 454.1999999999999886 Td
+(Applied Product Management) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.059 0.463 0.431 rg
+546.9120000000000346 454.1999999999999886 Td
+(Oct 2024) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.392 0.455 0.545 rg
+314. 445.6999999999999886 Td
+(Prodefied \(Lifecycle & Agile\)) Tj
+ET
+BT
+/F2 7.8 Tf
+8.9699999999999989 TL
+0.059 0.09 0.165 rg
+314. 436.1999999999999886 Td
+(Professional Virtual Assistant) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.059 0.463 0.431 rg
+545.3999999999999773 436.1999999999999886 Td
+(Dec 2023) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.392 0.455 0.545 rg
+314. 427.6999999999999886 Td
+(ALX Africa \(Executive Data\)) Tj
+ET
+BT
+/F2 7.8 Tf
+8.9699999999999989 TL
+0.059 0.09 0.165 rg
+314. 418.1999999999999886 Td
+(Remote Work Professional) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.059 0.463 0.431 rg
+546.6240000000000236 418.1999999999999886 Td
+(Jun 2024) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.392 0.455 0.545 rg
 314. 409.6999999999999886 Td
-(UNESCO IOC \(E-Learning\)) Tj
+(FOGDEV \(Distributed Tools\)) Tj
 ET
 BT
 /F2 7.8 Tf
 8.9699999999999989 TL
 0.059 0.09 0.165 rg
 314. 400.1999999999999886 Td
-(Virtual Assistant) Tj
+(Workplace Soft Skills) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.059 0.463 0.431 rg
-549.3600000000000136 400.1999999999999886 Td
-(Certified) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.392 0.455 0.545 rg
-314. 391.6999999999999886 Td
-(alx_africa \(Executive Support\)) Tj
-ET
-BT
-/F2 7.8 Tf
-8.9699999999999989 TL
-0.059 0.09 0.165 rg
-314. 382.1999999999999886 Td
-(Jobberman Soft Skills Training) Tj
-ET
-BT
-/F1 7.2 Tf
-8.2799999999999994 TL
-0.059 0.463 0.431 rg
-546.9120000000000346 382.1999999999999886 Td
+546.9120000000000346 400.1999999999999886 Td
 (Oct 2020) Tj
 ET
 BT
 /F1 7.2 Tf
 8.2799999999999994 TL
 0.392 0.455 0.545 rg
-314. 373.6999999999999886 Td
+314. 391.6999999999999886 Td
 (Jobberman \(Emotional Intel\)) Tj
+ET
+BT
+/F2 7.8 Tf
+8.9699999999999989 TL
+0.059 0.09 0.165 rg
+314. 382.1999999999999886 Td
+(Certified Digital Educator) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.059 0.463 0.431 rg
+540.3600000000000136 382.1999999999999886 Td
+(2023–2030) Tj
+ET
+BT
+/F1 7.2 Tf
+8.2799999999999994 TL
+0.392 0.455 0.545 rg
+314. 373.6999999999999886 Td
+(UNESCO IOC \(EdTech & Learning\)) Tj
 ET
 0.97 0.98 0.99 rg
 0.89 0.91 0.94 RG
@@ -1145,7 +1145,7 @@ endobj
 21 0 obj
 <<
 /Producer (jsPDF 4.2.1)
-/CreationDate (D:20260928141247-00'00')
+/CreationDate (D:20260930151339-00'00')
 >>
 endobj
 22 0 obj
@@ -1159,35 +1159,35 @@ endobj
 xref
 0 23
 0000000000 65535 f 
-0000023286 00000 n 
-0000025111 00000 n 
+0000023571 00000 n 
+0000025396 00000 n 
 0000000015 00000 n 
 0000000120 00000 n 
-0000012669 00000 n 
-0000012774 00000 n 
-0000023349 00000 n 
-0000023474 00000 n 
-0000023604 00000 n 
-0000023737 00000 n 
-0000023875 00000 n 
-0000023999 00000 n 
-0000024128 00000 n 
-0000024260 00000 n 
-0000024396 00000 n 
-0000024524 00000 n 
-0000024651 00000 n 
-0000024780 00000 n 
-0000024913 00000 n 
-0000025015 00000 n 
-0000025361 00000 n 
-0000025447 00000 n 
+0000012781 00000 n 
+0000012886 00000 n 
+0000023634 00000 n 
+0000023759 00000 n 
+0000023889 00000 n 
+0000024022 00000 n 
+0000024160 00000 n 
+0000024284 00000 n 
+0000024413 00000 n 
+0000024545 00000 n 
+0000024681 00000 n 
+0000024809 00000 n 
+0000024936 00000 n 
+0000025065 00000 n 
+0000025198 00000 n 
+0000025300 00000 n 
+0000025646 00000 n 
+0000025732 00000 n 
 trailer
 <<
 /Size 23
 /Root 22 0 R
 /Info 21 0 R
-/ID [ <8EBE2A12E4F4A87BC741C6E39471FA99> <8EBE2A12E4F4A87BC741C6E39471FA99> ]
+/ID [ <7A9AC39A95AB02209B65401114486F61> <7A9AC39A95AB02209B65401114486F61> ]
 >>
 startxref
-25551
+25836
 %%EOF

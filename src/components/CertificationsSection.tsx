@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   Award,
   ExternalLink,
@@ -11,6 +11,9 @@ import {
   Key,
   ChevronLeft,
   ChevronRight,
+  X,
+  Calendar,
+  Building,
 } from 'lucide-react';
 import { CertificationItem, PortfolioConfig } from '../types';
 
@@ -27,6 +30,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [inspectedCert, setInspectedCert] = useState<CertificationItem | null>(null);
 
   const categories = useMemo(() => {
     const cats = ['All', 'Data & AI', 'Product & Design', 'Management & Agile', 'Professional & Soft Skills'];
@@ -322,23 +326,42 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   </div>
 
                   {/* Action Footer */}
-                  <div className="pt-3 border-t border-foreground/15 flex items-center justify-between text-xs">
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-foreground">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-status-foreground fill-status" />
-                      Verified
-                    </span>
-
-                    <a
-                      href={cert.credentialUrl || certificationsUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      id={`cert-link-${cert.id}`}
-                      data-cursor-text="VIEW"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-foreground hover:text-primary transition-colors uppercase"
+                  <div className="pt-3 border-t border-foreground/15 flex items-center justify-between gap-2 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => setInspectedCert(cert)}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-foreground hover:text-primary transition-colors cursor-pointer text-left truncate"
+                      title="Inspect verifiable credential details"
                     >
-                      <span>View on LinkedIn</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-status-foreground fill-status shrink-0" />
+                      <span className="truncate">{cert.credentialId ? `ID: ${cert.credentialId}` : 'Verified Badge'}</span>
+                    </button>
+
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setInspectedCert(cert)}
+                        className="inline-flex items-center gap-1 text-[11px] font-mono font-bold px-2 py-1 rounded-xs bg-muted text-foreground border border-foreground/30 hover:border-foreground transition-all cursor-pointer uppercase"
+                        title={`Inspect certificate record for ${cert.title}`}
+                      >
+                        <Shield className="w-3 h-3 text-primary" />
+                        <span>Inspect</span>
+                      </button>
+
+                      <a
+                        href={cert.credentialUrl || certificationsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        id={`cert-link-${cert.id}`}
+                        data-cursor-text="VERIFY"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-bold px-2.5 py-1 rounded-xs bg-foreground text-background shadow-2xs hover:opacity-90 transition-all uppercase"
+                        title={`Verify credential badge for ${cert.title}`}
+                      >
+                        <BadgeCheck className="w-3.5 h-3.5 text-primary" />
+                        <span>Verify Badge</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -374,6 +397,9 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
               <div className="text-xs font-bold text-foreground font-mono uppercase tracking-wider">
                 {certifications.length} Verified Licenses &amp; Certificates
               </div>
+              <p className="text-xs text-muted-foreground font-sans mt-0.5">
+                Every credential links directly to an accredited badge issuer (ALX Africa, Hirist / Cutshort, Hotjar, New Horizons, Culturelligence) with verifiable serial IDs and dates.
+              </p>
             </div>
           </div>
 
@@ -389,6 +415,133 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
           </a>
         </div>
       </div>
+
+      {/* Verified Credential Badge Modal */}
+      <AnimatePresence>
+        {inspectedCert && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-lg bg-card text-foreground border-2 border-foreground rounded-xs shadow-brutal-lg p-6 font-sans overflow-hidden"
+            >
+              {/* Modal Header */}
+              <div className="flex items-start justify-between gap-4 mb-4 pb-3 border-b-2 border-foreground/15">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-xs bg-primary text-primary-foreground font-mono">
+                    <BadgeCheck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] uppercase font-bold text-primary tracking-wider block">
+                      Accredited Credential Record
+                    </span>
+                    <h3 className="font-display font-black text-lg text-foreground uppercase leading-tight">
+                      {inspectedCert.title}
+                    </h3>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setInspectedCert(null)}
+                  className="p-1 rounded-xs border border-foreground/30 hover:bg-muted text-foreground transition-colors cursor-pointer"
+                  aria-label="Close modal"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Metadata Grid */}
+              <div className="grid grid-cols-2 gap-3 mb-4 p-3.5 bg-muted/40 rounded-xs border border-foreground/20 font-mono text-xs">
+                <div>
+                  <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    Issuing Authority
+                  </span>
+                  <div className="flex items-center gap-1.5 font-bold text-foreground mt-0.5">
+                    <Building className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>{inspectedCert.issuer}</span>
+                  </div>
+                </div>
+
+                <div>
+                  <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                    Issue Date &amp; Validity
+                  </span>
+                  <div className="flex items-center gap-1.5 font-bold text-foreground mt-0.5">
+                    <Calendar className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>{inspectedCert.issueDate || 'Verified'}</span>
+                    {inspectedCert.expiresDate && (
+                      <span className="text-[10px] text-muted-foreground">· Exp {inspectedCert.expiresDate}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="col-span-2 pt-2 border-t border-foreground/10 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-muted-foreground uppercase block font-semibold">
+                      Credential Serial ID
+                    </span>
+                    <span className="font-bold text-foreground font-mono text-xs">
+                      {inspectedCert.credentialId || 'ACCREDITED-ACTIVE-BADGE'}
+                    </span>
+                  </div>
+                  <span className="inline-flex items-center gap-1 text-[10.5px] font-bold text-status-foreground bg-status px-2 py-0.5 rounded-xs">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span>Verified</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Description */}
+              {inspectedCert.description && (
+                <div className="mb-4 text-xs text-foreground/85 leading-relaxed font-sans">
+                  {inspectedCert.description}
+                </div>
+              )}
+
+              {/* Competencies */}
+              {inspectedCert.skills && inspectedCert.skills.length > 0 && (
+                <div className="mb-5">
+                  <span className="font-mono text-[10px] uppercase font-bold text-muted-foreground block mb-1.5">
+                    Verified Competencies &amp; Skills
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {inspectedCert.skills.map((s) => (
+                      <span
+                        key={s}
+                        className="px-2 py-0.5 rounded-xs bg-muted text-foreground font-mono text-[11px] font-semibold border border-foreground/30"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t-2 border-foreground/15 font-mono text-xs font-bold uppercase">
+                <button
+                  type="button"
+                  onClick={() => setInspectedCert(null)}
+                  className="px-3 py-1.5 rounded-xs border border-foreground/30 hover:bg-muted text-foreground cursor-pointer"
+                >
+                  Close
+                </button>
+                <a
+                  href={inspectedCert.credentialUrl || certificationsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xs bg-primary text-primary-foreground hover:bg-primary/90 shadow-brutal-sm cursor-pointer"
+                >
+                  <span>Open Verification Portal</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

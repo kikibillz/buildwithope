@@ -49,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
     { label: 'About', href: '#about', id: 'about' },
     { label: 'AI video', href: '#video', id: 'video' },
     { label: 'Certifications', href: '#certifications', id: 'certifications' },
-    { label: 'Resume', href: '#resume', id: 'resume' },
+    { label: 'CV & Letter', href: '#resume', id: 'resume' },
   ];
 
   return (

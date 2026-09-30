@@ -15,12 +15,14 @@ import {
   Play,
   LayoutGrid,
   List,
+  MoveHorizontal,
 } from 'lucide-react';
 import { initialConfig, projects, certifications, certificationsUrl } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroWorkspaceVisual } from './components/HeroWorkspaceVisual';
 import { ProjectCard } from './components/ProjectCard';
+import { SelectedWorkSwipeable } from './components/SelectedWorkSwipeable';
 import { ProjectCaseStudyModal } from './components/ProjectCaseStudyModal';
 import { LiveStreamlitModal } from './components/LiveStreamlitModal';
 import { ContactSection } from './components/ContactSection';
@@ -32,6 +34,7 @@ import { FastApiBackendSection } from './components/FastApiBackendSection';
 import { CertificationsSection } from './components/CertificationsSection';
 import { ResumeSection } from './components/ResumeSection';
 import { PrintableResume } from './components/PrintableResume';
+import { PrintableCoverLetter } from './components/PrintableCoverLetter';
 import { MagicCursor } from './components/MagicCursor';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SkillsMarquee } from './components/SkillsMarquee';
@@ -45,7 +48,7 @@ export default function App() {
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
   const [projectFilter, setProjectFilter] = useState<string>('all');
   const [projectSearch, setProjectSearch] = useState<string>('');
-  const [viewMode, setViewMode] = useState<'cards' | 'rows'>('cards');
+  const [viewMode, setViewMode] = useState<'swipe' | 'cards' | 'rows'>('swipe');
 
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
@@ -189,7 +192,7 @@ export default function App() {
             {/* Subtext and Action Buttons */}
             <div className="mt-8 sm:mt-9 grid gap-6 border-t border-foreground/15 pt-6 sm:pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
               <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                Computer science foundation in predictive modeling, high-throughput FastAPI services, and cinematic generative AI video commercials.
+                Computer science foundation bridging predictive machine learning with real-world HR workforce intelligence, cloud microservices (AWS, GCP, Azure), Power BI dashboards, and MLOps tooling—with all engineering claims 100% backed by public GitHub repositories and live interactive cloud runtimes.
               </p>
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 w-full sm:w-auto">
                 <a
@@ -230,6 +233,37 @@ export default function App() {
             <h2 className="max-w-4xl font-display text-3xl xs:text-4xl sm:text-5xl lg:text-7xl uppercase leading-[.92] text-foreground">
               Built to solve real problems.
             </h2>
+          </div>
+
+          {/* Strategic Differentiator & Verified Proof Callouts */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 sm:p-5 rounded-xs border-2 border-foreground bg-primary/10 flex items-start gap-3 shadow-brutal-sm">
+              <span className="p-1.5 sm:p-2 bg-primary text-primary-foreground rounded-xs font-mono text-xs font-bold shrink-0">
+                PITCH
+              </span>
+              <div>
+                <h4 className="font-display font-extrabold text-sm sm:text-base uppercase text-foreground">
+                  The Winning Combination: ML Meets Real HR Data
+                </h4>
+                <p className="mt-1 text-xs text-foreground/80 font-sans leading-relaxed">
+                  Roles 1 to 3 sit where machine learning engineering meets hands-on People Operations and HR data experience (Culturelligence, retention hazard modeling, turnover variance, and statutory tax reconciliation). Few junior candidates can show this dual domain synergy.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-xs border-2 border-foreground bg-secondary/15 flex items-start gap-3 shadow-brutal-sm">
+              <span className="p-1.5 sm:p-2 bg-secondary text-secondary-foreground rounded-xs font-mono text-xs font-bold shrink-0">
+                PROOFS
+              </span>
+              <div>
+                <h4 className="font-display font-extrabold text-sm sm:text-base uppercase text-foreground">
+                  100% Verifiable Code &amp; Live Interactive Demos
+                </h4>
+                <p className="mt-1 text-xs text-foreground/80 font-sans leading-relaxed">
+                  Because self-directed engineering claims carry weight through public proof, every project is backed by public source code on GitHub with automated test suites (&gt;90% Pytest coverage), Docker containerization, and live interactive cloud deployments (Streamlit, Vercel, and Swagger OpenAPI).
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Filter & Controls Toolbar */}
@@ -294,31 +328,46 @@ export default function App() {
                 )}
               </div>
 
-              {/* View Switcher: Card Grid vs Table List */}
-              <div className="flex items-center border border-foreground/30 p-0.5 rounded-xs bg-card shrink-0">
+              {/* View Switcher: Swipeable Reel vs Card Grid vs Table List */}
+              <div className="flex items-center border-2 border-foreground p-0.5 rounded-xs bg-card shrink-0 shadow-brutal-xs">
+                <button
+                  type="button"
+                  onClick={() => setViewMode('swipe')}
+                  title="Horizontal Swipeable Showcase"
+                  className={`px-2 py-1.5 rounded-xs cursor-pointer transition-colors flex items-center gap-1 font-mono text-xs font-bold uppercase ${
+                    viewMode === 'swipe'
+                      ? 'bg-foreground text-background shadow-xs'
+                      : 'text-foreground/70 hover:text-foreground'
+                  }`}
+                >
+                  <MoveHorizontal className="size-3.5" />
+                  <span>Swipe</span>
+                </button>
                 <button
                   type="button"
                   onClick={() => setViewMode('cards')}
                   title="Card Grid View"
-                  className={`p-1.5 rounded-xs cursor-pointer transition-colors ${
+                  className={`px-2 py-1.5 rounded-xs cursor-pointer transition-colors flex items-center gap-1 font-mono text-xs font-bold uppercase ${
                     viewMode === 'cards'
-                      ? 'bg-foreground text-background shadow-2xs'
-                      : 'text-foreground/60 hover:text-foreground'
+                      ? 'bg-foreground text-background shadow-xs'
+                      : 'text-foreground/70 hover:text-foreground'
                   }`}
                 >
-                  <LayoutGrid className="size-4" />
+                  <LayoutGrid className="size-3.5" />
+                  <span>Grid</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setViewMode('rows')}
                   title="Table / List View"
-                  className={`p-1.5 rounded-xs cursor-pointer transition-colors ${
+                  className={`px-2 py-1.5 rounded-xs cursor-pointer transition-colors flex items-center gap-1 font-mono text-xs font-bold uppercase ${
                     viewMode === 'rows'
-                      ? 'bg-foreground text-background shadow-2xs'
-                      : 'text-foreground/60 hover:text-foreground'
+                      ? 'bg-foreground text-background shadow-xs'
+                      : 'text-foreground/70 hover:text-foreground'
                   }`}
                 >
-                  <List className="size-4" />
+                  <List className="size-3.5" />
+                  <span>Table</span>
                 </button>
               </div>
             </div>
@@ -343,7 +392,7 @@ export default function App() {
             )}
           </div>
 
-          {/* Content View: Card Grid vs Table List */}
+          {/* Content View: Swipeable vs Card Grid vs Table List */}
           {filteredProjects.length === 0 ? (
             <div className="mt-8 p-12 text-center border-2 border-dashed border-foreground/20 rounded-sm bg-card">
               <p className="font-mono text-sm text-foreground/80 font-bold uppercase tracking-wider">
@@ -363,6 +412,13 @@ export default function App() {
                 Show All Projects
               </button>
             </div>
+          ) : viewMode === 'swipe' ? (
+            /* Horizontal Swipeable Showcase */
+            <SelectedWorkSwipeable
+              projects={filteredProjects}
+              onOpenCaseStudy={(p) => setSelectedProject(p)}
+              onOpenStreamlit={(p) => setStreamlitProject(p)}
+            />
           ) : viewMode === 'cards' ? (
             /* Pristine Card Grid View: 2 equal-height columns on desktop, 1 on mobile */
             <div className="mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
@@ -512,10 +568,10 @@ export default function App() {
                 Data &amp; machine learning
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
-                From messy source data to explainable models, statistical validation, and decision-ready insights.
+                From raw, messy records to predictive models, workforce analytics, statistical validation, and executive Power BI / Tableau dashboards.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
-                {['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'SQL (PostgreSQL)', 'NoSQL (MongoDB)'].map((tool) => (
+                {['Python', 'Scikit-learn', 'XGBoost', 'Power BI', 'Tableau', 'SQL (PostgreSQL)', 'NoSQL (MongoDB)', 'SMOTE'].map((tool) => (
                   <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
                     {tool}
                   </li>
@@ -529,13 +585,13 @@ export default function App() {
                 02
               </div>
               <h3 className="mt-8 sm:mt-10 text-xl sm:text-2xl font-extrabold font-display uppercase text-foreground">
-                Production engineering
+                MLOps, Cloud &amp; APIs
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
-                Reliable APIs and automated pipelines designed to move smoothly from notebook exploration to production runtime.
+                Production-ready REST APIs, containerized runtimes on AWS/GCP/Azure, automated CI/CD pipelines, and MLflow experiment tracking.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
-                {['FastAPI', 'Pydantic', 'Docker', 'PostgreSQL (SQL)', 'MongoDB (NoSQL)', 'CI/CD'].map((tool) => (
+                {['FastAPI', 'Docker', 'AWS & GCP', 'Azure', 'MLflow', 'Pytest (>90%)', 'CI/CD'].map((tool) => (
                   <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
                     {tool}
                   </li>
@@ -549,13 +605,13 @@ export default function App() {
                 03
               </div>
               <h3 className="mt-8 sm:mt-10 text-xl sm:text-2xl font-extrabold font-display uppercase text-foreground">
-                Generative AI video
+                LLMs &amp; Generative AI
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
-                Cinematic concepts, multi-shot direction, sound design, and pacing for memorable commercial brand stories.
+                Large Language Models with prompt engineering, RAG pipelines, and commercial-grade generative video direction with sound design.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
-                {['Veo 3', 'Runway Gen-3', 'Kling', 'Luma', 'Midjourney', 'ElevenLabs'].map((tool) => (
+                {['LLMs & RAG', 'OpenAI & Gemini', 'Prompt Eng', 'Veo 3', 'Runway Gen-3', 'ElevenLabs'].map((tool) => (
                   <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
                     {tool}
                   </li>
@@ -603,7 +659,7 @@ export default function App() {
                 Computer science foundations. AI-powered execution. Business-minded outcomes.
               </h2>
               <p className="mt-5 sm:mt-7 max-w-3xl text-base sm:text-lg leading-relaxed text-secondary-foreground/90 font-sans">
-                I use artificial intelligence as a force multiplier—from high-throughput FastAPI services and predictive models to commercial-grade generative video. My focus is practical: clean inputs, explainable decisions, structured delivery, and work people can use.
+                My strongest edge is the combination: Roles 1 to 3 sit precisely where statistical machine learning and cloud microservices meet real-world People Operations and HR data experience (Culturelligence). While many know ML purely in theory, I apply it to high-stakes business challenges—workforce retention hazard triage, turnover variance analytics, statutory tax ledgers, and commercial generative AI—with every claim 100% verified via public GitHub repositories, automated CI/CD test suites (&gt;90% Pytest coverage), and live interactive cloud runtimes.
               </p>
               <div className="mt-7 sm:mt-9 grid gap-3 sm:gap-4 sm:grid-cols-2">
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
@@ -612,15 +668,15 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
-                  <span>13 verified certifications</span>
+                  <span>13 verified certifications with badges (ALX, Hirist, Hotjar, New Horizons)</span>
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
-                  <span>Remote &amp; relocation ready</span>
+                  <span>Cloud &amp; MLOps: AWS, GCP, Azure, Docker, CI/CD, MLflow</span>
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
-                  <span>Data, engineering &amp; creative AI</span>
+                  <span>BI &amp; LLMs: Power BI (DAX), Tableau, Large Language Models (LLMs), RAG</span>
                 </div>
               </div>
             </div>
@@ -790,6 +846,13 @@ export default function App() {
        ======================================================== */}
     <div id="printable-resume-wrapper" className="hidden print:block w-full">
       <PrintableResume config={activeConfig} certifications={certifications} />
+    </div>
+
+    {/* ========================================================
+        DEDICATED PRINTABLE COVER LETTER (Active on Cover Letter print)
+       ======================================================== */}
+    <div id="printable-cover-letter-wrapper" className="hidden print:block w-full">
+      <PrintableCoverLetter config={activeConfig} />
     </div>
   </div>
 );

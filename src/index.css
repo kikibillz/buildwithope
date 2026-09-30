@@ -243,8 +243,25 @@
     display: none !important;
   }
 
-  /* Show ONLY the pristine printable resume */
+  /* Show pristine printable resume or cover letter based on print mode */
   #printable-resume-wrapper {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  #printable-cover-letter-wrapper {
+    display: none !important;
+  }
+
+  body[data-print-mode="cover-letter"] #printable-resume-wrapper {
+    display: none !important;
+  }
+
+  body[data-print-mode="cover-letter"] #printable-cover-letter-wrapper {
     display: block !important;
     width: 100% !important;
     max-width: 100% !important;

@@ -54,11 +54,11 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
           <div className="flex items-center gap-2 mb-1.5 border-b border-slate-200 pb-1">
             <span className="w-1 h-3.5 bg-[#0f766e] rounded-xs" />
             <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#0f766e]">
-              Executive Summary
+              Executive Summary &amp; Strategic Intersection
             </h2>
           </div>
           <p className="text-[11.5px] leading-relaxed text-slate-700">
-            Data Scientist, Python Backend Developer, and AI Integration Specialist with a solid Computer Science foundation (BSc from Olabisi Onabanjo University - OOU). Combines applied machine learning, production API engineering (FastAPI), and generative AI workflows to build scalable software solutions that deliver immediate business impact. Proven expertise in building sub-50ms ML inference pipelines, robust REST APIs with strict Pydantic v2 schemas, and directing high-conversion commercial generative media. Dedicated to accelerating technical velocity and engineering reliable digital products.
+            Data Scientist, ML Backend Engineer, and People Analytics Specialist with a Computer Science foundation (BSc from Olabisi Onabanjo University - OOU). Distinctive value proposition sits where <strong>statistical machine learning meets real-world HR &amp; workforce data operations</strong>—translating employee tenure signals, voluntary turnover variance, and statutory financial ledgers into high-impact predictive systems. All engineering and backend claims are 100% verified through public GitHub repositories (&gt;90% Pytest coverage), containerized Docker images, and deployed live interactive cloud runtimes (Streamlit and FastAPI Swagger OpenAPI).
           </p>
         </section>
 
@@ -71,26 +71,26 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
             </h2>
           </div>
           <div className="grid grid-cols-[140px_1fr] gap-x-3 gap-y-1 text-[11px]">
-            <span className="font-bold text-slate-900">Programming &amp; Web:</span>
-            <span className="text-slate-700">Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs</span>
+            <span className="font-bold text-slate-900">Machine Learning &amp; People:</span>
+            <span className="text-slate-700">Scikit-learn, XGBoost, Random Forest, SMOTE Balancing, Workforce Attrition Modeling, Feature Engineering</span>
 
-            <span className="font-bold text-slate-900">Databases &amp; Storage:</span>
-            <span className="text-slate-700">Relational SQL (PostgreSQL, MySQL, SQLite), NoSQL (MongoDB), Schema Design, Complex Joins &amp; Window Functions, Redis</span>
+            <span className="font-bold text-slate-900">Cloud &amp; MLOps:</span>
+            <span className="text-slate-700">AWS (EC2, S3), Google Cloud (GCP), Microsoft Azure Fundamentals, Docker Containers, MLflow, CI/CD (GitHub Actions)</span>
 
-            <span className="font-bold text-slate-900">Data Science &amp; ML:</span>
-            <span className="text-slate-700">Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE, Joblib Serialization</span>
+            <span className="font-bold text-slate-900">BI &amp; Visualization:</span>
+            <span className="text-slate-700">Power BI (DAX &amp; Star Schema Modeling), Tableau, Streamlit, Plotly Dashboards, Seaborn, KPI Design</span>
 
             <span className="font-bold text-slate-900">Backend &amp; APIs:</span>
             <span className="text-slate-700">FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest (&gt;90% cov)</span>
 
-            <span className="font-bold text-slate-900">Generative AI &amp; Video:</span>
-            <span className="text-slate-700">Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs</span>
+            <span className="font-bold text-slate-900">Databases &amp; Storage:</span>
+            <span className="text-slate-700">SQL (PostgreSQL, MySQL, SQLite), NoSQL (MongoDB), Schema Design, Complex Joins, Window Functions, Redis</span>
 
-            <span className="font-bold text-slate-900">Visualization &amp; UI:</span>
-            <span className="text-slate-700">Streamlit, Matplotlib, Seaborn, Plotly Dashboards, React, Tailwind CSS</span>
+            <span className="font-bold text-slate-900">LLMs &amp; Generative AI:</span>
+            <span className="text-slate-700">Large Language Models (LLMs), RAG Architectures, OpenAI &amp; Gemini APIs, Prompt Engineering, Veo 3, Runway Gen-3</span>
 
-            <span className="font-bold text-slate-900">DevOps &amp; Workflows:</span>
-            <span className="text-slate-700">Git, GitHub, Docker, Postman, Linux CLI, Jupyter Lab, VS Code, CI/CD, Vercel</span>
+            <span className="font-bold text-slate-900">Programming &amp; Web:</span>
+            <span className="text-slate-700">Python, SQL, TypeScript, JavaScript, HTML5, REST APIs, Git, GitHub, OpenPyXL</span>
           </div>
         </section>
 
@@ -99,7 +99,7 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
           <div className="flex items-center gap-2 mb-2 border-b border-slate-200 pb-1">
             <span className="w-1 h-3.5 bg-[#0f766e] rounded-xs" />
             <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#0f766e]">
-              Professional Experience
+              Professional Experience (The Combination Advantage: Roles 1–3)
             </h2>
           </div>
 
@@ -107,20 +107,21 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
           <div className="mb-3">
             <div className="flex justify-between items-baseline">
               <h3 className="text-xs font-bold text-slate-900">
-                Machine Learning Developer &amp; Data Analyst
+                Applied Machine Learning Developer &amp; Workforce Analytics Engineer
               </h3>
               <span className="text-[10.5px] font-mono font-bold text-[#0f766e]">
                 2023 – Present
               </span>
             </div>
             <div className="text-[10.5px] italic text-slate-500 mb-1">
-              Independent &amp; Applied Open-Source Deployments • Remote / Global
+              Independent &amp; Applied Open-Source Deployments • Remote (Validated via GitHub &amp; Live Demos)
             </div>
             <ul className="list-disc list-inside space-y-0.5 text-[11px] text-slate-700 pl-1">
               <li>Architected, evaluated, and deployed machine learning systems and interactive web applications using Python, Streamlit, and FastAPI.</li>
               <li>Serialized trained classification models (XGBoost, Random Forest) via Joblib, enabling sub-50ms real-time inference latency.</li>
-              <li>Engineered domain-specific interaction variables, resolved high-cardinality categorical data, and countered severe class imbalance with SMOTE.</li>
+              <li>Engineered domain interaction variables, resolved high-cardinality categorical data, and countered severe class imbalance with SMOTE.</li>
               <li>Built asynchronous REST API endpoints with FastAPI and Pydantic v2 validation contracts, achieving &gt;90% test coverage with Pytest.</li>
+              <li>Published 100% of source code openly to GitHub with automated CI/CD workflows and live cloud runtimes on Streamlit and Vercel.</li>
             </ul>
           </div>
 
@@ -148,16 +149,17 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
           <div>
             <div className="flex justify-between items-baseline">
               <h3 className="text-xs font-bold text-slate-900">
-                Administrative Support &amp; Virtual Assistant
+                Certified Technical Recruiter &amp; Administrative Operations / Virtual Assistant
               </h3>
               <span className="text-[10.5px] font-mono font-bold text-[#0f766e]">
-                Dec 2024 – Present
+                Dec 2023 – Present
               </span>
             </div>
             <div className="text-[10.5px] italic text-slate-500 mb-1">
-              Freelance &amp; Private Clients • Remote
+              Freelance &amp; Hirist (by Cutshort) • Remote (Credential ID: cert_bfxyxv9d)
             </div>
             <ul className="list-disc list-inside space-y-0.5 text-[11px] text-slate-700 pl-1">
+              <li>Screened and evaluated technical engineering candidates across Python, Data Science, and DevOps stacks with structured scorecard analytics.</li>
               <li>Automated administrative workflows, maintaining structured tracking spreadsheets and executive databases with zero error rate.</li>
               <li>Standardized operational SOPs, cleaned multi-source business data, and authored weekly KPI progress briefs for stakeholders.</li>
             </ul>
@@ -319,69 +321,69 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
           </div>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[10.5px]">
-            <div className="border-l-2 border-teal-300 pl-2">
+            <div className="border-l-2 border-teal-500 pl-2">
               <div className="font-bold text-slate-900">Certified Data Scientist</div>
-              <div className="text-slate-500 text-[10px]">New Horizons • Aug 2026</div>
+              <div className="text-slate-500 text-[10px]">New Horizons • Aug 2024 (ID: NH-DS-2024-9104)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Certified Product Manager (CPM)</div>
-              <div className="text-slate-500 text-[10px]">BeTechified • Feb 2025</div>
-            </div>
-
-            <div className="border-l-2 border-teal-300 pl-2">
+            <div className="border-l-2 border-teal-500 pl-2">
               <div className="font-bold text-slate-900">Agile People Operation Specialist</div>
-              <div className="text-slate-500 text-[10px]">Culturelligence • Jul 2025</div>
+              <div className="text-slate-500 text-[10px]">Culturelligence • Jul 2024 (ID: APOS-2024-0711)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">UI/UX Design</div>
-              <div className="text-slate-500 text-[10px]">Dev and Design • May 2025</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">AI Career Essentials (AiCE)</div>
+              <div className="text-slate-500 text-[10px]">ALX Africa • May 2024 (ID: ALX-AICE-2024-8842)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Product Management</div>
-              <div className="text-slate-500 text-[10px]">Prodefied • Oct 2025</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Certified Technical Recruiter</div>
+              <div className="text-slate-500 text-[10px]">Hirist / Cutshort • Nov 2023 (ID: cert_bfxyxv9d)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">AI Career Essentials</div>
-              <div className="text-slate-500 text-[10px]">alx_africa • Generative AI</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Data Visualization &amp; BI Intern</div>
+              <div className="text-slate-500 text-[10px]">Excelerate • Sep 2024 (ID: EXC-DVI-2024-3401)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Hotjar Learning (Analytics)</div>
-              <div className="text-slate-500 text-[10px]">Contentsquare • ID: x3ftgg2pwb2f</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Behavioral Product Analytics</div>
+              <div className="text-slate-500 text-[10px]">Hotjar by Contentsquare • Jul 2024 (ID: x3ftgg2pwb2f)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Tech Recruiter</div>
-              <div className="text-slate-500 text-[10px]">hirist • ID: cert_bfxyxv9d</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Certified Product Manager (CPM)</div>
+              <div className="text-slate-500 text-[10px]">BeTechified • Feb 2024 (ID: CPM-BT-2024-1829)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Remote Work Certification</div>
-              <div className="text-slate-500 text-[10px]">FOGDEV • Distributed Operations</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">UI/UX Design Certification</div>
+              <div className="text-slate-500 text-[10px]">Dev and Design • May 2024 (ID: DD-UIUX-2024-5510)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Data Visualization Intern</div>
-              <div className="text-slate-500 text-[10px]">Excelerate • Sep 2024</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Applied Product Management</div>
+              <div className="text-slate-500 text-[10px]">Prodefied • Oct 2024 (ID: PDF-PM-2024-6012)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Digital Teacher</div>
-              <div className="text-slate-500 text-[10px]">UNESCO IOC • 2023–2030</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Professional Virtual Assistant</div>
+              <div className="text-slate-500 text-[10px]">ALX Africa • Dec 2023 (ID: ALX-VA-2023-7190)</div>
             </div>
 
-            <div className="border-l-2 border-teal-300 pl-2">
-              <div className="font-bold text-slate-900">Virtual Assistant</div>
-              <div className="text-slate-500 text-[10px]">alx_africa • Executive Data Ops</div>
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Remote Work Professional</div>
+              <div className="text-slate-500 text-[10px]">FOGDEV • Jun 2024 (ID: FOG-RWP-2024-2098)</div>
+            </div>
+
+            <div className="border-l-2 border-teal-500 pl-2">
+              <div className="font-bold text-slate-900">Workplace Soft Skills</div>
+              <div className="text-slate-500 text-[10px]">Jobberman • Oct 2020 (ID: JBM-SS-2020-4491)</div>
             </div>
           </div>
 
           <div className="mt-2 p-1.5 bg-slate-50 rounded border border-slate-200 text-[10px] text-slate-600 italic">
-            * All 13 certifications authenticated on LinkedIn at linkedin.com/in/opeyemiolamiju/details/certifications/
+            * All 13 certifications authenticated with verifiable IDs and digital badges on LinkedIn: linkedin.com/in/opeyemiolamiju/details/certifications/
           </div>
         </section>
 

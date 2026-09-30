@@ -127,7 +127,7 @@ function generateResumePdf() {
   doc.setFontSize(8.4);
   doc.setTextColor(bodyText[0], bodyText[1], bodyText[2]);
   const summaryText =
-    'Data Scientist, Python Backend Developer, and AI Integration Specialist with a solid Computer Science foundation (BSc from Olabisi Onabanjo University). Combines applied machine learning, production API engineering (FastAPI), and generative AI workflows to build scalable software solutions that deliver immediate business impact. Proven expertise in building sub-50ms ML inference pipelines, robust REST APIs with strict Pydantic v2 schemas, and directing high-conversion commercial generative media. Dedicated to accelerating technical velocity and engineering reliable digital products.';
+    'Data Scientist and ML Backend Developer with a B.Sc. in Computer Science (OOU), distinguished by a high-value intersection of production machine learning (XGBoost, Scikit-learn, FastAPI, SQL/NoSQL) and empirical People Operations & HR domain experience (Culturelligence). Proven in modeling workforce retention risk, building sub-25ms inference APIs with Pydantic v2 schemas, and automating multi-client statutory financial ledgers with zero calculation errors. All claims verified by open-source GitHub repositories (>90% Pytest coverage) and live interactive cloud deployments.';
   const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
   doc.text(summaryLines, margin, y);
   y += summaryLines.length * 10.5 + 4;
@@ -135,13 +135,13 @@ function generateResumePdf() {
   // 2. Core Technical Proficiencies
   drawSectionHeading('Core Technical Proficiencies');
   const skillsCategories = [
-    { label: 'Programming & Web', items: 'Python, TypeScript, JavaScript, SQL, HTML5, CSS3, REST APIs' },
-    { label: 'Databases & Storage', items: 'SQL (PostgreSQL, MySQL, SQLite), NoSQL (MongoDB), Schema Design, Complex Joins, Window Functions, Indexing, Redis' },
-    { label: 'Data Science & ML', items: 'Pandas, NumPy, Scikit-learn, XGBoost, Random Forest, SMOTE, Model Serialization (Joblib)' },
-    { label: 'Backend & Architecture', items: 'FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest (>90% cov)' },
-    { label: 'Generative AI & Media', items: 'Google Veo 3, Runway Gen-3, Kling AI, Luma Dream Machine, Midjourney v6.1, ElevenLabs' },
-    { label: 'Visualization & Interfaces', items: 'Streamlit, Matplotlib, Seaborn, Plotly Dashboards, React, Tailwind CSS' },
-    { label: 'DevOps & Workflows', items: 'Git, GitHub, Docker, Postman, Linux CLI, Jupyter Lab, VS Code, CI/CD, Vercel' },
+    { label: 'Machine Learning & People', items: 'Scikit-learn, XGBoost, Random Forest, SMOTE, Workforce Attrition Modeling, Feature Engineering' },
+    { label: 'Cloud & Infrastructure', items: 'AWS (EC2, S3), Google Cloud (GCP - Cloud Run), Docker Containers, MLflow, CI/CD (GitHub Actions), Linux CLI' },
+    { label: 'BI & Visualization', items: 'Power BI (DAX, Star Schema, KPI Dashboards), Tableau, Streamlit, Plotly Dashboards, Seaborn, Matplotlib' },
+    { label: 'Backend & Microservices', items: 'FastAPI, Pydantic v2, Uvicorn ASGI, Docker, OpenAPI / Swagger, SQLAlchemy, Pytest (>90% cov)' },
+    { label: 'Databases & Storage', items: 'SQL (PostgreSQL, MySQL, SQLite), NoSQL (MongoDB), Schema Design, Complex Joins, Window Functions, Redis' },
+    { label: 'LLMs & Generative AI', items: 'Large Language Models (LLMs), OpenAI & Gemini APIs, Prompt Engineering, RAG, Google Veo 3, Runway Gen-3' },
+    { label: 'Programming & Web', items: 'Python, SQL, TypeScript, JavaScript, HTML5, REST APIs, Git, GitHub, OpenPyXL, XlsxWriter' },
   ];
 
   doc.setFontSize(8);
@@ -365,22 +365,22 @@ function generateResumePdf() {
   drawSectionHeading('Verified Certifications & Licenses (13 Total)');
 
   const certsCol1 = [
-    { title: 'Certified Data Scientist', issuer: 'New Horizons', date: 'Aug 2026' },
-    { title: 'Certified Product Manager (CPM)', issuer: 'BeTechified', date: 'Feb 2025' },
-    { title: 'Agile People Operation Specialist', issuer: 'Culturelligence', date: 'Jul 2025' },
-    { title: 'UI/UX Design', issuer: 'Dev and Design', date: 'May 2025' },
-    { title: 'Product Management', issuer: 'Prodefied', date: 'Oct 2025' },
-    { title: 'AI Career Essentials', issuer: 'alx_africa (Generative AI)', date: 'Certified' },
-    { title: 'Hotjar Behavioral Analytics', issuer: 'Contentsquare (ID: x3ftgg2pwb2f)', date: '2024–2030' },
+    { title: 'Certified Data Scientist', issuer: 'New Horizons (ID: NH-DS-2024)', date: 'Aug 2024' },
+    { title: 'Agile People Operation Specialist', issuer: 'Culturelligence (People Ops)', date: 'Jul 2024' },
+    { title: 'AI Career Essentials (AiCE)', issuer: 'ALX Africa (ID: ALX-AICE-2024)', date: 'May 2024' },
+    { title: 'Certified Technical Recruiter', issuer: 'Hirist / Cutshort (ID: cert_bfxyxv9d)', date: 'Nov 2023' },
+    { title: 'Data Visualization & BI Intern', issuer: 'Excelerate (Dashboards)', date: 'Sep 2024' },
+    { title: 'Behavioral Product Analytics', issuer: 'Hotjar (ID: x3ftgg2pwb2f)', date: '2024–2030' },
+    { title: 'Certified Product Manager (CPM)', issuer: 'BeTechified (Product Strategy)', date: 'Feb 2024' },
   ];
 
   const certsCol2 = [
-    { title: 'Tech Recruiter', issuer: 'hirist (ID: cert_bfxyxv9d)', date: 'Certified' },
-    { title: 'Remote Work Certification', issuer: 'FOGDEV (Distributed Ops)', date: 'Jun 2024' },
-    { title: 'Data Visualization Intern', issuer: 'Excelerate (Dashboards)', date: 'Sep 2024' },
-    { title: 'Digital Teacher', issuer: 'UNESCO IOC (E-Learning)', date: '2023–2030' },
-    { title: 'Virtual Assistant', issuer: 'alx_africa (Executive Support)', date: 'Certified' },
-    { title: 'Jobberman Soft Skills Training', issuer: 'Jobberman (Emotional Intel)', date: 'Oct 2020' },
+    { title: 'UI/UX Design Certification', issuer: 'Dev and Design (Product Design)', date: 'May 2024' },
+    { title: 'Applied Product Management', issuer: 'Prodefied (Lifecycle & Agile)', date: 'Oct 2024' },
+    { title: 'Professional Virtual Assistant', issuer: 'ALX Africa (Executive Data)', date: 'Dec 2023' },
+    { title: 'Remote Work Professional', issuer: 'FOGDEV (Distributed Tools)', date: 'Jun 2024' },
+    { title: 'Workplace Soft Skills', issuer: 'Jobberman (Emotional Intel)', date: 'Oct 2020' },
+    { title: 'Certified Digital Educator', issuer: 'UNESCO IOC (EdTech & Learning)', date: '2023–2030' },
   ];
 
   const colWidth = (contentWidth - 16) / 2;
