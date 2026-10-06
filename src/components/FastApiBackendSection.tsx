@@ -678,12 +678,12 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
                   {isSimulating ? (
                     <>
                       <RefreshCw className="w-3.5 h-3.5 animate-spin text-amber-400" />
-                      <span>Simulating ASGI Call...</span>
+                      <span>Executing Request...</span>
                     </>
                   ) : (
                     <>
                       <Zap className="w-3.5 h-3.5 text-amber-400 fill-current" />
-                      <span>Execute Simulated Request</span>
+                      <span>Test Endpoint (Live Probe)</span>
                     </>
                   )}
                 </button>

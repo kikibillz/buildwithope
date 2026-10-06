@@ -20,6 +20,7 @@ import { BankCustomerChurnPreview } from './BankCustomerChurnPreview';
 import { HrAnalyticsPreview } from './HrAnalyticsPreview';
 import { HrAttritionPredictorPreview } from './HrAttritionPredictorPreview';
 import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
+import { NexusCopilotPreview } from './NexusCopilotPreview';
 
 interface LiveStreamlitModalProps {
   project: Project | null;
@@ -76,6 +77,14 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
 
   const renderSimulator = () => {
     switch (project.id) {
+      case 'enterprise-rag-prompt-engine':
+      case 'nexus-enterprise-copilot':
+      case 'workforce-rag-knowledge-base':
+        return (
+          <div className="bg-slate-950 rounded-xl p-4 sm:p-6 border border-slate-800 text-slate-100 shadow-xl">
+            <NexusCopilotPreview />
+          </div>
+        );
       case 'bank-churn':
         return <BankCustomerChurnPreview />;
       case 'hr-analytics':
@@ -85,7 +94,7 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
       default:
         return (
           <div className="p-8 text-center text-stone-500 font-mono text-sm">
-            Interactive simulator preview available.
+            Interactive application console available.
           </div>
         );
     }
@@ -244,7 +253,7 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                     }`}
                   >
                     <Sparkles className="w-3.5 h-3.5 text-red-400" />
-                    <span>Demo Screenshot</span>
+                    <span>Application Overview</span>
                   </button>
 
                   <button
@@ -256,7 +265,7 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                     }`}
                   >
                     <Sliders className="w-3.5 h-3.5 text-red-400" />
-                    <span>Zero-Latency Simulator</span>
+                    <span>Interactive Console</span>
                   </button>
 
                   <button
@@ -268,7 +277,7 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                     }`}
                   >
                     <Radio className="w-3.5 h-3.5 text-red-400" />
-                    <span>Live Streamlit Cloud Iframe</span>
+                    <span>Cloud Deployment</span>
                   </button>
                 </>
               )}
@@ -290,10 +299,10 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                   <Sparkles className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold text-white block mb-0.5">
-                      Streamlit Application Live Demo Snapshot
+                      Application Interface & Architecture Overview
                     </span>
                     <p className="text-stone-400 leading-relaxed font-sans">
-                      Interactive demo interface screenshot rendered with animated hover dynamics. Hover over the interface below to trigger interactive simulation states and access launch shortcuts.
+                      Production interface visual and feature architecture. Use the tabs above to explore the interactive console or launch the live deployment.
                     </p>
                   </div>
                 </div>
@@ -316,10 +325,10 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                   <CheckCircle2 className="w-4 h-4 text-amber-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold block mb-0.5">
-                      Live Model Simulation (Zero Cold-Start Lag)
+                      Interactive Production Model Console
                     </span>
                     <p className="text-amber-800 leading-relaxed">
-                      This interactive preview replicates the exact logic of{' '}
+                      Interactive execution environment replicating the production pipeline of{' '}
                       <code className="font-mono bg-amber-100/70 px-1 py-0.5 rounded">
                         {project.streamlitDeployment}
                       </code>
@@ -328,7 +337,7 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
                         onClick={() => setViewMode('embed')}
                         className="underline font-semibold hover:text-amber-950"
                       >
-                        Live Streamlit Cloud Iframe
+                        Live Cloud Deployment tab
                       </button>{' '}
                       to connect to the remote host.
                     </p>

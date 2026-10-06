@@ -32,9 +32,10 @@ GitHub: https://github.com/kikibillz
 Work Model: Remote & Relocation Ready
 
 SUMMARY:
-Data Scientist, Machine Learning Engineer, and Python Backend Developer with a B.Sc. in Computer Science (Olabisi Onabanjo University - OOU). Distinguishes from traditional junior candidates by sitting at the high-impact intersection of Machine Learning Engineering (XGBoost, Scikit-learn, FastAPI, SQL/NoSQL) and empirical People Operations & HR domain experience (Culturelligence). Proven track record translating raw workforce records into predictive retention models, building sub-25ms REST APIs with Pydantic v2 validation contracts, and automating multi-client financial/tax ledgers with zero error rate. All engineering claims are validated by live open-source GitHub repositories with >90% Pytest test coverage and interactive cloud deployments.
+Data Scientist, Machine Learning Engineer, and Python Backend Developer with a B.Sc. in Computer Science (Olabisi Onabanjo University - OOU). Bridges the high-impact intersection of Machine Learning Engineering (XGBoost, Scikit-learn, FastAPI, SQL/NoSQL) and empirical People Operations & HR domain experience (Culturelligence). Proven track record translating workforce records into predictive retention models, building sub-25ms REST APIs with Pydantic v2 validation contracts, engineering domain-specific RAG knowledge assistants with citation grounding, and automating multi-client financial/tax ledgers with zero error rate. All engineering claims are validated by live open-source GitHub repositories with >90% Pytest test coverage and interactive cloud deployments.
 
 TECHNICAL SKILLS:
+- RAG & Prompt Engineering: Retrieval-Augmented Generation (RAG), Advanced Prompt Engineering (Chain-of-Thought, ReAct, Few-Shot, System Prompts), Vector Search (ChromaDB, FAISS), Semantic Embeddings, BM25 Hybrid Retrieval, Hallucination Guardrails, Grounded Citations, Context Window Optimization, LangChain
 - Machine Learning & Analytics: Scikit-learn, XGBoost, Random Forest, SMOTE Class Balancing, People Analytics, Attrition Modeling, Feature Engineering, Cross-Validation, Pandas, NumPy
 - Backend & Microservices: FastAPI, Pydantic v2, Uvicorn ASGI, REST APIs, SQLAlchemy, Pytest (>90% coverage), OpenAPI / Swagger
 - Cloud & Infrastructure: AWS (EC2, S3), Google Cloud Platform (GCP - Cloud Run), Docker Containerization, Linux CLI, Vercel Edge, Azure Fundamentals
@@ -304,6 +305,14 @@ Verification Profile: https://www.linkedin.com/in/opeyemiolamiju/details/certifi
               <span>Core Technical Proficiencies</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+              <div className="p-2.5 rounded-xs bg-muted/50 border border-foreground/20">
+                <span className="font-mono font-bold block text-[11px] text-accent uppercase mb-1">
+                  RAG &amp; Prompt Engineering
+                </span>
+                <span className="text-foreground/80 font-mono text-[11px]">
+                  RAG, CoT &amp; Few-Shot Prompting, Vector Search (ChromaDB), Guardrails
+                </span>
+              </div>
               <div className="p-2.5 rounded-xs bg-muted/50 border border-foreground/20">
                 <span className="font-mono font-bold block text-[11px] text-primary uppercase mb-1">
                   Machine Learning &amp; People Analytics

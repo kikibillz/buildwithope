@@ -31,6 +31,7 @@ import { AnimatedName } from './components/AnimatedName';
 import { AIVideoSection } from './components/AIVideoSection';
 import { AIVideoModal } from './components/AIVideoModal';
 import { FastApiBackendSection } from './components/FastApiBackendSection';
+import { NexusCopilotModal } from './components/NexusCopilotModal';
 import { CertificationsSection } from './components/CertificationsSection';
 import { ResumeSection } from './components/ResumeSection';
 import { PrintableResume } from './components/PrintableResume';
@@ -45,10 +46,19 @@ export default function App() {
   const [allProjects] = useState<Project[]>(projects);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [streamlitProject, setStreamlitProject] = useState<Project | null>(null);
+  const [nexusCopilotOpen, setNexusCopilotOpen] = useState<boolean>(false);
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
   const [projectFilter, setProjectFilter] = useState<string>('all');
   const [projectSearch, setProjectSearch] = useState<string>('');
   const [viewMode, setViewMode] = useState<'swipe' | 'cards' | 'rows'>('swipe');
+
+  const handleOpenAppOrCopilot = (p: Project) => {
+    if (p.id === 'enterprise-rag-prompt-engine' || p.id === 'nexus-enterprise-copilot') {
+      setNexusCopilotOpen(true);
+    } else {
+      setStreamlitProject(p);
+    }
+  };
 
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
@@ -109,6 +119,7 @@ export default function App() {
   const categoryCounts = useMemo(() => {
     return {
       all: allProjects.length,
+      rag: allProjects.filter((p) => p.category.toLowerCase().includes('rag') || p.tools.some((t) => t.toLowerCase().includes('rag') || t.toLowerCase().includes('prompt'))).length,
       ml: allProjects.filter((p) => p.category.toLowerCase().includes('machine learning') || p.category.toLowerCase().includes('predictive') || p.category.toLowerCase().includes('safety')).length,
       backend: allProjects.filter((p) => p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))).length,
       databases: allProjects.filter((p) => p.category.toLowerCase().includes('database') || p.category.toLowerCase().includes('sql') || p.tools.some((t) => t.toLowerCase().includes('sql') || t.toLowerCase().includes('mongo'))).length,
@@ -122,6 +133,8 @@ export default function App() {
       const matchesCategory =
         projectFilter === 'all'
           ? true
+          : projectFilter === 'rag'
+          ? p.category.toLowerCase().includes('rag') || p.tools.some((t) => t.toLowerCase().includes('rag') || t.toLowerCase().includes('prompt'))
           : projectFilter === 'backend'
           ? p.category.toLowerCase().includes('backend') || p.tools.some((t) => t.toLowerCase().includes('fastapi'))
           : projectFilter === 'ml'
@@ -192,7 +205,7 @@ export default function App() {
             {/* Subtext and Action Buttons */}
             <div className="mt-8 sm:mt-9 grid gap-6 border-t border-foreground/15 pt-6 sm:pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
               <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                Computer science foundation bridging predictive machine learning with real-world HR workforce intelligence, cloud microservices (AWS, GCP, Azure), Power BI dashboards, and MLOps tooling—with all engineering claims 100% backed by public GitHub repositories and live interactive cloud runtimes.
+                Computer science foundation bridging predictive machine learning with enterprise RAG architectures, prompt engineering, real-world HR workforce intelligence, cloud microservices (AWS, GCP, Azure), and MLOps tooling—with all engineering claims 100% backed by public GitHub repositories and live interactive cloud runtimes.
               </p>
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 w-full sm:w-auto">
                 <a
@@ -235,32 +248,32 @@ export default function App() {
             </h2>
           </div>
 
-          {/* Strategic Differentiator & Verified Proof Callouts */}
+          {/* Domain Focus & Production Standards Highlights */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 sm:p-5 rounded-xs border-2 border-foreground bg-primary/10 flex items-start gap-3 shadow-brutal-sm">
               <span className="p-1.5 sm:p-2 bg-primary text-primary-foreground rounded-xs font-mono text-xs font-bold shrink-0">
-                PITCH
+                FOCUS
               </span>
               <div>
                 <h4 className="font-display font-extrabold text-sm sm:text-base uppercase text-foreground">
-                  The Winning Combination: ML Meets Real HR Data
+                  Applied Machine Learning &amp; Workforce Intelligence
                 </h4>
                 <p className="mt-1 text-xs text-foreground/80 font-sans leading-relaxed">
-                  Roles 1 to 3 sit where machine learning engineering meets hands-on People Operations and HR data experience (Culturelligence, retention hazard modeling, turnover variance, and statutory tax reconciliation). Few junior candidates can show this dual domain synergy.
+                  Bridging statistical machine learning (XGBoost, Scikit-learn), retrieval-augmented generation (RAG), and high-throughput Python backends directly with real-world workforce and People Operations data (Culturelligence, retention hazard modeling, and turnover analytics).
                 </p>
               </div>
             </div>
 
             <div className="p-4 sm:p-5 rounded-xs border-2 border-foreground bg-secondary/15 flex items-start gap-3 shadow-brutal-sm">
               <span className="p-1.5 sm:p-2 bg-secondary text-secondary-foreground rounded-xs font-mono text-xs font-bold shrink-0">
-                PROOFS
+                STANDARDS
               </span>
               <div>
                 <h4 className="font-display font-extrabold text-sm sm:text-base uppercase text-foreground">
-                  100% Verifiable Code &amp; Live Interactive Demos
+                  Production-Grade Quality &amp; Live Cloud Deployments
                 </h4>
                 <p className="mt-1 text-xs text-foreground/80 font-sans leading-relaxed">
-                  Because self-directed engineering claims carry weight through public proof, every project is backed by public source code on GitHub with automated test suites (&gt;90% Pytest coverage), Docker containerization, and live interactive cloud deployments (Streamlit, Vercel, and Swagger OpenAPI).
+                  Every engineering implementation is backed by public source repositories on GitHub, automated CI/CD test suites (&gt;90% Pytest code coverage), Docker containerization, and live interactive deployments running on Streamlit and Vercel.
                 </p>
               </div>
             </div>
@@ -272,6 +285,7 @@ export default function App() {
             <div className="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 scrollbar-none font-mono text-xs w-full md:w-auto">
               {[
                 { id: 'all', label: 'All', count: categoryCounts.all },
+                { id: 'rag', label: 'RAG & GenAI', count: categoryCounts.rag },
                 { id: 'databases', label: 'Databases & SQL', count: categoryCounts.databases },
                 { id: 'ml', label: 'Machine Learning', count: categoryCounts.ml },
                 { id: 'backend', label: 'Backend & APIs', count: categoryCounts.backend },
@@ -417,7 +431,7 @@ export default function App() {
             <SelectedWorkSwipeable
               projects={filteredProjects}
               onOpenCaseStudy={(p) => setSelectedProject(p)}
-              onOpenStreamlit={(p) => setStreamlitProject(p)}
+              onOpenStreamlit={(p) => handleOpenAppOrCopilot(p)}
             />
           ) : viewMode === 'cards' ? (
             /* Pristine Card Grid View: 2 equal-height columns on desktop, 1 on mobile */
@@ -428,7 +442,7 @@ export default function App() {
                   project={project}
                   index={index}
                   onOpenCaseStudy={(p) => setSelectedProject(p)}
-                  onOpenStreamlit={(p) => setStreamlitProject(p)}
+                  onOpenStreamlit={(p) => handleOpenAppOrCopilot(p)}
                 />
               ))}
             </div>
@@ -516,9 +530,9 @@ export default function App() {
                     {project.streamlitDeployment && (
                       <button
                         type="button"
-                        onClick={() => setStreamlitProject(project)}
+                        onClick={() => handleOpenAppOrCopilot(project)}
                         className="p-1.5 border border-foreground/30 rounded-xs bg-primary text-primary-foreground hover:scale-105 transition-all shrink-0 cursor-pointer"
-                        title="Live Streamlit"
+                        title={project.id === 'enterprise-rag-prompt-engine' ? 'Launch AI Copilot' : 'Live Interactive App'}
                       >
                         <Play className="size-3.5 fill-current" />
                       </button>
@@ -605,13 +619,13 @@ export default function App() {
                 03
               </div>
               <h3 className="mt-8 sm:mt-10 text-xl sm:text-2xl font-extrabold font-display uppercase text-foreground">
-                LLMs &amp; Generative AI
+                RAG, LLMs &amp; Prompt Engineering
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
-                Large Language Models with prompt engineering, RAG pipelines, and commercial-grade generative video direction with sound design.
+                Production Retrieval-Augmented Generation (RAG) with vector embeddings (ChromaDB), systematic prompt engineering (CoT, few-shot schemas, citation guardrails), and multimodal generative AI.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
-                {['LLMs & RAG', 'OpenAI & Gemini', 'Prompt Eng', 'Veo 3', 'Runway Gen-3', 'ElevenLabs'].map((tool) => (
+                {['RAG Architectures', 'Prompt Engineering', 'Vector Search (ChromaDB)', 'OpenAI & Gemini APIs', 'Guardrails', 'LangChain', 'Runway Gen-3'].map((tool) => (
                   <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
                     {tool}
                   </li>
@@ -816,7 +830,7 @@ export default function App() {
           onClose={() => setSelectedProject(null)}
           onOpenStreamlit={(p) => {
             setSelectedProject(null);
-            setStreamlitProject(p);
+            handleOpenAppOrCopilot(p);
           }}
         />
       )}
@@ -828,6 +842,12 @@ export default function App() {
           onClose={() => setStreamlitProject(null)}
         />
       )}
+
+      {/* Dedicated Interactive Nexus Copilot AI Modal */}
+      <NexusCopilotModal
+        isOpen={nexusCopilotOpen}
+        onClose={() => setNexusCopilotOpen(false)}
+      />
 
       {/* AI Video Modal */}
       {selectedVideo && (

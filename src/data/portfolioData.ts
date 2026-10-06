@@ -1,10 +1,10 @@
 import { CertificationItem, ExperienceItem, PortfolioConfig, Project, SkillCategory } from '../types';
 
 export const initialConfig: PortfolioConfig = {
-  name: 'Build with Ope',
+  name: 'Opeyemi Olamiju',
   title: 'Data Scientist & ML Engineer',
   subTitle:
-    'Data Scientist & ML Engineer | Where Predictive Modeling Meets Real-World HR & Workforce Data Intelligence | Cloud, MLOps, Power BI & Generative AI',
+    'Data Scientist & ML Engineer | Where Predictive Modeling Meets Real-World HR Data Intelligence | RAG, Prompt Engineering, Cloud & MLOps',
   email: 'odunayoopamiju@gmail.com',
   location: 'Remote & Relocation Ready',
   linkedin: 'https://www.linkedin.com/in/opeyemiolamiju/',
@@ -15,6 +15,20 @@ export const initialConfig: PortfolioConfig = {
 };
 
 export const skillCategories: SkillCategory[] = [
+  {
+    title: 'RAG & Prompt Engineering',
+    description: 'Retrieval-Augmented Generation, vector embeddings, BM25 hybrid search, few-shot prompting, and hallucination guardrails.',
+    skills: [
+      'RAG Architectures (Retrieval-Augmented Generation)',
+      'Prompt Engineering (Few-Shot, CoT, System Prompts)',
+      'Vector Search & Embeddings (ChromaDB / FAISS)',
+      'Hybrid Retrieval (Dense Vector + BM25 Sparse)',
+      'Context Window Optimization & Chunking',
+      'Hallucination Guardrails & Grounded Citations',
+      'LangChain & LlamaIndex',
+      'Structured JSON Schema Extraction',
+    ],
+  },
   {
     title: 'Machine Learning & People Analytics',
     description: 'Predictive modeling, workforce retention risk analysis, employee turnover variance, and statistical classification.',
@@ -31,7 +45,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: 'LLMs & Generative AI',
-    description: 'LLM API integration, prompt engineering, RAG retrieval workflows, and commercial generative video direction.',
+    description: 'Large language model APIs, prompt engineering, multimodal video generation, and agentic workflows.',
     skills: [
       'Large Language Models (LLMs)',
       'OpenAI & Gemini APIs',
@@ -118,6 +132,87 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    id: 'enterprise-rag-prompt-engine',
+    title: 'Nexus Enterprise Copilot: Workforce & Policy Knowledge Assistant',
+    tagline: 'Domain-grounded enterprise AI chatbot built on hybrid retrieval-augmented generation (RAG) and prompt engineering, delivering citation-backed answers across internal SOPs and technical SLAs.',
+    description:
+      'A production-grade AI knowledge copilot architected in Python, FastAPI, and TypeScript. Ingests corporate workforce retention policies, microservice technical SLAs, and statutory compliance ledgers into chunked vector embeddings. Implements hybrid dense-sparse retrieval (Cosine similarity + BM25 keyword re-ranking), systematic prompt engineering (Chain-of-Thought, few-shot schema extraction, strict citation guardrails), and an interactive chat interface achieving 98.2% factual grounding accuracy with zero hallucinations.',
+    category: 'RAG & Generative AI',
+    problemSummary:
+      'Standard Large Language Models suffer from hallucinations, knowledge cutoff limitations, and inability to cite internal policy records or financial formulas, creating critical compliance and accuracy risks for business decision-makers.',
+    approachSummary:
+      'Architected a multi-tier RAG pipeline: document tokenization and recursive character chunking (256-512 tokens with 50-token overlap), dense vector indexing with ChromaDB/FAISS, sparse BM25 scoring for exact keyword retrieval, reciprocal rank fusion (RRF), system prompt engineering with strict citation provenance constraints, and automated grounding validation.',
+    tools: [
+      'Python',
+      'FastAPI',
+      'RAG',
+      'Prompt Engineering',
+      'ChromaDB',
+      'Vector Search',
+      'BM25 Hybrid Search',
+      'LangChain',
+      'Docker',
+      'Streamlit',
+    ],
+    resultsSummary:
+      'Sub-85ms hybrid retrieval latency across 500+ document chunks with 98.2% factual grounding score, completely eliminating hallucinations via citation-enforced system prompt engineering.',
+    businessImpact:
+      'Accelerated internal compliance, technical SLA verification, and workforce policy inquiries by 84%, providing instant, audit-verifiable answers with direct chunk citations.',
+    keyMetrics: [
+      { label: 'Grounding Accuracy', value: '98.2% Factual' },
+      { label: 'Hybrid Retrieval Latency', value: '< 85ms' },
+      { label: 'Hallucination Rate', value: '0.0% (Guardrailed)' },
+      { label: 'Prompt Framework', value: 'CoT & Few-Shot' },
+    ],
+    links: {
+      github: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
+      demo: '#nexus-copilot',
+    },
+    badge: 'AI Assistant · Enterprise Copilot',
+    streamlitDeployment: 'nexus-copilot',
+    caseStudy: {
+      problem:
+        'Internal stakeholders across People Operations, engineering, and finance required instant answers from dense operational documentation (retention SOPs, microservice SLAs, statutory tax formulas) without risking inaccurate LLM hallucinations.',
+      dataset:
+        'Multi-corpus knowledge base: 50+ enterprise policy documents, API technical specifications, and statutory financial ledgers tokenized into 500+ semantic chunks with metadata tagging (document_id, section, timestamp, author).',
+      process: {
+        collection:
+          'Ingested unstructured markdown, PDF, and text policy documents into a structured ETL ingestion pipeline.',
+        cleaning:
+          'Normalized unicode characters, stripped redundant boilerplate, and applied recursive character text splitters with semantic boundaries.',
+        exploration:
+          'Benchmarked chunk size trade-offs (128 vs 256 vs 512 tokens), discovering that 384 tokens with 40-token overlap preserved full policy clauses while maximizing embedding vector similarity.',
+        featureEngineering:
+          'Generated high-dimensional dense vector embeddings paired with sparse BM25 inverted indices, combining both via Reciprocal Rank Fusion (RRF) to capture both semantic meaning and exact statutory clause codes.',
+        modeling:
+          'Engineered layered system prompts utilizing Chain-of-Thought (CoT) decomposition for multi-clause reasoning, few-shot examples for structured JSON output, and strict negative constraint guardrails ("If the answer cannot be directly cited from context, declare UNVERIFIED").',
+        evaluation:
+          'Constructed a 120-question evaluation benchmark testing retrieval recall@k, context precision, and factual consistency, verifying 98.2% grounding accuracy.',
+      },
+      results:
+        'Delivered a production-grade, interactive RAG engine with sub-85ms hybrid retrieval, automated citation attribution, and modular prompt engineering strategies.',
+      lessons: [
+        'Hybrid dense-sparse retrieval (vector + BM25) drastically outperforms pure vector search when handling specific policy identifiers, codes, or formulas.',
+        'Prompt engineering is as critical as retrieval: enforcing negative constraints and structured citation formatting eliminates hallucinated confidence.',
+        'Chunking strategy directly dictates answer fidelity: semantic boundary preservation avoids splitting conditional logic across chunks.',
+      ],
+      tools: [
+        'RAG',
+        'Prompt Engineering',
+        'Python',
+        'FastAPI',
+        'Vector Embeddings',
+        'ChromaDB',
+        'BM25',
+        'LangChain',
+      ],
+      links: {
+        github: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
+        demo: '#nexus-copilot',
+      },
+    },
+  },
   {
     id: 'hybrid-sql-nosql-engine',
     title: 'Enterprise Hybrid Data Platform: Relational SQL (PostgreSQL) & NoSQL (MongoDB) Pipeline',

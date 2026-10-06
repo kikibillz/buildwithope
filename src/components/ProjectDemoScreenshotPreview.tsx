@@ -17,6 +17,7 @@ import {
 import { Project } from '../types';
 import { LiveWebEmbedPreview } from './LiveWebEmbedPreview';
 import { AutomatedSpreadsheetPreview } from './AutomatedSpreadsheetPreview';
+import { NexusCopilotPreview } from './NexusCopilotPreview';
 
 import bankChurnImg from '../assets/images/bank_churn_app_1789401191137.jpg';
 import hrAnalyticsImg from '../assets/images/hr_analytics_app_1789401204328.jpg';
@@ -34,6 +35,16 @@ export const ProjectDemoScreenshotPreview: React.FC<ProjectDemoScreenshotPreview
   onOpenCaseStudy,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  // If this project is the AI Copilot / RAG Assistant, render the interactive copilot preview
+  if (project.id === 'enterprise-rag-prompt-engine' || project.id === 'nexus-enterprise-copilot' || project.id === 'workforce-rag-knowledge-base') {
+    return (
+      <NexusCopilotPreview
+        onOpenLiveDemo={onOpenLiveDemo}
+        onOpenCaseStudy={onOpenCaseStudy}
+      />
+    );
+  }
 
   // If this project is an actual live web app, render the real embedded interactive application
   if (project.id === 'begi-begi') {

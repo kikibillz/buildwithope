@@ -34,6 +34,13 @@ const ROLE_PRESETS = [
     hiringManager: 'Hiring Team & Data Leadership',
   },
   {
+    id: 'rag-prompt',
+    title: 'Generative AI, RAG & Prompt Systems Engineer',
+    focus: 'Retrieval-Augmented Generation, vector search (ChromaDB/FAISS), BM25 hybrid ranking, and systematic prompt engineering with citation guardrails.',
+    company: 'AI Product Lab / Enterprise GenAI Team',
+    hiringManager: 'Head of Applied AI & Engineering',
+  },
+  {
     id: 'people-analytics',
     title: 'Applied ML & People Analytics Specialist',
     focus: 'Where ML meets Culturelligence HR operations: retention hazard modeling, headcount variance, and executive Power BI.',
@@ -280,6 +287,9 @@ B.Sc. Computer Science · OOU Alumnus
           </span>
           <span className="px-2.5 py-1 rounded-xs bg-highlight/30 border border-highlight text-foreground font-mono text-[11px] font-semibold">
             ✓ Power BI, AWS, GCP &amp; MLOps
+          </span>
+          <span className="px-2.5 py-1 rounded-xs bg-accent/20 border border-accent text-foreground font-mono text-[11px] font-semibold">
+            ✓ RAG &amp; Prompt Engineering (ChromaDB)
           </span>
         </div>
       </div>

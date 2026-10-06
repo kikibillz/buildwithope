@@ -43,9 +43,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Status and URL for mockup browser chrome
-  const getMockupMeta = () => {
+  // Status and URL for window chrome
+  const getWindowMeta = () => {
     switch (project.id) {
+      case 'enterprise-rag-prompt-engine':
+        return {
+          url: 'nexus-copilot.internal/v1/chat',
+          type: 'AI Copilot · RAG',
+          status: '98.2% Factual Grounding',
+          accent: 'text-teal-400',
+        };
       case 'hybrid-sql-nosql-engine':
         return {
           url: 'hybrid-database-engine.internal/sql-nosql-bench',
@@ -122,7 +129,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   };
 
-  const mockupMeta = getMockupMeta();
+  const windowMeta = getWindowMeta();
 
   // Render 16:9 Visual Preview
   const renderVisualContent = () => {
@@ -393,16 +400,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 shrink-0" />
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shrink-0" />
             <span className="text-stone-400 font-mono text-[10px] ml-1 truncate">
-              {mockupMeta.url}
+              {windowMeta.url}
             </span>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <span className="text-[10px] bg-stone-900 text-stone-300 px-2 py-0.5 rounded border border-stone-800 font-semibold hidden xs:inline">
-              {mockupMeta.type}
+              {windowMeta.type}
             </span>
-            <span className={`text-[10px] font-bold flex items-center gap-1 ${mockupMeta.accent}`}>
+            <span className={`text-[10px] font-bold flex items-center gap-1 ${windowMeta.accent}`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-              <span>{mockupMeta.status}</span>
+              <span>{windowMeta.status}</span>
             </span>
           </div>
         </div>

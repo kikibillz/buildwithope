@@ -1,21 +1,23 @@
 import React from 'react';
 
 const skillsTicker = [
+  'RAG (Retrieval-Augmented Generation)',
+  'Prompt Engineering (CoT & Few-Shot)',
+  'Vector Embeddings & ChromaDB',
+  'Hallucination Guardrails',
   'Python',
   'SQL (PostgreSQL)',
   'NoSQL (MongoDB)',
   'Machine Learning',
-  'FastAPI',
+  'FastAPI Microservices',
   'AWS & GCP Cloud',
   'Power BI & Tableau',
   'MLOps & MLflow',
-  'LLMs & RAG',
   'Docker & CI/CD',
   'People Analytics',
   'Azure Fundamentals',
-  'Veo 3 & Runway',
-  'Scikit-learn',
-  'Database Indexing & Joins',
+  'Veo 3 & Runway Gen-3',
+  'Scikit-learn & XGBoost',
 ];
 
 export const SkillsMarquee: React.FC = () => {

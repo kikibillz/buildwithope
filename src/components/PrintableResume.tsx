@@ -71,6 +71,9 @@ export const PrintableResume: React.FC<PrintableResumeProps> = ({ config, certif
             </h2>
           </div>
           <div className="grid grid-cols-[140px_1fr] gap-x-3 gap-y-1 text-[11px]">
+            <span className="font-bold text-slate-900">RAG &amp; Prompt Eng:</span>
+            <span className="text-slate-700">RAG Architectures, Prompt Engineering (CoT, ReAct, Few-Shot), Vector Search (ChromaDB, FAISS), BM25 Hybrid, Guardrails</span>
+
             <span className="font-bold text-slate-900">Machine Learning &amp; People:</span>
             <span className="text-slate-700">Scikit-learn, XGBoost, Random Forest, SMOTE Balancing, Workforce Attrition Modeling, Feature Engineering</span>
 

@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['top', 'work', 'skills', 'about', 'video', 'certifications', 'resume', 'contact'];
+      const sections = ['top', 'work', 'skills', 'about', 'video', 'certifications', 'fastapi', 'repos', 'resume', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {

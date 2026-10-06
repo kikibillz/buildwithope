@@ -8,15 +8,15 @@ interface HeroWorkspaceVisualProps {
 export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [runCount, setRunCount] = useState(1);
-  const [statusText, setStatusText] = useState('● Ready');
+  const [statusText, setStatusText] = useState('● Pytest: 48 passed (94.2% coverage)');
 
   const handleRun = () => {
     setIsRunning(true);
-    setStatusText('● Executing pipeline...');
+    setStatusText('● pytest -v --cov=src tests/');
     setTimeout(() => {
       setIsRunning(false);
       setRunCount((prev) => prev + 1);
-      setStatusText('● Passed (100% test coverage)');
+      setStatusText('● 48 passed in 1.42s (94.2% coverage)');
     }, 600);
   };
 
