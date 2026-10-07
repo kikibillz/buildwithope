@@ -1,3 +1,4 @@
+import { HrWorkLab } from './components/HrWorkLab';
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'motion/react';
 import {
@@ -249,6 +250,7 @@ export default function App() {
 
         {/* Marquee Ticker */}
         <SkillsMarquee />
+        <HrWorkLab />
 
         {/* =========================================================================
             01 / SELECTED WORK
