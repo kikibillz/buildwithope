@@ -1,1144 +1,1200 @@
 import { CertificationItem, ExperienceItem, PortfolioConfig, Project, SkillCategory } from '../types';
 
 export const initialConfig: PortfolioConfig = {
-  name: 'Opeyemi Olamiju',
-  title: 'Data Scientist & ML Engineer',
-  subTitle:
-    'Data Scientist & Automation Engineer | Practical Data & Automation Support for HR Teams & Recruitment Agencies | Predictive Attrition Modeling, Clean Pipelines & Executive Dashboards',
-  email: 'odunayoopamiju@gmail.com',
-  location: 'Remote & Relocation Ready',
-  linkedin: 'https://www.linkedin.com/in/opeyemiolamiju/',
-  github: 'https://github.com/kikibillz',
-  resumeUrl: '/Opeyemi_Olamiju_Resume.pdf',
-  certificationsUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-  avatarUrl: '/images/opeyemi picture.png',
+  "name": "Opeyemi Olamiju",
+  "title": "HR Data & Automation Support",
+  "subTitle": "Candidate tracking, spreadsheet cleanup and clear workforce reports for HR teams and recruitment agencies.",
+  "email": "odunayoopamiju@gmail.com",
+  "location": "Remote & Relocation Ready",
+  "linkedin": "https://www.linkedin.com/in/opeyemiolamiju/",
+  "github": "https://github.com/kikibillz",
+  "resumeUrl": "/Opeyemi_Olamiju_Resume.pdf",
+  "certificationsUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+  "avatarUrl": "/images/opeyemi picture.png"
 };
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: 'RAG & Prompt Engineering',
-    description: 'Retrieval-Augmented Generation, vector embeddings, BM25 hybrid search, few-shot prompting, and hallucination guardrails.',
-    skills: [
-      'RAG Architectures (Retrieval-Augmented Generation)',
-      'Prompt Engineering (Few-Shot, CoT, System Prompts)',
-      'Vector Search & Embeddings (ChromaDB / FAISS)',
-      'Hybrid Retrieval (Dense Vector + BM25 Sparse)',
-      'Context Window Optimization & Chunking',
-      'Hallucination Guardrails & Grounded Citations',
-      'LangChain & LlamaIndex',
-      'Structured JSON Schema Extraction',
-    ],
+    "title": "RAG & Prompt Engineering",
+    "description": "Retrieval-Augmented Generation, vector embeddings, BM25 hybrid search, few-shot prompting, and hallucination guardrails.",
+    "skills": [
+      "RAG Architectures (Retrieval-Augmented Generation)",
+      "Prompt Engineering (Few-Shot, CoT, System Prompts)",
+      "Vector Search & Embeddings (ChromaDB / FAISS)",
+      "Hybrid Retrieval (Dense Vector + BM25 Sparse)",
+      "Context Window Optimization & Chunking",
+      "Hallucination Guardrails & Grounded Citations",
+      "LangChain & LlamaIndex",
+      "Structured JSON Schema Extraction"
+    ]
   },
   {
-    title: 'Machine Learning & People Analytics',
-    description: 'Predictive modeling, workforce retention risk analysis, employee turnover variance, and statistical classification.',
-    skills: [
-      'Scikit-learn',
-      'XGBoost',
-      'Random Forest',
-      'People Analytics',
-      'Attrition Modeling',
-      'SMOTE Balancing',
-      'Feature Engineering',
-      'Cross-Validation',
-    ],
+    "title": "Machine Learning & People Analytics",
+    "description": "Predictive modeling, workforce retention risk analysis, employee turnover variance, and statistical classification.",
+    "skills": [
+      "Scikit-learn",
+      "XGBoost",
+      "Random Forest",
+      "People Analytics",
+      "Attrition Modeling",
+      "SMOTE Balancing",
+      "Feature Engineering",
+      "Cross-Validation"
+    ]
   },
   {
-    title: 'LLMs & Generative AI',
-    description: 'Large language model APIs, prompt engineering, multimodal video generation, and agentic workflows.',
-    skills: [
-      'Large Language Models (LLMs)',
-      'OpenAI & Gemini APIs',
-      'Prompt Engineering',
-      'RAG Architectures',
-      'LangChain',
-      'Google Veo 3',
-      'Runway Gen-3',
-      'ElevenLabs',
-    ],
+    "title": "LLMs & Generative AI",
+    "description": "Large language model APIs, prompt engineering, multimodal video generation, and agentic workflows.",
+    "skills": [
+      "Large Language Models (LLMs)",
+      "OpenAI & Gemini APIs",
+      "Prompt Engineering",
+      "RAG Architectures",
+      "LangChain",
+      "Google Veo 3",
+      "Runway Gen-3",
+      "ElevenLabs"
+    ]
   },
   {
-    title: 'Cloud & Infrastructure',
-    description: 'Cloud deployment, containerization, virtual machines, and cloud-native application runtimes.',
-    skills: [
-      'AWS (EC2 & S3)',
-      'Google Cloud (GCP)',
-      'Docker Containers',
-      'Linux CLI',
-      'Vercel Edge',
-      'Azure Fundamentals',
-    ],
+    "title": "Cloud & Infrastructure",
+    "description": "Cloud deployment, containerization, virtual machines, and cloud-native application runtimes.",
+    "skills": [
+      "AWS (EC2 & S3)",
+      "Google Cloud (GCP)",
+      "Docker Containers",
+      "Linux CLI",
+      "Vercel Edge",
+      "Azure Fundamentals"
+    ]
   },
   {
-    title: 'BI & Data Visualization',
-    description: 'Interactive business intelligence dashboards, DAX metric formulas, and publication-ready charting.',
-    skills: [
-      'Power BI (DAX & Dashboards)',
-      'Tableau',
-      'Streamlit',
-      'Plotly Interactive',
-      'Matplotlib',
-      'Seaborn',
-      'Executive KPI Design',
-    ],
+    "title": "BI & Data Visualization",
+    "description": "Interactive business intelligence dashboards, DAX metric formulas, and publication-ready charting.",
+    "skills": [
+      "Power BI (DAX & Dashboards)",
+      "Tableau",
+      "Streamlit",
+      "Plotly Interactive",
+      "Matplotlib",
+      "Seaborn",
+      "Executive KPI Design"
+    ]
   },
   {
-    title: 'MLOps & Backend Engineering',
-    description: 'High-throughput asynchronous APIs, request validation, automated testing, and model lifecycle management.',
-    skills: [
-      'FastAPI',
-      'Pydantic v2',
-      'Uvicorn ASGI',
-      'Docker',
-      'MLflow Tracking',
-      'CI/CD (GitHub Actions)',
-      'Pytest (>90% Coverage)',
-      'Joblib Serialization',
-    ],
+    "title": "MLOps & Backend Engineering",
+    "description": "High-throughput asynchronous APIs, request validation, automated testing, and model lifecycle management.",
+    "skills": [
+      "FastAPI",
+      "Pydantic v2",
+      "Uvicorn ASGI",
+      "Docker",
+      "MLflow Tracking",
+      "CI/CD (GitHub Actions)",
+      "Pytest (>90% Coverage)",
+      "Joblib Serialization"
+    ]
   },
   {
-    title: 'Databases & Storage',
-    description: 'Relational data modeling, SQL query optimization, transactional schemas, and high-performance NoSQL document stores.',
-    skills: [
-      'SQL (PostgreSQL / MySQL)',
-      'NoSQL (MongoDB)',
-      'SQLite',
-      'Complex Joins & CTEs',
-      'Window Functions',
-      'Schema Design & Indexing',
-      'MongoDB Aggregation Pipelines',
-      'Redis Caching',
-      'Query Optimization & EXPLAIN',
-    ],
+    "title": "Databases & Storage",
+    "description": "Relational data modeling, SQL query optimization, transactional schemas, and high-performance NoSQL document stores.",
+    "skills": [
+      "SQL (PostgreSQL / MySQL)",
+      "NoSQL (MongoDB)",
+      "SQLite",
+      "Complex Joins & CTEs",
+      "Window Functions",
+      "Schema Design & Indexing",
+      "MongoDB Aggregation Pipelines",
+      "Redis Caching",
+      "Query Optimization & EXPLAIN"
+    ]
   },
   {
-    title: 'Programming & Web',
-    description: 'Core languages used for full-stack logic, web interfaces, scripting, and data pipelines.',
-    skills: ['Python', 'SQL', 'TypeScript', 'JavaScript', 'HTML5', 'RESTful APIs'],
+    "title": "Programming & Web",
+    "description": "Core languages used for full-stack logic, web interfaces, scripting, and data pipelines.",
+    "skills": [
+      "Python",
+      "SQL",
+      "TypeScript",
+      "JavaScript",
+      "HTML5",
+      "RESTful APIs"
+    ]
   },
   {
-    title: 'Data & Spreadsheets',
-    description: 'Data manipulation, financial spreadsheet modeling, relational SQL querying, and automated reporting.',
-    skills: [
-      'Microsoft Excel (Advanced Modeling)',
-      'Google Sheets',
-      'Pandas',
-      'NumPy',
-      'OpenPyXL',
-      'XlsxWriter',
-      'Data Cleaning & Reconciliation',
-    ],
-  },
+    "title": "Data & Spreadsheets",
+    "description": "Data manipulation, financial spreadsheet modeling, relational SQL querying, and automated reporting.",
+    "skills": [
+      "Microsoft Excel (Advanced Modeling)",
+      "Google Sheets",
+      "Pandas",
+      "NumPy",
+      "OpenPyXL",
+      "XlsxWriter",
+      "Data Cleaning & Reconciliation"
+    ]
+  }
 ];
 
 export const projects: Project[] = [
   {
-    id: 'enterprise-rag-prompt-engine',
-    title: 'Nexus Enterprise Copilot: Workforce & Policy Knowledge Assistant',
-    tagline: 'Domain-grounded enterprise AI chatbot built on hybrid retrieval-augmented generation (RAG) and prompt engineering, delivering citation-backed answers across internal SOPs and technical SLAs.',
-    description:
-      'A production-grade AI knowledge copilot architected in Python, FastAPI, and TypeScript. Ingests corporate workforce retention policies, microservice technical SLAs, and statutory compliance ledgers into chunked vector embeddings. Implements hybrid dense-sparse retrieval (Cosine similarity + BM25 keyword re-ranking), systematic prompt engineering (Chain-of-Thought, few-shot schema extraction, strict citation guardrails), and an interactive chat interface achieving 98.2% factual grounding accuracy with provenance verification.',
-    category: 'RAG & Generative AI',
-    problemSummary:
-      'Standard Large Language Models suffer from hallucinations, knowledge cutoff limitations, and inability to cite internal policy records or financial formulas, creating critical compliance and accuracy risks for business decision-makers.',
-    approachSummary:
-      'Architected a multi-tier RAG pipeline: document tokenization and recursive character chunking (256-512 tokens with 50-token overlap), dense vector indexing with ChromaDB/FAISS, sparse BM25 scoring for exact keyword retrieval, reciprocal rank fusion (RRF), system prompt engineering with strict citation provenance constraints, and automated grounding validation.',
-    tools: [
-      'Python',
-      'FastAPI',
-      'RAG',
-      'Prompt Engineering',
-      'ChromaDB',
-      'Vector Search',
-      'BM25 Hybrid Search',
-      'LangChain',
-      'Docker',
-      'Streamlit',
+    "id": "enterprise-rag-prompt-engine",
+    "title": "Knowledge Assistant & RAG Exploration",
+    "tagline": "Portfolio exploration · RAG & Generative AI",
+    "description": "Explore retrieval and source-aware answers. The assistant on this website is a local portfolio FAQ, not a connected RAG service.",
+    "category": "RAG & Generative AI",
+    "problemSummary": "Standard Large Language Models suffer from hallucinations, knowledge cutoff limitations, and inability to cite internal policy records or financial formulas, creating critical compliance and accuracy risks for business decision-makers.",
+    "approachSummary": "Architected a multi-tier RAG pipeline: document tokenization and recursive character chunking (256-512 tokens with 50-token overlap), dense vector indexing with ChromaDB/FAISS, sparse BM25 scoring for exact keyword retrieval, reciprocal rank fusion (RRF), system prompt engineering with strict citation provenance constraints, and automated grounding validation.",
+    "tools": [
+      "Python",
+      "FastAPI",
+      "RAG",
+      "Prompt Engineering",
+      "ChromaDB",
+      "Vector Search",
+      "BM25 Hybrid Search",
+      "LangChain",
+      "Docker",
+      "Streamlit"
     ],
-    resultsSummary:
-      'Sub-85ms hybrid retrieval latency across 500+ document chunks with 98.2% factual grounding score, suppressing unverified assertions through citation-enforced system prompt guardrails.',
-    businessImpact:
-      'Accelerated internal compliance, technical SLA verification, and workforce policy inquiries by 84%, providing instant, audit-verifiable answers with direct chunk citations.',
-    keyMetrics: [
-      { label: 'Grounding Accuracy', value: '98.2% Verified' },
-      { label: 'Hybrid Retrieval Latency', value: '< 85ms' },
-      { label: 'Citation Provenance', value: '100% Traceable' },
-      { label: 'Prompt Framework', value: 'CoT & Few-Shot' },
-    ],
-    links: {
-      github: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
-      demo: '#nexus-copilot',
+    "resultsSummary": "Portfolio FAQ interface and source-linked knowledge-assistant exploration.",
+    "businessImpact": "Potential application: Standard Large Language Models suffer from hallucinations, knowledge cutoff limitations, and inability to cite internal policy records or financial formulas, creating critical compliance and accuracy risks for business decision-makers. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/enterprise-rag-prompt-engine",
+      "demo": "#nexus-copilot"
     },
-    badge: 'AI Assistant · Enterprise Copilot',
-    streamlitDeployment: 'nexus-copilot',
-    caseStudy: {
-      problem:
-        'Internal stakeholders across People Operations, engineering, and finance required instant answers from dense operational documentation (retention SOPs, microservice SLAs, statutory tax formulas) without risking inaccurate LLM hallucinations.',
-      dataset:
-        'Multi-corpus knowledge base: 50+ enterprise policy documents, API technical specifications, and statutory financial ledgers tokenized into 500+ semantic chunks with metadata tagging (document_id, section, timestamp, author).',
-      process: {
-        collection:
-          'Ingested unstructured markdown, PDF, and text policy documents into a structured ETL ingestion pipeline.',
-        cleaning:
-          'Normalized unicode characters, stripped redundant boilerplate, and applied recursive character text splitters with semantic boundaries.',
-        exploration:
-          'Benchmarked chunk size trade-offs (128 vs 256 vs 512 tokens), discovering that 384 tokens with 40-token overlap preserved full policy clauses while maximizing embedding vector similarity.',
-        featureEngineering:
-          'Generated high-dimensional dense vector embeddings paired with sparse BM25 inverted indices, combining both via Reciprocal Rank Fusion (RRF) to capture both semantic meaning and exact statutory clause codes.',
-        modeling:
-          'Engineered layered system prompts utilizing Chain-of-Thought (CoT) decomposition for multi-clause reasoning, few-shot examples for structured JSON output, and strict negative constraint guardrails ("If the answer cannot be directly cited from context, declare UNVERIFIED").',
-        evaluation:
-          'Constructed a 120-question evaluation benchmark testing retrieval recall@k, context precision, and factual consistency, verifying 98.2% grounding accuracy.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Standard Large Language Models suffer from hallucinations, knowledge cutoff limitations, and inability to cite internal policy records or financial formulas, creating critical compliance and accuracy risks for business decision-makers.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Normalized unicode characters, stripped redundant boilerplate, and applied recursive character text splitters with semantic boundaries.",
+        "exploration": "Benchmarked chunk size trade-offs (128 vs 256 vs 512 tokens), discovering that 384 tokens with 40-token overlap preserved full policy clauses while maximizing embedding vector similarity.",
+        "featureEngineering": "Document the relevant rules and validate this stage against the project inputs. See the source for implementation details.",
+        "modeling": "Engineered layered system prompts utilizing Chain-of-Thought (CoT) decomposition for multi-clause reasoning, few-shot examples for structured JSON output, and strict negative constraint guardrails (\"If the answer cannot be directly cited from context, declare UNVERIFIED\").",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Delivered a production-grade, interactive RAG engine with sub-85ms hybrid retrieval, automated citation attribution, and modular prompt engineering strategies.',
-      lessons: [
-        'Hybrid dense-sparse retrieval (vector + BM25) drastically outperforms pure vector search when handling specific policy identifiers, codes, or formulas.',
-        'Prompt engineering is as critical as retrieval: enforcing negative constraints and structured citation formatting eliminates hallucinated confidence.',
-        'Chunking strategy directly dictates answer fidelity: semantic boundary preservation avoids splitting conditional logic across chunks.',
+      "results": "Portfolio FAQ interface and source-linked knowledge-assistant exploration.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: [
-        'RAG',
-        'Prompt Engineering',
-        'Python',
-        'FastAPI',
-        'Vector Embeddings',
-        'ChromaDB',
-        'BM25',
-        'LangChain',
+      "tools": [
+        "RAG",
+        "Prompt Engineering",
+        "Python",
+        "FastAPI",
+        "Vector Embeddings",
+        "ChromaDB",
+        "BM25",
+        "LangChain"
       ],
-      links: {
-        github: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
-        demo: '#nexus-copilot',
+      "links": {
+        "github": "https://github.com/kikibillz/enterprise-rag-prompt-engine",
+        "demo": "#nexus-copilot"
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided.",
+        "The website FAQ uses deterministic keyword matching, with no LLM, vector search or company-policy access."
+      ]
+    }
   },
   {
-    id: 'hybrid-sql-nosql-engine',
-    title: 'Enterprise Hybrid Data Platform: Relational SQL (PostgreSQL) & NoSQL (MongoDB) Pipeline',
-    tagline: 'High-throughput dual-engine data platform integrating ACID relational PostgreSQL schemas with MongoDB document collections for real-time telemetry, aggregation, and sub-25ms analytical querying.',
-    description:
-      'An enterprise data engineering and persistence platform architected in Python that combines ACID-compliant PostgreSQL (relational SQL with multi-table joins, CTEs, B-Tree indexes, and window functions) with MongoDB (NoSQL document store with multi-stage aggregation pipelines). Features automated dual-engine syncing, query optimization, indexing benchmarks, and an interactive query analytics console.',
-    category: 'Databases & Distributed Storage',
-    problemSummary:
-      'Modern applications struggle when forcing all data into either purely relational tables or purely unstructured documents. Relational financial transactions require strict ACID guarantees and foreign keys, while real-time user events and telemetry require high-ingest document flexibility.',
-    approachSummary:
-      'Architected a hybrid architecture routing financial transactions and customer accounts to normalized PostgreSQL tables with foreign key constraints, while routing high-velocity clickstream and system telemetry to MongoDB NoSQL collections with compound indexes and multi-stage aggregation pipelines.',
-    tools: [
-      'SQL (PostgreSQL)',
-      'NoSQL (MongoDB)',
-      'Python',
-      'SQLAlchemy',
-      'PyMongo',
-      'Docker',
-      'Redis',
-      'Pandas',
-      'Streamlit',
+    "id": "hybrid-sql-nosql-engine",
+    "title": "Hybrid Data Platform: Relational SQL (PostgreSQL) & NoSQL (MongoDB) Pipeline",
+    "tagline": "Portfolio exploration · Databases & Distributed Storage",
+    "description": "Modern applications struggle when forcing all data into either purely relational tables or purely unstructured documents. Relational financial transactions require strict ACID guarantees and foreign keys, while real-time user events and telemetry require high-ingest document flexibility.",
+    "category": "Databases & Distributed Storage",
+    "problemSummary": "Modern applications struggle when forcing all data into either purely relational tables or purely unstructured documents. Relational financial transactions require strict ACID guarantees and foreign keys, while real-time user events and telemetry require high-ingest document flexibility.",
+    "approachSummary": "Architected a hybrid architecture routing financial transactions and customer accounts to normalized PostgreSQL tables with foreign key constraints, while routing high-velocity clickstream and system telemetry to MongoDB NoSQL collections with compound indexes and multi-stage aggregation pipelines.",
+    "tools": [
+      "SQL (PostgreSQL)",
+      "NoSQL (MongoDB)",
+      "Python",
+      "SQLAlchemy",
+      "PyMongo",
+      "Docker",
+      "Redis",
+      "Pandas",
+      "Streamlit"
     ],
-    resultsSummary: 'Sub-25ms query execution across 1.2M+ records with 4.5x indexing speedup and zero transactional sync lag.',
-    businessImpact: 'Consolidated transactional accounting and high-frequency product event streams into a unified data access layer, eliminating database bottlenecks and accelerating cross-department BI reporting by 78%.',
-    keyMetrics: [
-      { label: 'Query Latency', value: '< 25ms (Indexed)' },
-      { label: 'Data Tested', value: '1.2M+ Records' },
-      { label: 'Index Speedup', value: '4.5x Faster' },
-      { label: 'Dual Engine', value: 'PostgreSQL + MongoDB' },
-    ],
-    links: {
-      github: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline',
-      demo: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline#readme',
+    "resultsSummary": "A portfolio design for relational and document-store workflows.",
+    "businessImpact": "Potential application: Modern applications struggle when forcing all data into either purely relational tables or purely unstructured documents. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline",
+      "demo": ""
     },
-    badge: 'SQL & NoSQL Engine',
-    streamlitDeployment: 'hybrid-sql-nosql-engine ∙ main ∙ PostgreSQL & MongoDB',
-    caseStudy: {
-      problem:
-        'Enterprises frequently face architectural compromises: relational databases lock up under high-velocity unstructured event streams, while pure NoSQL databases lack transactional consistency and cross-entity relational joins for accounting and compliance.',
-      dataset:
-        'Dual-engine benchmark dataset: 1.2M+ rows across 5 normalized relational tables (users, accounts, transactions, merchants, audit_logs) in PostgreSQL, coupled with 450,000+ nested JSON telemetry documents in MongoDB.',
-      process: {
-        collection:
-          'Ingested transactional event streams via Python ETL loaders, routing relational payloads to PostgreSQL and document payloads to MongoDB.',
-        cleaning:
-          'Enforced PostgreSQL relational constraints (NOT NULL, UNIQUE, FOREIGN KEY, CHECK) while establishing MongoDB JSON schema validation rules for incoming telemetry docs.',
-        exploration:
-          'Benchmarked raw query plans (EXPLAIN ANALYZE in PostgreSQL and .explain("executionStats") in MongoDB) to locate table scans and pipeline bottlenecks.',
-        featureEngineering:
-          'Formulated SQL CTEs (Common Table Expressions) and window functions (ROW_NUMBER, LAG, LEAD, SUM OVER) to compute rolling customer spend, paired with MongoDB $facet and $bucket stages for real-time cohort grouping.',
-        modeling:
-          'Constructed B-Tree indexes on PostgreSQL foreign keys and compound indexes on MongoDB timestamp + user_id fields, reducing query response times by over 77%.',
-        evaluation:
-          'Executed concurrent stress testing with simulated multi-tenant query workloads, verifying sub-25ms P95 latency and zero transactional data anomalies.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Modern applications struggle when forcing all data into either purely relational tables or purely unstructured documents. Relational financial transactions require strict ACID guarantees and foreign keys, while real-time user events and telemetry require high-ingest document flexibility.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Enforced PostgreSQL relational constraints (NOT NULL, UNIQUE, FOREIGN KEY, CHECK) while establishing MongoDB JSON schema validation rules for incoming telemetry docs.",
+        "exploration": "Benchmarked raw query plans (EXPLAIN ANALYZE in PostgreSQL and .explain(\"executionStats\") in MongoDB) to locate table scans and pipeline bottlenecks.",
+        "featureEngineering": "Formulated SQL CTEs (Common Table Expressions) and window functions (ROW_NUMBER, LAG, LEAD, SUM OVER) to compute rolling customer spend, paired with MongoDB $facet and $bucket stages for real-time cohort grouping.",
+        "modeling": "Constructed B-Tree indexes on PostgreSQL foreign keys and compound indexes on MongoDB timestamp + user_id fields, reducing query response times by over 77%.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Engineered an enterprise-grade hybrid storage architecture with documented SQL schemas, PyMongo aggregation scripts, Docker Compose orchestration, and reproducible benchmarks.',
-      lessons: [
-        'Relational SQL and NoSQL document stores are complementary strengths: using PostgreSQL for financial accounting and MongoDB for event streams yields superior throughput over single-engine workarounds.',
-        'Proper indexing strategy (B-Tree on foreign keys in SQL, compound field indexing in MongoDB) provides orders-of-magnitude performance improvement compared to raw query tuning alone.',
-        'Abstracting database interactions behind structured Python repository patterns prevents backend coupling and simplifies query optimization.',
+      "results": "A portfolio design for relational and document-store workflows.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['SQL (PostgreSQL)', 'NoSQL (MongoDB)', 'Python', 'SQLAlchemy', 'PyMongo', 'Docker', 'Redis'],
-      links: {
-        github: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline',
-        demo: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline#readme',
+      "tools": [
+        "SQL (PostgreSQL)",
+        "NoSQL (MongoDB)",
+        "Python",
+        "SQLAlchemy",
+        "PyMongo",
+        "Docker",
+        "Redis"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'python-automated-ledger',
-    title: 'Python Automated Client Ledger & Tax Withholding System (Excel & Google Sheets)',
-    tagline: 'Automated Python pipeline generating financial accounting ledgers with 20% statutory withholding calculations, dynamic SUM formulas, and formatted multi-client reconciliation.',
-    description:
-      'An automated financial accounting and invoice reconciliation tool engineered in Python using OpenPyXL, Pandas, and Google Sheets APIs. It programmatically ingests raw project billing data, validates invoice statuses, computes exact 20% tax withholdings and net earnings, and formats audit-ready workbooks with dynamic summary formula ranges.',
-    category: 'Financial Automation & Spreadsheets',
-    problemSummary:
-      'Freelancers and consulting businesses spend countless hours manually updating spreadsheets, leading to tax withholding miscalculations, formula breaks, and payment reconciliation delays.',
-    approachSummary:
-      'Engineered an automated Python script that structures client ledgers into RFC-compliant Excel workbooks with automated cell formatting, 20% tax formulas, and live financial summary blocks.',
-    tools: ['Python', 'Microsoft Excel', 'Google Sheets', 'OpenPyXL', 'Pandas', 'XlsxWriter'],
-    resultsSummary: 'Production automation script and interactive ledger reducing financial reconciliation time by 85% with zero formula syntax errors.',
-    businessImpact: 'Automated billing and tax withholding reconciliation for client engagements, eliminating manual calculation errors and cutting monthly financial bookkeeping from hours to under 2 minutes.',
-    keyMetrics: [
-      { label: 'Tax Accuracy', value: '100% (Rule-Enforced)' },
-      { label: 'Time Reduction', value: '85% Faster' },
-      { label: 'Formula Integrity', value: 'Zero Syntax Errors' },
-      { label: 'File Support', value: 'Excel (.xlsx) & Sheets' },
+    "id": "python-automated-ledger",
+    "title": "Python Spreadsheet Ledger Automation",
+    "tagline": "Portfolio exploration · Financial Automation & Spreadsheets",
+    "description": "Freelancers and consulting businesses spend countless hours manually updating spreadsheets, leading to tax withholding miscalculations, formula breaks, and payment reconciliation delays.",
+    "category": "Financial Automation & Spreadsheets",
+    "problemSummary": "Freelancers and consulting businesses spend countless hours manually updating spreadsheets, leading to tax withholding miscalculations, formula breaks, and payment reconciliation delays.",
+    "approachSummary": "Explore structured spreadsheet exports, configurable calculations and reconciliation checks. Tax rules must be supplied and reviewed for the relevant jurisdiction.",
+    "tools": [
+      "Python",
+      "Microsoft Excel",
+      "Google Sheets",
+      "OpenPyXL",
+      "Pandas",
+      "XlsxWriter"
     ],
-    links: {
-      github: 'https://github.com/kikibillz',
-      demo: 'https://github.com/kikibillz',
+    "resultsSummary": "A spreadsheet-automation concept with configurable calculation rules.",
+    "businessImpact": "Potential application: Freelancers and consulting businesses spend countless hours manually updating spreadsheets, leading to tax withholding miscalculations, formula breaks, and payment reconciliation delays. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz",
+      "demo": ""
     },
-    badge: 'Python & Sheets',
-    caseStudy: {
-      problem:
-        'Managing consulting invoices and project receivables manually across spreadsheets leads to human error in tax withholding (20%), inconsistent currency formats, and missed overdue payments.',
-      dataset: 'Client billing registry schema: Date, Invoice #, Client Name, Project Description, Status, Gross Amount ($), Tax Withholding (20%), Net Income ($), and Financial Summary.',
-      process: {
-        collection: 'Standardized input invoice records into structured dictionary schemas and Pandas DataFrames.',
-        cleaning: 'Enforced strict data types for dates, monetary values, and enumeration of statuses (Paid, Pending, Overdue).',
-        exploration: 'Identified recurring client billing cycles and calculated required withholding tax reserve funds.',
-        featureEngineering: 'Generated dynamic formula strings (=F*0.20, =F-G, and =SUM) directly into workbook cells so client spreadsheets update reactively.',
-        modeling: 'Engineered automated cell styling (dark headers, currency number formats $#,##0.00, and auto-adjusting column widths).',
-        evaluation: 'Validated formula outputs against test billing datasets, verifying arithmetic precision across all gross thresholds.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Freelancers and consulting businesses spend countless hours manually updating spreadsheets, leading to tax withholding miscalculations, formula breaks, and payment reconciliation delays.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Enforced strict data types for dates, monetary values, and enumeration of statuses (Paid, Pending, Overdue).",
+        "exploration": "Identified recurring client billing cycles and calculated required withholding tax reserve funds.",
+        "featureEngineering": "Configure calculation rules explicitly; do not apply a universal withholding rate.",
+        "modeling": "Explore structured spreadsheet exports, configurable calculations and reconciliation checks. Tax rules must be supplied and reviewed for the relevant jurisdiction.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results: 'Delivered an automated, reusable Python workbook generator that exports clean, audit-ready financial sheets.',
-      lessons: [
-        'Writing native Excel formulas instead of static calculated numbers ensures downstream clients can interact with the sheet without breaking data dependencies.',
-        'Clear separation between transactional data and the executive financial summary prevents cell collision when adding new rows.',
+      "results": "A spreadsheet-automation concept with configurable calculation rules.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'Microsoft Excel', 'Google Sheets', 'OpenPyXL', 'Pandas', 'XlsxWriter'],
-      links: {
-        github: 'https://github.com/kikibillz',
-        demo: 'https://github.com/kikibillz',
+      "tools": [
+        "Python",
+        "Microsoft Excel",
+        "Google Sheets",
+        "OpenPyXL",
+        "Pandas",
+        "XlsxWriter"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'fastapi-ml-service',
-    title: 'FastAPI Production ML Inference & Validation Service',
-    tagline: 'High-throughput asynchronous REST API serving machine learning inference pipelines with Pydantic v2 schemas, JWT auth, and interactive Swagger UI.',
-    description:
-      'A production-grade Python backend service built with FastAPI, Uvicorn, and Pydantic v2 to expose serialized machine learning models via versioned RESTful endpoints. Features automated request validation, rate limiting, background batch scoring, Docker containerization, and full OpenAPI documentation.',
-    category: 'Backend Engineering & ML Serving',
-    problemSummary:
-      'Machine learning models locked inside Jupyter notebooks or ad-hoc scripts cannot be readily integrated by external frontends, mobile apps, or enterprise microservices. A scalable, strongly typed, low-latency REST API was required to serve real-time predictions with strict contract validation.',
-    approachSummary:
-      'Established a clean modular architecture (/api/v1, /core/config, /models/schemas, /services/predictor), enforced Pydantic v2 validation contracts, loaded serialized Joblib pipelines with lifespan startup hooks, and containerized the service using Docker.',
-    tools: [
-      'FastAPI',
-      'Python',
-      'Docker',
-      'AWS & GCP',
-      'MLflow',
-      'Pytest (>90%)',
-      'Pydantic v2',
-      'Uvicorn',
-      'Swagger / OpenAPI',
-      'Scikit-learn',
+    "id": "fastapi-ml-service",
+    "title": "FastAPI ML Inference & Validation Service",
+    "tagline": "Portfolio exploration · Backend Engineering & ML Serving",
+    "description": "Machine learning models locked inside Jupyter notebooks or ad-hoc scripts cannot be readily integrated by external frontends, mobile apps, or enterprise microservices. A scalable, strongly typed, low-latency REST API was required to serve real-time predictions with strict contract validation.",
+    "category": "Backend Engineering & ML Serving",
+    "problemSummary": "Machine learning models locked inside Jupyter notebooks or ad-hoc scripts cannot be readily integrated by external frontends, mobile apps, or enterprise microservices. A scalable, strongly typed, low-latency REST API was required to serve real-time predictions with strict contract validation.",
+    "approachSummary": "Established a clean modular architecture (/api/v1, /core/config, /models/schemas, /services/predictor), enforced Pydantic v2 validation contracts, loaded serialized Joblib pipelines with lifespan startup hooks, and containerized the service using Docker.",
+    "tools": [
+      "FastAPI",
+      "Python",
+      "Docker",
+      "AWS & GCP",
+      "MLflow",
+      "Pytest (>90%)",
+      "Pydantic v2",
+      "Uvicorn",
+      "Swagger / OpenAPI",
+      "Scikit-learn"
     ],
-    resultsSummary: 'Sub-15ms endpoint latency with automated OpenAPI Swagger UI and 92% pytest coverage.',
-    businessImpact: 'Accelerated ML model delivery turnaround from weeks to hours with zero-downtime containerized serving and automated Pydantic contract validation.',
-    keyMetrics: [
-      { label: 'Inference Latency', value: '< 15ms' },
-      { label: 'Pytest Coverage', value: '92%' },
-      { label: 'Runtime Type Errors', value: '0 (Pydantic v2)' },
-      { label: 'Concurrency', value: '1,200+ req/sec' },
-    ],
-    links: {
-      github: 'https://github.com/kikibillz/fastapi-ml-service',
-      demo: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+    "resultsSummary": "API validation and inference-service project structure.",
+    "businessImpact": "Potential application: Machine learning models locked inside Jupyter notebooks or ad-hoc scripts cannot be readily integrated by external frontends, mobile apps, or enterprise microservices. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/fastapi-ml-service",
+      "demo": ""
     },
-    badge: 'FastAPI REST API',
-    streamlitDeployment: 'FastAPI ASGI • /docs Swagger UI • Uvicorn Worker',
-    caseStudy: {
-      problem:
-        'Data science teams frequently face friction transitioning trained ML classifiers from local development environments into reliable production APIs. Ad-hoc scripts lack automated schema validation, concurrency handling, health metrics, and API documentation for client developers.',
-      dataset:
-        'Simulated and real-world tabular payloads for banking churn risk assessment and employee departure propensity with 15+ validated continuous and categorical attributes.',
-      process: {
-        collection:
-          'Defined strict OpenAPI request and response schema models leveraging Pydantic v2, rejecting corrupted, missing, or out-of-boundary payloads at the ASGI boundary.',
-        cleaning:
-          'Implemented custom Pydantic field validators and data sanitization decorators ensuring zero NaN or unencoded categorical inputs reach the scikit-learn estimator matrix.',
-        exploration:
-          'Benchmarked sync vs async request handlers using httpx and Locust, determining optimal worker concurrency under high concurrent prediction loads.',
-        featureEngineering:
-          'Engineered real-time feature derivation middleware that computes dynamic financial ratios (such as Balance-to-Salary) on incoming JSON payloads on the fly.',
-        modeling:
-          'Integrated serialized XGBoost and Random Forest pipelines loaded asynchronously during FastAPI lifespan events to avoid runtime disk I/O bottlenecks.',
-        evaluation:
-          'Achieved comprehensive test coverage (>90%) with Pytest and AsyncClient, verifying 200 OK inference results, 422 Validation Errors, and sub-15ms response times.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Machine learning models locked inside Jupyter notebooks or ad-hoc scripts cannot be readily integrated by external frontends, mobile apps, or enterprise microservices. A scalable, strongly typed, low-latency REST API was required to serve real-time predictions with strict contract validation.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Document the relevant rules and validate this stage against the project inputs. See the source for implementation details.",
+        "exploration": "Benchmarked sync vs async request handlers using httpx and Locust, determining optimal worker concurrency under high concurrent prediction loads.",
+        "featureEngineering": "Engineered real-time feature derivation middleware that computes dynamic financial ratios (such as Balance-to-Salary) on incoming JSON payloads on the fly.",
+        "modeling": "Integrated serialized XGBoost and Random Forest pipelines loaded asynchronously during FastAPI lifespan events to avoid runtime disk I/O bottlenecks.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Shipped a scalable, self-documenting FastAPI service with automated Swagger / ReDoc docs, Prometheus-style health metrics, Dockerfile containerization, and structured JSON logging.',
-      lessons: [
-        'Pydantic v2 field validators eliminate an entire class of runtime data bugs before payloads ever hit machine learning models.',
-        'Loading heavy scikit-learn and XGBoost pipelines once during app startup lifespan dramatically lowers per-request latency.',
-        'Interactive Swagger UI (/docs) provides immediate transparency and builds trust with frontend and product teams.',
+      "results": "API validation and inference-service project structure.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'FastAPI', 'Pydantic v2', 'Uvicorn', 'Docker', 'SQLite', 'Pytest', 'Scikit-learn'],
-      links: {
-        github: 'https://github.com/kikibillz/fastapi-ml-service',
-        demo: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+      "tools": [
+        "Python",
+        "FastAPI",
+        "Pydantic v2",
+        "Uvicorn",
+        "Docker",
+        "SQLite",
+        "Pytest",
+        "Scikit-learn"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/fastapi-ml-service",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'bank-churn',
-    title: 'Bank Customer Churn & Retention Pipeline',
-    tagline: 'End-to-end classification system predicting client attrition using XGBoost, SMOTE imbalance handling, and an interactive Streamlit portal.',
-    description:
-      'A machine learning project built with Python and XGBoost to analyze banking customer behavior, identify early churn indicators, and evaluate model performance using precision-recall trade-offs and SMOTE resampling.',
-    category: 'Machine Learning & Predictive Modeling',
-    problemSummary:
-      'Customer acquisition costs in retail banking are significantly higher than retention costs. Identifying at-risk customers early allows relationship teams to execute targeted retention strategies before accounts are closed.',
-    approachSummary:
-      'Engineered ratio metrics (Balance_Salary_Ratio), encoded demographic factors, balanced training folds using SMOTE, trained an XGBClassifier, serialized artifacts via Joblib, and deployed an interactive Streamlit application.',
-    tools: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'Imbalanced-learn', 'Joblib', 'Streamlit', 'Plotly'],
-    resultsSummary: '86.4% recall on churning accounts with SMOTE balancing, identifying high-risk deposits.',
-    businessImpact: 'Identified $140,000+ in estimated customer deposit balances at imminent attrition hazard, enabling relationship managers to launch proactive retention interventions.',
-    keyMetrics: [
-      { label: 'Recall on Churners', value: '86.4%' },
-      { label: 'Class Balancing', value: 'SMOTE 50/50' },
-      { label: 'ROC-AUC Score', value: '0.882' },
-      { label: 'High-Risk Cohort', value: '$140k+ Flagged' },
+    "id": "bank-churn",
+    "title": "Bank Customer Churn & Retention Pipeline",
+    "tagline": "Portfolio exploration · Machine Learning & Predictive Modeling",
+    "description": "Customer acquisition costs in retail banking are significantly higher than retention costs. Identifying at-risk customers early allows relationship teams to execute targeted retention strategies before accounts are closed.",
+    "category": "Machine Learning & Predictive Modeling",
+    "problemSummary": "Customer acquisition costs in retail banking are significantly higher than retention costs. Identifying at-risk customers early allows relationship teams to execute targeted retention strategies before accounts are closed.",
+    "approachSummary": "Engineered ratio metrics (Balance_Salary_Ratio), encoded demographic factors, balanced training folds using SMOTE, trained an XGBClassifier, serialized artifacts via Joblib, and deployed an interactive Streamlit application.",
+    "tools": [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "XGBoost",
+      "Imbalanced-learn",
+      "Joblib",
+      "Streamlit",
+      "Plotly"
     ],
-    links: {
-      github: 'https://github.com/kikibillz/Bank-Customer-Churn-Project',
-      demo: 'https://github.com/kikibillz/Bank-Customer-Churn-Project#readme',
+    "resultsSummary": "A churn-analysis project with a static application screenshot.",
+    "businessImpact": "Potential application: Customer acquisition costs in retail banking are significantly higher than retention costs. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/Bank-Customer-Churn-Project",
+      "demo": ""
     },
-    badge: 'XGBoost & SMOTE',
-    streamlitDeployment: 'bank-customer-churn-project ∙ main ∙ app/main_app.py',
-    streamlitUrl: 'https://bank-customer-churn-project.streamlit.app',
-    caseStudy: {
-      problem:
-        'Retail banks face customer attrition that erodes deposited balances and long-term customer lifetime value. Traditional batch reports highlight exits after accounts are closed. The objective was to build a predictive classification pipeline assessing churn likelihood from transactional and demographic attributes.',
-      dataset:
-        'Banking customer records containing CreditScore, Geography, Gender, Age, Tenure, Balance, NumOfProducts, HasCrCard, IsActiveMember, EstimatedSalary, and target binary indicator Exited.',
-      process: {
-        collection:
-          'Loaded raw customer records into Python and verified data types, distributions, and cardinality across columns.',
-        cleaning:
-          'Audited missing entries, standardized column casing, and filtered out non-predictive identifiers like CustomerId and Surname.',
-        exploration:
-          'Conducted exploratory data analysis uncovering non-linear relationships between customer age cohorts, dormant account flags, and attrition likelihood.',
-        featureEngineering:
-          'Engineered key economic ratios such as Balance_Salary_Ratio = Balance / (EstimatedSalary + 1) to capture financial commitment, and applied one-hot dummy encoding to Geography and Gender.',
-        modeling:
-          'Addressed substantial class imbalance using SMOTE (Synthetic Minority Over-sampling Technique) before fitting an XGBClassifier with stratified train-test splits.',
-        evaluation:
-          'Evaluated performance using confusion matrices and classification reports (precision, recall, and F1-score) to prioritize identifying true churning clients without excessive false alarms.',
+    "badge": "Portfolio project",
+    "streamlitUrl": "https://bank-customer-churn-project.streamlit.app",
+    "caseStudy": {
+      "problem": "Customer acquisition costs in retail banking are significantly higher than retention costs. Identifying at-risk customers early allows relationship teams to execute targeted retention strategies before accounts are closed.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Audited missing entries, standardized column casing, and filtered out non-predictive identifiers like CustomerId and Surname.",
+        "exploration": "Conducted exploratory data analysis uncovering non-linear relationships between customer age cohorts, dormant account flags, and attrition likelihood.",
+        "featureEngineering": "Engineered key economic ratios such as Balance_Salary_Ratio = Balance / (EstimatedSalary + 1) to capture financial commitment, and applied one-hot dummy encoding to Geography and Gender.",
+        "modeling": "Addressed substantial class imbalance using SMOTE (Synthetic Minority Over-sampling Technique) before fitting an XGBClassifier with stratified train-test splits.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Model evaluation metrics available in the project documentation. Serialized the trained XGBoost estimator, standard scaler, and feature list using Joblib, then integrated them into a responsive Streamlit web interface for single-customer inference.',
-      lessons: [
-        'Handling severe class imbalance with SMOTE prevents tree models from defaulting to the majority non-churn class.',
-        'Feature engineering (like Balance-to-Salary ratio) provided a cleaner signal than raw raw salary figures alone.',
-        'Deploying the model via Streamlit made the predictive outputs immediately testable for stakeholders.',
+      "results": "A churn-analysis project with a static application screenshot.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'Imbalanced-learn', 'Joblib', 'Streamlit'],
-      links: {
-        github: 'https://github.com/kikibillz/Bank-Customer-Churn-Project',
-        demo: 'https://github.com/kikibillz/Bank-Customer-Churn-Project#readme',
+      "tools": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "XGBoost",
+        "Imbalanced-learn",
+        "Joblib",
+        "Streamlit"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/Bank-Customer-Churn-Project",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'hr-analytics',
-    title: 'Workforce Intelligence System (HR-Analytics-2026)',
-    tagline: 'Workforce analytics pipeline and multi-department metrics explorer tracking turnover, compensation parity, and tenure.',
-    description:
-      'An end-to-end workforce analytics dashboard and exploratory pipeline analyzing structured employee records (HR_cleaned.csv) with MongoDB data integration, statistical summaries, and interactive Streamlit and Plotly visualizations.',
-    category: 'Data Analysis & Business Analytics',
-    problemSummary:
-      'Human Resources leaders lack consolidated insight into whether turnover trends correlate with compensation bands, department tenure, or performance evaluation scores.',
-    approachSummary:
-      'Structured automated Python ETL pipelines, integrated MongoDB document loading, generated multi-variable distribution charts with Seaborn and Plotly, and built interactive department filters in Streamlit.',
-    tools: ['Python', 'Pandas', 'Plotly', 'Streamlit', 'Scikit-learn', 'Seaborn', 'MongoDB', 'Joblib'],
-    resultsSummary: 'Diagnosed 2.4x attrition propensity in high-overtime cohorts across 8 core departments.',
-    businessImpact: 'Uncovered 2.4x higher voluntary turnover variance among employees with excessive overtime and stagnating salary bands, driving data-backed compensation adjustments.',
-    keyMetrics: [
-      { label: 'Turnover Variance', value: '2.4x in Overtime' },
-      { label: 'Query Latency', value: 'Instant via MongoDB' },
-      { label: 'Report Generation', value: 'Real-time vs Weeks' },
-      { label: 'Cohorts Analyzed', value: '8 Departments' },
+    "id": "hr-analytics",
+    "title": "Workforce Intelligence System (HR-Analytics-2026)",
+    "tagline": "Portfolio exploration · Data Analysis & Business Analytics",
+    "description": "Human Resources leaders lack consolidated insight into whether turnover trends correlate with compensation bands, department tenure, or performance evaluation scores.",
+    "category": "Data Analysis & Business Analytics",
+    "problemSummary": "Human Resources leaders lack consolidated insight into whether turnover trends correlate with compensation bands, department tenure, or performance evaluation scores.",
+    "approachSummary": "Structured automated Python ETL pipelines, integrated MongoDB document loading, generated multi-variable distribution charts with Seaborn and Plotly, and built interactive department filters in Streamlit.",
+    "tools": [
+      "Python",
+      "Pandas",
+      "Plotly",
+      "Streamlit",
+      "Scikit-learn",
+      "Seaborn",
+      "MongoDB",
+      "Joblib"
     ],
-    links: {
-      github: 'https://github.com/kikibillz/HR-Analytics-2026',
-      demo: 'https://github.com/kikibillz/HR-Analytics-2026#readme',
+    "resultsSummary": "An HR reporting project with a static dashboard screenshot.",
+    "businessImpact": "Potential application: Human Resources leaders lack consolidated insight into whether turnover trends correlate with compensation bands, department tenure, or performance evaluation scores. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/HR-Analytics-2026",
+      "demo": ""
     },
-    badge: 'Sample Dataset',
-    streamlitDeployment: 'hr-analytics-2026 ∙ main ∙ scripts/main_app.py',
-    streamlitUrl: 'https://hr-analytics-2026.streamlit.app',
-    caseStudy: {
-      problem:
-        'People operations teams generate significant operational records, but organizational leadership often lacks unified visibility into whether turnover rates correlate with salary distribution, department tenure, or performance evaluation ratings.',
-      dataset:
-        'Sample Dataset: Curated workforce records (HR_cleaned.csv) containing demographic tags, department assignments, salary tiers, tenure months, performance scores, and attrition indicators.',
-      process: {
-        collection:
-          'Loaded and validated the sample workforce dataset, connecting MongoDB document loaders and verifying column schemas.',
-        cleaning:
-          'Filtered anomalies in tenure values, normalized job titles across teams, and established consistent categorical bins for compensation brackets.',
-        exploration:
-          'Explored distribution curves of salary across departments using Seaborn box plots. Analyzed attrition rates by department tenure and performance tiers.',
-        featureEngineering:
-          'Created derived metrics including tenure-to-promotion ratios, compensation percentile within department, and overtime frequency flags.',
-        modeling:
-          'Formulated exploratory regression and correlation matrices to measure the statistical relationship between tenure, salary gap, and employee retention.',
-        evaluation:
-          'Validated findings against statistical summary tests to ensure insights were representative of the sample cohort without drawing unsubstantiated causal claims.',
+    "badge": "Portfolio project",
+    "streamlitUrl": "https://hr-analytics-2026.streamlit.app",
+    "caseStudy": {
+      "problem": "Human Resources leaders lack consolidated insight into whether turnover trends correlate with compensation bands, department tenure, or performance evaluation scores.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Filtered anomalies in tenure values, normalized job titles across teams, and established consistent categorical bins for compensation brackets.",
+        "exploration": "Explored distribution curves of salary across departments using Seaborn box plots. Analyzed attrition rates by department tenure and performance tiers.",
+        "featureEngineering": "Created derived metrics including tenure-to-promotion ratios, compensation percentile within department, and overtime frequency flags.",
+        "modeling": "Formulated exploratory regression and correlation matrices to measure the statistical relationship between tenure, salary gap, and employee retention.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Model evaluation metrics available in the project documentation. Delivered an interactive dashboard allowing HR managers to filter by department, view attrition percentages, and inspect compensation distribution curves.',
-      lessons: [
-        'Clearly defining what constitutes voluntary vs. involuntary turnover is essential for honest HR reporting.',
-        'Visualizing distributions (box plots and histograms) reveals disparities that aggregate department averages completely obscure.',
-        'Domain knowledge from HR workflows helped prioritize actionable metrics that directly answer leadership questions.',
+      "results": "An HR reporting project with a static dashboard screenshot.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'Pandas', 'Plotly', 'Streamlit', 'Scikit-learn', 'Seaborn', 'MongoDB', 'Joblib'],
-      links: {
-        github: 'https://github.com/kikibillz/HR-Analytics-2026',
-        demo: 'https://github.com/kikibillz/HR-Analytics-2026#readme',
+      "tools": [
+        "Python",
+        "Pandas",
+        "Plotly",
+        "Streamlit",
+        "Scikit-learn",
+        "Seaborn",
+        "MongoDB",
+        "Joblib"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/HR-Analytics-2026",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'hr-attrition',
-    title: 'HR Attrition Risk Classification Engine',
-    tagline: 'Supervised Random Forest classifier predicting employee departure risk and prescribing mitigation interventions via Streamlit.',
-    description:
-      'A machine learning predictive application built to forecast employee departure probabilities using categorical label encodings, Random Forest classification, and an interactive Streamlit risk inference form.',
-    category: 'Machine Learning & Predictive Modeling',
-    problemSummary:
-      'Unplanned employee turnover causes operational disruption and costly recruitment cycles. HR departments need an objective risk scoring model to identify high-hazard retention situations before resignations occur.',
-    approachSummary:
-      'Trained a multi-feature Random Forest model learning from BusinessTravel, Department, JobRole, OverTime, Age, MonthlyIncome, JobSatisfaction, YearsAtCompany, and StockOptionLevel with serialized Joblib pipelines.',
-    tools: [
-      'Python',
-      'Scikit-learn',
-      'Random Forest',
-      'Power BI',
-      'Tableau',
-      'LabelEncoder',
-      'Pandas',
-      'Joblib',
-      'Streamlit',
+    "id": "hr-attrition",
+    "title": "HR Attrition Risk Classification Engine",
+    "tagline": "Portfolio exploration · Machine Learning & Predictive Modeling",
+    "description": "Unplanned employee turnover causes operational disruption and costly recruitment cycles. HR departments need an objective risk scoring model to identify high-hazard retention situations before resignations occur.",
+    "category": "Machine Learning & Predictive Modeling",
+    "problemSummary": "Unplanned employee turnover causes operational disruption and costly recruitment cycles. HR departments need an objective risk scoring model to identify high-hazard retention situations before resignations occur.",
+    "approachSummary": "Trained a multi-feature Random Forest model learning from BusinessTravel, Department, JobRole, OverTime, Age, MonthlyIncome, JobSatisfaction, YearsAtCompany, and StockOptionLevel with serialized Joblib pipelines.",
+    "tools": [
+      "Python",
+      "Scikit-learn",
+      "Random Forest",
+      "Power BI",
+      "Tableau",
+      "LabelEncoder",
+      "Pandas",
+      "Joblib",
+      "Streamlit"
     ],
-    resultsSummary: '87.1% classification accuracy predicting employee resignation risk factors.',
-    businessImpact: 'Delivers real-time individual employee flight-risk scores with prescriptive mitigation levers, reducing unplanned talent loss and institutional knowledge drain.',
-    keyMetrics: [
-      { label: 'Classification Accuracy', value: '87.1%' },
-      { label: 'Leading Risk Signal', value: 'Overtime + Stock' },
-      { label: 'Decision Forest', value: '100 Estimators' },
-      { label: 'Triage Time', value: '< 2 Seconds' },
-    ],
-    links: {
-      github: 'https://github.com/kikibillz/HR-Analytics-2026',
-      demo: 'https://github.com/kikibillz/HR-Analytics-2026#readme',
+    "resultsSummary": "An exploratory attrition-classification workflow.",
+    "businessImpact": "Potential application: Unplanned employee turnover causes operational disruption and costly recruitment cycles. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/HR-Analytics-2026",
+      "demo": ""
     },
-    badge: 'RandomForest ML',
-    streamlitDeployment: 'hr-analytics-attrition-project ∙ main ∙ HR_Analytics_Project/scripts/main_app.py',
-    streamlitUrl: 'https://hr-analytics-attrition-project.streamlit.app',
-    caseStudy: {
-      problem:
-        'Employee turnover in knowledge-intensive roles carries steep institutional memory loss and replacement expenses. Identifying employee dissatisfaction and burnout factors through early signals enables targeted retention interventions.',
-      dataset:
-        'HR workforce features including department, job role, overtime requirements, business travel frequency, job satisfaction scales, monthly compensation, tenure years, and stock option levels.',
-      process: {
-        collection:
-          'Loaded employee baseline records and split categorical and numerical predictive feature matrices.',
-        cleaning:
-          'Standardized categorical labels with LabelEncoder and removed collinear index variables.',
-        exploration:
-          'Identified strong feature importance weights linking mandatory overtime and frequent travel to turnover rates.',
-        featureEngineering:
-          'Encoded categorical features and normalized income distributions to ensure balanced model convergence.',
-        modeling:
-          'Trained a Random Forest Classifier with ensemble decision trees, tuning estimators for optimal recall on the positive attrition class.',
-        evaluation:
-          'Evaluated cross-validation scores and precision-recall trade-offs to minimize costly false negatives.',
+    "badge": "Portfolio project",
+    "streamlitUrl": "https://hr-analytics-attrition-project.streamlit.app",
+    "caseStudy": {
+      "problem": "Unplanned employee turnover causes operational disruption and costly recruitment cycles. HR departments need an objective risk scoring model to identify high-hazard retention situations before resignations occur.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Standardized categorical labels with LabelEncoder and removed collinear index variables.",
+        "exploration": "Identified strong feature importance weights linking mandatory overtime and frequent travel to turnover rates.",
+        "featureEngineering": "Encoded categorical features and normalized income distributions to ensure balanced model convergence.",
+        "modeling": "Trained a Random Forest Classifier with ensemble decision trees, tuning estimators for optimal recall on the positive attrition class.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Delivered an interactive Streamlit inference form (HR_Analytics_Project/scripts/main_app.py) generating instantaneous risk percentages and proactive retention recommendations for managers.',
-      lessons: [
-        'Overtime combined with low stock option levels is the single most predictive co-occurring signal for impending resignation.',
-        'Streamlit form interfaces give non-technical HR business partners direct access to machine learning predictions.',
+      "results": "An exploratory attrition-classification workflow.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'Scikit-learn', 'Random Forest', 'LabelEncoder', 'Pandas', 'Joblib', 'Streamlit'],
-      links: {
-        github: 'https://github.com/kikibillz/HR-Analytics-2026',
-        demo: 'https://github.com/kikibillz/HR-Analytics-2026#readme',
+      "tools": [
+        "Python",
+        "Scikit-learn",
+        "Random Forest",
+        "LabelEncoder",
+        "Pandas",
+        "Joblib",
+        "Streamlit"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/HR-Analytics-2026",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'safesite',
-    title: 'SafeSite: Workplace Injury Risk Prediction',
-    tagline: 'Supervised classification model analyzing occupational incident reports to assess injury severity and risk tiers.',
-    description:
-      'A machine learning application designed to analyze workplace incident data and classify injury risk levels into actionable operational tiers.',
-    category: 'Machine Learning & Safety Analytics',
-    problemSummary:
-      'Workplace incident logs contain valuable historical patterns, but safety officers often review them reactively. SafeSite analyzes structured incident parameters to categorize risk levels before severe occurrences escalate.',
-    approachSummary:
-      'Handled sparse categorical incident factors, performed feature encoding on department/shift variables, trained multiple classification algorithms, and deployed an interactive inference tool via Streamlit.',
-    tools: ['Python', 'Pandas', 'Scikit-learn', 'Matplotlib', 'Streamlit', 'Joblib'],
-    resultsSummary: 'Stratifies occupational hazard reports across 3 proactive operational tiers.',
-    businessImpact: 'Transforms reactive incident reviews into proactive risk mitigation, allowing site safety officers to reallocate protective gear and schedule interventions 40% faster.',
-    keyMetrics: [
-      { label: 'Severity Tiers', value: '3 Risk Levels' },
-      { label: 'Intervention Speed', value: '40% Faster' },
-      { label: 'Safety Workflow', value: 'Streamlit Form' },
-      { label: 'False Negative Guard', value: 'High-Hazard Focus' },
+    "id": "safesite",
+    "title": "SafeSite: Workplace Injury Risk Prediction",
+    "tagline": "Portfolio exploration · Machine Learning & Safety Analytics",
+    "description": "Workplace incident logs contain valuable historical patterns, but safety officers often review them reactively. SafeSite analyzes structured incident parameters to categorize risk levels before severe occurrences escalate.",
+    "category": "Machine Learning & Safety Analytics",
+    "problemSummary": "Workplace incident logs contain valuable historical patterns, but safety officers often review them reactively. SafeSite analyzes structured incident parameters to categorize risk levels before severe occurrences escalate.",
+    "approachSummary": "Handled sparse categorical incident factors, performed feature encoding on department/shift variables, trained multiple classification algorithms, and deployed an interactive inference tool via Streamlit.",
+    "tools": [
+      "Python",
+      "Pandas",
+      "Scikit-learn",
+      "Matplotlib",
+      "Streamlit",
+      "Joblib"
     ],
-    links: {
-      github: 'https://github.com/kikibillz',
-      demo: 'https://github.com/kikibillz',
+    "resultsSummary": "An exploratory workplace-risk classification project.",
+    "businessImpact": "Potential application: Workplace incident logs contain valuable historical patterns, but safety officers often review them reactively. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz",
+      "demo": ""
     },
-    badge: 'Machine Learning',
-    caseStudy: {
-      problem:
-        'Organizations track hundreds of incident reports with varying degrees of operational severity. Without automated risk stratification, occupational health and safety coordinators spend hours manually reviewing raw logs, missing early patterns in department shifts, equipment usage, or incident conditions.',
-      dataset:
-        'Occupational safety incident records detailing department, shift timing, equipment involved, environmental conditions, and historical injury severity categories.',
-      process: {
-        collection: 'Loaded structured incident logs and verified schema consistency across historical reporting periods.',
-        cleaning:
-          'Identified and imputed missing environmental variables, standardized categorical text fields, and removed duplicate incident entries.',
-        exploration:
-          'Conducted exploratory data analysis with Matplotlib to assess class imbalances across incident severity categories and correlation between shift times and hazard occurrence.',
-        featureEngineering:
-          'Applied one-hot encoding to department and equipment types, mapped ordinal shift risks, and scaled continuous temporal features.',
-        modeling:
-          'Trained baseline Logistic Regression, Random Forest, and Gradient Boosting classifiers. Tuned hyperparameters using cross-validation to prevent overfitting on under-represented high-risk incidents.',
-        evaluation:
-          'Evaluated models focusing on precision, recall, and confusion matrix diagnostics to minimize false negatives in high-hazard situations.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Workplace incident logs contain valuable historical patterns, but safety officers often review them reactively. SafeSite analyzes structured incident parameters to categorize risk levels before severe occurrences escalate.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Identified and imputed missing environmental variables, standardized categorical text fields, and removed duplicate incident entries.",
+        "exploration": "Conducted exploratory data analysis with Matplotlib to assess class imbalances across incident severity categories and correlation between shift times and hazard occurrence.",
+        "featureEngineering": "Applied one-hot encoding to department and equipment types, mapped ordinal shift risks, and scaled continuous temporal features.",
+        "modeling": "Trained baseline Logistic Regression, Random Forest, and Gradient Boosting classifiers. Tuned hyperparameters using cross-validation to prevent overfitting on under-represented high-risk incidents.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Model evaluation metrics available in the project documentation. Serialized the final model pipeline using Joblib and embedded it into a responsive Streamlit dashboard for real-time risk classification.',
-      lessons: [
-        'Class imbalance in risk assessment requires careful metric selection (macro F1 and recall) rather than relying on overall accuracy.',
-        'Feature engineering on time-of-day and equipment type had a significantly higher predictive signal than environmental weather fields.',
-        'Building a lightweight Streamlit interface allowed non-technical stakeholders to test predictions without touching Python code.',
+      "results": "An exploratory workplace-risk classification project.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'Pandas', 'Scikit-learn', 'Matplotlib', 'Streamlit', 'Joblib'],
-      links: {
-        github: 'https://github.com/kikibillz',
-        demo: 'https://github.com/kikibillz',
+      "tools": [
+        "Python",
+        "Pandas",
+        "Scikit-learn",
+        "Matplotlib",
+        "Streamlit",
+        "Joblib"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'lead-finder',
-    title: 'Automated Healthcare Provider Data Pipeline',
-    tagline: 'Automated Python ETL script querying official UK Care Quality Commission (CQC) REST API to extract, parse, and export provider records to CSV.',
-    description:
-      'A Python data extraction and automation workflow that queries regulated care provider public endpoints, handles paginated responses, normalizes multi-level JSON schemas, and exports structured reports.',
-    category: 'Automation & API Data Pipelines',
-    problemSummary:
-      'Extracting clean records from public health registries is often hindered by nested JSON responses, rate limits, and paginated record structures.',
-    approachSummary:
-      'Built a modular Python script using Requests to communicate with the CQC Public API, configuring custom headers, automated pagination loops, error handling, and clean CSV exports.',
-    tools: ['Python', 'Requests', 'REST APIs', 'CSV', 'Data Pipelines', 'Automation'],
-    resultsSummary: 'Automated 100% of paginated health registry records into normalized CSV.',
-    businessImpact: 'Eliminated 100+ hours per month of manual healthcare facility lookups by automating the ingestion of thousands of verified care provider locations into compliant RFC 4180 datasets.',
-    keyMetrics: [
-      { label: 'Time Saved', value: '~100 hrs/mo' },
-      { label: 'API Pagination', value: '100% Automated' },
-      { label: 'Data Format', value: 'RFC 4180 CSV' },
-      { label: 'Endpoint Resilience', value: 'Rate-Limit Aware' },
+    "id": "lead-finder",
+    "title": "Automated Healthcare Provider Data Pipeline",
+    "tagline": "Portfolio exploration · Automation & API Data Pipelines",
+    "description": "Extracting clean records from public health registries is often hindered by nested JSON responses, rate limits, and paginated record structures.",
+    "category": "Automation & API Data Pipelines",
+    "problemSummary": "Extracting clean records from public health registries is often hindered by nested JSON responses, rate limits, and paginated record structures.",
+    "approachSummary": "Built a modular Python script using Requests to communicate with the CQC Public API, configuring custom headers, automated pagination loops, error handling, and clean CSV exports.",
+    "tools": [
+      "Python",
+      "Requests",
+      "REST APIs",
+      "CSV",
+      "Data Pipelines",
+      "Automation"
     ],
-    links: {
-      github: 'https://github.com/kikibillz/lead-finder',
-      demo: 'https://github.com/kikibillz/lead-finder#readme',
+    "resultsSummary": "A provider-data collection and CSV-export workflow.",
+    "businessImpact": "Potential application: Extracting clean records from public health registries is often hindered by nested JSON responses, rate limits, and paginated record structures. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/lead-finder",
+      "demo": ""
     },
-    badge: 'API ETL Pipeline',
-    caseStudy: {
-      problem:
-        'Health tech and business intelligence analysts need verified lists of regulated care locations and providers from government registers without tedious manual copying or unhandled API pagination.',
-      dataset:
-        'Official UK Care Quality Commission (CQC) Public API Location and Provider endpoints delivering JSON payloads with location IDs, postal areas, inspection statuses, and regulated activities.',
-      process: {
-        collection:
-          'Configured Python requests session with descriptive User-Agent headers to query the CQC public REST API endpoint.',
-        cleaning:
-          'Parsed nested JSON dictionaries, extracted essential location identifiers and provider metadata, and handled null fields.',
-        exploration:
-          'Inspected response schemas, pagination headers, and rate limiting thresholds to prevent connection termination.',
-        featureEngineering:
-          'Flattened hierarchical JSON objects into tabular columns for location ID, provider name, region, and operational status.',
-        modeling:
-          'Structured automated pagination loop with configurable page limits and delay intervals to prevent API throttling.',
-        evaluation:
-          'Validated output CSV formatting against RFC 4180 standards for seamless import into Pandas, Excel, or SQL databases.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Extracting clean records from public health registries is often hindered by nested JSON responses, rate limits, and paginated record structures.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Parsed nested JSON dictionaries, extracted essential location identifiers and provider metadata, and handled null fields.",
+        "exploration": "Inspected response schemas, pagination headers, and rate limiting thresholds to prevent connection termination.",
+        "featureEngineering": "Flattened hierarchical JSON objects into tabular columns for location ID, provider name, region, and operational status.",
+        "modeling": "Structured automated pagination loop with configurable page limits and delay intervals to prevent API throttling.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Successfully generates clean, structured CSV files ready for downstream exploratory data analysis and database ingestion.',
-      lessons: [
-        'Public APIs require respectful rate limiting and robust status code verification.',
-        'Normalizing nested JSON into clean tabular schemas at ingestion time saves significant effort during subsequent analysis.',
+      "results": "A provider-data collection and CSV-export workflow.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'Requests', 'REST APIs', 'CSV', 'Automation'],
-      links: {
-        github: 'https://github.com/kikibillz/lead-finder',
-        demo: 'https://github.com/kikibillz/lead-finder#readme',
+      "tools": [
+        "Python",
+        "Requests",
+        "REST APIs",
+        "CSV",
+        "Automation"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/lead-finder",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'income-prediction',
-    title: 'Income Prediction Model',
-    tagline: 'End-to-end classification pipeline predicting income brackets from demographic, educational, and employment features.',
-    description:
-      'A machine learning project that predicts income categories based on demographic and employment-related features using structured scikit-learn pipelines.',
-    category: 'Machine Learning & Predictive Modeling',
-    problemSummary:
-      'Economic and demographic analyses often require classifying income thresholds when direct earnings data is unrecorded or coarse-grained.',
-    approachSummary:
-      'Constructed a robust scikit-learn ColumnTransformer pipeline incorporating numerical scaling, categorical one-hot encoding, and missing-value imputation before training classification models.',
-    tools: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Streamlit'],
-    resultsSummary: '0.868 ROC-AUC classification score with complete pipeline data leakage prevention.',
-    businessImpact: 'Built a zero-leakage ColumnTransformer pipeline to automate demographic socioeconomic tiering, supporting public grant qualification and fair credit assessment.',
-    keyMetrics: [
-      { label: 'ROC-AUC Score', value: '0.868' },
-      { label: 'Data Leakage', value: '0% (Pipeline Guard)' },
-      { label: 'Feature Types', value: '14 Mixed Attributes' },
-      { label: 'Validation', value: '5-Fold Stratified' },
+    "id": "income-prediction",
+    "title": "Income Prediction Model",
+    "tagline": "Portfolio exploration · Machine Learning & Predictive Modeling",
+    "description": "Economic and demographic analyses often require classifying income thresholds when direct earnings data is unrecorded or coarse-grained.",
+    "category": "Machine Learning & Predictive Modeling",
+    "problemSummary": "Economic and demographic analyses often require classifying income thresholds when direct earnings data is unrecorded or coarse-grained.",
+    "approachSummary": "Constructed a robust scikit-learn ColumnTransformer pipeline incorporating numerical scaling, categorical one-hot encoding, and missing-value imputation before training classification models.",
+    "tools": [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Streamlit"
     ],
-    links: {
-      github: 'https://github.com/kikibillz',
-      demo: 'https://github.com/kikibillz',
+    "resultsSummary": "An exploratory income-classification pipeline.",
+    "businessImpact": "Potential application: Economic and demographic analyses often require classifying income thresholds when direct earnings data is unrecorded or coarse-grained. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz",
+      "demo": ""
     },
-    badge: 'Machine Learning',
-    caseStudy: {
-      problem:
-        'Predicting whether an individual earns above or below a specific income threshold based on census and employment characteristics. The goal was to establish a reproducible, leakage-free data science workflow.',
-      dataset:
-        'Benchmark demographic and employment survey dataset containing age, work class, education level, marital status, occupation, hours worked per week, and capital gain/loss.',
-      process: {
-        collection:
-          'Acquired and imported the structured tabular dataset with predefined demographic columns and target income thresholds.',
-        cleaning:
-          'Detected special missing-value characters (such as question marks), imputed categorical unknowns, and trimmed whitespace across string fields.',
-        exploration:
-          'Analyzed distributions of working hours, education levels, and capital changes against the binary income target.',
-        featureEngineering:
-          'Engineered grouped education tiers, combined sparse marital status categories, and applied logarithmic transformations to heavily skewed financial variables.',
-        modeling:
-          'Built an end-to-end scikit-learn Pipeline with ColumnTransformer, testing Logistic Regression and Tree-based ensemble estimators.',
-        evaluation:
-          'Conducted Stratified K-Fold cross-validation, plotting ROC curves and examining Precision-Recall tradeoffs.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Economic and demographic analyses often require classifying income thresholds when direct earnings data is unrecorded or coarse-grained.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Detected special missing-value characters (such as question marks), imputed categorical unknowns, and trimmed whitespace across string fields.",
+        "exploration": "Analyzed distributions of working hours, education levels, and capital changes against the binary income target.",
+        "featureEngineering": "Engineered grouped education tiers, combined sparse marital status categories, and applied logarithmic transformations to heavily skewed financial variables.",
+        "modeling": "Built an end-to-end scikit-learn Pipeline with ColumnTransformer, testing Logistic Regression and Tree-based ensemble estimators.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results:
-        'Model evaluation metrics available in the project documentation. Packaged the preprocessing pipeline and trained estimator into an interactive web interface for sample prediction.',
-      lessons: [
-        'Encapsulating all preprocessing inside a Scikit-learn Pipeline prevents data leakage between training and validation folds.',
-        'Handling skewed numerical features like capital gains requires dedicated transformation rather than standard scaling alone.',
-        'Explaining prediction inputs to users is as important as the model outcome itself.',
+      "results": "An exploratory income-classification pipeline.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Streamlit'],
-      links: {
-        github: 'https://github.com/kikibillz',
-        demo: 'https://github.com/kikibillz',
+      "tools": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "Streamlit"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'begi-begi',
-    title: 'Begi-Begi: Social Micro-Funding Platform',
-    tagline: 'Modern responsive web application facilitating community micro-requests and peer support, built with React and Tailwind CSS.',
-    description:
-      'A full-stack web application designed for social micro-funding and structured community assistance requests, featuring intuitive form flows and real-time state management.',
-    category: 'Web Application & Product Engineering',
-    problemSummary:
-      'Community assistance requests often get lost in unstructured group chats without clear tracking, categorized needs, or accountability.',
-    approachSummary:
-      'Built a modular React architecture with clean state management, responsive UI components, and continuous cloud delivery.',
-    tools: ['TypeScript', 'React', 'Tailwind CSS', 'Cloud Hosting'],
-    resultsSummary: 'Production web application deployed with mobile-first donation flows and peer contribution management.',
-    businessImpact: 'Streamlined mutual aid discovery and peer contribution flows, delivering an ultra-fast mobile-first donation experience for community micro-funding.',
-    keyMetrics: [
-      { label: 'Platform Architecture', value: 'React + TypeScript' },
-      { label: 'Responsiveness', value: '100% Mobile' },
-      { label: 'Submission Flow', value: '2-Step Wizard' },
-      { label: 'State Model', value: 'Deterministic' },
+    "id": "begi-begi",
+    "title": "Begi-Begi: Social Micro-Funding Platform",
+    "tagline": "Portfolio exploration · Web Application & Product Engineering",
+    "description": "Community assistance requests often get lost in unstructured group chats without clear tracking, categorized needs, or accountability.",
+    "category": "Web Application & Product Engineering",
+    "problemSummary": "Community assistance requests often get lost in unstructured group chats without clear tracking, categorized needs, or accountability.",
+    "approachSummary": "Built a modular React architecture with clean state management, responsive UI components, and continuous cloud delivery.",
+    "tools": [
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Cloud Hosting"
     ],
-    links: {
-      github: 'https://github.com/kikibillz/Begi-Begi',
-      demo: 'https://begi-begi.vercel.app',
+    "resultsSummary": "A responsive micro-funding platform interface.",
+    "businessImpact": "Potential application: Community assistance requests often get lost in unstructured group chats without clear tracking, categorized needs, or accountability. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/Begi-Begi",
+      "demo": "https://begi-begi.vercel.app"
     },
-    badge: 'Live Web App',
-    streamlitDeployment: 'begi-begi.vercel.app',
-    streamlitUrl: 'https://begi-begi.vercel.app',
-    caseStudy: {
-      problem:
-        'Community members frequently need quick access to mutual aid or micro-assistance. Traditional crowdfunding tools are too heavyweight for everyday neighborhood or peer support.',
-      dataset: 'User request records with category tags, urgency indicators, and verified contact points.',
-      process: {
-        collection: 'Defined application schema for micro-assistance requests and response tracking.',
-        cleaning: 'Input sanitization and validation on client and server boundaries.',
-        exploration: 'Designed user workflows optimizing for rapid request posting and transparent listing.',
-        featureEngineering: 'Categorization filters by urgency, request type, and fulfillment status.',
-        modeling: 'State synchronization and responsive UI architecture.',
-        evaluation: 'End-to-end user testing across mobile and desktop breakpoints.',
+    "badge": "Portfolio project",
+    "streamlitUrl": "https://begi-begi.vercel.app",
+    "caseStudy": {
+      "problem": "Community assistance requests often get lost in unstructured group chats without clear tracking, categorized needs, or accountability.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Input sanitization and validation on client and server boundaries.",
+        "exploration": "Designed user workflows optimizing for rapid request posting and transparent listing.",
+        "featureEngineering": "Categorization filters by urgency, request type, and fulfillment status.",
+        "modeling": "State synchronization and responsive UI architecture.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results: 'Production deployment with responsive layout and live users.',
-      lessons: [
-        'Fast page load times and mobile optimization are crucial for accessible community tools.',
-        'Clear typography and minimal forms improve submission completion rates.',
+      "results": "A responsive micro-funding platform interface.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['TypeScript', 'React', 'Tailwind CSS', 'Vercel'],
-      links: {
-        github: 'https://github.com/kikibillz/Begi-Begi',
-        demo: 'https://begi-begi.vercel.app',
+      "tools": [
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Vercel"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/Begi-Begi",
+        "demo": "https://begi-begi.vercel.app"
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'career-boost',
-    title: 'Career Boost (Nigeria)',
-    tagline: 'Interactive career development and talent acceleration web platform for Nigerian professionals, optimized for fast mobile discovery.',
-    description:
-      'A responsive career exploration and preparation web application engineered for Nigerian professionals and early-stage talent, featuring career readiness guides, skill benchmarks, and localized career resources.',
-    category: 'Web Application & Career Tools',
-    problemSummary:
-      'Nigerian professionals frequently struggle with fragmented career development materials that lack localized context and structured pathways.',
-    approachSummary:
-      'Engineered a fast, accessible React and Tailwind application with clean resource grouping, localized advice, and continuous production deployment.',
-    tools: ['TypeScript', 'React', 'Tailwind CSS', 'Cloud Edge'],
-    resultsSummary: 'Production platform serving curated career pathways with sub-second page loads and mobile accessibility.',
-    businessImpact: 'Democratized verified career acceleration toolkits for 500+ Nigerian tech switchers with curated roadmaps, localized benchmarks, and mentorship access.',
-    keyMetrics: [
-      { label: 'Audience Reach', value: '500+ Switchers' },
-      { label: 'Mobile Score', value: '98/100 Lighthouse' },
-      { label: 'Resource Roadmaps', value: '4 Tech Tracks' },
-      { label: 'Platform Hosting', value: 'Edge CDN' },
+    "id": "career-boost",
+    "title": "Career Boost (Nigeria)",
+    "tagline": "Portfolio exploration · Web Application & Career Tools",
+    "description": "Nigerian professionals frequently struggle with fragmented career development materials that lack localized context and structured pathways.",
+    "category": "Web Application & Career Tools",
+    "problemSummary": "Nigerian professionals frequently struggle with fragmented career development materials that lack localized context and structured pathways.",
+    "approachSummary": "Engineered a fast, accessible React and Tailwind application with clean resource grouping, localized advice, and deployment on Vercel.",
+    "tools": [
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Cloud Edge"
     ],
-    links: {
-      github: 'https://github.com/kikibillz/career-boost',
-      demo: 'https://github.com/kikibillz/career-boost#readme',
+    "resultsSummary": "A career-resource web interface for Nigerian users.",
+    "businessImpact": "Potential application: Nigerian professionals frequently struggle with fragmented career development materials that lack localized context and structured pathways. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/career-boost",
+      "demo": ""
     },
-    badge: 'Production Web App',
-    caseStudy: {
-      problem:
-        'Emerging professionals in Nigeria need actionable, clutter-free career acceleration frameworks and practical resources tailored to the local job market.',
-      dataset: 'Curated career preparation toolkits, role profiles, and talent development resources.',
-      process: {
-        collection: 'Curated career guidance modules and practical entry strategies for professional roles.',
-        cleaning: 'Structured and validated resource links, documentation, and career roadmaps.',
-        exploration: 'Designed intuitive category workflows optimized for mobile and desktop screens.',
-        featureEngineering: 'Categorized by experience levels and industry verticals.',
-        modeling: 'Component-based responsive architecture with fast client-side navigation.',
-        evaluation: 'Audited UI accessibility and responsive layout across standard viewport sizes.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Nigerian professionals frequently struggle with fragmented career development materials that lack localized context and structured pathways.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Structured and validated resource links, documentation, and career roadmaps.",
+        "exploration": "Designed intuitive category workflows optimized for mobile and desktop screens.",
+        "featureEngineering": "Categorized by experience levels and industry verticals.",
+        "modeling": "Component-based responsive architecture with fast client-side navigation.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results: 'Live platform providing streamlined access to career acceleration toolkits.',
-      lessons: [
-        'Direct, concise UI cards help users quickly find the exact resource they need without cognitive overload.',
-        'Mobile-friendly layout is critical as the majority of Nigerian users browse via smartphones.',
+      "results": "A career-resource web interface for Nigerian users.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['TypeScript', 'React', 'Tailwind CSS', 'Cloud Edge'],
-      links: {
-        github: 'https://github.com/kikibillz/career-boost',
-        demo: 'https://github.com/kikibillz/career-boost#readme',
+      "tools": [
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Cloud Edge"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/career-boost",
+        "demo": ""
       },
-    },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
   },
   {
-    id: 'nigerian-career-boost-hub',
-    title: 'Nigerian Career Boost Hub (ELEVATR)',
-    tagline: 'Comprehensive career advancement portal connecting Nigerian talent with internships, mentorship, and free career training resources.',
-    description:
-      'A curated career intelligence platform connecting Nigerian tech talent with job opportunities, skill benchmarks, resume templates, and practical transition roadmaps.',
-    category: 'Web Application & Career Platform',
-    problemSummary:
-      'Early-career professionals and tech switchers in Nigeria often navigate fragmented resources without localized salary data or structured transition guidance.',
-    approachSummary:
-      'Designed a structured resource hub with interactive filters, localized career guidance modules, and modern web performance optimizations.',
-    tools: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Edge CDN'],
-    resultsSummary: 'Production deployment serving curated career resources with instant multi-facet category filtering.',
-    businessImpact: 'Delivered an all-in-one localized hub aggregating 40+ curated learning tracks and transition roadmaps, eliminating friction for emerging Nigerian engineers and analysts.',
-    keyMetrics: [
-      { label: 'Aggregated Tracks', value: '40+ Pathways' },
-      { label: 'Filter Response', value: 'Instant (<50ms)' },
-      { label: 'Target Audience', value: 'Tech Talent & Grads' },
-      { label: 'Platform Hosting', value: 'Next.js Edge' },
+    "id": "nigerian-career-boost-hub",
+    "title": "Nigerian Career Boost Hub (ELEVATR)",
+    "tagline": "Portfolio exploration · Web Application & Career Platform",
+    "description": "Early-career professionals and tech switchers in Nigeria often navigate fragmented resources without localized salary data or structured transition guidance.",
+    "category": "Web Application & Career Platform",
+    "problemSummary": "Early-career professionals and tech switchers in Nigeria often navigate fragmented resources without localized salary data or structured transition guidance.",
+    "approachSummary": "Designed a structured resource hub with interactive filters, localized career guidance modules, and modern web performance optimizations.",
+    "tools": [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Edge CDN"
     ],
-    links: {
-      github: 'https://github.com/kikibillz/nigerian-career-boost-hub',
-      demo: 'https://github.com/kikibillz/nigerian-career-boost-hub#readme',
+    "resultsSummary": "A searchable career-resource hub interface.",
+    "businessImpact": "Potential application: Early-career professionals and tech switchers in Nigeria often navigate fragmented resources without localized salary data or structured transition guidance. Outcomes would need to be measured in a scoped pilot.",
+    "keyMetrics": [],
+    "links": {
+      "github": "https://github.com/kikibillz/nigerian-career-boost-hub",
+      "demo": ""
     },
-    badge: 'Production Web App',
-    caseStudy: {
-      problem:
-        'Talent transition into high-growth tech careers in Nigeria lacks localized, accessible roadmaps, vetted communities, and actionable entry-level toolkits.',
-      dataset: 'Curated repository of tech job roles, essential competencies, compensation benchmarks, and learning paths.',
-      process: {
-        collection: 'Compiled and verified career pathways, remote work playbooks, and tech transition resources.',
-        cleaning: 'Curated and structured high-value guidance into searchable categories.',
-        exploration: 'Mapped user personas from university graduates to mid-career switchers.',
-        featureEngineering: 'Dynamic filtering by domain (Data, Software, Product, Design).',
-        modeling: 'Client-side search, filtering, and responsive rendering.',
-        evaluation: 'Audited performance, SEO, and accessibility via Lighthouse.',
+    "badge": "Portfolio project",
+    "caseStudy": {
+      "problem": "Early-career professionals and tech switchers in Nigeria often navigate fragmented resources without localized salary data or structured transition guidance.",
+      "dataset": "See the linked project documentation for dataset provenance, licence and preprocessing. The portfolio does not establish permission to use employer or applicant records.",
+      "process": {
+        "collection": "Use the documented project inputs; obtain approval before using any client data.",
+        "cleaning": "Curated and structured high-value guidance into searchable categories.",
+        "exploration": "Mapped user personas from university graduates to mid-career switchers.",
+        "featureEngineering": "Dynamic filtering by domain (Data, Software, Product, Design).",
+        "modeling": "Client-side search, filtering, and responsive rendering.",
+        "evaluation": "Publish the dataset split, baseline, metrics and reproducible evaluation before making accuracy or performance claims."
       },
-      results: 'Deployed live platform offering frictionless access to career readiness tools.',
-      lessons: [
-        'Localizing career guidance to Nigerian market realities builds immediate trust and high engagement.',
-        'A clean, uncluttered interface keeps user focus on actionable next steps.',
+      "results": "A searchable career-resource hub interface.",
+      "lessons": [
+        "Separate demonstrations from deployed services and measured results.",
+        "Validate data quality and agree success criteria before applying this workflow to a client."
       ],
-      tools: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Vercel'],
-      links: {
-        github: 'https://github.com/kikibillz/nigerian-career-boost-hub',
-        demo: 'https://nigerian-career-boost-hub.vercel.app',
+      "tools": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Vercel"
+      ],
+      "links": {
+        "github": "https://github.com/kikibillz/nigerian-career-boost-hub",
+        "demo": ""
       },
-    },
-  },
+      "limitations": [
+        "The portfolio preview is illustrative; it is not a live model evaluation or client case study.",
+        "No verified time savings, financial impact or production reliability measurements are provided."
+      ]
+    }
+  }
 ];
 
 export const experienceItems: ExperienceItem[] = [
   {
-    id: 'exp-ds',
-    category: 'Experience',
-    title: 'Machine Learning & People Analytics Systems',
-    roleOrDegree: 'Applied Machine Learning Developer & Workforce Analytics Engineer',
-    organization: 'Independent & Applied Open-Source Deployments',
-    period: '2023 – Present',
-    description:
-      'Engineered, evaluated, and deployed production machine learning systems, statistical pipelines, and interactive web applications bridging predictive modeling with real-world workforce retention intelligence. All engineering claims are verified through public GitHub codebases, automated CI/CD (>90% Pytest coverage), and live interactive cloud deployments.',
-    highlights: [
-      'The Winning Combination: Sits precisely at the intersection of statistical machine learning and HR workforce data intelligence—translating raw employee records and attrition signals into high-impact predictive models and statutory financial reconciliation engines.',
-      'Employer-Grade Verification: Self-directed engineering claims are 100% verified via public GitHub repositories, automated CI/CD pipelines (>90% Pytest test coverage), Docker containerization, and live interactive cloud deployments on Streamlit and FastAPI Swagger UI.',
-      'MLOps & Cloud Infrastructure: Containerized microservices using Docker, orchestrated automated testing with GitHub Actions CI/CD, tracked model experiments and metrics with MLflow, and deployed scalable inference endpoints on AWS (EC2/S3) and GCP (Cloud Run).',
-      'BI & Visual Dashboards: Designed executive-ready interactive dashboards in Power BI (DAX formulas & star-schema data modeling), Tableau, and Streamlit—translating complex ROC-AUC curves and retention cohorts into strategic business KPIs.',
-      'Feature Engineering & Imbalance Handling: Engineered domain interaction metrics (Balance-to-Salary ratios, tenure-to-promotion rates), addressed high-cardinality data, and eliminated majority-class bias using SMOTE resampling with 5-fold stratified cross-validation.',
-    ],
+    "id": "exp-ds",
+    "category": "Experience",
+    "title": "Independent Data & Automation Projects",
+    "roleOrDegree": "Self-directed portfolio development",
+    "organization": "Independent projects",
+    "period": "2023 – Present",
+    "description": "Portfolio work in Python, data analysis, machine learning and web interfaces. These projects are not presented as paid client deployments.",
+    "highlights": [
+      "Explored data cleaning, dashboarding and classification workflows.",
+      "Built portfolio interfaces and linked project repositories for review."
+    ]
   },
   {
-    id: 'exp-hr',
-    category: 'Experience',
-    title: 'People Operations & Workforce Intelligence',
-    roleOrDegree: 'People Leader (Promoted Role) & Agile People Operations Specialist',
-    organization: 'Culturelligence',
-    period: 'August 2024 – July 2025',
-    description:
-      'Managed workforce records, audited recruitment tracking funnels, and optimized employee onboarding data operations—providing the empirical domain foundation for predictive people analytics models.',
-    highlights: [
-      'Workforce Analytics & Retention: Analyzed departmental headcount distributions, tenure trends, and voluntary turnover variance across teams, diagnosing early attrition hazard signals for leadership intervention.',
-      'Employee Data Hygiene & Compliance: Audited and maintained confidential employee records across HRIS spreadsheets, ensuring compliance, schema consistency, and zero data leakage.',
-      'Leadership Promotion: Rapidly promoted to People Leader for demonstrated operational efficiency, cross-functional team coordination, and structured people data governance.',
-      'Domain Synergy: Bridged practical organizational workflows with analytical questions around employee engagement and predictive retention modeling.',
-    ],
+    "id": "exp-hr",
+    "category": "Experience",
+    "title": "People Operations & Workforce Intelligence",
+    "roleOrDegree": "People Leader (Promoted Role) & Agile People Operations Specialist",
+    "organization": "Culturelligence",
+    "period": "August 2024 – July 2025",
+    "description": "Worked with workforce records, recruitment tracking and onboarding operations.",
+    "highlights": [
+      "Maintained employee records and recruitment tracking spreadsheets.",
+      "Supported headcount, tenure and turnover reporting.",
+      "Promoted to People Leader."
+    ]
   },
   {
-    id: 'exp-recruiter-va',
-    category: 'Experience',
-    title: 'Technical Recruiting & Operations',
-    roleOrDegree: 'Certified Technical Recruiter & Administrative Operations / Virtual Assistant',
-    organization: 'Freelance & Hirist (by Cutshort)',
-    period: 'December 2023 – Present',
-    description:
-      'Credentialed technical recruiter (Hirist ID: cert_bfxyxv9d) and administrative data specialist managing engineering talent sourcing pipelines, candidate screening data, and executive operational tracking.',
-    highlights: [
-      'Technical Talent Sourcing & Screening: Evaluated engineering candidates across Python, Data Science, and DevOps competencies, managing pipeline metrics with high data hygiene.',
-      'Operational Workflow Automation: Cleaned and structured multi-source operational spreadsheets, eliminating reconciliation errors and accelerating reporting turnaround for executive clients.',
-      'Standard Operating Procedures (SOPs): Documented repeatable asynchronous administrative workflows, standardizing candidate feedback loops and project tracking sheets.',
-    ],
+    "id": "exp-recruiter-va",
+    "category": "Experience",
+    "title": "Technical Recruiting & Operations",
+    "roleOrDegree": "Certified Technical Recruiter & Administrative Operations / Virtual Assistant",
+    "organization": "Freelance & Hirist (by Cutshort)",
+    "period": "December 2023 – Present",
+    "description": "Recruitment and administrative support, spreadsheet organisation and workflow documentation.",
+    "highlights": [
+      "Organised candidate and operational tracking data.",
+      "Cleaned spreadsheets and prepared reporting summaries.",
+      "Documented repeatable administrative workflows."
+    ]
   },
   {
-    id: 'edu-cs',
-    category: 'Education',
-    title: 'Computer Science',
-    roleOrDegree: 'Bachelor of Science (BSc) in Computer Science',
-    organization: 'Olabisi Onabanjo University (O.O.U)',
-    period: '2019 – 2023',
-    description:
-      'Rigorous academic foundation in computer science principles, practical programming in Python, algorithms, relational database design with SQL, and statistical thinking.',
-    highlights: [
-      'Core coursework: Object-Oriented Programming, Data Structures & Algorithms, Database Management Systems, Statistics & Probability.',
-      'Applied projects focusing on algorithmic efficiency, Python scripting, and data manipulation.',
-      'Collaborative software development practices and version control with Git.',
-    ],
-  },
+    "id": "edu-cs",
+    "category": "Education",
+    "title": "Computer Science",
+    "roleOrDegree": "Bachelor of Science (BSc) in Computer Science",
+    "organization": "Olabisi Onabanjo University (O.O.U)",
+    "period": "2019 – 2023",
+    "description": "Rigorous academic foundation in computer science principles, practical programming in Python, algorithms, relational database design with SQL, and statistical thinking.",
+    "highlights": [
+      "Core coursework: Object-Oriented Programming, Data Structures & Algorithms, Database Management Systems, Statistics & Probability.",
+      "Applied projects focusing on algorithmic efficiency, Python scripting, and data manipulation.",
+      "Collaborative software development practices and version control with Git."
+    ]
+  }
 ];
 
-export const certificationsUrl = 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/';
+export const certificationsUrl = "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/";
 
 export const certifications: CertificationItem[] = [
   {
-    id: 'cert-new-horizons-ds',
-    title: 'Certified Data Scientist',
-    issuer: 'New Horizons Computer Learning Centers',
-    issueDate: 'Aug 2024',
-    credentialId: 'NH-DS-2024-9104',
-    category: 'Data & AI',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Data Analysis', 'Data Centers', 'Machine Learning', 'Python', 'Predictive Modeling'],
-    description:
-      'Professional certification in Data Science, encompassing advanced data analysis, data center infrastructure, machine learning pipelines, and predictive analytics.',
+    "id": "cert-new-horizons-ds",
+    "title": "Certified Data Scientist",
+    "issuer": "New Horizons Computer Learning Centers",
+    "issueDate": "Aug 2024",
+    "credentialId": "NH-DS-2024-9104",
+    "category": "Data & AI",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Data Analysis",
+      "Data Centers",
+      "Machine Learning",
+      "Python",
+      "Predictive Modeling"
+    ],
+    "description": "Professional certification in Data Science, encompassing advanced data analysis, data center infrastructure, machine learning pipelines, and predictive analytics."
   },
   {
-    id: 'cert-culturelligence-agile-hr',
-    title: 'Agile People Operation Specialist',
-    issuer: 'Culturelligence',
-    issueDate: 'Jul 2024',
-    credentialId: 'APOS-2024-0711',
-    category: 'Management & Agile',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Human Resources (HR)', 'People Operations', 'Agile Methodologies', 'Talent Enablement', 'Workforce Data'],
-    description:
-      'Specialist certification in modern Agile People Operations, employee experience optimization, culture design, workforce data operations, and adaptive HR frameworks.',
+    "id": "cert-culturelligence-agile-hr",
+    "title": "Agile People Operation Specialist",
+    "issuer": "Culturelligence",
+    "issueDate": "Jul 2024",
+    "credentialId": "APOS-2024-0711",
+    "category": "Management & Agile",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Human Resources (HR)",
+      "People Operations",
+      "Agile Methodologies",
+      "Talent Enablement",
+      "Workforce Data"
+    ],
+    "description": "Specialist certification in modern Agile People Operations, employee experience optimization, culture design, workforce data operations, and adaptive HR frameworks."
   },
   {
-    id: 'cert-alx-ai-career',
-    title: 'Artificial Intelligence Career Essentials (AiCE)',
-    issuer: 'ALX Africa',
-    issueDate: 'May 2024',
-    credentialId: 'ALX-AICE-2024-8842',
-    category: 'Data & AI',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Artificial Intelligence', 'Generative AI', 'Prompt Engineering', 'LLM Workflows', 'Automation'],
-    description:
-      'Specialized ALX accredited certification mastering modern Artificial Intelligence workflows, generative AI platforms, prompt engineering, LLM orchestration, and intelligent workflow automation.',
+    "id": "cert-alx-ai-career",
+    "title": "Artificial Intelligence Career Essentials (AiCE)",
+    "issuer": "ALX Africa",
+    "issueDate": "May 2024",
+    "credentialId": "ALX-AICE-2024-8842",
+    "category": "Data & AI",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Artificial Intelligence",
+      "Generative AI",
+      "Prompt Engineering",
+      "LLM Workflows",
+      "Automation"
+    ],
+    "description": "Specialized ALX accredited certification mastering modern Artificial Intelligence workflows, generative AI platforms, prompt engineering, LLM orchestration, and intelligent workflow automation."
   },
   {
-    id: 'cert-hirist-tech-recruiter',
-    title: 'Certified Technical Recruiter',
-    issuer: 'Hirist (by Cutshort)',
-    issueDate: 'Nov 2023',
-    credentialId: 'cert_bfxyxv9d',
-    category: 'Management & Agile',
-    credentialUrl: 'https://hirist.tech/certificate/cert_bfxyxv9d',
-    skills: ['Technical Recruitment', 'Candidate Sourcing', 'Talent Acquisition', 'Engineering Screening', 'Pipeline Analytics'],
-    description:
-      'Credentialed in modern technical recruiting, engineering candidate screening, talent pipeline data management, and recruitment negotiations with direct verifiable ID: cert_bfxyxv9d.',
+    "id": "cert-hirist-tech-recruiter",
+    "title": "Certified Technical Recruiter",
+    "issuer": "Hirist (by Cutshort)",
+    "issueDate": "Nov 2023",
+    "credentialId": "cert_bfxyxv9d",
+    "category": "Management & Agile",
+    "credentialUrl": "https://hirist.tech/certificate/cert_bfxyxv9d",
+    "skills": [
+      "Technical Recruitment",
+      "Candidate Sourcing",
+      "Talent Acquisition",
+      "Engineering Screening",
+      "Pipeline Analytics"
+    ],
+    "description": "Credentialed in modern technical recruiting, engineering candidate screening, talent pipeline data management, and recruitment negotiations with direct verifiable ID: cert_bfxyxv9d."
   },
   {
-    id: 'cert-excelerate-data-viz',
-    title: 'Data Visualization & BI Intern (Power BI & Tableau)',
-    issuer: 'Excelerate',
-    issueDate: 'Sep 2024',
-    credentialId: 'EXC-DVI-2024-3401',
-    category: 'Data & AI',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Power BI', 'Tableau', 'Interactive Dashboards', 'Business Intelligence', 'Analytical Storytelling', 'DAX'],
-    description:
-      'Hands-on practical data visualization internship creating interactive dashboards in Power BI and Tableau, statistical visual analytics, and transforming raw business datasets into executive KPI insights.',
+    "id": "cert-excelerate-data-viz",
+    "title": "Data Visualization & BI Intern (Power BI & Tableau)",
+    "issuer": "Excelerate",
+    "issueDate": "Sep 2024",
+    "credentialId": "EXC-DVI-2024-3401",
+    "category": "Data & AI",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Power BI",
+      "Tableau",
+      "Interactive Dashboards",
+      "Business Intelligence",
+      "Analytical Storytelling",
+      "DAX"
+    ],
+    "description": "Hands-on practical data visualization internship creating interactive dashboards in Power BI and Tableau, statistical visual analytics, and transforming raw business datasets into executive KPI insights."
   },
   {
-    id: 'cert-hotjar-learning',
-    title: 'Behavioral Product Analytics Specialist',
-    issuer: 'Hotjar by Contentsquare',
-    issueDate: 'Jul 2024',
-    expiresDate: 'Dec 2030',
-    credentialId: 'x3ftgg2pwb2f',
-    category: 'Product & Design',
-    credentialUrl: 'https://verify.skilljar.com/c/x3ftgg2pwb2f',
-    skills: ['Product Analytics', 'Heatmaps', 'Session Recordings', 'User Behavior Analysis', 'Funnel Optimization'],
-    description:
-      'Certified in behavioral product analytics, customer sentiment capture, heatmap interpretation, user session recordings, and funnel optimization with verifiable ID: x3ftgg2pwb2f.',
+    "id": "cert-hotjar-learning",
+    "title": "Behavioral Product Analytics Specialist",
+    "issuer": "Hotjar by Contentsquare",
+    "issueDate": "Jul 2024",
+    "expiresDate": "Dec 2030",
+    "credentialId": "x3ftgg2pwb2f",
+    "category": "Product & Design",
+    "credentialUrl": "https://verify.skilljar.com/c/x3ftgg2pwb2f",
+    "skills": [
+      "Product Analytics",
+      "Heatmaps",
+      "Session Recordings",
+      "User Behavior Analysis",
+      "Funnel Optimization"
+    ],
+    "description": "Certified in behavioral product analytics, customer sentiment capture, heatmap interpretation, user session recordings, and funnel optimization with verifiable ID: x3ftgg2pwb2f."
   },
   {
-    id: 'cert-betechified-cpm',
-    title: 'Certified Product Manager (CPM)',
-    issuer: 'BeTechified',
-    issueDate: 'Feb 2024',
-    credentialId: 'CPM-BT-2024-1829',
-    category: 'Product & Design',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Product Management', 'Product Strategy', 'User Research', 'Cross-functional Collaboration'],
-    description:
-      'Results-driven product professional credentialed in product strategy, user research, feature prioritization, and cross-functional engineering collaboration.',
+    "id": "cert-betechified-cpm",
+    "title": "Certified Product Manager (CPM)",
+    "issuer": "BeTechified",
+    "issueDate": "Feb 2024",
+    "credentialId": "CPM-BT-2024-1829",
+    "category": "Product & Design",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Product Management",
+      "Product Strategy",
+      "User Research",
+      "Cross-functional Collaboration"
+    ],
+    "description": "Results-driven product professional credentialed in product strategy, user research, feature prioritization, and cross-functional engineering collaboration."
   },
   {
-    id: 'cert-dev-design-uiux',
-    title: 'UI/UX Design Certification',
-    issuer: 'Dev and Design',
-    issueDate: 'May 2024',
-    credentialId: 'DD-UIUX-2024-5510',
-    category: 'Product & Design',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Product Design', 'UI/UX Design', 'Wireframing', 'User Research', 'Prototyping'],
-    description:
-      'User experience and interface design certification covering end-to-end product design, wireframing, high-fidelity mockups, and usability principles.',
+    "id": "cert-dev-design-uiux",
+    "title": "UI/UX Design Certification",
+    "issuer": "Dev and Design",
+    "issueDate": "May 2024",
+    "credentialId": "DD-UIUX-2024-5510",
+    "category": "Product & Design",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Product Design",
+      "UI/UX Design",
+      "Wireframing",
+      "User Research",
+      "Prototyping"
+    ],
+    "description": "User experience and interface design certification covering end-to-end product design, wireframing, high-fidelity mockups, and usability principles."
   },
   {
-    id: 'cert-prodefied-pm',
-    title: 'Applied Product Management',
-    issuer: 'Prodefied',
-    issueDate: 'Oct 2024',
-    credentialId: 'PDF-PM-2024-6012',
-    category: 'Product & Design',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Product Management', 'Product Roadmapping', 'Feature Prioritization', 'Agile Delivery'],
-    description:
-      'Applied product lifecycle management, market validation, roadmap development, feature prioritization, and stakeholder synchronization.',
+    "id": "cert-prodefied-pm",
+    "title": "Applied Product Management",
+    "issuer": "Prodefied",
+    "issueDate": "Oct 2024",
+    "credentialId": "PDF-PM-2024-6012",
+    "category": "Product & Design",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Product Management",
+      "Product Roadmapping",
+      "Feature Prioritization",
+      "Agile Delivery"
+    ],
+    "description": "Applied product lifecycle management, market validation, roadmap development, feature prioritization, and stakeholder synchronization."
   },
   {
-    id: 'cert-alx-virtual-assistant',
-    title: 'Professional Virtual Assistant Certification',
-    issuer: 'ALX Africa',
-    issueDate: 'Dec 2023',
-    credentialId: 'ALX-VA-2023-7190',
-    category: 'Professional & Soft Skills',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Data Entry', 'Executive Support', 'Data Hygiene', 'Workflow Organization', 'Spreadsheet Auditing'],
-    description:
-      'Accredited virtual assistance training from ALX covering executive support, task prioritization, data management, and digital client communication.',
+    "id": "cert-alx-virtual-assistant",
+    "title": "Professional Virtual Assistant Certification",
+    "issuer": "ALX Africa",
+    "issueDate": "Dec 2023",
+    "credentialId": "ALX-VA-2023-7190",
+    "category": "Professional & Soft Skills",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Data Entry",
+      "Executive Support",
+      "Data Hygiene",
+      "Workflow Organization",
+      "Spreadsheet Auditing"
+    ],
+    "description": "Accredited virtual assistance training from ALX covering executive support, task prioritization, data management, and digital client communication."
   },
   {
-    id: 'cert-fogdev-remote-work',
-    title: 'Remote Work Professional',
-    issuer: 'FOGDEV (Focus on Growth & Development)',
-    issueDate: 'Jun 2024',
-    credentialId: 'FOG-RWP-2024-2098',
-    category: 'Professional & Soft Skills',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Remote Work', 'Asynchronous Collaboration', 'Distributed Team Tools', 'Digital Productivity'],
-    description:
-      'Certified in remote work best practices, covering asynchronous communication, self-management, distributed documentation, and remote productivity tooling.',
+    "id": "cert-fogdev-remote-work",
+    "title": "Remote Work Professional",
+    "issuer": "FOGDEV (Focus on Growth & Development)",
+    "issueDate": "Jun 2024",
+    "credentialId": "FOG-RWP-2024-2098",
+    "category": "Professional & Soft Skills",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Remote Work",
+      "Asynchronous Collaboration",
+      "Distributed Team Tools",
+      "Digital Productivity"
+    ],
+    "description": "Certified in remote work best practices, covering asynchronous communication, self-management, distributed documentation, and remote productivity tooling."
   },
   {
-    id: 'cert-jobberman-soft-skills',
-    title: 'Workplace Soft Skills & Emotional Intelligence',
-    issuer: 'Jobberman Youth Engagement & Learning',
-    issueDate: 'Oct 2020',
-    credentialId: 'JBM-SS-2020-4491',
-    category: 'Professional & Soft Skills',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Soft Skills', 'Workplace Ethics', 'Emotional Intelligence', 'Teamwork', 'Communication'],
-    description:
-      'In-depth soft skills qualification focusing on emotional intelligence, workplace collaboration, problem solving, and professional presentation.',
+    "id": "cert-jobberman-soft-skills",
+    "title": "Workplace Soft Skills & Emotional Intelligence",
+    "issuer": "Jobberman Youth Engagement & Learning",
+    "issueDate": "Oct 2020",
+    "credentialId": "JBM-SS-2020-4491",
+    "category": "Professional & Soft Skills",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Soft Skills",
+      "Workplace Ethics",
+      "Emotional Intelligence",
+      "Teamwork",
+      "Communication"
+    ],
+    "description": "In-depth soft skills qualification focusing on emotional intelligence, workplace collaboration, problem solving, and professional presentation."
   },
   {
-    id: 'cert-unesco-digital-teacher',
-    title: 'Certified Digital Educator',
-    issuer: 'IOC of UNESCO (Intergovernmental Oceanographic Commission)',
-    issueDate: 'Feb 2023',
-    expiresDate: 'Aug 2030',
-    credentialId: 'UNESCO-IOC-DT-2023',
-    category: 'Professional & Soft Skills',
-    credentialUrl: 'https://www.linkedin.com/in/opeyemiolamiju/details/certifications/',
-    skills: ['Digital Education', 'Knowledge Facilitation', 'Global Educational Standards', 'EdTech Tools'],
-    description:
-      'International certification under the IOC of UNESCO preparing professionals in digital pedagogical delivery, modern e-learning tools, and knowledge dissemination.',
-  },
+    "id": "cert-unesco-digital-teacher",
+    "title": "Certified Digital Educator",
+    "issuer": "IOC of UNESCO (Intergovernmental Oceanographic Commission)",
+    "issueDate": "Feb 2023",
+    "expiresDate": "Aug 2030",
+    "credentialId": "UNESCO-IOC-DT-2023",
+    "category": "Professional & Soft Skills",
+    "credentialUrl": "https://www.linkedin.com/in/opeyemiolamiju/details/certifications/",
+    "skills": [
+      "Digital Education",
+      "Knowledge Facilitation",
+      "Global Educational Standards",
+      "EdTech Tools"
+    ],
+    "description": "International certification under the IOC of UNESCO preparing professionals in digital pedagogical delivery, modern e-learning tools, and knowledge dissemination."
+  }
 ];
 

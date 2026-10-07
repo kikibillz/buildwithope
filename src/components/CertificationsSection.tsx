@@ -125,10 +125,10 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
               05 / Credentials
             </p>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display uppercase leading-[.92] text-foreground mb-3">
-              13 Verified Certifications.
+              {certifications.length} Listed Credentials.
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed font-sans">
-              Verified credentials, specialized industry certifications, and accredited licenses spanning Data Science, Product Management, UI/UX, Agile Operations, and AI workflows.
+              Listed training credentials spanning Data Science, Product Management, UI/UX, Agile Operations, and AI workflows.
             </p>
           </div>
 
@@ -334,7 +334,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                       title="Inspect verifiable credential details"
                     >
                       <CheckCircle2 className="w-3.5 h-3.5 text-status-foreground fill-status shrink-0" />
-                      <span className="truncate">{cert.credentialId ? `ID: ${cert.credentialId}` : 'Verified Badge'}</span>
+                      <span className="truncate">{cert.credentialId ? `ID: ${cert.credentialId}` : 'Credential listed'}</span>
                     </button>
 
                     <div className="flex items-center gap-1.5 shrink-0">
@@ -395,7 +395,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             </div>
             <div>
               <div className="text-xs font-bold text-foreground font-mono uppercase tracking-wider">
-                {certifications.length} Verified Licenses &amp; Certificates
+                {certifications.length} Listed Certificates
               </div>
               <p className="text-xs text-muted-foreground font-sans mt-0.5">
                 Every credential links directly to an accredited badge issuer (ALX Africa, Hirist / Cutshort, Hotjar, New Horizons, Culturelligence) with verifiable serial IDs and dates.
@@ -470,7 +470,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   </span>
                   <div className="flex items-center gap-1.5 font-bold text-foreground mt-0.5">
                     <Calendar className="w-3.5 h-3.5 text-primary shrink-0" />
-                    <span>{inspectedCert.issueDate || 'Verified'}</span>
+                    <span>{inspectedCert.issueDate || 'Date not provided'}</span>
                     {inspectedCert.expiresDate && (
                       <span className="text-[10px] text-muted-foreground">· Exp {inspectedCert.expiresDate}</span>
                     )}
@@ -488,7 +488,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   </div>
                   <span className="inline-flex items-center gap-1 text-[10.5px] font-bold text-status-foreground bg-status px-2 py-0.5 rounded-xs">
                     <CheckCircle2 className="w-3 h-3" />
-                    <span>Verified</span>
+                    <span>Issuer link</span>
                   </span>
                 </div>
               </div>
@@ -504,7 +504,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
               {inspectedCert.skills && inspectedCert.skills.length > 0 && (
                 <div className="mb-5">
                   <span className="font-mono text-[10px] uppercase font-bold text-muted-foreground block mb-1.5">
-                    Verified Competencies &amp; Skills
+                    Listed Competencies &amp; Skills
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {inspectedCert.skills.map((s) => (

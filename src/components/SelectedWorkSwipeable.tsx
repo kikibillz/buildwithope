@@ -14,6 +14,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { Project } from '../types';
+import { demoUrl, sourceLabel } from '../utils/projectLinks';
 import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
 
 interface SelectedWorkSwipeableProps {
@@ -232,10 +233,10 @@ export const SelectedWorkSwipeable: React.FC<SelectedWorkSwipeableProps> = ({
                   )}
                 </div>
 
-                {project.streamlitDeployment && (
+                {demoUrl(project) && (
                   <span className="inline-flex items-center gap-1 font-mono text-[10px] font-bold text-primary bg-primary/10 border border-primary/30 px-2 py-0.5 rounded-xs">
                     <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-                    Live Cloud
+                    External demo · unverified
                   </span>
                 )}
               </div>
@@ -309,15 +310,16 @@ export const SelectedWorkSwipeable: React.FC<SelectedWorkSwipeableProps> = ({
                 </button>
 
                 <div className="flex items-center gap-2">
-                  {project.streamlitDeployment && (
+                  {project.links.demo.startsWith('#hr-lab-') ? <a href={project.links.demo} className="underline text-sm font-bold">Try working tool</a> : null}
+                  {demoUrl(project) && (
                     <button
                       type="button"
                       onClick={() => onOpenStreamlit(project)}
                       className="inline-flex items-center gap-1 px-3 py-2 border-2 border-foreground bg-primary text-primary-foreground rounded-xs font-mono text-xs font-bold uppercase shadow-brutal-sm hover:shadow-brutal transition-all cursor-pointer"
-                      title="Launch live Streamlit interactive demo"
+                      title="External demo; availability has not been verified"
                     >
                       <Play className="size-3.5 fill-current" />
-                      <span>Live Demo</span>
+                      <span>External demo</span>
                     </button>
                   )}
 
@@ -326,7 +328,7 @@ export const SelectedWorkSwipeable: React.FC<SelectedWorkSwipeableProps> = ({
                     target="_blank"
                     rel="noreferrer"
                     className="p-2 border-2 border-foreground rounded-xs bg-card hover:bg-muted text-foreground transition-all shadow-brutal-sm hover:shadow-brutal"
-                    title="View GitHub Source Repository"
+                    title={sourceLabel(project.links.github)}
                   >
                     <Github className="size-4" />
                   </a>
