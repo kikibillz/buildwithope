@@ -1,4 +1,5 @@
 export interface ProjectCaseStudy {
+  limitations?: string[];
   problem: string;
   dataset: string;
   process: {

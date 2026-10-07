@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal, Sparkles, TrendingUp, Gauge } from 'lucide-react';
 import { Project } from '../types';
+import { demoUrl, sourceLabel } from '../utils/projectLinks';
 import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
 
 interface ProjectCaseStudyModalProps {
@@ -29,6 +30,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
   if (!project) return null;
 
   const { caseStudy } = project;
+  const deployment = demoUrl(project);
 
   return (
     <AnimatePresence>
@@ -236,11 +238,12 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
           </section>
 
           {/* 05 : Results & Live Demo Screenshot */}
+          <section className="border-b pb-5"><h3 className="font-bold mb-2">Scope & limitations</h3><ul className="list-disc pl-5 text-sm">{caseStudy.limitations?.map(item => <li key={item}>{item}</li>)}</ul></section>
           <section id="case-study-results" className="border-b border-stone-200 dark:border-stone-800 pb-5">
             <div className="flex items-center gap-2 text-xs font-mono font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider mb-2">
               <span className="text-stone-900 dark:text-stone-100 font-bold">05</span>
               <span>:</span>
-              <span>Results, Delivery &amp; Live Demo Interface</span>
+              <span>Project output &amp; illustrative preview</span>
             </div>
             <p className="text-sm leading-relaxed text-stone-700 dark:text-stone-300 bg-stone-100 dark:bg-stone-900/60 border border-stone-200 dark:border-stone-800 rounded-md p-3.5 mb-3.5">
               {caseStudy.results}
@@ -251,9 +254,9 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
               <div className="text-xs font-mono text-stone-600 dark:text-stone-400 uppercase tracking-wider mb-2 flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-semibold text-stone-800 dark:text-stone-200">
                   <Sparkles className="w-3.5 h-3.5 text-red-500" />
-                  <span>Interactive Application Interface (Demo Screenshot)</span>
+                  <span>Illustrative Project Preview</span>
                 </span>
-                <span className="text-stone-400 text-[11px]">Hover for interactive preview</span>
+                <span className="text-stone-400 text-[11px]">Static portfolio material</span>
               </div>
               <ProjectDemoScreenshotPreview project={project} />
             </div>
@@ -264,7 +267,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
             <div className="flex items-center gap-2 text-xs font-mono font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider mb-2">
               <span className="text-stone-900 dark:text-stone-100 font-bold">06</span>
               <span>:</span>
-              <span>Production Lessons & Architectural Takeaways</span>
+              <span>Lessons &amp; Architectural Takeaways</span>
             </div>
             <ul className="space-y-2">
               {caseStudy.lessons.map((lesson, idx) => (
@@ -300,7 +303,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
             <div className="flex items-center gap-2 text-xs font-mono font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider mb-3">
               <span className="text-stone-900 dark:text-stone-100 font-bold">08</span>
               <span>:</span>
-              <span>Verified Repositories & Artifacts</span>
+              <span>Source links &amp; artifacts</span>
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <a
@@ -310,18 +313,18 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
                 className="inline-flex items-center gap-2 text-xs font-medium text-stone-800 dark:text-stone-200 bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 hover:border-stone-400 hover:bg-stone-50 dark:hover:bg-stone-700 px-3.5 py-2 rounded-md transition-colors"
               >
                 <Github className="w-4 h-4" />
-                <span>GitHub Repository</span>
+                <span>{sourceLabel(project.links.github)}</span>
               </a>
 
-              <a
-                href={caseStudy.links.demo}
+              {deployment ? <a
+                href={deployment}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 text-xs font-medium text-white bg-stone-900 dark:bg-stone-100 dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-white px-3.5 py-2 rounded-md transition-colors font-medium shadow-xs"
               >
                 <ExternalLink className="w-4 h-4" />
-                <span>Live Streamlit / App Demo</span>
-              </a>
+                <span>Open external deployment</span>
+              </a> : null}
             </div>
           </section>
         </div>

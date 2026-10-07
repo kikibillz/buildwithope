@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { initialConfig, projects, certifications, certificationsUrl } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
+import { demoUrl, sourceLabel } from './utils/projectLinks';
 import { Navbar } from './components/Navbar';
 import { HeroWorkspaceVisual } from './components/HeroWorkspaceVisual';
 import { ProjectCard } from './components/ProjectCard';
@@ -205,16 +206,16 @@ export default function App() {
               </div>
 
               <h1 className="font-display uppercase tracking-tight text-foreground leading-[.92] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
-                <span className="block text-primary">Data Scientist,</span>
-                <span className="block text-accent">Automation Engineer</span>
-                <span className="block text-secondary">&amp; ML Developer</span>
+                <span className="block text-primary">Data &amp; Reporting</span>
+                <span className="block text-accent">Automation Support</span>
+                <span className="block text-secondary">for HR Teams</span>
               </h1>
             </div>
 
             {/* Subtext and Action Buttons */}
             <div className="mt-8 sm:mt-9 grid gap-6 border-t border-foreground/15 pt-6 sm:pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
               <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                Practical data and automation support for in-house HR teams and recruitment agencies. Turning messy candidate spreadsheets and HR turnover data into automated pipeline dashboards and flight-risk early warning systems. Backed by computer science foundations, proven Culturelligence People Ops experience, and production-tested Python backends.
+                I help HR teams and recruitment agencies organise candidate spreadsheets, prepare clear workforce reports and make recurring data tasks easier to repeat. Start with one scoped pilot, informed by my People Operations experience and independent Python projects.
               </p>
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 w-full sm:w-auto">
                 <a
@@ -284,10 +285,10 @@ export default function App() {
               </span>
               <div>
                 <h4 className="font-display font-extrabold text-sm sm:text-base uppercase text-foreground">
-                  Production-Grade Quality &amp; Live Cloud Deployments
+                  Project evidence &amp; source links
                 </h4>
                 <p className="mt-1 text-xs text-foreground/80 font-sans leading-relaxed">
-                  Every engineering implementation is backed by public source repositories on GitHub, automated CI/CD test suites (&gt;90% Pytest code coverage), Docker containerization, and live interactive deployments running on Streamlit and Vercel.
+                  Review the project descriptions and source links to understand the work. Static previews are labelled separately from external deployments; performance claims require reproducible evaluation.
                 </p>
               </div>
             </div>
@@ -404,7 +405,7 @@ export default function App() {
           {/* Results summary counter */}
           <div className="mt-3 flex items-center justify-between text-xs font-mono text-muted-foreground">
             <span>
-              Showing <b className="text-foreground">{filteredProjects.length}</b> of {allProjects.length} production projects
+              Showing <b className="text-foreground">{filteredProjects.length}</b> of {allProjects.length} portfolio projects
             </span>
             {(projectFilter !== 'all' || projectSearch) && (
               <button
@@ -541,12 +542,12 @@ export default function App() {
                       <ArrowRight className="size-3" />
                     </button>
 
-                    {project.streamlitDeployment && (
+                    {(demoUrl(project) || project.id === 'enterprise-rag-prompt-engine') && (
                       <button
                         type="button"
                         onClick={() => handleOpenAppOrCopilot(project)}
                         className="p-1.5 border border-foreground/30 rounded-xs bg-primary text-primary-foreground hover:scale-105 transition-all shrink-0 cursor-pointer"
-                        title={project.id === 'enterprise-rag-prompt-engine' ? 'Launch AI Copilot' : 'Live Interactive App'}
+                        title={project.id === 'enterprise-rag-prompt-engine' ? 'Open local portfolio FAQ' : 'View external deployment'}
                       >
                         <Play className="size-3.5 fill-current" />
                       </button>
@@ -624,10 +625,10 @@ export default function App() {
                 MLOps, Cloud &amp; APIs
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
-                Production-ready REST APIs, containerized runtimes on AWS/GCP/Azure, automated CI/CD pipelines, and MLflow experiment tracking.
+                API design, input validation, containerisation and model evaluation explored through independent projects.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
-                {['FastAPI', 'Docker', 'AWS & GCP', 'Azure', 'MLflow', 'Pytest (>90%)', 'CI/CD'].map((tool) => (
+                {['FastAPI', 'Docker', 'AWS & GCP', 'Azure', 'MLflow', 'Pytest', 'CI/CD'].map((tool) => (
                   <li key={tool} className="border border-foreground/20 px-2.5 py-1 font-mono text-[11px] text-foreground font-semibold rounded-xs bg-card">
                     {tool}
                   </li>
@@ -644,7 +645,7 @@ export default function App() {
                 RAG, LLMs &amp; Prompt Engineering
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground font-sans text-sm sm:text-base">
-                Production Retrieval-Augmented Generation (RAG) with vector embeddings (ChromaDB), systematic prompt engineering (CoT, few-shot schemas, citation guardrails), and multimodal generative AI.
+                Explorations in retrieval-augmented generation, prompting and creative AI tools. The website FAQ itself uses local keyword search.
               </p>
               <ul className="mt-6 sm:mt-7 flex flex-wrap gap-2">
                 {['RAG Architectures', 'Prompt Engineering', 'Vector Search (ChromaDB)', 'OpenAI & Gemini APIs', 'Guardrails', 'LangChain', 'Runway Gen-3'].map((tool) => (
@@ -695,7 +696,7 @@ export default function App() {
                 Computer science foundations. AI-powered execution. Business-minded outcomes.
               </h2>
               <p className="mt-5 sm:mt-7 max-w-3xl text-base sm:text-lg leading-relaxed text-secondary-foreground/90 font-sans">
-                My strongest edge is the combination: Roles 1 to 3 sit precisely where statistical machine learning and cloud microservices meet real-world People Operations and HR data experience (Culturelligence). While many know ML purely in theory, I apply it to high-stakes business challenges—workforce retention hazard triage, turnover variance analytics, statutory tax ledgers, and commercial generative AI—with every claim verified via public GitHub repositories, automated CI/CD test suites (&gt;90% Pytest coverage), and live interactive cloud runtimes.
+                My focus combines People Operations experience with independent data and automation projects. I am interested in roles involving reporting, spreadsheet quality and repeatable data workflows. Project repositories provide material to review; they do not establish client outcomes or production reliability.
               </p>
               <div className="mt-7 sm:mt-9 grid gap-3 sm:gap-4 sm:grid-cols-2">
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
@@ -704,7 +705,7 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
-                  <span>13 verified certifications with badges (ALX, Hirist, Hotjar, New Horizons)</span>
+                  <span>Listed training credentials with issuer links where available</span>
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
@@ -720,7 +721,7 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            06 / CREDENTIALS (13 Verified Certifications)
+            06 / LISTED TRAINING CREDENTIALS
            ========================================================================= */}
         <CertificationsSection
           certifications={certifications}
@@ -735,7 +736,7 @@ export default function App() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="mb-8 sm:mb-12">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-                07 / Production API
+                07 / API PROJECTS
               </p>
               <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
                 FastAPI REST Service.
@@ -755,7 +756,7 @@ export default function App() {
                 08 / Open Source
               </p>
               <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
-                Production Code Repositories.
+                Project Source Repositories.
               </h2>
             </div>
             <GitHubReposSection />

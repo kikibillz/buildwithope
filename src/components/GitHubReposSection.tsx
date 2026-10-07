@@ -22,10 +22,10 @@ export const allGithubRepos: GitHubRepo[] = [
     name: 'enterprise-rag-prompt-engine',
     displayName: 'enterprise-rag-prompt-engine',
     description:
-      'Production-ready Hybrid RAG architecture combining semantic vector embeddings, BM25 keyword search, Chain-of-Thought prompt engineering, and strict citation guardrails.',
+      'Hybrid RAG project architecture combining semantic vector embeddings, BM25 keyword search, Chain-of-Thought prompt engineering, and strict citation guardrails.',
     language: 'Python',
     html_url: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
-    homepage: 'https://github.com/kikibillz/enterprise-rag-prompt-engine#readme',
+    homepage: null,
     category: 'Machine Learning',
     tags: ['RAG', 'Prompt Engineering', 'Python', 'FastAPI', 'ChromaDB', 'Gemini & OpenAI'],
     isFeatured: true,
@@ -34,10 +34,10 @@ export const allGithubRepos: GitHubRepo[] = [
     name: 'workforce-rag-knowledge-base',
     displayName: 'workforce-rag-knowledge-base',
     description:
-      'HR workforce policy and retention intelligence RAG assistant extracting verified answers, statutory formulas, and structured action plans.',
+      'HR workforce policy and retention intelligence RAG assistant exploring source-aware answers and structured knowledge retrieval.',
     language: 'Python',
     html_url: 'https://github.com/kikibillz/workforce-rag-knowledge-base',
-    homepage: 'https://github.com/kikibillz/workforce-rag-knowledge-base#readme',
+    homepage: null,
     category: 'Machine Learning',
     tags: ['RAG', 'Prompt Engineering', 'LangChain', 'People Analytics', 'Vector Search'],
     isFeatured: true,
@@ -46,10 +46,10 @@ export const allGithubRepos: GitHubRepo[] = [
     name: 'fastapi-ml-service',
     displayName: 'fastapi-ml-service',
     description:
-      'Production-grade asynchronous FastAPI backend serving machine learning inference pipelines with Pydantic v2 schemas, automated Swagger UI, and Docker.',
+      'Asynchronous FastAPI project serving machine learning inference pipelines with Pydantic v2 schemas, automated Swagger UI, and Docker.',
     language: 'Python',
     html_url: 'https://github.com/kikibillz/fastapi-ml-service',
-    homepage: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+    homepage: null,
     category: 'Machine Learning',
     tags: ['Python', 'FastAPI', 'Pydantic v2', 'REST APIs', 'Docker', 'Uvicorn'],
     isFeatured: true,
@@ -94,7 +94,7 @@ export const allGithubRepos: GitHubRepo[] = [
     name: 'nigerian-career-boost-hub',
     displayName: 'nigerian-career-boost-hub',
     description:
-      'Interactive workforce resource platform supporting Nigerian job seekers and tech career switchers with verified tools and guidance.',
+      'Interactive workforce resource platform supporting Nigerian job seekers and tech career switchers with curated tools and guidance.',
     language: 'TypeScript',
     html_url: 'https://github.com/kikibillz/nigerian-career-boost-hub',
     homepage: 'https://nigerian-career-boost-hub.vercel.app',
@@ -319,7 +319,7 @@ export const GitHubReposSection: React.FC = () => {
             Repositories &amp; Code
           </h3>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-xl font-sans">
-            Horizontal swipeable reel of production machine learning models, exploratory data pipelines, web platforms, and utilities.
+            Horizontal swipeable reel of portfolio machine learning projects, exploratory data pipelines, web platforms, and utilities.
           </p>
         </div>
 

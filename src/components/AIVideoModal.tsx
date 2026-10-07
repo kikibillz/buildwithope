@@ -329,7 +329,7 @@ export const AIVideoModal: React.FC<AIVideoModalProps> = ({ video, onClose }) =>
                           Direct Generation Prompt:
                         </span>
                         <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                          Production Ready
+                          Creative sample
                         </span>
                       </div>
                       <div className="bg-stone-900 text-stone-200 font-mono text-xs p-3.5 rounded-lg leading-relaxed border border-stone-800 select-all">
@@ -381,7 +381,7 @@ export const AIVideoModal: React.FC<AIVideoModalProps> = ({ video, onClose }) =>
                 {activeTab === 'highlights' && (
                   <div className="space-y-2.5">
                     <span className="text-xs font-mono font-semibold text-stone-700 block mb-1">
-                      Technical Achievements &amp; Production Quality:
+                      Creative workflow &amp; visual details:
                     </span>
                     <ul className="space-y-2">
                       {video.keyVisualHighlights.map((highlight, idx) => (
