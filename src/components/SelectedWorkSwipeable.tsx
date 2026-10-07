@@ -310,6 +310,7 @@ export const SelectedWorkSwipeable: React.FC<SelectedWorkSwipeableProps> = ({
                 </button>
 
                 <div className="flex items-center gap-2">
+                  {project.links.demo.startsWith('#hr-lab-') ? <a href={project.links.demo} className="underline text-sm font-bold">Try working tool</a> : null}
                   {demoUrl(project) && (
                     <button
                       type="button"
