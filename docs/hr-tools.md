@@ -27,3 +27,7 @@ Use Node 24 and `npm install`, then `npm run lint`, `npm run test:hr`, `npm run 
 ## Deployment
 
 Updates stay on the existing draft review branch. Production is not merged. Vercel preview authentication is retained; successful build status does not itself verify a signed-in production session. Review the preview before merging.
+
+## Final completion pass
+
+Workforce reports now include filter-aware interpretation and a downloadable management summary. The contact flow validates a draft, opens an email app or copies the draft; it never claims delivery. Existing external demos are labelled unverified. Production JavaScript is split into separate React, animation and shared-vendor chunks without a chunk warning. Browser verification covers the added downloads and contact controls. Synthetic records remain explicitly labelled; no real business findings are invented.

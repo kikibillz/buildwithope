@@ -6,13 +6,15 @@ The earlier unsupported savings, performance and production-reliability claims r
 
 ## Validation
 
-TypeScript, production build, data checks and DOM interaction tests pass. Real Chromium checks cover desktop/mobile HR tools, CSV uploads and downloaded contents, filters, stage edits, onboarding updates, errors, resets, direct anchors, keyboard activation, case-study focus/Escape, mobile navigation, theme switching and PDF download. Actual screenshots were captured and visually reviewed.
+TypeScript, production build, data checks and DOM interaction tests pass. Real Chromium checks cover desktop/mobile HR tools, CSV uploads and downloaded contents, filters, stage edits, onboarding updates, errors, resets, direct anchors, keyboard activation, case-study focus/Escape, mobile navigation, theme switching and PDF download. Final browser checks also validate workforce management-report downloads, contact validation, copied draft contents and honest email-app status. Actual screenshots were captured and visually reviewed.
 
 Full definitions, limits, checks and reproduction commands: [HR tools](hr-tools.md).
 
 ## Remaining boundaries
 
-Existing employment, education and credential metadata should be confirmed by the owner. No email or contact-form message was sent; FormSubmit delivery remains untested. Old external project deployments are not claimed as verified. Vite retains a chunk-size warning. Workforce/recruitment/onboarding data are fictional, changes are session-only, and there is no HRIS/ATS connection or automated hiring decision.
+Existing employment, education and credential metadata should be confirmed by the owner. Contact now prepares an email-app draft and offers copy/manual-copy options; it makes no delivery claim and uses no third-party form service. No email was sent. Old external project deployments are explicitly labelled unverified. Vendor code is split into cacheable chunks and the production build has no chunk-size warning. Workforce/recruitment/onboarding data are fictional, changes are session-only, and there is no HRIS/ATS connection or automated hiring decision.
+
+The workforce view includes a filter-aware interpretation and management-report export, with definitions, department breakdowns, suggested checks and explicit fictional-data limits.
 
 ## Integration
 

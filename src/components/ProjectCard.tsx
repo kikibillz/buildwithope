@@ -11,7 +11,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenCaseStu
   <div className="flex flex-wrap gap-2">{project.tools.map(tool => <span key={tool} className="text-xs border px-2 py-1">{tool}</span>)}</div>
   <div className="flex flex-wrap gap-4 mt-auto text-sm font-semibold"><button type="button" className="underline" onClick={() => onOpenCaseStudy(project)}>Read case study</button><a href={project.links.github} target="_blank" rel="noopener noreferrer" className="underline">{sourceLabel(project.links.github)}</a>
   {project.links.demo.startsWith('#hr-lab-') ? <a href={project.links.demo} className="underline">Try working tool</a> : null}
-  {deployment ? <a href={deployment} target="_blank" rel="noopener noreferrer" className="underline">Open deployment</a> : null}
+  {deployment ? <a href={deployment} target="_blank" rel="noopener noreferrer" className="underline">External demo · unverified</a> : null}
   {project.id === 'enterprise-rag-prompt-engine' && onOpenStreamlit ? <button type="button" className="underline" onClick={() => onOpenStreamlit(project)}>Try portfolio FAQ</button> : null}</div></div>
  </article>;
 };

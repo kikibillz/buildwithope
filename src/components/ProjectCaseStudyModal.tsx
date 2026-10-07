@@ -335,7 +335,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
                 className="inline-flex items-center gap-2 text-xs font-medium text-white bg-stone-900 dark:bg-stone-100 dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-white px-3.5 py-2 rounded-md transition-colors font-medium shadow-xs"
               >
                 <ExternalLink className="w-4 h-4" />
-                <span>Open external deployment</span>
+                <span>External demo · unverified</span>
               </a> : null}
             </div>
           </section>
