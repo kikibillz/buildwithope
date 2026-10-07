@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['top', 'work', 'skills', 'about', 'video', 'certifications', 'fastapi', 'repos', 'resume', 'contact'];
+      const sections = ['top', 'hr-offer', 'work', 'outreach', 'skills', 'about', 'video', 'certifications', 'fastapi', 'repos', 'resume', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -44,12 +44,14 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
   }, []);
 
   const navLinks = [
+    { label: 'HR Offer', href: '#hr-offer', id: 'hr-offer' },
     { label: 'Work', href: '#work', id: 'work' },
+    { label: 'Outreach', href: '#outreach', id: 'outreach' },
     { label: 'Skills', href: '#skills', id: 'skills' },
     { label: 'About', href: '#about', id: 'about' },
     { label: 'AI video', href: '#video', id: 'video' },
     { label: 'Certifications', href: '#certifications', id: 'certifications' },
-    { label: 'CV & Letter', href: '#resume', id: 'resume' },
+    { label: 'Resume', href: '#resume', id: 'resume' },
   ];
 
   return (

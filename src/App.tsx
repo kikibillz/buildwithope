@@ -34,6 +34,8 @@ import { FastApiBackendSection } from './components/FastApiBackendSection';
 import { NexusCopilotModal } from './components/NexusCopilotModal';
 import { CertificationsSection } from './components/CertificationsSection';
 import { ResumeSection } from './components/ResumeSection';
+import { HrAutomationSolutionsSection } from './components/HrAutomationSolutionsSection';
+import { CoverLetterSection } from './components/CoverLetterSection';
 import { PrintableResume } from './components/PrintableResume';
 import { PrintableCoverLetter } from './components/PrintableCoverLetter';
 import { MagicCursor } from './components/MagicCursor';
@@ -184,9 +186,16 @@ export default function App() {
                 <span className="size-2 animate-pulse rounded-full bg-current" />
                 Available for roles &amp; projects
               </span>
+              <a
+                href="#hr-offer"
+                className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-3 py-1.5 sm:py-2 font-mono text-[11px] font-bold shadow-brutal-sm rounded-xs hover:bg-primary/90 transition-colors"
+              >
+                <span>Core Offer: HR &amp; Agency Automation</span>
+                <ArrowRight className="size-3" />
+              </a>
             </div>
 
-            {/* Giant Display Headline: Hi, I'm + AnimatedName (with def .py switch) */}
+            {/* Giant Display Headline: Hi, I'm + AnimatedName */}
             <div className="max-w-4xl">
               <span className="block text-foreground/75 font-sans text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-wider mb-2">
                 Hi, I&apos;m
@@ -197,30 +206,35 @@ export default function App() {
 
               <h1 className="font-display uppercase tracking-tight text-foreground leading-[.92] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
                 <span className="block text-primary">Data Scientist,</span>
-                <span className="block text-accent">ML Engineer</span>
-                <span className="block text-secondary">&amp; AI Video Creator</span>
+                <span className="block text-accent">Automation Engineer</span>
+                <span className="block text-secondary">&amp; ML Developer</span>
               </h1>
             </div>
 
             {/* Subtext and Action Buttons */}
             <div className="mt-8 sm:mt-9 grid gap-6 border-t border-foreground/15 pt-6 sm:pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
               <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                Computer science foundation bridging predictive machine learning with enterprise RAG architectures, prompt engineering, real-world HR workforce intelligence, cloud microservices (AWS, GCP, Azure), and MLOps tooling—with all engineering claims 100% backed by public GitHub repositories and live interactive cloud runtimes.
+                Practical data and automation support for in-house HR teams and recruitment agencies. Turning messy candidate spreadsheets and HR turnover data into automated pipeline dashboards and flight-risk early warning systems. Backed by computer science foundations, proven Culturelligence People Ops experience, and production-tested Python backends.
               </p>
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 w-full sm:w-auto">
                 <a
-                  href="#work"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow-[var(--shadow-button)] hover:bg-primary/88 hover:-translate-y-0.5 h-12 rounded-xs px-6 text-sm font-mono uppercase"
+                  href="#hr-offer"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow-[var(--shadow-button)] hover:bg-primary/88 hover:-translate-y-0.5 h-12 rounded-xs px-5 text-sm font-mono uppercase"
                 >
-                  <span>Explore work</span>
+                  <span>Explore HR Offer</span>
                   <ArrowDown className="size-4" />
                 </a>
                 <a
-                  href="#video"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors border-2 border-foreground bg-card text-foreground shadow-brutal-sm hover:shadow-brutal hover:bg-foreground hover:text-background h-12 rounded-xs px-6 text-sm font-mono uppercase"
+                  href="#work"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors border-2 border-foreground bg-card text-foreground shadow-brutal-sm hover:shadow-brutal hover:bg-foreground hover:text-background h-12 rounded-xs px-5 text-sm font-mono uppercase"
                 >
-                  <Play className="size-4" />
-                  <span>Watch reel</span>
+                  <span>Selected Work</span>
+                </a>
+                <a
+                  href="#outreach"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors border-2 border-foreground bg-muted text-foreground shadow-brutal-sm hover:shadow-brutal hover:bg-foreground hover:text-background h-12 rounded-xs px-5 text-sm font-mono uppercase"
+                >
+                  <span>1-Outcome Pitches</span>
                 </a>
               </div>
             </div>
@@ -555,17 +569,25 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            02 / AI VIDEO DIRECTION
+            02 / CORE OFFER: HR & RECRUITMENT AUTOMATION
+           ========================================================================= */}
+        <HrAutomationSolutionsSection
+          config={activeConfig}
+          onOpenCopilot={() => setNexusCopilotOpen(true)}
+        />
+
+        {/* =========================================================================
+            03 / AI VIDEO DIRECTION
            ========================================================================= */}
         <AIVideoSection onSelectVideo={(v) => setSelectedVideo(v)} />
 
         {/* =========================================================================
-            03 / CAPABILITIES
+            04 / CAPABILITIES
            ========================================================================= */}
         <section id="skills" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28">
           <div className="grid gap-4 sm:gap-5 sm:grid-cols-[180px_1fr] sm:items-end">
             <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-              03 / Capabilities
+              04 / Capabilities
             </p>
             <h2 className="max-w-4xl font-display text-3xl xs:text-4xl sm:text-5xl lg:text-7xl uppercase leading-[.92] text-foreground">
               One builder. Three disciplines.
@@ -636,13 +658,13 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            04 / ABOUT OPE
+            05 / ABOUT OPE
            ========================================================================= */}
         <section id="about" className="border-y-2 border-foreground bg-secondary text-secondary-foreground">
           <div className="mx-auto grid max-w-7xl gap-8 lg:gap-12 px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28 lg:grid-cols-[.7fr_1.3fr]">
             <div>
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-secondary-foreground">
-                04 / About Ope
+                05 / About Ope
               </p>
               <div className="mt-6 sm:mt-8 relative border-2 border-foreground bg-foreground rounded-xs shadow-brutal overflow-hidden group">
                 <div className="aspect-[4/3] sm:aspect-square w-full overflow-hidden bg-foreground">
@@ -673,7 +695,7 @@ export default function App() {
                 Computer science foundations. AI-powered execution. Business-minded outcomes.
               </h2>
               <p className="mt-5 sm:mt-7 max-w-3xl text-base sm:text-lg leading-relaxed text-secondary-foreground/90 font-sans">
-                My strongest edge is the combination: Roles 1 to 3 sit precisely where statistical machine learning and cloud microservices meet real-world People Operations and HR data experience (Culturelligence). While many know ML purely in theory, I apply it to high-stakes business challenges—workforce retention hazard triage, turnover variance analytics, statutory tax ledgers, and commercial generative AI—with every claim 100% verified via public GitHub repositories, automated CI/CD test suites (&gt;90% Pytest coverage), and live interactive cloud runtimes.
+                My strongest edge is the combination: Roles 1 to 3 sit precisely where statistical machine learning and cloud microservices meet real-world People Operations and HR data experience (Culturelligence). While many know ML purely in theory, I apply it to high-stakes business challenges—workforce retention hazard triage, turnover variance analytics, statutory tax ledgers, and commercial generative AI—with every claim verified via public GitHub repositories, automated CI/CD test suites (&gt;90% Pytest coverage), and live interactive cloud runtimes.
               </p>
               <div className="mt-7 sm:mt-9 grid gap-3 sm:gap-4 sm:grid-cols-2">
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
@@ -698,7 +720,7 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            05 / CREDENTIALS (13 Verified Certifications)
+            06 / CREDENTIALS (13 Verified Certifications)
            ========================================================================= */}
         <CertificationsSection
           certifications={certifications}
@@ -707,13 +729,13 @@ export default function App() {
         />
 
         {/* =========================================================================
-            06 / PRODUCTION API (FastAPI Backend Console)
+            07 / PRODUCTION API (FastAPI Backend Console)
            ========================================================================= */}
         <section id="fastapi" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-background">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="mb-8 sm:mb-12">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-                06 / Production API
+                07 / Production API
               </p>
               <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
                 FastAPI REST Service.
@@ -724,13 +746,13 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            07 / CODE REPOSITORIES (GitHub Repos)
+            08 / CODE REPOSITORIES (GitHub Repos)
            ========================================================================= */}
         <section id="repos" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-muted">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="mb-8 sm:mb-12">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-secondary">
-                07 / Open Source
+                08 / Open Source
               </p>
               <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
                 Production Code Repositories.
@@ -741,13 +763,13 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            08 / EXECUTIVE RECORD & RESUME
+            09 / EXECUTIVE RECORD & RESUME
            ========================================================================= */}
         <section id="resume" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-background">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="mb-8 sm:mb-12">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-accent">
-                08 / Executive Record
+                09 / Executive Record
               </p>
               <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
                 Curriculum Vitae &amp; Credentials.
@@ -758,13 +780,30 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            09 / START A CONVERSATION & FOOTER
+            10 / DIRECT OUTREACH & PROPOSALS
+           ========================================================================= */}
+        <section id="outreach" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-muted">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="mb-8 sm:mb-12">
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
+                10 / Direct Outreach
+              </p>
+              <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
+                Outreach &amp; Proposals.
+              </h2>
+            </div>
+            <CoverLetterSection config={activeConfig} />
+          </div>
+        </section>
+
+        {/* =========================================================================
+            11 / START A CONVERSATION & FOOTER
            ========================================================================= */}
         <section id="contact" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28">
           <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
             <div>
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-                09 / Start a conversation
+                11 / Start a conversation
               </p>
               <h2 className="mt-4 sm:mt-5 max-w-4xl font-display text-3xl xs:text-4xl sm:text-6xl md:text-7xl uppercase leading-[.88] text-foreground">
                 Have a problem worth <span className="text-primary">solving?</span>

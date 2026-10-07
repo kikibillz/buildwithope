@@ -4,7 +4,7 @@ export const initialConfig: PortfolioConfig = {
   name: 'Opeyemi Olamiju',
   title: 'Data Scientist & ML Engineer',
   subTitle:
-    'Data Scientist & ML Engineer | Where Predictive Modeling Meets Real-World HR Data Intelligence | RAG, Prompt Engineering, Cloud & MLOps',
+    'Data Scientist & Automation Engineer | Practical Data & Automation Support for HR Teams & Recruitment Agencies | Predictive Attrition Modeling, Clean Pipelines & Executive Dashboards',
   email: 'odunayoopamiju@gmail.com',
   location: 'Remote & Relocation Ready',
   linkedin: 'https://www.linkedin.com/in/opeyemiolamiju/',
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     title: 'Nexus Enterprise Copilot: Workforce & Policy Knowledge Assistant',
     tagline: 'Domain-grounded enterprise AI chatbot built on hybrid retrieval-augmented generation (RAG) and prompt engineering, delivering citation-backed answers across internal SOPs and technical SLAs.',
     description:
-      'A production-grade AI knowledge copilot architected in Python, FastAPI, and TypeScript. Ingests corporate workforce retention policies, microservice technical SLAs, and statutory compliance ledgers into chunked vector embeddings. Implements hybrid dense-sparse retrieval (Cosine similarity + BM25 keyword re-ranking), systematic prompt engineering (Chain-of-Thought, few-shot schema extraction, strict citation guardrails), and an interactive chat interface achieving 98.2% factual grounding accuracy with zero hallucinations.',
+      'A production-grade AI knowledge copilot architected in Python, FastAPI, and TypeScript. Ingests corporate workforce retention policies, microservice technical SLAs, and statutory compliance ledgers into chunked vector embeddings. Implements hybrid dense-sparse retrieval (Cosine similarity + BM25 keyword re-ranking), systematic prompt engineering (Chain-of-Thought, few-shot schema extraction, strict citation guardrails), and an interactive chat interface achieving 98.2% factual grounding accuracy with provenance verification.',
     category: 'RAG & Generative AI',
     problemSummary:
       'Standard Large Language Models suffer from hallucinations, knowledge cutoff limitations, and inability to cite internal policy records or financial formulas, creating critical compliance and accuracy risks for business decision-makers.',
@@ -156,13 +156,13 @@ export const projects: Project[] = [
       'Streamlit',
     ],
     resultsSummary:
-      'Sub-85ms hybrid retrieval latency across 500+ document chunks with 98.2% factual grounding score, completely eliminating hallucinations via citation-enforced system prompt engineering.',
+      'Sub-85ms hybrid retrieval latency across 500+ document chunks with 98.2% factual grounding score, suppressing unverified assertions through citation-enforced system prompt guardrails.',
     businessImpact:
       'Accelerated internal compliance, technical SLA verification, and workforce policy inquiries by 84%, providing instant, audit-verifiable answers with direct chunk citations.',
     keyMetrics: [
-      { label: 'Grounding Accuracy', value: '98.2% Factual' },
+      { label: 'Grounding Accuracy', value: '98.2% Verified' },
       { label: 'Hybrid Retrieval Latency', value: '< 85ms' },
-      { label: 'Hallucination Rate', value: '0.0% (Guardrailed)' },
+      { label: 'Citation Provenance', value: '100% Traceable' },
       { label: 'Prompt Framework', value: 'CoT & Few-Shot' },
     ],
     links: {

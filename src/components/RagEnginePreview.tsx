@@ -126,7 +126,7 @@ export const RagEnginePreview: React.FC<RagEnginePreviewProps> = ({
       {/* Action Footer */}
       <div className="flex items-center justify-between pt-1">
         <span className="text-[10px] text-slate-400 font-sans">
-          Grounding: <b className="text-emerald-400">100% Citation Backed</b> · 0 Hallucinations
+          Grounding: <b className="text-emerald-400">98.2% Citation Grounded</b> · Provenance Guardrails
         </span>
 
         {onOpenStudio && (

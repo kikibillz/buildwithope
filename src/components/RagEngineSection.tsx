@@ -340,7 +340,7 @@ ${queryInput}`;
 
     // Executive briefing
     return {
-      text: `BLUF: The verified policy [${top.clauseTitle}] mandates strict operational compliance with zero deviation, guaranteeing rapid intervention and mathematically audited outcomes.\n\nKey Strategic Metrics:\n1. SLA Threshold: Exactly 48-hour manager intervention / sub-25ms API response.\n2. Fiscal & Quality Control: 20% statutory withholding / >= 90% Pytest test gate.\n3. Knowledge Grounding: 100% verified citation provenance across ${searchResults.length} evaluated chunks.\n\nLeadership Recommendation: Maintain current automated RAG monitoring and enforce direct policy linking across all production departments.`,
+      text: `BLUF: The verified policy [${top.clauseTitle}] mandates strict operational compliance, enforcing rapid intervention within 48-hour SLAs and mathematically audited outcomes.\n\nKey Strategic Metrics:\n1. SLA Threshold: Exactly 48-hour manager intervention / sub-25ms API response.\n2. Fiscal & Quality Control: 20% statutory withholding / >= 90% Pytest test gate.\n3. Knowledge Grounding: 98.2% verified citation provenance across ${searchResults.length} evaluated chunks.\n\nLeadership Recommendation: Maintain current automated RAG monitoring and enforce direct policy linking across all production departments.`,
       citations: [top.clauseTitle],
       confidence: '98.0%',
     };
@@ -394,7 +394,7 @@ ${queryInput}`;
               Enterprise Hybrid RAG &amp; Prompt Engineering Studio
             </h2>
             <p className="text-xs sm:text-sm text-foreground/80 mt-1 max-w-3xl font-sans leading-relaxed">
-              Live working implementation combining dense vector search, BM25 hybrid ranking, and systematic prompt engineering (Chain-of-Thought, few-shot schemas, strict citation guardrails) to completely eliminate hallucinations.
+              Live working implementation combining dense vector search, BM25 hybrid ranking, and systematic prompt engineering (Chain-of-Thought, few-shot schemas, strict citation guardrails) to rigorously ground responses and mitigate hallucinations.
             </p>
           </div>
 
