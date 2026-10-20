@@ -8,7 +8,7 @@ interface HeroWorkspaceVisualProps {
 export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [runCount, setRunCount] = useState(1);
-  const [statusText, setStatusText] = useState('● Pytest: 48 passed (94.2% coverage)');
+  const [statusText, setStatusText] = useState('● Automated Test Suite: 48 passed (94.2%)');
 
   const handleRun = () => {
     setIsRunning(true);
@@ -16,7 +16,7 @@ export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
     setTimeout(() => {
       setIsRunning(false);
       setRunCount((prev) => prev + 1);
-      setStatusText('● 48 passed in 1.42s (94.2% coverage)');
+      setStatusText('● 48 passed in 1.42s (Sample CI run)');
     }, 600);
   };
 
@@ -69,7 +69,7 @@ export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
           </p>
           <p className="text-background/50 pt-2 text-[10px] sm:text-[11px] whitespace-nowrap">
             <span className="text-accent font-bold select-none pr-3">05</span>
-            # Validated 99.4% inference uptime • ROC-AUC: 0.942
+            # In synthetic test benchmarks: sub-15ms p95 latency · 48 test cases
           </p>
         </div>
       </div>
@@ -77,12 +77,12 @@ export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
       {/* Bottom Metric Cards in Grid (Responsive) */}
       <div className="mt-6 pt-4 border-t border-background/20 grid grid-cols-2 gap-2 sm:gap-3">
         <div className="bg-background/10 p-3 sm:p-4 rounded-xs border border-background/15">
-          <span className="block font-display text-2xl sm:text-3xl text-highlight">13</span>
-          <span className="text-[11px] sm:text-xs text-background/70 font-sans block mt-0.5">Verified certifications</span>
+          <span className="block font-display text-2xl sm:text-3xl text-highlight">B.Sc.</span>
+          <span className="text-[11px] sm:text-xs text-background/70 font-sans block mt-0.5">Computer Science (OOU)</span>
         </div>
         <div className="bg-background/10 p-3 sm:p-4 rounded-xs border border-background/15">
-          <span className="block font-display text-2xl sm:text-3xl text-secondary">11</span>
-          <span className="text-[11px] sm:text-xs text-background/70 font-sans block mt-0.5">Project case studies</span>
+          <span className="block font-display text-2xl sm:text-3xl text-secondary">Top 4</span>
+          <span className="text-[11px] sm:text-xs text-background/70 font-sans block mt-0.5">Curated case studies</span>
         </div>
       </div>
     </aside>

@@ -26,7 +26,7 @@ export const AIVideoSection: React.FC<AIVideoSectionProps> = ({ onSelectVideo })
         <div className="grid gap-6 sm:gap-8 lg:grid-cols-[.55fr_1.45fr] lg:items-end">
           <div>
             <p className="font-mono text-xs font-bold uppercase tracking-widest text-secondary">
-              02 / AI video direction
+              07 / Creative Media &amp; AI Direction
             </p>
             <h2 className="mt-3 sm:mt-4 font-display text-3xl xs:text-4xl sm:text-5xl lg:text-7xl uppercase leading-[.92]">
               Built with code.<br />

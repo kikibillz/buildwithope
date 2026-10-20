@@ -44,7 +44,7 @@ export const HrAutomationSolutionsSection: React.FC<HrAutomationSolutionsSection
         <div className="grid gap-4 sm:gap-5 sm:grid-cols-[200px_1fr] sm:items-end mb-10 sm:mb-14">
           <div>
             <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-              02 / Core Offer
+              02 / HR &amp; Recruitment Automation
             </p>
             <span className="inline-block mt-2 px-2.5 py-1 rounded-xs bg-primary text-primary-foreground font-mono text-[11px] font-bold uppercase tracking-wide">
               High-ROI Solution
@@ -321,15 +321,15 @@ export const HrAutomationSolutionsSection: React.FC<HrAutomationSolutionsSection
             </div>
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <a
-                href="#outreach"
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xs border-2 border-foreground bg-muted font-mono text-xs font-bold uppercase hover:bg-muted/80 shadow-brutal-xs cursor-pointer w-full sm:w-auto"
+                href="#contact"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xs border-2 border-foreground bg-card text-foreground font-mono text-xs font-bold uppercase hover:bg-foreground hover:text-background shadow-brutal-xs cursor-pointer w-full sm:w-auto transition-colors"
               >
-                <span>View One-Outcome Pitches</span>
+                <span>Book a 15-Min Discovery Call</span>
                 <ChevronRight className="size-3.5" />
               </a>
               <a
                 href={`mailto:${config.email}?subject=Practical%20HR%20Data%20%26%20Automation%20Support`}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xs border-2 border-foreground bg-primary text-primary-foreground font-mono text-xs font-bold uppercase hover:bg-primary/90 shadow-brutal-xs cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xs border-2 border-foreground bg-primary text-primary-foreground font-mono text-xs font-bold uppercase hover:bg-primary/90 shadow-brutal-xs cursor-pointer w-full sm:w-auto transition-colors"
               >
                 <Mail className="size-3.5" />
                 <span>Discuss Your Project</span>

@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['top', 'hr-offer', 'work', 'outreach', 'skills', 'about', 'video', 'certifications', 'fastapi', 'repos', 'resume', 'contact'];
+      const sections = ['top', 'work', 'hr-offer', 'skills', 'certifications', 'about', 'fastapi', 'video', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -44,14 +44,12 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
   }, []);
 
   const navLinks = [
-    { label: 'HR Offer', href: '#hr-offer', id: 'hr-offer' },
-    { label: 'Work', href: '#work', id: 'work' },
-    { label: 'Outreach', href: '#outreach', id: 'outreach' },
-    { label: 'Skills', href: '#skills', id: 'skills' },
+    { label: 'Case Studies', href: '#work', id: 'work' },
+    { label: 'HR Automation', href: '#hr-offer', id: 'hr-offer' },
+    { label: 'Stack & Skills', href: '#skills', id: 'skills' },
+    { label: 'Credentials', href: '#certifications', id: 'certifications' },
     { label: 'About', href: '#about', id: 'about' },
-    { label: 'AI video', href: '#video', id: 'video' },
-    { label: 'Certifications', href: '#certifications', id: 'certifications' },
-    { label: 'Resume', href: '#resume', id: 'resume' },
+    { label: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   return (

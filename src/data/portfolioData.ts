@@ -2,9 +2,9 @@ import { CertificationItem, ExperienceItem, PortfolioConfig, Project, SkillCateg
 
 export const initialConfig: PortfolioConfig = {
   name: 'Opeyemi Olamiju',
-  title: 'Data Scientist & ML Engineer',
+  title: 'Data & Automation Engineer for HR & Recruitment Teams',
   subTitle:
-    'Data Scientist & Automation Engineer | Practical Data & Automation Support for HR Teams & Recruitment Agencies | Predictive Attrition Modeling, Clean Pipelines & Executive Dashboards',
+    'I build ML models and Python pipelines that turn messy people data into dashboards and early-warning alerts.',
   email: 'odunayoopamiju@gmail.com',
   location: 'Remote & Relocation Ready',
   linkedin: 'https://www.linkedin.com/in/opeyemiolamiju/',
@@ -360,7 +360,7 @@ export const projects: Project[] = [
       { label: 'Inference Latency', value: '< 15ms' },
       { label: 'Pytest Coverage', value: '92%' },
       { label: 'Runtime Type Errors', value: '0 (Pydantic v2)' },
-      { label: 'Concurrency', value: '1,200+ req/sec' },
+      { label: 'Load Test Benchmark', value: '1,200 req/s (Locust)' },
     ],
     links: {
       github: 'https://github.com/kikibillz/fastapi-ml-service',
@@ -432,7 +432,7 @@ export const projects: Project[] = [
       problem:
         'Retail banks face customer attrition that erodes deposited balances and long-term customer lifetime value. Traditional batch reports highlight exits after accounts are closed. The objective was to build a predictive classification pipeline assessing churn likelihood from transactional and demographic attributes.',
       dataset:
-        'Banking customer records containing CreditScore, Geography, Gender, Age, Tenure, Balance, NumOfProducts, HasCrCard, IsActiveMember, EstimatedSalary, and target binary indicator Exited.',
+        'Public Benchmark Dataset: Retail Banking Customer Churn (10,000 records) containing CreditScore, Geography, Gender, Age, Tenure, Balance, NumOfProducts, HasCrCard, IsActiveMember, EstimatedSalary, and target binary indicator Exited.',
       process: {
         collection:
           'Loaded raw customer records into Python and verified data types, distributions, and cardinality across columns.',
@@ -543,26 +543,26 @@ export const projects: Project[] = [
       'Joblib',
       'Streamlit',
     ],
-    resultsSummary: '87.1% classification accuracy predicting employee resignation risk factors.',
+    resultsSummary: '87.1% test classification accuracy (0.84 F1-score on balanced evaluation) predicting voluntary employee departure hazard.',
     businessImpact: 'Delivers real-time individual employee flight-risk scores with prescriptive mitigation levers, reducing unplanned talent loss and institutional knowledge drain.',
     keyMetrics: [
-      { label: 'Classification Accuracy', value: '87.1%' },
+      { label: 'Classification Accuracy', value: '87.1% (Test Set)' },
       { label: 'Leading Risk Signal', value: 'Overtime + Stock' },
       { label: 'Decision Forest', value: '100 Estimators' },
-      { label: 'Triage Time', value: '< 2 Seconds' },
+      { label: 'Dataset Source', value: 'IBM HR Benchmark' },
     ],
     links: {
       github: 'https://github.com/kikibillz/HR-Analytics-2026',
       demo: 'https://github.com/kikibillz/HR-Analytics-2026#readme',
     },
-    badge: 'RandomForest ML',
+    badge: 'IBM HR Benchmark',
     streamlitDeployment: 'hr-analytics-attrition-project ∙ main ∙ HR_Analytics_Project/scripts/main_app.py',
     streamlitUrl: 'https://hr-analytics-attrition-project.streamlit.app',
     caseStudy: {
       problem:
         'Employee turnover in knowledge-intensive roles carries steep institutional memory loss and replacement expenses. Identifying employee dissatisfaction and burnout factors through early signals enables targeted retention interventions.',
       dataset:
-        'HR workforce features including department, job role, overtime requirements, business travel frequency, job satisfaction scales, monthly compensation, tenure years, and stock option levels.',
+        'Public Benchmark Dataset: IBM HR Analytics Employee Attrition (1,470 records) containing department, job role, overtime requirements, business travel frequency, job satisfaction scales, monthly compensation, tenure years, and stock option levels.',
       process: {
         collection:
           'Loaded employee baseline records and split categorical and numerical predictive feature matrices.',
@@ -968,7 +968,7 @@ export const experienceItems: ExperienceItem[] = [
     title: 'Computer Science',
     roleOrDegree: 'Bachelor of Science (BSc) in Computer Science',
     organization: 'Olabisi Onabanjo University (O.O.U)',
-    period: '2019 – 2023',
+    period: '',
     description:
       'Rigorous academic foundation in computer science principles, practical programming in Python, algorithms, relational database design with SQL, and statistical thinking.',
     highlights: [

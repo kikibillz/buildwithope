@@ -12,6 +12,11 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { PortfolioConfig } from '../types';
+import {
+  getVisitorData,
+  saveCapturedLead,
+  recordAction,
+} from '../utils/cookieTracking';
 
 interface ContactSectionProps {
   config: PortfolioConfig;
@@ -84,6 +89,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
       ? cleanSubject
       : `Portfolio Message from ${cleanName}`;
 
+    const visitorData = getVisitorData();
+    recordAction('submitted_contact_form');
+
+    const autoresponseMessage = `Hi ${cleanName},
+
+Thank you for reaching out via Build with Ope (Opeyemi Olamiju's Data Science & AI Portfolio)!
+
+I have received your message:
+"${cleanMessage.slice(0, 150)}${cleanMessage.length > 150 ? '...' : ''}"
+
+Here are quick links to explore while I review your note:
+• GitHub Repositories: https://github.com/kikibillz
+• Live Demos: RAG Engine, HR Attrition Predictor, FastAPI Services
+• LinkedIn: https://linkedin.com/in/opeyemiolamiju
+
+I will respond directly as soon as possible.
+
+Best regards,
+Opeyemi Olamiju
+odunayoopamiju@gmail.com`;
+
     try {
       const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`, {
         method: 'POST',
@@ -98,13 +124,28 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
           message: cleanMessage,
           _replyto: cleanEmail,
           _template: 'table',
+          _autoresponse: autoresponseMessage,
           _honey: honeypot,
+          // Tracked visitor cookie metadata:
+          visitor_id: visitorData.visitorId,
+          total_visits: `${visitorData.visitCount} visits`,
+          sections_explored: visitorData.sectionsViewed.join(', ') || 'Home',
+          referring_source: visitorData.referrer,
         }),
       });
 
       const data = await response.json().catch(() => null);
 
       if (response.ok && (data?.success === 'true' || data?.success === true)) {
+        saveCapturedLead({
+          name: cleanName,
+          email: cleanEmail,
+          role: 'Contact Form Message',
+          note: cleanMessage.slice(0, 100),
+          visitCount: visitorData.visitCount,
+          sectionsViewed: visitorData.sectionsViewed,
+          autoEmailSent: true,
+        });
         setStatus('success');
       } else if (data?.message && typeof data.message === 'string' && data.message.toLowerCase().includes('activation')) {
         // FormSubmit sent a one-time activation confirmation email to targetEmail
@@ -360,6 +401,36 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
               {/* FORM INPUTS */}
               {status !== 'success' && status !== 'activation_required' && (
                 <form onSubmit={handleSubmit} noValidate className="space-y-4 font-sans">
+                  {/* Audience Intent Selector */}
+                  <div>
+                    <label className="block text-xs font-mono text-stone-600 dark:text-stone-400 mb-2 uppercase tracking-wider font-semibold">
+                      Purpose of inquiry:
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        { label: 'Discuss a Role / Hire Me', defaultSub: '[Hiring] Data & ML Role Opportunity' },
+                        { label: 'Automate HR / Agency Pipelines', defaultSub: '[HR Automation] Pipeline & Turnover Reporting Pilot' },
+                        { label: 'General Project / Advisory', defaultSub: '[Project Inquiry] Data & Python Consulting' },
+                      ].map((intent) => {
+                        const isSelected = subject === intent.defaultSub;
+                        return (
+                          <button
+                            key={intent.label}
+                            type="button"
+                            onClick={() => setSubject(intent.defaultSub)}
+                            className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer border ${
+                              isSelected
+                                ? 'bg-amber-600 text-white border-amber-600 font-bold shadow-xs'
+                                : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border-stone-300 dark:border-stone-700 hover:border-amber-500'
+                            }`}
+                          >
+                            {intent.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="contact-name" className="block text-xs font-medium text-stone-700 dark:text-stone-300 mb-1">
@@ -492,6 +563,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ config }) => {
                       <ExternalLink className="w-3 h-3 text-stone-400" />
                     </a>
                   </div>
+
+                  <p className="text-[11px] text-stone-500 dark:text-stone-400 flex items-center gap-1.5 pt-1">
+                    <span className="size-1.5 rounded-full bg-emerald-500 inline-block shrink-0" />
+                    <span>Direct delivery to inbox · Typical response time within 24 hours</span>
+                  </p>
                 </form>
               )}
             </div>

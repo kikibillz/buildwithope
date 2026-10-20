@@ -122,13 +122,13 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
         >
           <div className="max-w-2xl">
             <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary mb-2">
-              05 / Credentials
+              04 / Credentials
             </p>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display uppercase leading-[.92] text-foreground mb-3">
-              13 Verified Certifications.
+              Verified Technical Credentials.
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed font-sans">
-              Verified credentials, specialized industry certifications, and accredited licenses spanning Data Science, Product Management, UI/UX, Agile Operations, and AI workflows.
+              Selected certifications validating practical data science pipelines, AI engineering, executive BI dashboards, and agile recruitment operations.
             </p>
           </div>
 

@@ -214,60 +214,24 @@
 }
 
 /* =========================================================================
-   DEDICATED PRINT STYLESHEET (Executive 2-Page CV Print Layout)
+   CLEAN PRINT STYLESHEET
    ========================================================================= */
 @media print {
   @page {
     size: letter portrait;
-    margin: 10mm 12mm;
+    margin: 12mm 15mm;
   }
 
-  /* Completely hide the website interactive chrome & content */
-  #portfolio-interactive-shell,
-  #main-navbar,
   nav,
   header,
-  footer,
-  aside,
   button,
   input,
   iframe,
-  video,
-  canvas,
-  dialog,
-  [role="dialog"],
   .fixed,
   .sticky,
   .print-hidden,
   .no-print {
     display: none !important;
-  }
-
-  /* Show pristine printable resume or cover letter based on print mode */
-  #printable-resume-wrapper {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #ffffff !important;
-  }
-
-  #printable-cover-letter-wrapper {
-    display: none !important;
-  }
-
-  body[data-print-mode="cover-letter"] #printable-resume-wrapper {
-    display: none !important;
-  }
-
-  body[data-print-mode="cover-letter"] #printable-cover-letter-wrapper {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #ffffff !important;
   }
 
   html,
@@ -276,35 +240,12 @@
     color: #0f172a !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
     font-size: 10pt !important;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-  }
-
-  .printable-resume-root {
-    background: #ffffff !important;
-    color: #0f172a !important;
-  }
-
-  .resume-page {
-    background: #ffffff !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: 100% !important;
-  }
-
-  .page-break {
-    page-break-after: always !important;
-    break-after: page !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
   }
 
   a {

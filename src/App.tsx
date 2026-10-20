@@ -33,15 +33,17 @@ import { AIVideoModal } from './components/AIVideoModal';
 import { FastApiBackendSection } from './components/FastApiBackendSection';
 import { NexusCopilotModal } from './components/NexusCopilotModal';
 import { CertificationsSection } from './components/CertificationsSection';
-import { ResumeSection } from './components/ResumeSection';
 import { HrAutomationSolutionsSection } from './components/HrAutomationSolutionsSection';
-import { CoverLetterSection } from './components/CoverLetterSection';
-import { PrintableResume } from './components/PrintableResume';
-import { PrintableCoverLetter } from './components/PrintableCoverLetter';
 import { MagicCursor } from './components/MagicCursor';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SkillsMarquee } from './components/SkillsMarquee';
 import { BackToTop } from './components/BackToTop';
+import { OwnerAutoMailerModal } from './components/OwnerAutoMailerModal';
+import {
+  initSilentVisitorTracking,
+  recordSectionView,
+  recordAction,
+} from './utils/cookieTracking';
 
 export default function App() {
   const [config] = useState<PortfolioConfig>(initialConfig);
@@ -49,18 +51,87 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [streamlitProject, setStreamlitProject] = useState<Project | null>(null);
   const [nexusCopilotOpen, setNexusCopilotOpen] = useState<boolean>(false);
+  const [ownerAutoMailerOpen, setOwnerAutoMailerOpen] = useState<boolean>(false);
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
   const [projectFilter, setProjectFilter] = useState<string>('all');
   const [projectSearch, setProjectSearch] = useState<string>('');
   const [viewMode, setViewMode] = useState<'swipe' | 'cards' | 'rows'>('swipe');
 
   const handleOpenAppOrCopilot = (p: Project) => {
+    recordAction(`opened_project_${p.id}`);
     if (p.id === 'enterprise-rag-prompt-engine' || p.id === 'nexus-enterprise-copilot') {
       setNexusCopilotOpen(true);
     } else {
       setStreamlitProject(p);
     }
   };
+
+  // Secret click handler for owner hub
+  const [secretClickCount, setSecretClickCount] = useState<number>(0);
+  const handleSecretOwnerClick = (e: React.MouseEvent) => {
+    if (e.altKey) {
+      setOwnerAutoMailerOpen(true);
+      return;
+    }
+    setSecretClickCount((prev) => {
+      const next = prev + 1;
+      if (next >= 3) {
+        setOwnerAutoMailerOpen(true);
+        return 0;
+      }
+      return next;
+    });
+    setTimeout(() => setSecretClickCount(0), 1200);
+  };
+
+  // Silent Visitor Telemetry: Track visits, sessions, and sections visited via cookies
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // 1. Silently initialize cookies & session metrics
+    initSilentVisitorTracking();
+
+    // 2. Secret owner shortcut: Ctrl+Shift+O (or Cmd+Shift+O on Mac)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'O' || e.key === 'o')) {
+        e.preventDefault();
+        setOwnerAutoMailerOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    // 3. Optional URL flag check for owner: ?admin=true or #admin
+    if (window.location.search.includes('admin=true') || window.location.hash === '#admin' || window.location.hash === '#owner') {
+      setOwnerAutoMailerOpen(true);
+    }
+
+    // 4. Section tracking
+    const sectionIds = ['work', 'ai-video', 'certifications', 'fastapi', 'hr-solutions', 'outreach', 'about', 'contact'];
+    
+    // Initial record for landing page
+    recordSectionView('hero');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target.id) {
+            recordSectionView(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const [naturalPhoto, setNaturalPhoto] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
@@ -184,13 +255,13 @@ export default function App() {
             <div className="mb-5 sm:mb-7 flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs font-bold uppercase tracking-widest font-mono">
               <span className="inline-flex items-center gap-2 bg-status px-3 py-1.5 sm:py-2 text-status-foreground shadow-brutal-sm rounded-xs">
                 <span className="size-2 animate-pulse rounded-full bg-current" />
-                Available for roles &amp; projects
+                Available for roles &amp; client projects
               </span>
               <a
                 href="#hr-offer"
                 className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-3 py-1.5 sm:py-2 font-mono text-[11px] font-bold shadow-brutal-sm rounded-xs hover:bg-primary/90 transition-colors"
               >
-                <span>Core Offer: HR &amp; Agency Automation</span>
+                <span>HR &amp; Agency Pipeline Automation</span>
                 <ArrowRight className="size-3" />
               </a>
             </div>
@@ -204,37 +275,31 @@ export default function App() {
                 <AnimatedName name="Opeyemi Olamiju" variant="hero" />
               </div>
 
-              <h1 className="font-display uppercase tracking-tight text-foreground leading-[.92] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
-                <span className="block text-primary">Data Scientist,</span>
-                <span className="block text-accent">Automation Engineer</span>
-                <span className="block text-secondary">&amp; ML Developer</span>
+              <h1 className="font-display uppercase tracking-tight text-foreground leading-[.92] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                <span className="block text-primary">Data &amp; Automation</span>
+                <span className="block text-accent">Engineer for HR</span>
+                <span className="block text-secondary">&amp; Recruitment Teams.</span>
               </h1>
             </div>
 
             {/* Subtext and Action Buttons */}
             <div className="mt-8 sm:mt-9 grid gap-6 border-t border-foreground/15 pt-6 sm:pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
               <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                Practical data and automation support for in-house HR teams and recruitment agencies. Turning messy candidate spreadsheets and HR turnover data into automated pipeline dashboards and flight-risk early warning systems. Backed by computer science foundations, proven Culturelligence People Ops experience, and production-tested Python backends.
+                I build machine learning models and Python pipelines that turn messy people data into dashboards and early-warning flight-risk alerts. Backed by computer science foundations, proven Culturelligence People Ops experience, and production-tested Python backends.
               </p>
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 w-full sm:w-auto">
                 <a
-                  href="#hr-offer"
+                  href="#work"
                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow-[var(--shadow-button)] hover:bg-primary/88 hover:-translate-y-0.5 h-12 rounded-xs px-5 text-sm font-mono uppercase"
                 >
-                  <span>Explore HR Offer</span>
+                  <span>See My Projects</span>
                   <ArrowDown className="size-4" />
                 </a>
                 <a
-                  href="#work"
+                  href="#hr-offer"
                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors border-2 border-foreground bg-card text-foreground shadow-brutal-sm hover:shadow-brutal hover:bg-foreground hover:text-background h-12 rounded-xs px-5 text-sm font-mono uppercase"
                 >
-                  <span>Selected Work</span>
-                </a>
-                <a
-                  href="#outreach"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors border-2 border-foreground bg-muted text-foreground shadow-brutal-sm hover:shadow-brutal hover:bg-foreground hover:text-background h-12 rounded-xs px-5 text-sm font-mono uppercase"
-                >
-                  <span>1-Outcome Pitches</span>
+                  <span>Automate HR Reporting</span>
                 </a>
               </div>
             </div>
@@ -577,17 +642,12 @@ export default function App() {
         />
 
         {/* =========================================================================
-            03 / AI VIDEO DIRECTION
-           ========================================================================= */}
-        <AIVideoSection onSelectVideo={(v) => setSelectedVideo(v)} />
-
-        {/* =========================================================================
-            04 / CAPABILITIES
+            03 / TECHNICAL STACK & CAPABILITIES
            ========================================================================= */}
         <section id="skills" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28">
           <div className="grid gap-4 sm:gap-5 sm:grid-cols-[180px_1fr] sm:items-end">
             <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-              04 / Capabilities
+              03 / Capabilities
             </p>
             <h2 className="max-w-4xl font-display text-3xl xs:text-4xl sm:text-5xl lg:text-7xl uppercase leading-[.92] text-foreground">
               One builder. Three disciplines.
@@ -658,6 +718,15 @@ export default function App() {
         </section>
 
         {/* =========================================================================
+            04 / VERIFIED CREDENTIALS
+           ========================================================================= */}
+        <CertificationsSection
+          certifications={certifications}
+          certificationsUrl={certificationsUrl}
+          config={config}
+        />
+
+        {/* =========================================================================
             05 / ABOUT OPE
            ========================================================================= */}
         <section id="about" className="border-y-2 border-foreground bg-secondary text-secondary-foreground">
@@ -670,7 +739,7 @@ export default function App() {
                 <div className="aspect-[4/3] sm:aspect-square w-full overflow-hidden bg-foreground">
                   <img
                     src={activeConfig.avatarUrl}
-                    alt="Opeyemi Olamiju - Data Scientist & AI Video Creator"
+                    alt="Opeyemi Olamiju - Data & Automation Engineer"
                     className="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-105 transition-all duration-500"
                   />
                 </div>
@@ -684,7 +753,7 @@ export default function App() {
                     </span>
                   </div>
                   <blockquote className="font-display text-lg sm:text-xl uppercase leading-tight text-background">
-                    “I don&apos;t just write code; I engineer solutions.”
+                    “Turning messy people data into reliable, automated systems.”
                   </blockquote>
                 </div>
               </div>
@@ -695,7 +764,7 @@ export default function App() {
                 Computer science foundations. AI-powered execution. Business-minded outcomes.
               </h2>
               <p className="mt-5 sm:mt-7 max-w-3xl text-base sm:text-lg leading-relaxed text-secondary-foreground/90 font-sans">
-                My strongest edge is the combination: Roles 1 to 3 sit precisely where statistical machine learning and cloud microservices meet real-world People Operations and HR data experience (Culturelligence). While many know ML purely in theory, I apply it to high-stakes business challenges—workforce retention hazard triage, turnover variance analytics, statutory tax ledgers, and commercial generative AI—with every claim verified via public GitHub repositories, automated CI/CD test suites (&gt;90% Pytest coverage), and live interactive cloud runtimes.
+                I sit at the intersection of statistical machine learning, high-throughput Python backends, and practical People Operations. Having managed employee records and audited workforce operations at Culturelligence, I experienced firsthand the real friction: lost candidates in spreadsheet clutter, delayed reporting cycles, and turnover surprises caught only at exit interviews. Rather than treating ML as purely theoretical, I build practical tools that solve those exact headaches—predictive retention risk scoring, automated candidate pipelines, and verified ledger reconciliations—backed by rigorous computer science foundations and public GitHub repositories.
               </p>
               <div className="mt-7 sm:mt-9 grid gap-3 sm:gap-4 sm:grid-cols-2">
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
@@ -704,7 +773,7 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
-                  <span>13 verified certifications with badges (ALX, Hirist, Hotjar, New Horizons)</span>
+                  <span>Verified Credentials (New Horizons, ALX, Culturelligence, Hirist)</span>
                 </div>
                 <div className="flex items-center gap-3 border-t border-secondary-foreground/25 pt-4 text-xs sm:text-sm font-bold font-mono">
                   <Check className="size-4 shrink-0 text-accent" />
@@ -720,22 +789,13 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            06 / CREDENTIALS (13 Verified Certifications)
-           ========================================================================= */}
-        <CertificationsSection
-          certifications={certifications}
-          certificationsUrl={certificationsUrl}
-          config={config}
-        />
-
-        {/* =========================================================================
-            07 / PRODUCTION API (FastAPI Backend Console)
+            06 / PRODUCTION API & OPEN SOURCE
            ========================================================================= */}
         <section id="fastapi" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-background">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="mb-8 sm:mb-12">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-                07 / Production API
+                06 / Production API
               </p>
               <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
                 FastAPI REST Service.
@@ -745,14 +805,12 @@ export default function App() {
           </div>
         </section>
 
-        {/* =========================================================================
-            08 / CODE REPOSITORIES (GitHub Repos)
-           ========================================================================= */}
+        {/* Code Repositories */}
         <section id="repos" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-muted">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="mb-8 sm:mb-12">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-secondary">
-                08 / Open Source
+                Open Source
               </p>
               <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
                 Production Code Repositories.
@@ -763,47 +821,18 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-            09 / EXECUTIVE RECORD & RESUME
+            07 / CREATIVE MEDIA & AI VIDEO DIRECTION (Compact Proof Point)
            ========================================================================= */}
-        <section id="resume" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-background">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="mb-8 sm:mb-12">
-              <p className="font-mono text-xs font-bold uppercase tracking-widest text-accent">
-                09 / Executive Record
-              </p>
-              <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
-                Curriculum Vitae &amp; Credentials.
-              </h2>
-            </div>
-            <ResumeSection config={activeConfig} />
-          </div>
-        </section>
+        <AIVideoSection onSelectVideo={(v) => setSelectedVideo(v)} />
 
         {/* =========================================================================
-            10 / DIRECT OUTREACH & PROPOSALS
-           ========================================================================= */}
-        <section id="outreach" className="py-14 sm:py-20 lg:py-28 border-b-2 border-foreground/15 bg-muted">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="mb-8 sm:mb-12">
-              <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-                10 / Direct Outreach
-              </p>
-              <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl lg:text-6xl uppercase leading-[.92] text-foreground">
-                Outreach &amp; Proposals.
-              </h2>
-            </div>
-            <CoverLetterSection config={activeConfig} />
-          </div>
-        </section>
-
-        {/* =========================================================================
-            11 / START A CONVERSATION & FOOTER
+            08 / START A CONVERSATION & FOOTER
            ========================================================================= */}
         <section id="contact" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-14 sm:py-20 lg:py-28">
           <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
             <div>
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
-                11 / Start a conversation
+                08 / Start a conversation
               </p>
               <h2 className="mt-4 sm:mt-5 max-w-4xl font-display text-3xl xs:text-4xl sm:text-6xl md:text-7xl uppercase leading-[.88] text-foreground">
                 Have a problem worth <span className="text-primary">solving?</span>
@@ -811,7 +840,7 @@ export default function App() {
             </div>
             <div>
               <p className="text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                I&apos;m open to data and ML roles, engineering collaborations, and ambitious AI media projects.
+                I&apos;m open to full-time data science and ML engineering roles, as well as fixed-scope HR and recruitment automation pilot projects.
               </p>
               <a
                 href={`mailto:${config.email || 'odunayoopamiju@gmail.com'}`}
@@ -823,14 +852,21 @@ export default function App() {
             </div>
           </div>
 
-          {/* Interactive Contact Form */}
+          {/* Interactive Contact Form (Single unified contact hub) */}
           <div className="mt-12 sm:mt-16">
             <ContactSection config={activeConfig} />
           </div>
 
           {/* Site Footer */}
           <footer className="mt-16 sm:mt-20 flex flex-col gap-4 sm:gap-5 border-t border-foreground/15 pt-6 sm:pt-7 sm:flex-row sm:items-center sm:justify-between text-foreground">
-            <span className="font-bold font-mono text-xs sm:text-sm">Build with Ope © 2026</span>
+            <div className="flex items-center gap-3">
+              <span
+                onClick={handleSecretOwnerClick}
+                className="font-bold font-mono text-xs sm:text-sm select-none cursor-default"
+              >
+                Build with Ope © 2026
+              </span>
+            </div>
             <div className="flex gap-3">
               <a
                 href="https://github.com/kikibillz"
@@ -896,22 +932,15 @@ export default function App() {
         />
       )}
 
+      {/* Owner Analytics & Auto-Mailer Hub Modal (Secretly accessible via Ctrl+Shift+O or triple-clicking copyright) */}
+      <OwnerAutoMailerModal
+        isOpen={ownerAutoMailerOpen}
+        onClose={() => setOwnerAutoMailerOpen(false)}
+        ownerEmail={activeConfig.email || 'odunayoopamiju@gmail.com'}
+      />
+
       {/* Floating Back to Top Button */}
       <BackToTop />
-    </div>
-
-    {/* ========================================================
-        DEDICATED PRINTABLE RESUME (Active exclusively on print)
-       ======================================================== */}
-    <div id="printable-resume-wrapper" className="hidden print:block w-full">
-      <PrintableResume config={activeConfig} certifications={certifications} />
-    </div>
-
-    {/* ========================================================
-        DEDICATED PRINTABLE COVER LETTER (Active on Cover Letter print)
-       ======================================================== */}
-    <div id="printable-cover-letter-wrapper" className="hidden print:block w-full">
-      <PrintableCoverLetter config={activeConfig} />
     </div>
   </div>
 );
