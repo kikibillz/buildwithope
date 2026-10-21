@@ -20,12 +20,14 @@ interface SelectedWorkSwipeableProps {
   projects: Project[];
   onOpenCaseStudy: (project: Project) => void;
   onOpenStreamlit: (project: Project) => void;
+  onOpenBiDashboard?: (project: Project) => void;
 }
 
 export const SelectedWorkSwipeable: React.FC<SelectedWorkSwipeableProps> = ({
   projects,
   onOpenCaseStudy,
   onOpenStreamlit,
+  onOpenBiDashboard,
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
@@ -309,6 +311,18 @@ export const SelectedWorkSwipeable: React.FC<SelectedWorkSwipeableProps> = ({
                 </button>
 
                 <div className="flex items-center gap-2">
+                  {onOpenBiDashboard && (project.id.includes('hr') || project.id.includes('ledger') || project.id.includes('churn') || project.tools.includes('Power BI') || project.tools.includes('Microsoft Excel')) && (
+                    <button
+                      type="button"
+                      onClick={() => onOpenBiDashboard(project)}
+                      className="inline-flex items-center gap-1 px-2.5 py-2 border-2 border-foreground bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 rounded-xs font-mono text-xs font-black uppercase shadow-brutal-sm hover:shadow-brutal transition-all cursor-pointer"
+                      title="Launch Interactive Power BI & Excel Dashboard"
+                    >
+                      <BarChart3 className="size-3.5" />
+                      <span className="hidden xs:inline">BI &amp; Excel</span>
+                    </button>
+                  )}
+
                   {project.streamlitDeployment && (
                     <button
                       type="button"

@@ -16,6 +16,9 @@ import {
   LayoutGrid,
   List,
   MoveHorizontal,
+  BarChart3,
+  FileSpreadsheet,
+  Calculator,
 } from 'lucide-react';
 import { initialConfig, projects, certifications, certificationsUrl } from './data/portfolioData';
 import { PortfolioConfig, Project, AIVideoProject } from './types';
@@ -39,6 +42,8 @@ import { ScrollProgress } from './components/ScrollProgress';
 import { SkillsMarquee } from './components/SkillsMarquee';
 import { BackToTop } from './components/BackToTop';
 import { OwnerAutoMailerModal } from './components/OwnerAutoMailerModal';
+import { InteractiveBiExcelModal } from './components/InteractiveBiExcelModal';
+import { InteractiveBiExcelDashboard, DashboardMode } from './components/InteractiveBiExcelDashboard';
 import {
   initSilentVisitorTracking,
   recordSectionView,
@@ -52,10 +57,18 @@ export default function App() {
   const [streamlitProject, setStreamlitProject] = useState<Project | null>(null);
   const [nexusCopilotOpen, setNexusCopilotOpen] = useState<boolean>(false);
   const [ownerAutoMailerOpen, setOwnerAutoMailerOpen] = useState<boolean>(false);
+  const [biDashboardOpen, setBiDashboardOpen] = useState<boolean>(false);
+  const [biDashboardMode, setBiDashboardMode] = useState<DashboardMode>('powerbi_hr');
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
   const [projectFilter, setProjectFilter] = useState<string>('all');
   const [projectSearch, setProjectSearch] = useState<string>('');
   const [viewMode, setViewMode] = useState<'swipe' | 'cards' | 'rows'>('swipe');
+
+  const handleOpenBiDashboard = (_project?: Project, initialMode: DashboardMode = 'powerbi_hr') => {
+    recordAction('opened_bi_excel_dashboard');
+    setBiDashboardMode(initialMode);
+    setBiDashboardOpen(true);
+  };
 
   const handleOpenAppOrCopilot = (p: Project) => {
     recordAction(`opened_project_${p.id}`);
@@ -358,6 +371,13 @@ export default function App() {
             </div>
           </div>
 
+          {/* =========================================================================
+              FLAGSHIP INTERACTIVE DATA ANALYST DASHBOARD SUITE (LIVE EMBEDDED)
+             ========================================================================= */}
+          <div className="mt-8 mb-10">
+            <InteractiveBiExcelDashboard initialMode="powerbi_hr" isEmbedded={true} />
+          </div>
+
           {/* Filter & Controls Toolbar */}
           <div className="mt-8 sm:mt-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-4 border-b-2 border-foreground/15">
             {/* Category Filter Pills with counts */}
@@ -511,6 +531,7 @@ export default function App() {
               projects={filteredProjects}
               onOpenCaseStudy={(p) => setSelectedProject(p)}
               onOpenStreamlit={(p) => handleOpenAppOrCopilot(p)}
+              onOpenBiDashboard={(p) => handleOpenBiDashboard(p)}
             />
           ) : viewMode === 'cards' ? (
             /* Pristine Card Grid View: 2 equal-height columns on desktop, 1 on mobile */
@@ -522,6 +543,7 @@ export default function App() {
                   index={index}
                   onOpenCaseStudy={(p) => setSelectedProject(p)}
                   onOpenStreamlit={(p) => handleOpenAppOrCopilot(p)}
+                  onOpenBiDashboard={(p) => handleOpenBiDashboard(p)}
                 />
               ))}
             </div>
@@ -605,6 +627,17 @@ export default function App() {
                       <span>Case Study</span>
                       <ArrowRight className="size-3" />
                     </button>
+
+                    {(project.id.includes('hr') || project.id.includes('ledger') || project.id.includes('churn') || project.tools.includes('Power BI') || project.tools.includes('Microsoft Excel')) && (
+                      <button
+                        type="button"
+                        onClick={() => handleOpenBiDashboard(project)}
+                        className="p-1.5 border border-foreground/30 rounded-xs bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 hover:scale-105 transition-all shrink-0 cursor-pointer"
+                        title="Launch Power BI & Excel Dashboard"
+                      >
+                        <BarChart3 className="size-3.5" />
+                      </button>
+                    )}
 
                     {project.streamlitDeployment && (
                       <button
@@ -907,8 +940,19 @@ export default function App() {
             setSelectedProject(null);
             handleOpenAppOrCopilot(p);
           }}
+          onOpenBiDashboard={(p) => {
+            setSelectedProject(null);
+            handleOpenBiDashboard(p);
+          }}
         />
       )}
+
+      {/* Interactive Power BI & Excel Dashboard Modal */}
+      <InteractiveBiExcelModal
+        isOpen={biDashboardOpen}
+        onClose={() => setBiDashboardOpen(false)}
+        initialMode={biDashboardMode}
+      />
 
       {/* Streamlit Live Preview Modal */}
       {streamlitProject && (

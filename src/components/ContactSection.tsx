@@ -295,8 +295,8 @@ odunayoopamiju@gmail.com`;
 
             {/* Note on availability */}
             <div className="bg-white/95 dark:bg-[#1a1714] border border-amber-900/10 dark:border-amber-500/20 rounded-2xl p-5 text-xs text-stone-600 dark:text-stone-400 leading-relaxed font-sans shadow-xs">
-              <span className="font-semibold text-stone-900 dark:text-stone-100 block mb-1">Response Window</span>
-              Open to Data Science, Python Developer, and Data/Business Analyst roles, as well as AI video &amp; ML collaborations. Emails are delivered directly to {targetEmail} and answered within 24–48 hours.
+              <span className="font-semibold text-stone-900 dark:text-stone-100 block mb-1">Direct Availability</span>
+              Open to full-time Data &amp; Automation Engineering roles, as well as fixed-scope HR and recruitment automation pilot projects. Emails are delivered directly to {targetEmail} and answered within 24 hours.
             </div>
           </motion.div>
 

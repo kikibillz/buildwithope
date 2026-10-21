@@ -1,15 +1,22 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal, Sparkles, TrendingUp, Gauge } from 'lucide-react';
+import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal, Sparkles, TrendingUp, Gauge, BarChart3, FileSpreadsheet, Play } from 'lucide-react';
 import { Project } from '../types';
 import { ProjectDemoScreenshotPreview } from './ProjectDemoScreenshotPreview';
 
 interface ProjectCaseStudyModalProps {
   project: Project | null;
   onClose: () => void;
+  onOpenStreamlit?: (project: Project) => void;
+  onOpenBiDashboard?: (project: Project) => void;
 }
 
-export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ project, onClose }) => {
+export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
+  project,
+  onClose,
+  onOpenStreamlit,
+  onOpenBiDashboard,
+}) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -303,6 +310,34 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
               <span>Verified Repositories & Artifacts</span>
             </div>
             <div className="flex flex-wrap items-center gap-3">
+              {onOpenBiDashboard && (project.id.includes('hr') || project.id.includes('ledger') || project.id.includes('churn') || project.tools.includes('Power BI') || project.tools.includes('Microsoft Excel')) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenBiDashboard(project);
+                  }}
+                  className="inline-flex items-center gap-2 text-xs font-bold text-stone-950 bg-amber-400 hover:bg-amber-300 border border-amber-500 px-3.5 py-2 rounded-md transition-colors shadow-xs cursor-pointer"
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  <span>Launch Interactive Power BI &amp; Excel Dashboard</span>
+                </button>
+              )}
+
+              {onOpenStreamlit && project.streamlitDeployment && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenStreamlit(project);
+                  }}
+                  className="inline-flex items-center gap-2 text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 border border-teal-700 px-3.5 py-2 rounded-md transition-colors shadow-xs cursor-pointer"
+                >
+                  <Play className="w-4 h-4 fill-current" />
+                  <span>Interactive Streamlit App</span>
+                </button>
+              )}
+
               <a
                 href={caseStudy.links.github}
                 target="_blank"
@@ -320,7 +355,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({ pr
                 className="inline-flex items-center gap-2 text-xs font-medium text-white bg-stone-900 dark:bg-stone-100 dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-white px-3.5 py-2 rounded-md transition-colors font-medium shadow-xs"
               >
                 <ExternalLink className="w-4 h-4" />
-                <span>Live Streamlit / App Demo</span>
+                <span>Live App Demo</span>
               </a>
             </div>
           </section>

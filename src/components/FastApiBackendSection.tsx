@@ -876,10 +876,10 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
             <div className="flex items-center gap-2 print:hidden">
               <button
                 type="button"
-                onClick={() => setIsAccessOpen(true)}
+                onClick={() => setIsDocsOpen(true)}
                 className="text-amber-800 dark:text-amber-300 hover:text-amber-950 dark:hover:text-amber-100 font-semibold font-mono underline underline-offset-4 cursor-pointer"
               >
-                Need staging API access or Swagger credentials? Click here &rarr;
+                Inspect OpenAPI 3.1 Architecture &amp; Postman Schemas &rarr;
               </button>
             </div>
           </div>

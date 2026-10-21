@@ -17,6 +17,7 @@ import {
   Database,
   Table,
   Gauge,
+  BarChart3,
 } from 'lucide-react';
 import { Project } from '../types';
 
@@ -31,6 +32,7 @@ interface ProjectCardProps {
   index?: number;
   onOpenCaseStudy: (project: Project) => void;
   onOpenStreamlit?: (project: Project) => void;
+  onOpenBiDashboard?: (project: Project) => void;
   className?: string;
 }
 
@@ -39,6 +41,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   index = 0,
   onOpenCaseStudy,
   onOpenStreamlit,
+  onOpenBiDashboard,
   className,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -559,6 +562,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </button>
 
           <div className="flex items-center gap-2">
+            {onOpenBiDashboard && (project.id.includes('hr') || project.id.includes('ledger') || project.id.includes('churn') || project.tools.includes('Power BI') || project.tools.includes('Microsoft Excel')) && (
+              <button
+                type="button"
+                onClick={() => onOpenBiDashboard(project)}
+                className="inline-flex items-center gap-1 bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 px-2.5 py-2 rounded-xs font-mono text-xs font-black uppercase tracking-wider shadow-brutal-sm hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
+                title="Launch Interactive Power BI & Excel Dashboard"
+              >
+                <BarChart3 className="size-3.5" />
+                <span className="hidden xs:inline">BI &amp; Excel</span>
+              </button>
+            )}
+
             {project.streamlitDeployment && onOpenStreamlit && project.id !== 'fastapi-ml-service' && (
               <button
                 type="button"

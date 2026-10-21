@@ -30,6 +30,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showFeaturedOnly, setShowFeaturedOnly] = useState<boolean>(true);
   const [inspectedCert, setInspectedCert] = useState<CertificationItem | null>(null);
 
   const categories = useMemo(() => {
@@ -37,8 +38,19 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
     return cats;
   }, []);
 
+  // Top 4 core flagship certifications recommended by portfolio audit
+  const coreCertIds = useMemo(() => [
+    'cert-new-horizons-ds',
+    'cert-culturelligence-agile-hr',
+    'cert-alx-ai-career',
+    'cert-hirist-tech-recruiter',
+  ], []);
+
   const filteredCertifications = useMemo(() => {
     return certifications.filter((cert) => {
+      if (showFeaturedOnly && !coreCertIds.includes(cert.id)) {
+        return false;
+      }
       const matchesCategory =
         selectedCategory === 'All' || cert.category === selectedCategory;
 
@@ -54,7 +66,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
 
       return matchesCategory && matchesSearch;
     });
-  }, [certifications, selectedCategory, searchQuery]);
+  }, [certifications, selectedCategory, searchQuery, showFeaturedOnly, coreCertIds]);
 
   // Horizontal Reel scroll logic for Certifications
   const certsScrollRef = useRef<HTMLDivElement>(null);
@@ -395,24 +407,33 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             </div>
             <div>
               <div className="text-xs font-bold text-foreground font-mono uppercase tracking-wider">
-                {certifications.length} Verified Licenses &amp; Certificates
+                {showFeaturedOnly ? '4 Flagship Credentials Selected' : `${certifications.length} Industry Certifications`}
               </div>
               <p className="text-xs text-muted-foreground font-sans mt-0.5">
-                Every credential links directly to an accredited badge issuer (ALX Africa, Hirist / Cutshort, Hotjar, New Horizons, Culturelligence) with verifiable serial IDs and dates.
+                Curated for applied Data Science, People Operations analytics, AI engineering, and technical recruiting. Verified via credential IDs and LinkedIn.
               </p>
             </div>
           </div>
 
-          <a
-            href={certificationsUrl}
-            target="_blank"
-            rel="noreferrer"
-            id="cert-callout-linkedin"
-            className="shrink-0 inline-flex items-center gap-2 text-xs font-mono font-bold text-foreground hover:text-primary uppercase"
-          >
-            <span>Open LinkedIn Certifications</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowFeaturedOnly(!showFeaturedOnly)}
+              className="px-3 py-1.5 rounded-xs border-2 border-foreground text-xs font-mono font-bold uppercase bg-background hover:bg-foreground hover:text-background transition-colors cursor-pointer"
+            >
+              {showFeaturedOnly ? 'Show All 13 Badges' : 'Show Top 4 Only'}
+            </button>
+            <a
+              href={certificationsUrl}
+              target="_blank"
+              rel="noreferrer"
+              id="cert-callout-linkedin"
+              className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xs border-2 border-foreground bg-primary text-primary-foreground text-xs font-mono font-bold uppercase shadow-brutal-xs hover:bg-primary/90 transition-colors"
+            >
+              <span>LinkedIn</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
       </div>
 
