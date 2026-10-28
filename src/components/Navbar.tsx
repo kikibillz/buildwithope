@@ -49,6 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
     { label: 'Stack & Skills', href: '#skills', id: 'skills' },
     { label: 'Credentials', href: '#certifications', id: 'certifications' },
     { label: 'About', href: '#about', id: 'about' },
+    { label: 'AI UGC', href: '/ugc/', id: 'ugc' },
     { label: 'Contact', href: '#contact', id: 'contact' },
   ];
 
@@ -75,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-7 text-sm font-semibold md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-4 text-sm font-semibold xl:flex" aria-label="Main navigation">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -94,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
         </nav>
 
         {/* Desktop Actions & Theme Toggle */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <ThemeToggle />
           <a
             href="#contact"
@@ -108,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
         </div>
 
         {/* Mobile Actions */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex xl:hidden items-center gap-2">
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -127,11 +128,11 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
       {mobileMenuOpen && (
         <>
           <div
-            className="fixed inset-0 top-16 bg-foreground/20 backdrop-blur-xs md:hidden z-30"
+            className="fixed inset-0 top-16 bg-foreground/20 backdrop-blur-xs xl:hidden z-30"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <div className="relative md:hidden z-40 bg-background border-b border-foreground/15 px-5 py-6 space-y-4">
+          <div className="relative xl:hidden z-40 bg-background border-b border-foreground/15 px-5 py-6 space-y-4">
             <nav className="flex flex-col space-y-3 font-semibold text-sm">
               {navLinks.map((link) => (
                 <a
@@ -160,3 +161,4 @@ export const Navbar: React.FC<NavbarProps> = ({ config }) => {
     </header>
   );
 };
+

@@ -34,9 +34,13 @@ export const AIVideoSection: React.FC<AIVideoSectionProps> = ({ onSelectVideo })
             </h2>
           </div>
           <p className="max-w-xl text-base sm:text-lg leading-relaxed text-background/65 lg:justify-self-end">
-            Commercial concepts and cinematic sequences created with Google Veo 3, Runway Gen-3, Kling, Luma Dream Machine, Midjourney, and ElevenLabs.
+            AI-created commercial concepts and cinematic sequences. Explore my dedicated AI UGC Creator portfolio for product stories, creative services, and collaboration.
           </p>
         </div>
+
+        <a href="/ugc/" className="mt-6 inline-flex items-center gap-3 border border-background/40 px-5 py-3 font-mono text-sm font-bold hover:bg-background/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+          Explore AI UGC Creator portfolio <span aria-hidden="true">↗</span>
+        </a>
 
         {/* Featured Reel Banner */}
         <figure className="group relative mt-8 sm:mt-12 overflow-hidden border border-background/20 rounded-xs shadow-brutal">
@@ -108,3 +112,4 @@ export const AIVideoSection: React.FC<AIVideoSectionProps> = ({ onSelectVideo })
     </section>
   );
 };
+
