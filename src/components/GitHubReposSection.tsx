@@ -19,42 +19,6 @@ import { RepoDemoScreenshotPreview } from './RepoDemoScreenshotPreview';
 
 export const allGithubRepos: GitHubRepo[] = [
   {
-    name: 'enterprise-rag-prompt-engine',
-    displayName: 'enterprise-rag-prompt-engine',
-    description:
-      'Production-ready Hybrid RAG architecture combining semantic vector embeddings, BM25 keyword search, Chain-of-Thought prompt engineering, and strict citation guardrails.',
-    language: 'Python',
-    html_url: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
-    homepage: 'https://github.com/kikibillz/enterprise-rag-prompt-engine#readme',
-    category: 'Machine Learning',
-    tags: ['RAG', 'Prompt Engineering', 'Python', 'FastAPI', 'ChromaDB', 'Gemini & OpenAI'],
-    isFeatured: true,
-  },
-  {
-    name: 'workforce-rag-knowledge-base',
-    displayName: 'workforce-rag-knowledge-base',
-    description:
-      'HR workforce policy and retention intelligence RAG assistant extracting verified answers, statutory formulas, and structured action plans.',
-    language: 'Python',
-    html_url: 'https://github.com/kikibillz/workforce-rag-knowledge-base',
-    homepage: 'https://github.com/kikibillz/workforce-rag-knowledge-base#readme',
-    category: 'Machine Learning',
-    tags: ['RAG', 'Prompt Engineering', 'LangChain', 'People Analytics', 'Vector Search'],
-    isFeatured: true,
-  },
-  {
-    name: 'fastapi-ml-service',
-    displayName: 'fastapi-ml-service',
-    description:
-      'Production-grade asynchronous FastAPI backend serving machine learning inference pipelines with Pydantic v2 schemas, automated Swagger UI, and Docker.',
-    language: 'Python',
-    html_url: 'https://github.com/kikibillz/fastapi-ml-service',
-    homepage: 'https://github.com/kikibillz/fastapi-ml-service#readme',
-    category: 'Machine Learning',
-    tags: ['Python', 'FastAPI', 'Pydantic v2', 'REST APIs', 'Docker', 'Uvicorn'],
-    isFeatured: true,
-  },
-  {
     name: 'HR-Analytics-2026',
     displayName: 'HR-Analytics-2026',
     description:

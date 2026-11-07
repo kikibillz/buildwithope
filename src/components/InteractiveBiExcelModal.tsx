@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
+import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { InteractiveBiExcelDashboard, DashboardMode } from './InteractiveBiExcelDashboard';
@@ -14,30 +15,18 @@ export const InteractiveBiExcelModal: React.FC<InteractiveBiExcelModalProps> = (
   onClose,
   initialMode = 'powerbi_hr',
 }) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  const dialogRef = useModalAccessibility(isOpen, onClose);
 
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="bi-modal-title"
+        aria-label="Interactive BI and Excel dashboard"
         className="fixed inset-0 z-50 overflow-y-auto bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 md:p-6"
         onClick={onClose}
       >

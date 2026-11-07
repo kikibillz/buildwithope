@@ -572,7 +572,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1 bg-card text-foreground border-2 border-foreground/30 px-3 py-2 rounded-xs font-mono text-xs font-bold uppercase tracking-wider shadow-brutal-sm hover:border-foreground transition-all cursor-pointer"
-              title="View GitHub Repository"
+              title={project.sourceKind === 'portfolio-demo' ? 'View portfolio demo source' : 'View GitHub Repository'}
             >
               <Github className="size-3.5" />
               <span className="hidden xs:inline">Code</span>

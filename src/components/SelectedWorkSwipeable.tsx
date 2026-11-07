@@ -340,7 +340,7 @@ export const SelectedWorkSwipeable: React.FC<SelectedWorkSwipeableProps> = ({
                     target="_blank"
                     rel="noreferrer"
                     className="p-2 border-2 border-foreground rounded-xs bg-card hover:bg-muted text-foreground transition-all shadow-brutal-sm hover:shadow-brutal"
-                    title="View GitHub Source Repository"
+                    title={project.sourceKind === 'portfolio-demo' ? 'View portfolio demo source' : 'View GitHub Source Repository'}
                   >
                     <Github className="size-4" />
                   </a>

@@ -134,6 +134,7 @@ export const skillCategories: SkillCategory[] = [
 export const projects: Project[] = [
   {
     id: 'enterprise-rag-prompt-engine',
+    sourceKind: 'portfolio-demo',
     title: 'Nexus Enterprise Copilot: Workforce & Policy Knowledge Assistant',
     tagline: 'Domain-grounded enterprise AI chatbot built on hybrid retrieval-augmented generation (RAG) and prompt engineering, delivering citation-backed answers across internal SOPs and technical SLAs.',
     description:
@@ -166,7 +167,7 @@ export const projects: Project[] = [
       { label: 'Prompt Framework', value: 'CoT & Few-Shot' },
     ],
     links: {
-      github: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
+      github: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/NexusCopilotModal.tsx',
       demo: '#nexus-copilot',
     },
     badge: 'AI Assistant · Enterprise Copilot',
@@ -208,13 +209,14 @@ export const projects: Project[] = [
         'LangChain',
       ],
       links: {
-        github: 'https://github.com/kikibillz/enterprise-rag-prompt-engine',
+        github: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/NexusCopilotModal.tsx',
         demo: '#nexus-copilot',
       },
     },
   },
   {
     id: 'hybrid-sql-nosql-engine',
+    sourceKind: 'portfolio-demo',
     title: 'Enterprise Hybrid Data Platform: Relational SQL (PostgreSQL) & NoSQL (MongoDB) Pipeline',
     tagline: 'High-throughput dual-engine data platform integrating ACID relational PostgreSQL schemas with MongoDB document collections for real-time telemetry, aggregation, and sub-25ms analytical querying.',
     description:
@@ -244,8 +246,8 @@ export const projects: Project[] = [
       { label: 'Dual Engine', value: 'PostgreSQL + MongoDB' },
     ],
     links: {
-      github: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline',
-      demo: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline#readme',
+      github: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/ProjectDemoScreenshotPreview.tsx',
+      demo: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/ProjectDemoScreenshotPreview.tsx',
     },
     badge: 'SQL & NoSQL Engine',
     streamlitDeployment: 'hybrid-sql-nosql-engine ∙ main ∙ PostgreSQL & MongoDB',
@@ -277,8 +279,8 @@ export const projects: Project[] = [
       ],
       tools: ['SQL (PostgreSQL)', 'NoSQL (MongoDB)', 'Python', 'SQLAlchemy', 'PyMongo', 'Docker', 'Redis'],
       links: {
-        github: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline',
-        demo: 'https://github.com/kikibillz/hybrid-sql-nosql-analytics-pipeline#readme',
+        github: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/ProjectDemoScreenshotPreview.tsx',
+        demo: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/ProjectDemoScreenshotPreview.tsx',
       },
     },
   },
@@ -333,6 +335,7 @@ export const projects: Project[] = [
   },
   {
     id: 'fastapi-ml-service',
+    sourceKind: 'portfolio-demo',
     title: 'FastAPI Production ML Inference & Validation Service',
     tagline: 'High-throughput asynchronous REST API serving machine learning inference pipelines with Pydantic v2 schemas, JWT auth, and interactive Swagger UI.',
     description:
@@ -363,8 +366,8 @@ export const projects: Project[] = [
       { label: 'Load Test Benchmark', value: '1,200 req/s (Locust)' },
     ],
     links: {
-      github: 'https://github.com/kikibillz/fastapi-ml-service',
-      demo: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+      github: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/FastApiBackendSection.tsx',
+      demo: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/FastApiBackendSection.tsx',
     },
     badge: 'FastAPI REST API',
     streamlitDeployment: 'FastAPI ASGI • /docs Swagger UI • Uvicorn Worker',
@@ -396,8 +399,8 @@ export const projects: Project[] = [
       ],
       tools: ['Python', 'FastAPI', 'Pydantic v2', 'Uvicorn', 'Docker', 'SQLite', 'Pytest', 'Scikit-learn'],
       links: {
-        github: 'https://github.com/kikibillz/fastapi-ml-service',
-        demo: 'https://github.com/kikibillz/fastapi-ml-service#readme',
+        github: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/FastApiBackendSection.tsx',
+        demo: 'https://github.com/kikibillz/buildwithope/blob/main/src/components/FastApiBackendSection.tsx',
       },
     },
   },
