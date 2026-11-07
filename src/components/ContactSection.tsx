@@ -112,6 +112,7 @@ odunayoopamiju@gmail.com`;
 
     try {
       const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`, {
+        signal: AbortSignal.timeout(15000),
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -183,7 +184,7 @@ odunayoopamiju@gmail.com`;
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 lg:py-32 border-t border-amber-900/10 dark:border-amber-500/15 bg-[#faf8f4] dark:bg-[#15120f] transition-colors">
+    <section id="contact-form" className="py-20 sm:py-28 lg:py-32 border-t border-amber-900/10 dark:border-amber-500/15 bg-[#faf8f4] dark:bg-[#15120f] transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 28 }}

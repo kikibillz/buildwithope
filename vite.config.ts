@@ -5,7 +5,18 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), {
+      name: 'ugc-directory-index',
+      configureServer(server) {
+        server.middlewares.use((req, _res, next) => {
+          const [pathname, query] = (req.url || '').split('?');
+          if (pathname === '/ugc' || pathname === '/ugc/') {
+            req.url = '/ugc/index.html' + (query ? '?' + query : '');
+          }
+          next();
+        });
+      },
+    }],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

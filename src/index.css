@@ -7,7 +7,7 @@
 
 @theme inline {
   --font-sans: "Manrope", sans-serif;
-  --font-display: "Archivo Black", sans-serif;
+  --font-display: "Archivo Black", "Arial Black", Arial, sans-serif;
   --font-mono: "Space Mono", monospace;
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
@@ -254,3 +254,12 @@
   }
 }
 
+
+/* Portfolio navigation and accessible content defaults. */
+section[id] { scroll-margin-top: 5.5rem; }
+:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 4px; }
+.font-display { font-weight: 800; }
+#top h1 { text-wrap: balance; }
+#top .font-display:has(#hero-name-cursor) { font-size: clamp(1.8rem, 3.9vw, 3.7rem); }
+.skip-to-content { position: fixed; top: -100px; left: 1rem; z-index: 200; padding: 1rem; background: var(--color-foreground); color: var(--color-background); }
+.skip-to-content:focus { top: 1rem; }

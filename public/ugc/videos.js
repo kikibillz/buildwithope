@@ -2,6 +2,8 @@
 // Paths are relative to this /ugc/ page. Use null for duration if unconfirmed.
 window.ugcVideos = [
   {
+    id: 'hydration-edit',
+    duration: '0:10',
     title: 'The hydration edit',
     category: 'Beauty',
     format: 'Vertical product story',
@@ -11,6 +13,8 @@ window.ugcVideos = [
     label: 'AI-created portfolio concept'
   },
   {
+    id: 'villa-story',
+    duration: '0:10',
     title: 'A different view of home',
     category: 'Real estate',
     format: 'Property story with voiceover',

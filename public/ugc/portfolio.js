@@ -19,6 +19,7 @@ function render(category) {
   if (!selected.length) grid.append(element('p', '', 'New work in this category is on its way.'));
   selected.forEach(item => {
     const card = element('article', 'video-card');
+    card.id = item.id || `concept-${videos.indexOf(item) + 1}`;
     const frame = element('div', 'video-frame');
     const video = document.createElement('video');
     video.controls = true;
@@ -40,10 +41,23 @@ function render(category) {
     frame.append(video, error);
     const meta = element('div', 'video-meta');
     meta.append(element('span', '', item.category), element('span', '', item.label));
-    card.append(frame, meta, element('h3', '', item.title), element('p', '', item.description), element('p', '', item.format));
+    const details = element('div', 'video-details');
+    const watch = element('a', '', 'Open video');
+    watch.href = item.video;
+    details.append(element('p', '', `${item.format}${item.duration ? ' · ' + item.duration : ''}`), watch);
+    card.append(frame, meta, element('h3', '', item.title), element('p', '', item.description), details);
     grid.append(card);
   });
 }
+
+const filters = document.querySelector('.filters');
+[...new Set(videos.map(item => item.category))].forEach(category => {
+  const button = element('button', '', category);
+  button.type = 'button';
+  button.dataset.filter = category;
+  button.setAttribute('aria-pressed', 'false');
+  filters.append(button);
+});
 
 document.querySelectorAll('[data-filter]').forEach(button => {
   button.addEventListener('click', () => {

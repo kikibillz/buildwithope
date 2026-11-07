@@ -348,15 +348,16 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                 <span>GitHub Repository</span>
               </a>
 
-              <a
-                href={caseStudy.links.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-medium text-white bg-stone-900 dark:bg-stone-100 dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-white px-3.5 py-2 rounded-md transition-colors font-medium shadow-xs"
-              >
-                <ExternalLink className="w-4 h-4" />
-                <span>Live App Demo</span>
-              </a>
+              {caseStudy.links.demo.startsWith('#') ? (
+                <button type="button" onClick={() => onOpenStreamlit?.(project)} className="inline-flex items-center gap-2 text-xs font-medium bg-teal-700 text-white px-3.5 py-2 rounded-md">
+                  <Play className="w-4 h-4" />Open interactive demo
+                </button>
+              ) : (
+                <a href={caseStudy.links.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-medium bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-950 px-3.5 py-2 rounded-md">
+                  <ExternalLink className="w-4 h-4" />
+                  {caseStudy.links.demo.includes('github.com') ? 'Project documentation' : 'Visit live app'}
+                </a>
+              )}
             </div>
           </section>
         </div>

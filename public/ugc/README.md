@@ -5,8 +5,8 @@ The standalone page is served at `/ugc/`. Vite copies this folder into `dist/ugc
 ## Add a video
 
 1. Upload your MP4 and a JPG or WebP poster to `public/videos/`. Use short filenames, for example `coffee-story.mp4` and `coffee-story.webp`.
-2. Add an entry to `public/ugc/videos.js` with `title`, `category`, `format`, `description`, `video`, `poster`, and `label`.
-3. Use `../videos/coffee-story.mp4` and `../videos/coffee-story.webp` for the paths. Use an existing category (`Beauty` or `Real estate`), or add a matching filter button in `index.html` when introducing another category.
+2. Add an entry to `public/ugc/videos.js` with a unique `id`, `title`, `category`, `format`, `duration`, `description`, `video`, `poster`, and `label`.
+3. Use `../videos/coffee-story.mp4` and `../videos/coffee-story.webp` for the paths. Category filters are generated automatically from the entries.
 4. Label AI-created concepts clearly. Only describe paid partnerships or performance results when they are verified.
 5. Commit and deploy using the portfolio's existing hosting workflow.
 

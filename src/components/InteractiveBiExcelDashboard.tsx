@@ -436,7 +436,16 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
     const rows = filteredHrData.map((d) => [
       d.id, `"${d.name}"`, `"${d.department}"`, `"${d.role}"`, d.monthlyIncome, d.overtime, d.jobSatisfaction, d.tenureYears, `${d.predictedRiskPct}%`, d.flightRiskTier, d.replacementCost
     ]);
-    const csvContent = [headers.join(','), ...rows.map((e) => e.join(','))].join('\n');
+    const exportHeaders = mode === 'powerbi_sales'
+      ? ['Deal ID', 'Account', 'Region', 'Stage', 'Amount', 'Probability']
+      : mode === 'churn_fintech'
+      ? ['Customer ID', 'Surname', 'Geography', 'Balance', 'Activity', 'Churn probability', 'Status'] : headers;
+    const exportRows = mode === 'powerbi_sales'
+      ? filteredSalesData.map(d => [d.id, d.account, d.region, d.stage, d.amount, d.probability])
+      : mode === 'churn_fintech'
+      ? filteredChurnData.map(d => [d.customerId, d.surname, d.geography, d.balance, d.isActive, d.churnProbability, d.predictedStatus]) : rows;
+    const csvCell = (value: unknown) => `"${String(value).replace(/^"|"$/g, '').replace(/"/g, '""')}"`;
+    const csvContent = [exportHeaders.map(csvCell).join(','), ...exportRows.map(row => row.map(csvCell).join(','))].join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -445,6 +454,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
   return (
@@ -468,11 +478,11 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                 Data Analyst Interactive Dashboard Suite
               </h3>
               <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                LIVE INTERACTIVE
+                INTERACTIVE DEMO
               </span>
             </div>
             <p className="text-[11px] font-mono text-stone-400 mt-0.5">
-              Power BI DAX Models &bull; Dynamic Excel Pivot Tables &bull; Churn &amp; Funnel Analytics
+              Illustrative sample data &bull; Browser-based BI &amp; Excel-style demonstrations
             </p>
           </div>
         </div>
@@ -550,7 +560,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
           <button
             type="button"
             onClick={handleExportCsv}
-            title="Download full interactive dataset as CSV"
+            title="Download the current filtered sample as CSV"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xs bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-600 text-xs font-mono font-bold uppercase transition-all cursor-pointer"
           >
             <Download className="size-3.5" />
@@ -602,7 +612,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                   Department
                 </label>
                 <select
-                  value={selectedDept}
+                  aria-label="Department" value={selectedDept}
                   onChange={(e) => setSelectedDept(e.target.value)}
                   className="w-full bg-stone-950 border border-stone-700 rounded-xs px-2.5 py-1.5 text-stone-100 text-xs focus:border-amber-400 outline-none"
                 >
@@ -618,7 +628,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                   Overtime Status
                 </label>
                 <select
-                  value={selectedOvertime}
+                  aria-label="Overtime" value={selectedOvertime}
                   onChange={(e) => setSelectedOvertime(e.target.value)}
                   className="w-full bg-stone-950 border border-stone-700 rounded-xs px-2.5 py-1.5 text-stone-100 text-xs focus:border-amber-400 outline-none"
                 >
@@ -633,7 +643,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                   Risk Tier
                 </label>
                 <select
-                  value={selectedRiskTier}
+                  aria-label="Risk tier" value={selectedRiskTier}
                   onChange={(e) => setSelectedRiskTier(e.target.value)}
                   className="w-full bg-stone-950 border border-stone-700 rounded-xs px-2.5 py-1.5 text-stone-100 text-xs focus:border-amber-400 outline-none"
                 >
@@ -780,7 +790,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                   Region
                 </label>
                 <select
-                  value={selectedRegion}
+                  aria-label="Sales region" value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
                   className="w-full bg-stone-950 border border-stone-700 rounded-xs px-2.5 py-1.5 text-stone-100 text-xs focus:border-cyan-400 outline-none"
                 >
@@ -797,7 +807,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                   Pipeline Stage
                 </label>
                 <select
-                  value={selectedStage}
+                  aria-label="Sales stage" value={selectedStage}
                   onChange={(e) => setSelectedStage(e.target.value)}
                   className="w-full bg-stone-950 border border-stone-700 rounded-xs px-2.5 py-1.5 text-stone-100 text-xs focus:border-cyan-400 outline-none"
                 >
@@ -983,7 +993,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                 <span>Customer Churn Demographics &amp; Balances</span>
               </div>
               <span className="text-[10px] font-mono text-stone-400">
-                Public Retail Banking Benchmark (10,000 records)
+                Illustrative sample · {filteredChurnData.length} of {SAMPLE_CHURN_DATA.length} records
               </span>
             </div>
 
@@ -993,7 +1003,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                   Geography
                 </label>
                 <select
-                  value={selectedGeo}
+                  aria-label="Customer geography" value={selectedGeo}
                   onChange={(e) => setSelectedGeo(e.target.value)}
                   className="w-full bg-stone-950 border border-stone-700 rounded-xs px-2.5 py-1.5 text-stone-100 text-xs focus:border-rose-400 outline-none"
                 >
@@ -1009,7 +1019,7 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                   Member Activity Status
                 </label>
                 <select
-                  value={selectedActiveStatus}
+                  aria-label="Customer activity" value={selectedActiveStatus}
                   onChange={(e) => setSelectedActiveStatus(e.target.value)}
                   className="w-full bg-stone-950 border border-stone-700 rounded-xs px-2.5 py-1.5 text-stone-100 text-xs focus:border-rose-400 outline-none"
                 >
@@ -1025,37 +1035,37 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <div className="bg-stone-900 border border-stone-800 p-4 rounded-xs">
               <span className="text-stone-400 text-[11px] font-mono uppercase font-bold block">
-                Total Benchmark Accounts
+                Filtered sample accounts
               </span>
               <div className="font-display font-black text-2xl sm:text-3xl text-white mt-1">
-                10,000
+                {filteredChurnData.length}
               </div>
               <span className="text-[10px] font-mono text-stone-400 mt-0.5 block">
-                Tabular banking records
+                Illustrative banking records
               </span>
             </div>
 
             <div className="bg-stone-900 border border-stone-800 p-4 rounded-xs">
               <span className="text-stone-400 text-[11px] font-mono uppercase font-bold block">
-                Predicted Churn Rate
+                Sample risk share
               </span>
               <div className="font-display font-black text-2xl sm:text-3xl text-rose-400 mt-1">
-                20.4%
+                {filteredChurnData.length ? Math.round(filteredChurnData.filter(d => d.predictedStatus === 'Churn Risk').length / filteredChurnData.length * 100) : 0}%
               </div>
               <span className="text-[10px] font-mono text-stone-400 mt-0.5 block">
-                86.4% recall on churners via SMOTE
+                Share labelled as churn risk in this sample
               </span>
             </div>
 
             <div className="bg-stone-900 border border-stone-800 p-4 rounded-xs">
               <span className="text-stone-400 text-[11px] font-mono uppercase font-bold block">
-                Model ROC-AUC Score
+                Mean sample risk
               </span>
               <div className="font-display font-black text-2xl sm:text-3xl text-emerald-400 mt-1">
-                0.882
+                {filteredChurnData.length ? (filteredChurnData.reduce((total, d) => total + d.churnProbability, 0) / filteredChurnData.length).toFixed(1) : '0.0'}%
               </div>
               <span className="text-[10px] font-mono text-stone-400 mt-0.5 block">
-                XGBoost Classifier
+                Average illustrative risk score
               </span>
             </div>
 
@@ -1064,10 +1074,10 @@ export const InteractiveBiExcelDashboard: React.FC<InteractiveBiExcelDashboardPr
                 At-Risk Deposit Balances
               </span>
               <div className="font-display font-black text-2xl sm:text-3xl text-amber-400 mt-1">
-                $140,000+
+                ${filteredChurnData.filter(d => d.predictedStatus === 'Churn Risk').reduce((total, d) => total + d.balance, 0).toLocaleString()}
               </div>
               <span className="text-[10px] font-mono text-stone-400 mt-0.5 block">
-                Flagged for relationship managers
+                Balances of sample accounts labelled at risk
               </span>
             </div>
           </div>

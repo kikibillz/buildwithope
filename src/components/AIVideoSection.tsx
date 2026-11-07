@@ -45,7 +45,7 @@ export const AIVideoSection: React.FC<AIVideoSectionProps> = ({ onSelectVideo })
         {/* Featured Reel Banner */}
         <figure className="group relative mt-8 sm:mt-12 overflow-hidden border border-background/20 rounded-xs shadow-brutal">
           <img
-            src="/images/video-hero-collage.jpg"
+            src={aiVideoProjects[0]?.posterUrl}
             onError={(e) => {
               // Fallback to first video poster if collage is not present
               e.currentTarget.src = aiVideoProjects[0]?.posterUrl || '';
@@ -58,16 +58,16 @@ export const AIVideoSection: React.FC<AIVideoSectionProps> = ({ onSelectVideo })
           <figcaption className="absolute inset-x-0 bottom-0 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 bg-foreground/90 p-3.5 sm:p-6 backdrop-blur-md border-t border-background/20">
             <div>
               <b className="block text-base sm:text-lg font-bold text-background font-sans">
-                AI Commercial Reel 2026
+                Featured AI beauty concept
               </b>
               <span className="text-xs sm:text-sm text-background/60 font-mono">
-                Commercials · Fashion · Luxury Media · 4K
+                Skincare · AI-created portfolio concept
               </span>
             </div>
             <button
               onClick={() => onSelectVideo(aiVideoProjects[0])}
               className="grid size-10 sm:size-12 place-items-center rounded-full bg-accent text-accent-foreground shadow-brutal-sm hover:scale-105 active:scale-95 transition-transform cursor-pointer shrink-0"
-              title="Play Featured Reel"
+              title="Play featured beauty concept" aria-label="Play featured beauty concept"
             >
               <Play className="size-4 sm:size-5 fill-current ml-0.5" />
             </button>

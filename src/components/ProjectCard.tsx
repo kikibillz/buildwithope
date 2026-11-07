@@ -418,13 +418,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Visual Content Frame */}
-        <div className="w-full h-[calc(100%-29px)] overflow-hidden relative" onClick={() => onOpenCaseStudy(project)}>
+        <div className="w-full h-[calc(100%_-_29px)] overflow-hidden relative" onClick={() => onOpenCaseStudy(project)}>
           {renderVisualContent()}
 
           {/* Hover Overlay with Quick Actions */}
           <div
-            className={`absolute inset-0 bg-stone-950/80 backdrop-blur-xs flex flex-col items-center justify-center p-4 gap-3 text-center transition-opacity duration-200 ${
-              isHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            aria-hidden="true" className={`absolute inset-0 pointer-events-none bg-stone-950/80 backdrop-blur-xs flex flex-col items-center justify-center p-4 gap-3 text-center transition-opacity duration-200 ${
+              isHovered ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <div className="space-y-1 max-w-sm">
@@ -436,39 +436,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 pt-1" onClick={(e) => e.stopPropagation()}>
-              <button
-                type="button"
-                onClick={() => onOpenCaseStudy(project)}
-                className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-xs font-mono font-bold px-3.5 py-1.5 rounded-xs shadow-sm hover:scale-105 active:scale-95 transition-transform cursor-pointer uppercase"
-              >
-                <Maximize2 className="size-3" />
-                <span>Case Study</span>
-              </button>
 
-              {project.streamlitDeployment && onOpenStreamlit && project.id !== 'fastapi-ml-service' && (
-                <button
-                  type="button"
-                  onClick={() => onOpenStreamlit(project)}
-                  className="inline-flex items-center gap-1.5 bg-foreground text-background text-xs font-mono font-bold px-3.5 py-1.5 rounded-xs shadow-sm hover:scale-105 active:scale-95 transition-transform cursor-pointer uppercase"
-                >
-                  <Play className="size-3 fill-current" />
-                  <span>Launch Demo</span>
-                </button>
-              )}
-
-              {project.links.demo && project.links.demo.startsWith('http') && !project.links.demo.includes('github') && (
-                <a
-                  href={project.links.demo}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-secondary text-secondary-foreground text-xs font-mono font-bold px-3.5 py-1.5 rounded-xs shadow-sm hover:scale-105 transition-transform cursor-pointer uppercase"
-                >
-                  <ExternalLink className="size-3" />
-                  <span>Live Web App</span>
-                </a>
-              )}
-            </div>
           </div>
         </div>
       </div>
