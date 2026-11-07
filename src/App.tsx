@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
@@ -26,23 +26,23 @@ import { Navbar } from './components/Navbar';
 import { HeroWorkspaceVisual } from './components/HeroWorkspaceVisual';
 import { ProjectCard } from './components/ProjectCard';
 import { SelectedWorkSwipeable } from './components/SelectedWorkSwipeable';
-import { ProjectCaseStudyModal } from './components/ProjectCaseStudyModal';
-import { LiveStreamlitModal } from './components/LiveStreamlitModal';
+const ProjectCaseStudyModal = lazy(() => import('./components/ProjectCaseStudyModal').then(module => ({ default: module.ProjectCaseStudyModal })));
+const LiveStreamlitModal = lazy(() => import('./components/LiveStreamlitModal').then(module => ({ default: module.LiveStreamlitModal })));
 import { ContactSection } from './components/ContactSection';
 import { GitHubReposSection } from './components/GitHubReposSection';
 import { AnimatedName } from './components/AnimatedName';
 import { AIVideoSection } from './components/AIVideoSection';
-import { AIVideoModal } from './components/AIVideoModal';
+const AIVideoModal = lazy(() => import('./components/AIVideoModal').then(module => ({ default: module.AIVideoModal })));
 import { FastApiBackendSection } from './components/FastApiBackendSection';
-import { NexusCopilotModal } from './components/NexusCopilotModal';
+const NexusCopilotModal = lazy(() => import('./components/NexusCopilotModal').then(module => ({ default: module.NexusCopilotModal })));
 import { CertificationsSection } from './components/CertificationsSection';
 import { HrAutomationSolutionsSection } from './components/HrAutomationSolutionsSection';
 import { MagicCursor } from './components/MagicCursor';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SkillsMarquee } from './components/SkillsMarquee';
 import { BackToTop } from './components/BackToTop';
-import { OwnerAutoMailerModal } from './components/OwnerAutoMailerModal';
-import { InteractiveBiExcelModal } from './components/InteractiveBiExcelModal';
+const OwnerAutoMailerModal = lazy(() => import('./components/OwnerAutoMailerModal').then(module => ({ default: module.OwnerAutoMailerModal })));
+const InteractiveBiExcelModal = lazy(() => import('./components/InteractiveBiExcelModal').then(module => ({ default: module.InteractiveBiExcelModal })));
 import { InteractiveBiExcelDashboard, DashboardMode } from './components/InteractiveBiExcelDashboard';
 import {
   initSilentVisitorTracking,
@@ -62,7 +62,7 @@ export default function App() {
   const [selectedVideo, setSelectedVideo] = useState<AIVideoProject | null>(null);
   const [projectFilter, setProjectFilter] = useState<string>('all');
   const [projectSearch, setProjectSearch] = useState<string>('');
-  const [viewMode, setViewMode] = useState<'swipe' | 'cards' | 'rows'>('swipe');
+  const [viewMode, setViewMode] = useState<'swipe' | 'cards' | 'rows'>('cards');
 
   const handleOpenBiDashboard = (_project?: Project, initialMode: DashboardMode = 'powerbi_hr') => {
     recordAction('opened_bi_excel_dashboard');
@@ -256,9 +256,10 @@ export default function App() {
         <MagicCursor />
 
         {/* Navigation */}
+        <a className="skip-to-content" href="#main-content">Skip to content</a>
         <Navbar config={activeConfig} />
 
-        <main className="flex-grow">
+        <main id="main-content" className="flex-grow">
         {/* =========================================================================
             1. HERO SECTION (Hi, I'm + def .py Switch + Multi-Discipline Punchline)
            ========================================================================= */}
@@ -298,7 +299,7 @@ export default function App() {
             {/* Subtext and Action Buttons */}
             <div className="mt-8 sm:mt-9 grid gap-6 border-t border-foreground/15 pt-6 sm:pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
               <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                I build machine learning models and Python pipelines that turn messy people data into dashboards and early-warning flight-risk alerts. Backed by computer science foundations, proven Culturelligence People Ops experience, and production-tested Python backends.
+                I build machine learning models and Python pipelines that turn messy people data into dashboards and early-warning flight-risk alerts. Backed by computer science foundations, proven Culturelligence People Ops experience, and Python backend projects.
               </p>
               <div className="flex flex-col xs:flex-row flex-wrap gap-3 w-full sm:w-auto">
                 <a
@@ -323,6 +324,15 @@ export default function App() {
             <HeroWorkspaceVisual onSelectVideo={setSelectedVideo} />
           </div>
         </section>
+
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10 pb-10">
+          <a href="/ugc/" className="group grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center border-2 border-foreground bg-highlight p-5 sm:p-7 shadow-brutal-sm text-highlight-foreground">
+            <div><p className="font-mono text-xs font-bold uppercase tracking-widest mb-2">The creative side / AI UGC Creator</p>
+            <p className="font-display text-xl sm:text-2xl">Product stories. Cinematic concepts. Made with AI.</p>
+            <p className="mt-2 text-sm opacity-80">Watch my video work in a dedicated creative portfolio.</p></div>
+            <span className="inline-flex items-center gap-2 font-mono text-sm font-bold">Explore the studio <ArrowUpRight className="size-5" /></span>
+          </a>
+        </div>
 
         {/* Marquee Ticker */}
         <SkillsMarquee />
@@ -362,18 +372,17 @@ export default function App() {
               </span>
               <div>
                 <h4 className="font-display font-extrabold text-sm sm:text-base uppercase text-foreground">
-                  Production-Grade Quality &amp; Live Cloud Deployments
+                  Explore the source. Try the demos.
                 </h4>
                 <p className="mt-1 text-xs text-foreground/80 font-sans leading-relaxed">
-                  Every engineering implementation is backed by public source repositories on GitHub, automated CI/CD test suites (&gt;90% Pytest code coverage), Docker containerization, and live interactive deployments running on Streamlit and Vercel.
+                  Explore project case studies, public GitHub repositories, and interactive portfolio demonstrations. Individual project pages explain the implementation, data, and evaluation approach.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* =========================================================================
-              FLAGSHIP INTERACTIVE DATA ANALYST DASHBOARD SUITE (LIVE EMBEDDED)
-             ========================================================================= */}
+          <p className="mt-8 mb-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Try the interactive dashboard · Illustrative sample data</p>
+          {/* Interactive dashboard */}
           <div className="mt-8 mb-10">
             <InteractiveBiExcelDashboard initialMode="powerbi_hr" isEmbedded={true} />
           </div>
@@ -489,7 +498,7 @@ export default function App() {
           {/* Results summary counter */}
           <div className="mt-3 flex items-center justify-between text-xs font-mono text-muted-foreground">
             <span>
-              Showing <b className="text-foreground">{filteredProjects.length}</b> of {allProjects.length} production projects
+              Showing <b className="text-foreground">{filteredProjects.length}</b> of {allProjects.length} portfolio projects
             </span>
             {(projectFilter !== 'all' || projectSearch) && (
               <button
@@ -931,6 +940,7 @@ export default function App() {
         </section>
       </main>
 
+      <Suspense fallback={<div role="status" className="fixed bottom-6 left-1/2 z-[100] -translate-x-1/2 border border-foreground/20 bg-card px-5 py-3 shadow-brutal-sm">Opening project…</div>}>
       {/* Case Study Modal */}
       {selectedProject && (
         <ProjectCaseStudyModal
@@ -948,11 +958,11 @@ export default function App() {
       )}
 
       {/* Interactive Power BI & Excel Dashboard Modal */}
-      <InteractiveBiExcelModal
+      {biDashboardOpen && <InteractiveBiExcelModal
         isOpen={biDashboardOpen}
         onClose={() => setBiDashboardOpen(false)}
         initialMode={biDashboardMode}
-      />
+      />}
 
       {/* Streamlit Live Preview Modal */}
       {streamlitProject && (
@@ -963,10 +973,10 @@ export default function App() {
       )}
 
       {/* Dedicated Interactive Nexus Copilot AI Modal */}
-      <NexusCopilotModal
+      {nexusCopilotOpen && <NexusCopilotModal
         isOpen={nexusCopilotOpen}
         onClose={() => setNexusCopilotOpen(false)}
-      />
+      />}
 
       {/* AI Video Modal */}
       {selectedVideo && (
@@ -977,11 +987,12 @@ export default function App() {
       )}
 
       {/* Owner Analytics & Auto-Mailer Hub Modal (Secretly accessible via Ctrl+Shift+O or triple-clicking copyright) */}
-      <OwnerAutoMailerModal
+      {ownerAutoMailerOpen && <OwnerAutoMailerModal
         isOpen={ownerAutoMailerOpen}
         onClose={() => setOwnerAutoMailerOpen(false)}
         ownerEmail={activeConfig.email || 'odunayoopamiju@gmail.com'}
-      />
+      />}
+      </Suspense>
 
       {/* Floating Back to Top Button */}
       <BackToTop />

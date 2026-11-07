@@ -8,15 +8,15 @@ interface HeroWorkspaceVisualProps {
 export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [runCount, setRunCount] = useState(1);
-  const [statusText, setStatusText] = useState('● Automated Test Suite: 48 passed (94.2%)');
+  const [statusText, setStatusText] = useState('● Interactive pipeline walkthrough');
 
   const handleRun = () => {
     setIsRunning(true);
-    setStatusText('● pytest -v --cov=src tests/');
+    setStatusText('● Walking through the pipeline…');
     setTimeout(() => {
       setIsRunning(false);
       setRunCount((prev) => prev + 1);
-      setStatusText('● 48 passed in 1.42s (Sample CI run)');
+      setStatusText('● Walkthrough complete · illustrative example');
     }, 600);
   };
 
@@ -44,7 +44,7 @@ export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
               ) : (
                 <Play className="size-3 fill-current" />
               )}
-              <span>Run ({runCount})</span>
+              <span>Explore ({runCount})</span>
             </button>
           </div>
         </div>
@@ -69,7 +69,7 @@ export const HeroWorkspaceVisual: React.FC<HeroWorkspaceVisualProps> = () => {
           </p>
           <p className="text-background/50 pt-2 text-[10px] sm:text-[11px] whitespace-nowrap">
             <span className="text-accent font-bold select-none pr-3">05</span>
-            # In synthetic test benchmarks: sub-15ms p95 latency · 48 test cases
+            # Illustrative workflow · inspect project source for implementation
           </p>
         </div>
       </div>

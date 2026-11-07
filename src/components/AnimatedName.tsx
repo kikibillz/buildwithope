@@ -20,10 +20,10 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
   // ----------------------------------------------------
   if (variant === 'hero') {
     return (
-      <span className={`inline-flex items-center align-baseline ${className}`}>
-        <span className="relative inline-flex items-center select-none group font-display font-black tracking-tight text-foreground">
+      <span className={`inline-flex max-w-full items-center align-baseline ${className}`}>
+        <span className="relative inline-flex max-w-full items-center select-none group font-display font-black tracking-tight text-foreground">
           {/* Subtle Accent on Ope */}
-          <span className="text-foreground">
+          <span className="text-foreground leading-tight" style={{ overflowWrap: 'anywhere' }}>
             Ope
             <span className="text-primary underline decoration-primary/50 decoration-4 underline-offset-6">
               yemi
@@ -40,7 +40,7 @@ export const AnimatedName: React.FC<AnimatedNameProps> = ({
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="inline-block w-2 sm:w-2.5 md:w-3.5 h-8 sm:h-11 md:h-14 bg-primary ml-2 rounded-xs align-middle shadow-brutal-xs"
+            className="hidden sm:inline-block shrink-0 w-2 sm:w-2.5 md:w-3.5 h-8 sm:h-11 md:h-14 bg-primary ml-2 rounded-xs align-middle shadow-brutal-xs"
             aria-hidden="true"
           />
         </span>
