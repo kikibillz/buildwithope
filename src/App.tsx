@@ -967,6 +967,7 @@ export default function App() {
       {/* Streamlit Live Preview Modal */}
       {streamlitProject && (
         <LiveStreamlitModal
+          isOpen={true}
           project={streamlitProject}
           onClose={() => setStreamlitProject(null)}
         />

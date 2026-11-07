@@ -1,3 +1,4 @@
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -683,13 +684,7 @@ export const NexusCopilotModal: React.FC<NexusCopilotModalProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 100);
-    }
-  }, [isOpen]);
+  const dialogRef = useModalAccessibility(isOpen, onClose);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -898,7 +893,7 @@ export const NexusCopilotModal: React.FC<NexusCopilotModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-foreground/60 backdrop-blur-xs font-sans">
+    <div ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="nexus-dialog-title" className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-foreground/60 backdrop-blur-xs font-sans">
       <div
         className="fixed inset-0"
         onClick={onClose}
@@ -914,7 +909,7 @@ export const NexusCopilotModal: React.FC<NexusCopilotModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-display font-extrabold text-base sm:text-lg uppercase text-foreground">
+                <h3 id="nexus-dialog-title" className="font-display font-extrabold text-base sm:text-lg uppercase text-foreground">
                   Nexus Copilot
                 </h3>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-xs bg-highlight text-highlight-foreground border border-foreground font-bold">
@@ -940,11 +935,11 @@ export const NexusCopilotModal: React.FC<NexusCopilotModalProps> = ({
             </button>
 
             <a
-              href="https://github.com/kikibillz/enterprise-rag-prompt-engine"
+              href="https://github.com/kikibillz/buildwithope/blob/main/src/components/NexusCopilotModal.tsx"
               target="_blank"
               rel="noreferrer"
               className="p-2 rounded-xs border border-foreground/30 hover:border-foreground bg-card text-foreground transition-colors cursor-pointer"
-              title="Inspect GitHub Code"
+              title="Inspect portfolio demo source"
             >
               <Github className="size-4" />
             </a>

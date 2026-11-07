@@ -1,3 +1,4 @@
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -64,6 +65,8 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
     }
   }, [project]);
 
+  const dialogRef = useModalAccessibility(isOpen && Boolean(project), onClose);
+
   if (!isOpen || !project) return null;
 
   const currentUrl = customUrl || project.streamlitUrl || 'https://share.streamlit.io';
@@ -115,6 +118,11 @@ export const LiveStreamlitModal: React.FC<LiveStreamlitModalProps> = ({
     <AnimatePresence>
       <div
         id="streamlit-modal-backdrop"
+        ref={dialogRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.title} interactive demo`}
         className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/70 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
         onClick={onClose}
       >

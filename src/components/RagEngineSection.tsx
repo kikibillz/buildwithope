@@ -401,13 +401,13 @@ ${queryInput}`;
           {/* GitHub Repo Button */}
           <div className="flex items-center gap-2 shrink-0">
             <a
-              href="https://github.com/kikibillz/enterprise-rag-prompt-engine"
+              href="https://github.com/kikibillz/buildwithope/blob/main/src/components/NexusCopilotModal.tsx"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-foreground text-background px-4 py-2.5 rounded-xs font-mono text-xs font-bold uppercase shadow-brutal-sm hover:shadow-brutal hover:bg-foreground/90 transition-all cursor-pointer"
             >
               <Github className="size-4" />
-              <span>Inspect Source Code</span>
+              <span>Inspect portfolio demo source</span>
               <ExternalLink className="size-3" />
             </a>
           </div>

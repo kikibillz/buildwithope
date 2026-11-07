@@ -27,6 +27,7 @@ export interface ProjectDemoScreenshot {
 }
 
 export interface Project {
+  sourceKind?: 'repository' | 'portfolio-demo';
   id: string;
   title: string;
   tagline: string;

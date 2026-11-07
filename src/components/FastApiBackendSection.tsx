@@ -529,13 +529,13 @@ export const FastApiBackendSection: React.FC<FastApiBackendSectionProps> = ({ on
 
             <div className="flex items-center gap-2 print:hidden">
               <a
-                href="https://github.com/kikibillz/fastapi-ml-service"
+                href="https://github.com/kikibillz/buildwithope/blob/main/src/components/FastApiBackendSection.tsx"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-mono text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white px-3 py-1.5 rounded-md bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors"
               >
                 <Code2 className="w-3.5 h-3.5" />
-                <span>GitHub Repository</span>
+                <span>Portfolio demo source</span>
                 <ExternalLink className="w-3 h-3 text-stone-400" />
               </a>
             </div>
@@ -1023,12 +1023,12 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--worker
             {/* Modal Footer */}
             <div className="flex items-center justify-between px-6 py-3.5 border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950/70">
               <a
-                href="https://github.com/kikibillz/fastapi-ml-service"
+                href="https://github.com/kikibillz/buildwithope/blob/main/src/components/FastApiBackendSection.tsx"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 text-xs font-mono text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white"
               >
-                <span>Read Full Documentation on GitHub</span>
+                <span>Inspect this demo implementation</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
 

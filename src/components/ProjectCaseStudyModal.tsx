@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
+import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ExternalLink, Github, Database, Code, CheckCircle, BookOpen, Layers, Terminal, Sparkles, TrendingUp, Gauge, BarChart3, FileSpreadsheet, Play } from 'lucide-react';
 import { Project } from '../types';
@@ -17,21 +18,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
   onOpenStreamlit,
   onOpenBiDashboard,
 }) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-
-    if (project) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [project, onClose]);
+  const dialogRef = useModalAccessibility(Boolean(project), onClose);
 
   if (!project) return null;
 
@@ -40,6 +27,8 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
   return (
     <AnimatePresence>
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-labelledby="case-study-title"
@@ -309,6 +298,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
               <span>:</span>
               <span>Verified Repositories & Artifacts</span>
             </div>
+            {project.sourceKind === 'portfolio-demo' && <p className="text-xs text-stone-500 dark:text-stone-400 mb-3">The source link opens this portfolio's browser demonstration. A separate backend repository is not currently verified.</p>}
             <div className="flex flex-wrap items-center gap-3">
               {onOpenBiDashboard && (project.id.includes('hr') || project.id.includes('ledger') || project.id.includes('churn') || project.tools.includes('Power BI') || project.tools.includes('Microsoft Excel')) && (
                 <button
@@ -345,7 +335,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                 className="inline-flex items-center gap-2 text-xs font-medium text-stone-800 dark:text-stone-200 bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 hover:border-stone-400 hover:bg-stone-50 dark:hover:bg-stone-700 px-3.5 py-2 rounded-md transition-colors"
               >
                 <Github className="w-4 h-4" />
-                <span>GitHub Repository</span>
+                <span>{project.sourceKind === 'portfolio-demo' ? 'Portfolio demo source' : 'GitHub Repository'}</span>
               </a>
 
               {caseStudy.links.demo.startsWith('#') ? (
@@ -355,7 +345,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
               ) : (
                 <a href={caseStudy.links.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-medium bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-950 px-3.5 py-2 rounded-md">
                   <ExternalLink className="w-4 h-4" />
-                  {caseStudy.links.demo.includes('github.com') ? 'Project documentation' : 'Visit live app'}
+                  {project.sourceKind === 'portfolio-demo' ? 'View demo implementation' : caseStudy.links.demo.includes('github.com') ? 'Project documentation' : 'Visit live app'}
                 </a>
               )}
             </div>

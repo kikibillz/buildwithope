@@ -47,3 +47,23 @@ The interactive BI dashboards use illustrative sample data. Their outputs demons
 ## Maintenance checklist
 
 After updating projects or videos, run the type check and build; visit `/` and `/ugc/` on desktop and phone; try project search, a case study, gallery filters, both video players, and the return link. Verify public project links and that the Vercel deployment reaches a successful status.
+
+## Browser regression tests
+
+An optional Python Playwright test starts a temporary local server for `dist/`, blocks external services, and checks dialogs, project search, dashboard downloads, contact fallback, navigation, gallery filters, video playback, and phone layouts. It never sends a contact email.
+
+```sh
+python -m pip install playwright
+python -m playwright install chromium
+npm run check
+npm run build
+python scripts/test-portfolio-browser.py
+```
+
+The script uses an installed `chromium` binary when available; `PORTFOLIO_CHROMIUM` can select a different browser path. In a disposable container that cannot support Chromium's sandbox, `PORTFOLIO_DISABLE_BROWSER_SANDBOX=1` is an explicit test-only fallback.
+
+Project dialogs move keyboard focus inside, keep Tab navigation within the dialog, close with Escape, and restore focus to their launch button. The demo viewer requires `isOpen`; keep that flag when changing its caller.
+
+### Source-link verification
+
+During the November 2026 maintenance pass, the separate `enterprise-rag-prompt-engine`, `workforce-rag-knowledge-base`, `hybrid-sql-nosql-analytics-pipeline`, and `fastapi-ml-service` repository URLs returned 404 through GitHub. Unavailable entries are omitted from the public repository list. Existing browser demonstrations remain; where their source is available in this repository, their buttons are explicitly labelled **Portfolio demo source**. These links do not establish the existence of a separate deployed backend. Restore separate repository links only after verifying their public destination.

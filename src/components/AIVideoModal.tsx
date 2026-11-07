@@ -1,3 +1,4 @@
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import React, { useState, useEffect, useRef } from 'react';
 import {
   X,
@@ -35,14 +36,7 @@ export const AIVideoModal: React.FC<AIVideoModalProps> = ({ video, onClose }) =>
     setIsPlaying(true);
   }, [video?.id]);
 
-  // Handle escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  const dialogRef = useModalAccessibility(Boolean(video), onClose);
 
   if (!video) return null;
 
@@ -99,7 +93,10 @@ export const AIVideoModal: React.FC<AIVideoModalProps> = ({ video, onClose }) =>
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       role="dialog"
+      aria-labelledby="video-dialog-title"
       aria-modal="true"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -120,7 +117,7 @@ export const AIVideoModal: React.FC<AIVideoModalProps> = ({ video, onClose }) =>
                   {video.aspectRatio} • {video.duration}
                 </span>
               </div>
-              <h2 className="text-lg sm:text-xl font-bold text-stone-950 tracking-tight mt-0.5">
+              <h2 id="video-dialog-title" className="text-lg sm:text-xl font-bold text-stone-950 tracking-tight mt-0.5">
                 {video.title}
               </h2>
             </div>
@@ -129,6 +126,7 @@ export const AIVideoModal: React.FC<AIVideoModalProps> = ({ video, onClose }) =>
           <button
             onClick={onClose}
             id="close-video-modal-btn"
+            aria-label="Close video"
             className="p-2 text-stone-500 hover:text-stone-950 rounded-full hover:bg-stone-100 transition-colors"
           >
             <X className="w-5 h-5" />
